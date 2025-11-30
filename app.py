@@ -36,7 +36,7 @@ st.set_page_config(
 )
 
 # Custom CSS for better styling
-    st.markdown("""
+st.markdown("""
 <style>
 .main-header {
     background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
