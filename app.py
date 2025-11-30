@@ -270,8 +270,8 @@ def display_summary_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
     else:
         st.error("🔴 Low match. Significant improvements needed to align with job requirements.")
     
-    # Quick stats
-    st.subheader("Quick Statistics")
+    # Enhanced statistics
+    st.subheader("Detailed Analytics")
     
     col1, col2, col3, col4 = st.columns(4)
     
@@ -290,6 +290,25 @@ def display_summary_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
     with col4:
         critical_missing = match_data.get('priority_analysis', {}).get('critical_missing_count', 0)
         st.metric("Critical Gaps", critical_missing)
+    
+    # Additional metrics row
+    col5, col6, col7, col8 = st.columns(4)
+    
+    with col5:
+        ats_score = resume_data.get('ats_analysis', {}).get('score', 0)
+        st.metric("ATS Score", f"{ats_score}/100")
+    
+    with col6:
+        competitiveness = match_data.get('market_analysis', {}).get('competitiveness_score', 0)
+        st.metric("Market Competitiveness", f"{competitiveness:.0f}%")
+    
+    with col7:
+        exp_score = match_data.get('experience_alignment', {}).get('experience_score', 0)
+        st.metric("Experience Fit", f"{exp_score}/100")
+    
+    with col8:
+        word_count = resume_data.get('word_count', 0)
+        st.metric("Resume Word Count", word_count)
 
 def display_skills_tab(match_data: Dict, jd_data: Dict, resume_data: Dict):
     """Display skills analysis."""
