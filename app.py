@@ -498,23 +498,26 @@ def display_recommendations_tab(recommendations: Dict):
     skill_roadmap = recommendations.get('skill_roadmap', [])
     
     if skill_roadmap:
-        roadmap_df = pd.DataFrame(skill_roadmap)
+        # Create priority counts for visualization
+        priority_counts = {}
+        for item in skill_roadmap:
+            priority = item.get('priority', 'medium')
+            priority_counts[priority] = priority_counts.get(priority, 0) + 1
         
-        # Create skill priority chart
-        fig = px.bar(
-            roadmap_df,
-            x='skill',
-            y='timeframe',
-            color='priority',
-            title="Learning Roadmap",
-            color_discrete_map={
-                'high': '#dc3545',
-                'medium': '#ffc107',
-                'low': '#28a745'
-            }
-        )
-        fig.update_layout(xaxis_tickangle=-45, height=400)
-        st.plotly_chart(fig, width='stretch')
+        if priority_counts:
+            # Create priority distribution chart
+            fig = px.pie(
+                values=list(priority_counts.values()),
+                names=list(priority_counts.keys()),
+                title="Learning Priority Distribution",
+                color_discrete_map={
+                    'high': '#dc3545',
+                    'medium': '#ffc107',
+                    'low': '#28a745'
+                }
+            )
+            fig.update_layout(height=400)
+            st.plotly_chart(fig, width='stretch')
         
         # Display roadmap details
         for item in skill_roadmap:
