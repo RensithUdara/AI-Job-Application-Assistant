@@ -1,7 +1,15 @@
 import re
 import json
 from typing import Dict, List, Set, Optional
-from fuzzywuzzy import fuzz
+try:
+    from fuzzywuzzy import fuzz
+except ImportError:
+    # Fallback for basic string matching
+    class MockFuzz:
+        @staticmethod
+        def ratio(s1, s2):
+            return 100 if s1 == s2 else 0
+    fuzz = MockFuzz()
 from collections import Counter
 
 class JobDescriptionProcessor:
@@ -37,6 +45,11 @@ class JobDescriptionProcessor:
             # Categorize skills as must-have vs nice-to-have
             skill_categories = self._categorize_skills(jd_role, jd_skills)
             
+            # Additional analytics
+            salary_info = self._extract_salary_info(cleaned_text)
+            company_info = self._extract_company_info(jd_text)
+            job_requirements = self._analyze_job_requirements(cleaned_text)
+            
             return {
                 'jd_text': jd_text,
                 'cleaned_text': cleaned_text,
@@ -46,7 +59,11 @@ class JobDescriptionProcessor:
                 'seniority': experience_info['seniority'],
                 'critical_skills': skill_categories['critical_skills'],
                 'bonus_skills': skill_categories['bonus_skills'],
-                'all_jd_skills_list': list(jd_skills['all_skills'])
+                'all_jd_skills_list': list(jd_skills['all_skills']),
+                'salary_info': salary_info,
+                'company_info': company_info,
+                'job_requirements': job_requirements,
+                'word_count': len(jd_text.split())
             }
         
         except Exception as e:
@@ -213,3 +230,117 @@ class JobDescriptionProcessor:
                 skill_categories['bonus_skills'].extend(skills)
         
         return skill_categories
+    
+    def _extract_salary_info(self, text: str) -> Dict:
+        """Extract salary information from job description."""
+        salary_info = {
+            'min_salary': None,
+            'max_salary': None,
+            'currency': 'USD',
+            'salary_type': 'annual',
+            'salary_mentioned': False
+        }
+        
+        # Salary patterns
+        salary_patterns = [
+            r'\$([\d,]+)\s*[-–]\s*\$([\d,]+)',  # $70,000 - $85,000
+            r'\$([\d,]+)k?\s*[-–]\s*([\d,]+)k',  # $70k - 85k
+            r'salary.*\$([\d,]+)',  # salary: $75,000
+            r'([\d,]+)\s*[-–]\s*([\d,]+)\s*thousand',  # 70 - 85 thousand
+        ]
+        
+        for pattern in salary_patterns:
+            matches = re.findall(pattern, text)
+            if matches:
+                try:
+                    if len(matches[0]) == 2:
+                        min_sal = int(matches[0][0].replace(',', ''))
+                        max_sal = int(matches[0][1].replace(',', ''))
+                        salary_info.update({
+                            'min_salary': min_sal,
+                            'max_salary': max_sal,
+                            'salary_mentioned': True
+                        })
+                        break
+                except (ValueError, IndexError):
+                    continue
+        
+        return salary_info
+    
+    def _extract_company_info(self, text: str) -> Dict:
+        """Extract company information from job description."""
+        company_info = {
+            'company_name': None,
+            'location': None,
+            'work_type': None,
+            'company_size': None
+        }
+        
+        # Extract company name (usually after "Company:")
+        company_match = re.search(r'company:\s*([^\n]+)', text, re.IGNORECASE)
+        if company_match:
+            company_info['company_name'] = company_match.group(1).strip()
+        
+        # Extract location
+        location_match = re.search(r'location:\s*([^\n]+)', text, re.IGNORECASE)
+        if location_match:
+            company_info['location'] = location_match.group(1).strip()
+        
+        # Determine work type
+        if any(word in text.lower() for word in ['remote', 'work from home', 'wfh']):
+            if any(word in text.lower() for word in ['hybrid', 'flexible']):
+                company_info['work_type'] = 'Hybrid'
+            else:
+                company_info['work_type'] = 'Remote'
+        elif any(word in text.lower() for word in ['on-site', 'office', 'onsite']):
+            company_info['work_type'] = 'On-site'
+        else:
+            company_info['work_type'] = 'Not specified'
+        
+        return company_info
+    
+    def _analyze_job_requirements(self, text: str) -> Dict:
+        """Analyze job requirements complexity and structure."""
+        requirements = {
+            'total_requirements': 0,
+            'hard_requirements': 0,
+            'soft_requirements': 0,
+            'education_required': False,
+            'certification_mentioned': False,
+            'complexity_score': 0
+        }
+        
+        # Count bullet points as requirements
+        bullet_points = re.findall(r'[•·*-]\s*([^\n]+)', text)
+        requirements['total_requirements'] = len(bullet_points)
+        
+        # Analyze requirement types
+        hard_skill_keywords = ['experience', 'proficiency', 'knowledge of', 'understanding of', 'years']
+        soft_skill_keywords = ['communication', 'teamwork', 'leadership', 'problem solving']
+        
+        for point in bullet_points:
+            point_lower = point.lower()
+            if any(keyword in point_lower for keyword in hard_skill_keywords):
+                requirements['hard_requirements'] += 1
+            if any(keyword in point_lower for keyword in soft_skill_keywords):
+                requirements['soft_requirements'] += 1
+        
+        # Check for education and certification requirements
+        if any(word in text.lower() for word in ['degree', 'bachelor', 'master', 'education']):
+            requirements['education_required'] = True
+        
+        if any(word in text.lower() for word in ['certification', 'certified', 'license']):
+            requirements['certification_mentioned'] = True
+        
+        # Calculate complexity score (0-100)
+        complexity = 0
+        complexity += min(requirements['total_requirements'] * 2, 40)  # Max 40 for total reqs
+        complexity += min(requirements['hard_requirements'] * 3, 30)  # Max 30 for hard reqs
+        if requirements['education_required']:
+            complexity += 15
+        if requirements['certification_mentioned']:
+            complexity += 15
+        
+        requirements['complexity_score'] = min(complexity, 100)
+        
+        return requirements
