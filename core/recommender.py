@@ -27,11 +27,23 @@ class Recommender:
             # Priority action items
             priority_actions = self._generate_priority_actions(resume_data, match_data)
             
+            # Career advancement insights
+            career_insights = self._generate_career_insights(jd_data, match_data)
+            
+            # Personalized learning resources
+            learning_resources = self._generate_learning_resources(match_data, jd_data)
+            
+            # Application strategy
+            application_strategy = self._generate_application_strategy(resume_data, jd_data, match_data)
+            
             return {
                 'resume_tips': resume_tips,
                 'skill_roadmap': skill_roadmap,
                 'interview_questions': interview_questions,
-                'priority_actions': priority_actions
+                'priority_actions': priority_actions,
+                'career_insights': career_insights,
+                'learning_resources': learning_resources,
+                'application_strategy': application_strategy
             }
         
         except Exception as e:
@@ -40,7 +52,10 @@ class Recommender:
                 'resume_tips': [],
                 'skill_roadmap': [],
                 'interview_questions': [],
-                'priority_actions': []
+                'priority_actions': [],
+                'career_insights': {},
+                'learning_resources': {},
+                'application_strategy': {}
             }
     
     def _generate_resume_tips(self, resume_data: Dict, jd_data: Dict) -> List[Dict]:
@@ -299,3 +314,191 @@ class Recommender:
         })
         
         return actions
+    
+    def _generate_career_insights(self, jd_data: Dict, match_data: Dict) -> Dict:
+        """Generate career advancement insights and market analysis."""
+        insights = {
+            'market_demand': 'Moderate',
+            'growth_potential': 'Good',
+            'skill_trends': [],
+            'next_career_steps': [],
+            'industry_insights': []
+        }
+        
+        # Analyze role demand based on skills
+        role = jd_data.get('jd_role', 'general')
+        skills = jd_data.get('all_jd_skills_list', [])
+        
+        # High-demand skill indicators
+        high_demand_skills = ['python', 'javascript', 'react', 'aws', 'docker', 'kubernetes', 'machine learning']
+        trending_skills = ['ai', 'blockchain', 'flutter', 'typescript', 'graphql', 'terraform']
+        
+        matched_high_demand = [s for s in skills if s.lower() in high_demand_skills]
+        matched_trending = [s for s in skills if s.lower() in trending_skills]
+        
+        if len(matched_high_demand) >= 3:
+            insights['market_demand'] = 'High'
+            insights['industry_insights'].append('This role involves high-demand skills with strong market potential')
+        
+        if matched_trending:
+            insights['skill_trends'] = matched_trending
+            insights['industry_insights'].append(f'Trending technologies mentioned: {', '.join(matched_trending)}')
+        
+        # Career progression suggestions
+        role_progressions = {
+            'web_developer': ['Senior Developer', 'Full Stack Architect', 'Tech Lead'],
+            'mobile_developer': ['Senior Mobile Developer', 'Mobile Architect', 'Platform Lead'],
+            'data_analyst': ['Senior Analyst', 'Data Scientist', 'Analytics Manager'],
+            'software_engineer': ['Senior Engineer', 'Staff Engineer', 'Engineering Manager']
+        }
+        
+        insights['next_career_steps'] = role_progressions.get(role, ['Senior Role', 'Team Lead', 'Specialist'])
+        
+        # Growth potential based on match score
+        match_score = match_data.get('match_score_overall', 0)
+        if match_score >= 75:
+            insights['growth_potential'] = 'Excellent'
+        elif match_score >= 50:
+            insights['growth_potential'] = 'Good'
+        else:
+            insights['growth_potential'] = 'Needs Development'
+        
+        return insights
+    
+    def _generate_learning_resources(self, match_data: Dict, jd_data: Dict) -> Dict:
+        """Generate personalized learning resource recommendations."""
+        resources = {
+            'online_courses': [],
+            'practice_projects': [],
+            'certifications': [],
+            'books_articles': [],
+            'estimated_learning_time': ''
+        }
+        
+        missing_skills = match_data.get('missing_skills', [])
+        priority_analysis = match_data.get('priority_analysis', {})
+        high_priority_skills = priority_analysis.get('high_priority', [])
+        
+        # Course recommendations based on missing skills
+        course_mapping = {
+            'python': {'course': 'Python for Beginners', 'platform': 'Codecademy', 'time': '4-6 weeks'},
+            'javascript': {'course': 'JavaScript Fundamentals', 'platform': 'freeCodeCamp', 'time': '3-4 weeks'},
+            'react': {'course': 'React - The Complete Guide', 'platform': 'Udemy', 'time': '6-8 weeks'},
+            'node.js': {'course': 'Node.js Development', 'platform': 'Coursera', 'time': '4-5 weeks'},
+            'aws': {'course': 'AWS Cloud Practitioner', 'platform': 'AWS Training', 'time': '2-3 weeks'},
+            'docker': {'course': 'Docker Mastery', 'platform': 'Udemy', 'time': '3-4 weeks'},
+            'sql': {'course': 'SQL for Data Science', 'platform': 'Coursera', 'time': '3-4 weeks'}
+        }
+        
+        # Add courses for high-priority missing skills
+        total_weeks = 0
+        for skill in high_priority_skills[:4]:  # Top 4 skills
+            skill_lower = skill.lower()
+            if skill_lower in course_mapping:
+                course_info = course_mapping[skill_lower]
+                resources['online_courses'].append({
+                    'skill': skill,
+                    'course': course_info['course'],
+                    'platform': course_info['platform'],
+                    'estimated_time': course_info['time']
+                })
+                # Extract weeks for time calculation
+                weeks = int(course_info['time'].split('-')[0])
+                total_weeks += weeks
+        
+        resources['estimated_learning_time'] = f'{total_weeks}-{total_weeks + len(high_priority_skills)} weeks'
+        
+        # Project recommendations
+        project_mapping = {
+            'web_developer': [
+                'Build a personal portfolio website',
+                'Create a full-stack e-commerce app',
+                'Develop a REST API with authentication'
+            ],
+            'mobile_developer': [
+                'Build a mobile app with local storage',
+                'Create an app with API integration',
+                'Develop a cross-platform Flutter app'
+            ],
+            'data_analyst': [
+                'Analyze a public dataset',
+                'Create interactive dashboards',
+                'Build a machine learning model'
+            ]
+        }
+        
+        role = jd_data.get('jd_role', 'web_developer')
+        resources['practice_projects'] = project_mapping.get(role, project_mapping['web_developer'])
+        
+        # Certification recommendations
+        cert_mapping = {
+            'aws': 'AWS Cloud Practitioner',
+            'google cloud': 'Google Cloud Associate',
+            'azure': 'Microsoft Azure Fundamentals',
+            'docker': 'Docker Certified Associate',
+            'kubernetes': 'Certified Kubernetes Administrator'
+        }
+        
+        for skill in high_priority_skills:
+            skill_lower = skill.lower()
+            if skill_lower in cert_mapping:
+                resources['certifications'].append({
+                    'skill': skill,
+                    'certification': cert_mapping[skill_lower]
+                })
+        
+        return resources
+    
+    def _generate_application_strategy(self, resume_data: Dict, jd_data: Dict, 
+                                     match_data: Dict) -> Dict:
+        """Generate strategic advice for job application approach."""
+        strategy = {
+            'application_readiness': 'Not Ready',
+            'recommended_approach': [],
+            'timeline_suggestions': [],
+            'networking_advice': [],
+            'application_tips': []
+        }
+        
+        match_score = match_data.get('match_score_overall', 0)
+        competitiveness = match_data.get('market_analysis', {}).get('competitiveness_score', 0)
+        
+        # Determine readiness
+        if match_score >= 70 and competitiveness >= 60:
+            strategy['application_readiness'] = 'Ready to Apply'
+            strategy['recommended_approach'].append('Apply directly with confidence')
+            strategy['timeline_suggestions'].append('Apply within the next 1-2 weeks')
+        elif match_score >= 50:
+            strategy['application_readiness'] = 'Nearly Ready'
+            strategy['recommended_approach'].append('Apply but continue skill development')
+            strategy['timeline_suggestions'].append('Apply now while learning missing skills')
+        else:
+            strategy['application_readiness'] = 'Needs Preparation'
+            strategy['recommended_approach'].append('Focus on skill development first')
+            strategy['timeline_suggestions'].append('Prepare for 1-2 months before applying')
+        
+        # Networking advice
+        company_info = jd_data.get('company_info', {})
+        if company_info.get('company_name'):
+            strategy['networking_advice'].extend([
+                f"Research {company_info['company_name']} employees on LinkedIn",
+                'Attend industry meetups and conferences',
+                'Join relevant professional communities'
+            ])
+        
+        # Application tips based on analysis
+        ats_score = resume_data.get('ats_analysis', {}).get('score', 0)
+        if ats_score < 70:
+            strategy['application_tips'].append('Optimize resume for ATS systems before applying')
+        
+        missing_critical = len(match_data.get('priority_analysis', {}).get('high_priority', []))
+        if missing_critical > 3:
+            strategy['application_tips'].append('Consider applying for junior positions to gain experience')
+        
+        strategy['application_tips'].extend([
+            'Tailor your resume for each application',
+            'Write a compelling cover letter highlighting relevant projects',
+            'Prepare portfolio showcasing your best work'
+        ])
+        
+        return strategy
