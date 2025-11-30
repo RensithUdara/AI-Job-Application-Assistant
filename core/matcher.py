@@ -41,6 +41,16 @@ class Matcher:
                 skill_match_result, category_match, text_similarity
             )
             
+            # Market competitiveness analysis
+            market_analysis = self._analyze_market_competitiveness(
+                resume_data, jd_data, skill_match_result
+            )
+            
+            # Experience alignment
+            experience_alignment = self._analyze_experience_alignment(
+                resume_data, jd_data
+            )
+            
             return {
                 'match_score_overall': overall_score,
                 'skill_match': skill_match_result,
@@ -51,7 +61,10 @@ class Matcher:
                 'missing_skills': list(skill_match_result['missing_skills']),
                 'resume_only_skills': list(skill_match_result['resume_only_skills']),
                 'technical_match': category_match.get('technical_match', 0),
-                'soft_skill_match': category_match.get('soft_skill_match', 0)
+                'soft_skill_match': category_match.get('soft_skill_match', 0),
+                'market_analysis': market_analysis,
+                'experience_alignment': experience_alignment,
+                'competitiveness_score': market_analysis.get('competitiveness_score', 0)
             }
         
         except Exception as e:
@@ -62,7 +75,9 @@ class Matcher:
                 'missing_skills': [],
                 'resume_only_skills': [],
                 'technical_match': 0,
-                'soft_skill_match': 0
+                'soft_skill_match': 0,
+                'market_analysis': {'competitiveness_score': 0, 'market_position': 'Unknown'},
+                'experience_alignment': {'experience_score': 0, 'seniority_fit': 'Unknown'}
             }
     
     def _analyze_skill_match(self, resume_skills: Set[str], jd_skills: Set[str]) -> Dict:
@@ -192,3 +207,106 @@ class Matcher:
         overall_score = skill_score + technical_score + text_score
         
         return min(int(overall_score), 100)
+    
+    def _analyze_market_competitiveness(self, resume_data: Dict, jd_data: Dict, 
+                                      skill_match: Dict) -> Dict:
+        """Analyze how competitive the candidate is in the job market."""
+        competitiveness = {
+            'competitiveness_score': 0,
+            'strengths': [],
+            'improvement_areas': [],
+            'market_position': 'Entry Level'
+        }
+        
+        # Base score from skill match
+        match_percentage = skill_match.get('match_percentage', 0)
+        competitiveness['competitiveness_score'] = match_percentage
+        
+        # Analyze strengths
+        resume_skills_count = len(resume_data.get('resume_skills', {}).get('all_skills', set()))
+        if resume_skills_count > 15:
+            competitiveness['strengths'].append('Diverse skill set')
+            competitiveness['competitiveness_score'] += 5
+        
+        if resume_data.get('ats_analysis', {}).get('score', 0) > 80:
+            competitiveness['strengths'].append('ATS-friendly resume')
+            competitiveness['competitiveness_score'] += 5
+        
+        # Check for in-demand skills
+        in_demand_skills = ['python', 'javascript', 'react', 'aws', 'docker', 'kubernetes']
+        resume_skills = resume_data.get('resume_skills', {}).get('all_skills', set())
+        matching_demand_skills = len([s for s in resume_skills if s.lower() in in_demand_skills])
+        
+        if matching_demand_skills > 3:
+            competitiveness['strengths'].append('Has in-demand technical skills')
+            competitiveness['competitiveness_score'] += 10
+        
+        # Improvement areas
+        critical_missing = len(skill_match.get('missing_skills', []))
+        if critical_missing > 5:
+            competitiveness['improvement_areas'].append('Missing several key skills')
+            competitiveness['competitiveness_score'] -= 10
+        
+        # Determine market position
+        final_score = competitiveness['competitiveness_score']
+        if final_score >= 80:
+            competitiveness['market_position'] = 'Highly Competitive'
+        elif final_score >= 60:
+            competitiveness['market_position'] = 'Competitive'
+        elif final_score >= 40:
+            competitiveness['market_position'] = 'Moderate'
+        else:
+            competitiveness['market_position'] = 'Needs Improvement'
+        
+        return competitiveness
+    
+    def _analyze_experience_alignment(self, resume_data: Dict, jd_data: Dict) -> Dict:
+        """Analyze how well experience aligns with job requirements."""
+        alignment = {
+            'experience_match': 'Unknown',
+            'seniority_fit': 'Unknown',
+            'experience_score': 50,
+            'recommendations': []
+        }
+        
+        # Extract experience info from resume (simplified)
+        resume_text = resume_data.get('cleaned_text', '')
+        jd_seniority = jd_data.get('seniority', 'Not specified')
+        jd_experience = jd_data.get('required_experience', 'Not specified')
+        
+        # Look for experience indicators in resume
+        experience_indicators = {
+            'intern': ['intern', 'internship', 'trainee'],
+            'junior': ['junior', 'entry', 'graduate', '1 year', '2 years'],
+            'mid': ['senior developer', '3 years', '4 years', '5 years'],
+            'senior': ['senior', 'lead', 'architect', '6+ years', '7+ years']
+        }
+        
+        resume_level = 'entry'
+        for level, keywords in experience_indicators.items():
+            if any(keyword in resume_text for keyword in keywords):
+                resume_level = level
+                break
+        
+        # Compare with JD requirements
+        if jd_seniority.lower() in ['junior', 'entry level'] and resume_level in ['intern', 'junior']:
+            alignment['seniority_fit'] = 'Good Fit'
+            alignment['experience_score'] = 80
+        elif jd_seniority.lower() in ['mid', 'intermediate'] and resume_level in ['junior', 'mid']:
+            alignment['seniority_fit'] = 'Good Fit'
+            alignment['experience_score'] = 85
+        elif jd_seniority.lower() == 'senior' and resume_level in ['mid', 'senior']:
+            alignment['seniority_fit'] = 'Good Fit'
+            alignment['experience_score'] = 90
+        else:
+            alignment['seniority_fit'] = 'Potential Mismatch'
+            alignment['experience_score'] = 40
+            
+            if resume_level in ['intern', 'junior'] and jd_seniority.lower() == 'senior':
+                alignment['recommendations'].append('Consider gaining more experience before applying')
+            elif resume_level == 'senior' and jd_seniority.lower() in ['junior', 'entry']:
+                alignment['recommendations'].append('You may be overqualified for this position')
+        
+        alignment['experience_match'] = f"Resume suggests {resume_level} level, JD requires {jd_seniority}"
+        
+        return alignment
