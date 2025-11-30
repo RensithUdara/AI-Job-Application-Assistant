@@ -270,6 +270,35 @@ def display_summary_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
     else:
         st.error("🔴 Low match. Significant improvements needed to align with job requirements.")
     
+    # Market Analysis Summary
+    st.subheader("Market Analysis")
+    market_analysis = match_data.get('market_analysis', {})
+    market_position = market_analysis.get('market_position', 'Unknown')
+    
+    if market_position == 'Highly Competitive':
+        st.success(f"🌟 Market Position: {market_position}")
+    elif market_position == 'Competitive':
+        st.info(f"💼 Market Position: {market_position}")
+    else:
+        st.warning(f"📊 Market Position: {market_position}")
+    
+    # Show strengths and improvement areas
+    col_strengths, col_improvements = st.columns(2)
+    
+    with col_strengths:
+        strengths = market_analysis.get('strengths', [])
+        if strengths:
+            st.write("**Key Strengths:**")
+            for strength in strengths:
+                st.write(f"• {strength}")
+    
+    with col_improvements:
+        improvements = market_analysis.get('improvement_areas', [])
+        if improvements:
+            st.write("**Areas for Improvement:**")
+            for improvement in improvements:
+                st.write(f"• {improvement}")
+    
     # Enhanced statistics
     st.subheader("Detailed Analytics")
     
