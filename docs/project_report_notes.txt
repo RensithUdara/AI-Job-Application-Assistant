@@ -1,0 +1,193 @@
+# Project Architecture and Technical Notes
+
+## System Architecture
+
+### High-Level Overview
+```
+User Interface (Streamlit)
+    ↓
+Input Processing Layer
+    ↓
+Core Processing Modules
+├── Resume Parser
+├── Job Description Processor  
+├── Matcher & Analyzer
+└── Recommendation Engine
+    ↓
+Data Layer (JSON/CSV)
+    ↓
+Visualization & Output
+```
+
+### Component Interaction Flow
+1. **Input Layer:** User uploads resume and job description
+2. **Parsing Layer:** Extract text and structure from documents
+3. **Analysis Layer:** Process and compare content using NLP
+4. **Matching Layer:** Calculate similarity and identify gaps
+5. **Recommendation Layer:** Generate personalized suggestions
+6. **Presentation Layer:** Display results through interactive dashboard
+
+## Technical Implementation Details
+
+### NLP Processing Pipeline
+- **Text Cleaning:** Normalize whitespace, remove special characters
+- **Skill Extraction:** Dictionary-based + fuzzy matching (FuzzyWuzzy)
+- **Semantic Analysis:** TF-IDF vectorization + cosine similarity
+- **Classification:** Keyword-based job role detection
+
+### Scoring Algorithms
+- **Resume Quality Score:** Weighted combination of structure completeness (40%), contact info (20%), skills diversity (40%)
+- **Match Score:** Skill overlap (50%) + technical categories (30%) + text similarity (20%)
+- **Priority Analysis:** Critical vs nice-to-have skill classification
+
+### Data Management
+- **Skills Taxonomy:** Hierarchical categorization of 100+ skills
+- **Job Templates:** Role-specific requirements and keywords
+- **Question Bank:** 30+ interview questions mapped to skills/roles
+
+## Report Structure Suggestions
+
+### 1. Introduction
+- Problem statement and motivation
+- Project objectives and scope
+- Technology selection rationale
+
+### 2. Literature Review
+- Existing resume analysis tools comparison
+- NLP techniques in HR technology
+- Skill matching algorithms research
+
+### 3. System Design
+- Architecture diagrams
+- Component specifications
+- Data flow models
+- User interface mockups
+
+### 4. Implementation
+- Development methodology
+- Key algorithms and code snippets
+- Database design and data preprocessing
+- Web interface development process
+
+### 5. Testing & Validation
+- Test cases and scenarios
+- Performance metrics
+- User acceptance testing results
+- Limitation analysis
+
+### 6. Results & Discussion
+- Feature demonstration with screenshots
+- Algorithm performance evaluation
+- User feedback and insights
+- Comparison with existing solutions
+
+### 7. Conclusion & Future Work
+- Project achievements summary
+- Lessons learned
+- Potential enhancements
+- Commercial viability assessment
+
+## Viva Preparation Points
+
+### Technical Questions
+1. **"Explain your skill matching algorithm"**
+   - Dictionary-based exact matching
+   - FuzzyWuzzy for approximate matches
+   - TF-IDF + cosine similarity for semantic comparison
+   - Weighted scoring system
+
+2. **"How do you handle different resume formats?"**
+   - pdfplumber for PDF extraction
+   - python-docx for Word documents
+   - Text preprocessing and normalization
+   - Error handling for corrupted files
+
+3. **"What makes your recommendation engine intelligent?"**
+   - Priority-based gap analysis
+   - Role-specific suggestions
+   - Time-bound learning roadmaps
+   - Contextual interview questions
+
+### Demonstration Flow
+1. Show live application with sample resume
+2. Walk through each dashboard tab
+3. Explain visualizations and insights
+4. Demonstrate different job roles/skills
+5. Discuss technical architecture
+
+### Key Strengths to Highlight
+- **Modular Design:** Easy to extend and maintain
+- **Multi-format Support:** PDF, DOCX, plain text
+- **Interactive Visualizations:** Plotly charts and gauges
+- **Comprehensive Analysis:** Structure + content + skills + interview prep
+- **Real-world Applicability:** Addresses genuine student needs
+
+## Performance Considerations
+
+### Optimization Techniques
+- **Caching:** Store processed skills taxonomy in memory
+- **Vectorization:** Batch process multiple text comparisons  
+- **Lazy Loading:** Load interview questions only when needed
+- **Session State:** Persist analysis results during user session
+
+### Scalability Factors
+- **Database Integration:** Future MySQL/PostgreSQL support
+- **API Architecture:** REST endpoints for external integration
+- **User Management:** Authentication and personalization
+- **Batch Processing:** Multiple resume analysis
+
+## Deployment Options
+
+### Local Development
+```bash
+streamlit run app.py --server.port 8501
+```
+
+### Cloud Deployment
+- **Streamlit Cloud:** Direct GitHub integration
+- **Heroku:** Container-based deployment
+- **AWS/Azure:** Full cloud infrastructure
+- **Docker:** Containerized application
+
+## Error Handling Strategy
+
+### Input Validation
+- File format verification
+- Text content validation
+- Empty input handling
+- Large file size limits
+
+### Processing Errors
+- PDF parsing failures
+- NLP processing exceptions
+- Missing data graceful degradation
+- User-friendly error messages
+
+## Data Privacy & Security
+
+### Considerations
+- No permanent data storage
+- Session-based processing only  
+- Secure file upload handling
+- Resume content confidentiality
+
+## Testing Strategy
+
+### Unit Tests
+- Individual module functionality
+- Edge case handling
+- Algorithm accuracy validation
+
+### Integration Tests
+- End-to-end workflow testing
+- Cross-module communication
+- Data consistency verification
+
+### User Acceptance Tests
+- Real resume/job description pairs
+- User interface usability
+- Performance benchmarking
+
+---
+
+*This document serves as a comprehensive technical reference for project documentation and presentation preparation.*

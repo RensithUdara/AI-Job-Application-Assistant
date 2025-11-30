@@ -1,0 +1,58 @@
+John Doe
+Software Developer
+Email: john.doe@email.com
+Phone: +1-555-123-4567
+LinkedIn: linkedin.com/in/johndoe
+
+SUMMARY
+Enthusiastic computer science student with strong programming skills in Python and Java. Passionate about web development and mobile applications. Seeking opportunities to apply technical knowledge in a dynamic software development environment.
+
+EDUCATION
+Bachelor of Science in Computer Science
+University of Technology | Expected Graduation: May 2024
+GPA: 3.7/4.0
+Relevant Coursework: Data Structures, Algorithms, Database Systems, Software Engineering
+
+SKILLS
+Programming Languages: Python, Java, JavaScript, HTML, CSS
+Frameworks: React, Django, Flask
+Databases: MySQL, PostgreSQL
+Tools: Git, GitHub, VS Code, IntelliJ IDEA
+Operating Systems: Windows, Linux
+
+PROJECTS
+E-commerce Website (2023)
+• Developed a full-stack e-commerce platform using React frontend and Django backend
+• Implemented user authentication, product catalog, and payment integration
+• Deployed on Heroku with PostgreSQL database
+• Technologies: React, Django, PostgreSQL, Stripe API
+
+Personal Finance Tracker (2023)
+• Created a web application for tracking personal expenses and budgets
+• Built responsive UI with JavaScript and Bootstrap
+• Implemented data visualization using Chart.js
+• Technologies: HTML, CSS, JavaScript, Chart.js, Local Storage
+
+Chat Application (2022)
+• Developed a real-time chat application using Node.js and Socket.io
+• Implemented user rooms and message history
+• Deployed on AWS EC2 with MongoDB database
+• Technologies: Node.js, Express, Socket.io, MongoDB
+
+EXPERIENCE
+Software Development Intern
+Tech Solutions Inc. | June 2023 - August 2023
+• Assisted in developing web applications using React and Node.js
+• Collaborated with team members using Git version control
+• Participated in code reviews and testing processes
+• Gained experience in agile development methodology
+
+Teaching Assistant - Intro to Programming
+University of Technology | January 2023 - May 2023
+• Helped students understand programming concepts in Python
+• Conducted lab sessions and graded assignments
+• Provided one-on-one tutoring for struggling students
+
+CERTIFICATIONS
+• AWS Cloud Practitioner (2023)
+• Google Analytics Individual Qualification (2022)
