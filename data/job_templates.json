@@ -1,66 +1,197 @@
 {
-  "mobile_developer": {
-    "keywords": [
-      "flutter", "android", "kotlin", "dart", "play store", "ios", "mobile app", 
-      "app store", "react native", "swift", "mobile development", "xamarin"
-    ],
-    "must_have": ["programming_languages", "mobile_technologies"],
-    "nice_to_have": ["databases", "tools", "cloud_platforms"]
-  },
-  "web_developer": {
-    "keywords": [
-      "react", "node", "frontend", "backend", "api", "javascript", "html", "css", 
-      "web development", "full stack", "angular", "vue", "express", "django"
-    ],
-    "must_have": ["programming_languages", "web_technologies"],
-    "nice_to_have": ["databases", "tools", "cloud_platforms", "frameworks"]
-  },
-  "data_analyst": {
-    "keywords": [
-      "sql", "excel", "power bi", "tableau", "data analysis", "python", "r", 
-      "statistics", "data visualization", "pandas", "numpy", "machine learning"
-    ],
-    "must_have": ["databases", "programming_languages"],
-    "nice_to_have": ["tools", "frameworks", "cloud_platforms"]
-  },
-  "data_scientist": {
-    "keywords": [
-      "machine learning", "deep learning", "python", "r", "tensorflow", "pytorch", 
-      "scikit-learn", "statistics", "data mining", "ai", "nlp", "computer vision"
-    ],
-    "must_have": ["programming_languages", "frameworks", "databases"],
-    "nice_to_have": ["cloud_platforms", "tools"]
-  },
-  "software_engineer": {
-    "keywords": [
-      "software development", "programming", "coding", "algorithms", "data structures", 
-      "oop", "design patterns", "testing", "debugging", "software engineering"
-    ],
-    "must_have": ["programming_languages", "concepts"],
-    "nice_to_have": ["databases", "tools", "frameworks", "cloud_platforms"]
-  },
-  "devops_engineer": {
-    "keywords": [
-      "devops", "ci/cd", "docker", "kubernetes", "aws", "azure", "jenkins", 
-      "terraform", "ansible", "monitoring", "deployment", "infrastructure"
-    ],
-    "must_have": ["cloud_platforms", "tools"],
-    "nice_to_have": ["programming_languages", "databases"]
-  },
-  "ui_ux_designer": {
-    "keywords": [
-      "ui", "ux", "design", "figma", "sketch", "adobe", "prototype", "wireframe", 
-      "user experience", "user interface", "design thinking", "usability"
-    ],
-    "must_have": ["soft_skills"],
-    "nice_to_have": ["web_technologies", "tools"]
-  },
-  "product_manager": {
-    "keywords": [
-      "product management", "roadmap", "stakeholder", "requirements", "agile", 
-      "scrum", "user stories", "market research", "product strategy", "analytics"
-    ],
-    "must_have": ["soft_skills", "concepts"],
-    "nice_to_have": ["tools"]
-  }
+    "mobile_developer": {
+        "keywords": [
+            "flutter",
+            "android",
+            "kotlin",
+            "dart",
+            "play store",
+            "ios",
+            "mobile app",
+            "app store",
+            "react native",
+            "swift",
+            "mobile development",
+            "xamarin"
+        ],
+        "must_have": [
+            "programming_languages",
+            "mobile_technologies"
+        ],
+        "nice_to_have": [
+            "databases",
+            "tools",
+            "cloud_platforms"
+        ]
+    },
+    "web_developer": {
+        "keywords": [
+            "react",
+            "node",
+            "frontend",
+            "backend",
+            "api",
+            "javascript",
+            "html",
+            "css",
+            "web development",
+            "full stack",
+            "angular",
+            "vue",
+            "express",
+            "django"
+        ],
+        "must_have": [
+            "programming_languages",
+            "web_technologies"
+        ],
+        "nice_to_have": [
+            "databases",
+            "tools",
+            "cloud_platforms",
+            "frameworks"
+        ]
+    },
+    "data_analyst": {
+        "keywords": [
+            "sql",
+            "excel",
+            "power bi",
+            "tableau",
+            "data analysis",
+            "python",
+            "r",
+            "statistics",
+            "data visualization",
+            "pandas",
+            "numpy",
+            "machine learning"
+        ],
+        "must_have": [
+            "databases",
+            "programming_languages"
+        ],
+        "nice_to_have": [
+            "tools",
+            "frameworks",
+            "cloud_platforms"
+        ]
+    },
+    "data_scientist": {
+        "keywords": [
+            "machine learning",
+            "deep learning",
+            "python",
+            "r",
+            "tensorflow",
+            "pytorch",
+            "scikit-learn",
+            "statistics",
+            "data mining",
+            "ai",
+            "nlp",
+            "computer vision"
+        ],
+        "must_have": [
+            "programming_languages",
+            "frameworks",
+            "databases"
+        ],
+        "nice_to_have": [
+            "cloud_platforms",
+            "tools"
+        ]
+    },
+    "software_engineer": {
+        "keywords": [
+            "software development",
+            "programming",
+            "coding",
+            "algorithms",
+            "data structures",
+            "oop",
+            "design patterns",
+            "testing",
+            "debugging",
+            "software engineering"
+        ],
+        "must_have": [
+            "programming_languages",
+            "concepts"
+        ],
+        "nice_to_have": [
+            "databases",
+            "tools",
+            "frameworks",
+            "cloud_platforms"
+        ]
+    },
+    "devops_engineer": {
+        "keywords": [
+            "devops",
+            "ci/cd",
+            "docker",
+            "kubernetes",
+            "aws",
+            "azure",
+            "jenkins",
+            "terraform",
+            "ansible",
+            "monitoring",
+            "deployment",
+            "infrastructure"
+        ],
+        "must_have": [
+            "cloud_platforms",
+            "tools"
+        ],
+        "nice_to_have": [
+            "programming_languages",
+            "databases"
+        ]
+    },
+    "ui_ux_designer": {
+        "keywords": [
+            "ui",
+            "ux",
+            "design",
+            "figma",
+            "sketch",
+            "adobe",
+            "prototype",
+            "wireframe",
+            "user experience",
+            "user interface",
+            "design thinking",
+            "usability"
+        ],
+        "must_have": [
+            "soft_skills"
+        ],
+        "nice_to_have": [
+            "web_technologies",
+            "tools"
+        ]
+    },
+    "product_manager": {
+        "keywords": [
+            "product management",
+            "roadmap",
+            "stakeholder",
+            "requirements",
+            "agile",
+            "scrum",
+            "user stories",
+            "market research",
+            "product strategy",
+            "analytics"
+        ],
+        "must_have": [
+            "soft_skills",
+            "concepts"
+        ],
+        "nice_to_have": [
+            "tools"
+        ]
+    }
 }
