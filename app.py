@@ -13,7 +13,19 @@ from core.resume_parser import ResumeParser
 from core.jd_processor import JobDescriptionProcessor
 from core.matcher import Matcher
 from core.recommender import Recommender
-from core.utils import *
+# Import utility functions
+def format_skills_list(skills):
+    if not skills:
+        return "None found"
+    formatted_skills = [skill.replace('_', ' ').title() for skill in skills]
+    return ' • '.join(formatted_skills)
+
+def get_section_status_icon(present):
+    return "✅" if present else "❌"
+
+def get_priority_color(priority):
+    priority_icons = {'high': '🔴', 'medium': '🟡', 'low': '🟢'}
+    return priority_icons.get(priority.lower(), '🟡')
 
 # Page configuration
 st.set_page_config(
@@ -126,7 +138,7 @@ def main():
         )
     
     # Analysis button
-    if st.button("🔍 Analyze Application", type="primary", use_container_width=True):
+    if st.button("🔍 Analyze Application", type="primary"):
         if resume_content and jd_text.strip():
             with st.spinner("Analyzing your application... This may take a moment."):
                 try:
@@ -236,7 +248,7 @@ def display_summary_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
             }
         ))
         fig.update_layout(height=300)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col2:
         st.metric("Detected Role", jd_data.get('jd_role', 'Unknown').replace('_', ' ').title())
@@ -298,7 +310,7 @@ def display_skills_tab(match_data: Dict, jd_data: Dict, resume_data: Dict):
             }
         )
         fig.update_layout(showlegend=False, height=300)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col2:
         # Category-wise match
@@ -316,7 +328,7 @@ def display_skills_tab(match_data: Dict, jd_data: Dict, resume_data: Dict):
                 color_continuous_scale=['red', 'yellow', 'green']
             )
             fig.update_layout(height=300, xaxis={'tickangle': 45})
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
     
     # Detailed skills breakdown
     st.subheader("Detailed Skills Breakdown")
@@ -402,7 +414,7 @@ def display_structure_tab(resume_data: Dict):
             color_discrete_map={'Present': '#28a745', 'Missing': '#dc3545'}
         )
         fig.update_layout(height=300)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     # Contact information quality
     st.subheader("Contact Information")
@@ -486,23 +498,26 @@ def display_recommendations_tab(recommendations: Dict):
     skill_roadmap = recommendations.get('skill_roadmap', [])
     
     if skill_roadmap:
-        roadmap_df = pd.DataFrame(skill_roadmap)
+        # Create priority counts for visualization
+        priority_counts = {}
+        for item in skill_roadmap:
+            priority = item.get('priority', 'medium')
+            priority_counts[priority] = priority_counts.get(priority, 0) + 1
         
-        # Create timeline visualization
-        fig = px.timeline(
-            roadmap_df,
-            x_start='timeframe',
-            x_end='timeframe',
-            y='skill',
-            color='priority',
-            title="Learning Timeline",
-            color_discrete_map={
-                'high': '#dc3545',
-                'medium': '#ffc107',
-                'low': '#28a745'
-            }
-        )
-        st.plotly_chart(fig, use_container_width=True)
+        if priority_counts:
+            # Create priority distribution chart
+            fig = px.pie(
+                values=list(priority_counts.values()),
+                names=list(priority_counts.keys()),
+                title="Learning Priority Distribution",
+                color_discrete_map={
+                    'high': '#dc3545',
+                    'medium': '#ffc107',
+                    'low': '#28a745'
+                }
+            )
+            fig.update_layout(height=400)
+            st.plotly_chart(fig, width='stretch')
         
         # Display roadmap details
         for item in skill_roadmap:
