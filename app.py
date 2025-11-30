@@ -248,7 +248,7 @@ def display_summary_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
             }
         ))
         fig.update_layout(height=300)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col2:
         st.metric("Detected Role", jd_data.get('jd_role', 'Unknown').replace('_', ' ').title())
@@ -310,7 +310,7 @@ def display_skills_tab(match_data: Dict, jd_data: Dict, resume_data: Dict):
             }
         )
         fig.update_layout(showlegend=False, height=300)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col2:
         # Category-wise match
@@ -328,7 +328,7 @@ def display_skills_tab(match_data: Dict, jd_data: Dict, resume_data: Dict):
                 color_continuous_scale=['red', 'yellow', 'green']
             )
             fig.update_layout(height=300, xaxis={'tickangle': 45})
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
     
     # Detailed skills breakdown
     st.subheader("Detailed Skills Breakdown")
