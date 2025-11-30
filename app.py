@@ -13,7 +13,19 @@ from core.resume_parser import ResumeParser
 from core.jd_processor import JobDescriptionProcessor
 from core.matcher import Matcher
 from core.recommender import Recommender
-from core.utils import *
+# Import utility functions
+def format_skills_list(skills):
+    if not skills:
+        return "None found"
+    formatted_skills = [skill.replace('_', ' ').title() for skill in skills]
+    return ' • '.join(formatted_skills)
+
+def get_section_status_icon(present):
+    return "✅" if present else "❌"
+
+def get_priority_color(priority):
+    priority_icons = {'high': '🔴', 'medium': '🟡', 'low': '🟢'}
+    return priority_icons.get(priority.lower(), '🟡')
 
 # Page configuration
 st.set_page_config(
@@ -126,7 +138,7 @@ def main():
         )
     
     # Analysis button
-    if st.button("🔍 Analyze Application", type="primary", use_container_width=True):
+    if st.button("🔍 Analyze Application", type="primary"):
         if resume_content and jd_text.strip():
             with st.spinner("Analyzing your application... This may take a moment."):
                 try:
@@ -488,21 +500,21 @@ def display_recommendations_tab(recommendations: Dict):
     if skill_roadmap:
         roadmap_df = pd.DataFrame(skill_roadmap)
         
-        # Create timeline visualization
-        fig = px.timeline(
+        # Create skill priority chart
+        fig = px.bar(
             roadmap_df,
-            x_start='timeframe',
-            x_end='timeframe',
-            y='skill',
+            x='skill',
+            y='timeframe',
             color='priority',
-            title="Learning Timeline",
+            title="Learning Roadmap",
             color_discrete_map={
                 'high': '#dc3545',
                 'medium': '#ffc107',
                 'low': '#28a745'
             }
         )
-        st.plotly_chart(fig, use_container_width=True)
+        fig.update_layout(xaxis_tickangle=-45, height=400)
+        st.plotly_chart(fig, width='stretch')
         
         # Display roadmap details
         for item in skill_roadmap:
