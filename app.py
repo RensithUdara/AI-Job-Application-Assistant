@@ -414,7 +414,7 @@ def display_structure_tab(resume_data: Dict):
             color_discrete_map={'Present': '#28a745', 'Missing': '#dc3545'}
         )
         fig.update_layout(height=300)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     # Contact information quality
     st.subheader("Contact Information")
