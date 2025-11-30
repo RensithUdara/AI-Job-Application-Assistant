@@ -47,6 +47,7 @@ class ResumeParser:
             contact_info = self._extract_contact_info(cleaned_text)
             resume_skills = self._extract_skills(cleaned_text)
             quality_score = self._calculate_quality_score(sections_found, contact_info, resume_skills)
+            ats_analysis = self.calculate_ats_score(text)
             
             return {
                 'raw_text': text,
@@ -55,7 +56,10 @@ class ResumeParser:
                 'missing_sections': self._get_missing_sections(sections_found),
                 'contact_info': contact_info,
                 'resume_skills': resume_skills,
-                'quality_score': quality_score
+                'quality_score': quality_score,
+                'ats_analysis': ats_analysis,
+                'word_count': len(text.split()),
+                'character_count': len(text)
             }
         
         except Exception as e:
@@ -202,11 +206,11 @@ class ResumeParser:
         """Calculate overall resume quality score (0-100)."""
         score = 0
         
-        # Section completeness (40 points)
+        # Section completeness (30 points)
         total_sections = len(sections_found)
         found_sections = sum(sections_found.values())
         if total_sections > 0:
-            score += (found_sections / total_sections) * 40
+            score += (found_sections / total_sections) * 30
         
         # Contact information (20 points)
         if contact_info.get('valid_email'):
@@ -216,13 +220,68 @@ class ResumeParser:
         if contact_info.get('has_linkedin'):
             score += 5
         
-        # Skills (40 points)
+        # Skills diversity and depth (30 points)
         skill_categories = len(resume_skills['by_category'])
         total_skills = len(resume_skills['all_skills'])
         
         if skill_categories > 0:
-            score += min(skill_categories * 5, 20)  # Max 20 for categories
+            score += min(skill_categories * 4, 15)  # Max 15 for categories
         if total_skills > 0:
-            score += min(total_skills * 2, 20)  # Max 20 for total skills
+            score += min(total_skills * 1.5, 15)  # Max 15 for total skills
+        
+        # Content quality indicators (20 points)
+        score += self._assess_content_quality(sections_found)
         
         return min(int(score), 100)
+    
+    def _assess_content_quality(self, sections_found: Dict[str, bool]) -> int:
+        """Assess content quality based on section presence and importance."""
+        quality_score = 0
+        
+        # Critical sections
+        if sections_found.get('experience', False):
+            quality_score += 8
+        if sections_found.get('projects', False):
+            quality_score += 6
+        if sections_found.get('education', False):
+            quality_score += 4
+        if sections_found.get('certifications', False):
+            quality_score += 2
+        
+        return quality_score
+    
+    def calculate_ats_score(self, text: str) -> Dict:
+        """Calculate ATS (Applicant Tracking System) compatibility score."""
+        ats_score = 100
+        issues = []
+        
+        # Check for ATS-friendly formatting
+        if len(re.findall(r'[^\w\s@.\-+()]', text)) > len(text) * 0.1:
+            ats_score -= 15
+            issues.append("Too many special characters may confuse ATS systems")
+        
+        # Check for standard section headers
+        standard_headers = ['experience', 'education', 'skills', 'summary']
+        missing_headers = []
+        for header in standard_headers:
+            if header not in text.lower():
+                missing_headers.append(header)
+        
+        if missing_headers:
+            ats_score -= len(missing_headers) * 5
+            issues.append(f"Missing standard sections: {', '.join(missing_headers)}")
+        
+        # Check text length (too short or too long)
+        word_count = len(text.split())
+        if word_count < 200:
+            ats_score -= 20
+            issues.append("Resume appears too short (< 200 words)")
+        elif word_count > 1000:
+            ats_score -= 10
+            issues.append("Resume may be too long for ATS parsing (> 1000 words)")
+        
+        return {
+            'score': max(0, ats_score),
+            'issues': issues,
+            'word_count': word_count
+        }
