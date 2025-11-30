@@ -1,42 +1,154 @@
 {
-  "programming_languages": [
-    "python", "java", "c", "c++", "dart", "javascript", "typescript", "kotlin", "swift", 
-    "php", "ruby", "go", "rust", "scala", "r", "matlab", "sql"
-  ],
-  "web_technologies": [
-    "html", "css", "react", "angular", "vue", "node.js", "express", "django", "flask", 
-    "fastapi", "spring boot", "asp.net", "laravel", "bootstrap", "tailwind", "sass", 
-    "webpack", "next.js", "nuxt.js"
-  ],
-  "mobile_technologies": [
-    "flutter", "android", "kotlin", "swift", "react native", "xamarin", "ionic", 
-    "cordova", "java", "objective-c", "dart"
-  ],
-  "databases": [
-    "mysql", "postgresql", "mongodb", "sqlite", "oracle", "sql server", "redis", 
-    "elasticsearch", "cassandra", "firebase firestore", "dynamodb", "neo4j"
-  ],
-  "cloud_platforms": [
-    "aws", "azure", "google cloud", "firebase", "heroku", "digitalocean", "vercel", 
-    "netlify", "docker", "kubernetes", "terraform", "cloudformation"
-  ],
-  "tools": [
-    "git", "github", "gitlab", "bitbucket", "jira", "trello", "slack", "teams", 
-    "postman", "insomnia", "jenkins", "github actions", "docker", "vs code", 
-    "intellij", "eclipse", "xcode", "android studio"
-  ],
-  "frameworks": [
-    "spring", "hibernate", "junit", "mockito", "redux", "vuex", "rxjs", "express", 
-    "koa", "nestjs", "tensorflow", "pytorch", "pandas", "numpy", "scikit-learn"
-  ],
-  "soft_skills": [
-    "communication", "teamwork", "leadership", "problem solving", "critical thinking", 
-    "time management", "adaptability", "creativity", "attention to detail", 
-    "project management", "presentation", "analytical thinking"
-  ],
-  "concepts": [
-    "oop", "data structures", "algorithms", "design patterns", "rest api", "graphql", 
-    "microservices", "agile", "scrum", "devops", "ci/cd", "testing", "unit testing", 
-    "integration testing", "tdd", "bdd", "mvc", "mvvm"
-  ]
+    "programming_languages": [
+        "python",
+        "java",
+        "c",
+        "c++",
+        "dart",
+        "javascript",
+        "typescript",
+        "kotlin",
+        "swift",
+        "php",
+        "ruby",
+        "go",
+        "rust",
+        "scala",
+        "r",
+        "matlab",
+        "sql"
+    ],
+    "web_technologies": [
+        "html",
+        "css",
+        "react",
+        "angular",
+        "vue",
+        "node.js",
+        "express",
+        "django",
+        "flask",
+        "fastapi",
+        "spring boot",
+        "asp.net",
+        "laravel",
+        "bootstrap",
+        "tailwind",
+        "sass",
+        "webpack",
+        "next.js",
+        "nuxt.js"
+    ],
+    "mobile_technologies": [
+        "flutter",
+        "android",
+        "kotlin",
+        "swift",
+        "react native",
+        "xamarin",
+        "ionic",
+        "cordova",
+        "java",
+        "objective-c",
+        "dart"
+    ],
+    "databases": [
+        "mysql",
+        "postgresql",
+        "mongodb",
+        "sqlite",
+        "oracle",
+        "sql server",
+        "redis",
+        "elasticsearch",
+        "cassandra",
+        "firebase firestore",
+        "dynamodb",
+        "neo4j"
+    ],
+    "cloud_platforms": [
+        "aws",
+        "azure",
+        "google cloud",
+        "firebase",
+        "heroku",
+        "digitalocean",
+        "vercel",
+        "netlify",
+        "docker",
+        "kubernetes",
+        "terraform",
+        "cloudformation"
+    ],
+    "tools": [
+        "git",
+        "github",
+        "gitlab",
+        "bitbucket",
+        "jira",
+        "trello",
+        "slack",
+        "teams",
+        "postman",
+        "insomnia",
+        "jenkins",
+        "github actions",
+        "docker",
+        "vs code",
+        "intellij",
+        "eclipse",
+        "xcode",
+        "android studio"
+    ],
+    "frameworks": [
+        "spring",
+        "hibernate",
+        "junit",
+        "mockito",
+        "redux",
+        "vuex",
+        "rxjs",
+        "express",
+        "koa",
+        "nestjs",
+        "tensorflow",
+        "pytorch",
+        "pandas",
+        "numpy",
+        "scikit-learn"
+    ],
+    "soft_skills": [
+        "communication",
+        "teamwork",
+        "leadership",
+        "problem solving",
+        "critical thinking",
+        "time management",
+        "adaptability",
+        "creativity",
+        "attention to detail",
+        "project management",
+        "presentation",
+        "analytical thinking"
+    ],
+    "concepts": [
+        "oop",
+        "data structures",
+        "algorithms",
+        "design patterns",
+        "rest api",
+        "graphql",
+        "microservices",
+        "agile",
+        "scrum",
+        "devops",
+        "ci/cd",
+        "testing",
+        "unit testing",
+        "integration testing",
+        "tdd",
+        "bdd",
+        "mvc",
+        "mvvm"
+    ]
 }
