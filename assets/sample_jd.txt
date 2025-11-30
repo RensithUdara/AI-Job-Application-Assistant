@@ -1,0 +1,68 @@
+Job Title: Junior Full Stack Developer
+
+Company: InnovateTech Solutions
+Location: Remote/Hybrid
+Experience Level: 1-2 years
+Employment Type: Full-time
+
+Job Description:
+We are seeking a talented Junior Full Stack Developer to join our growing development team. The ideal candidate will have experience with modern web technologies and a passion for building scalable web applications.
+
+Key Responsibilities:
+• Develop and maintain web applications using React.js for frontend and Node.js for backend
+• Collaborate with cross-functional teams to define, design, and ship new features
+• Write clean, maintainable, and efficient code following best practices
+• Participate in code reviews and contribute to team knowledge sharing
+• Work with databases (PostgreSQL, MongoDB) to design and optimize data storage solutions
+• Implement RESTful APIs and integrate third-party services
+• Ensure responsive design and cross-browser compatibility
+• Participate in agile development processes and daily standups
+• Debug and troubleshoot issues across the full stack
+• Stay updated with emerging technologies and industry trends
+
+Required Skills and Qualifications:
+• Bachelor's degree in Computer Science, Engineering, or related field
+• 1-2 years of professional software development experience
+• Strong proficiency in JavaScript, HTML5, and CSS3
+• Experience with React.js and modern frontend frameworks
+• Knowledge of Node.js and Express.js for backend development
+• Understanding of database design and SQL (PostgreSQL preferred)
+• Experience with NoSQL databases (MongoDB)
+• Proficiency with Git version control and GitHub
+• Understanding of RESTful API design and implementation
+• Knowledge of responsive web design principles
+• Experience with testing frameworks (Jest, Cypress)
+• Familiarity with cloud platforms (AWS, Azure, or Google Cloud)
+• Understanding of CI/CD pipelines and DevOps practices
+
+Preferred Skills:
+• Experience with TypeScript
+• Knowledge of GraphQL
+• Familiarity with containerization (Docker)
+• Understanding of microservices architecture
+• Experience with state management libraries (Redux, Context API)
+• Knowledge of authentication and authorization (JWT, OAuth)
+• Experience with performance optimization techniques
+• Familiarity with monitoring tools and logging
+
+Soft Skills:
+• Strong problem-solving and analytical thinking abilities
+• Excellent communication and collaboration skills
+• Ability to work in a fast-paced, agile environment
+• Self-motivated with strong attention to detail
+• Eagerness to learn and adapt to new technologies
+• Good time management and organizational skills
+
+What We Offer:
+• Competitive salary range: $70,000 - $85,000
+• Comprehensive health, dental, and vision insurance
+• Flexible work arrangements (remote/hybrid)
+• Professional development opportunities and training budget
+• Modern development tools and equipment
+• Collaborative and inclusive work culture
+• Opportunities for career advancement
+
+Application Process:
+Please submit your resume, cover letter, and portfolio showcasing your best projects. Include links to GitHub repositories and any deployed applications.
+
+Equal Opportunity Employer: InnovateTech Solutions is committed to creating a diverse and inclusive workplace and is an equal opportunity employer.
