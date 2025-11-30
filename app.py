@@ -48,23 +48,50 @@ st.markdown("""
 }
 
 .metric-card {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
     padding: 1rem;
     border-radius: 8px;
     border-left: 4px solid #667eea;
     margin: 0.5rem 0;
+    color: #212529;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+}
+
+.metric-card strong {
+    color: #495057;
+    font-weight: 600;
+}
+
+.metric-card small {
+    color: #6c757d;
 }
 
 .priority-high {
     border-left-color: #dc3545;
+    background-color: #fff5f5;
+}
+
+.priority-high strong {
+    color: #c53030;
 }
 
 .priority-medium {
     border-left-color: #ffc107;
+    background-color: #fffbeb;
+}
+
+.priority-medium strong {
+    color: #d69e2e;
 }
 
 .priority-low {
     border-left-color: #28a745;
+    background-color: #f0fff4;
+}
+
+.priority-low strong {
+    color: #38a169;
 }
 
 .stTabs [data-baseweb="tab-list"] {
@@ -75,6 +102,11 @@ st.markdown("""
     height: 50px;
     padding-left: 20px;
     padding-right: 20px;
+}
+
+/* Ensure text visibility in all themes */
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
+    color: inherit !important;
 }
 </style>
 """, unsafe_allow_html=True)
