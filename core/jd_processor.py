@@ -344,3 +344,33 @@ class JobDescriptionProcessor:
         requirements['complexity_score'] = min(complexity, 100)
         
         return requirements
+    
+    def get_industry_benchmarks(self, role: str, seniority: str) -> Dict:
+        """Get industry benchmarks for role and seniority level."""
+        # Industry benchmark data (simplified - in real app, this would come from API/database)
+        benchmarks = {
+            'web_developer': {
+                'junior': {'avg_salary': 65000, 'common_skills': ['javascript', 'html', 'css', 'react']},
+                'mid': {'avg_salary': 85000, 'common_skills': ['javascript', 'react', 'node.js', 'sql']},
+                'senior': {'avg_salary': 110000, 'common_skills': ['javascript', 'react', 'node.js', 'aws', 'docker']}
+            },
+            'mobile_developer': {
+                'junior': {'avg_salary': 70000, 'common_skills': ['java', 'kotlin', 'android', 'ios']},
+                'mid': {'avg_salary': 90000, 'common_skills': ['flutter', 'react native', 'firebase', 'api']},
+                'senior': {'avg_salary': 115000, 'common_skills': ['flutter', 'architecture', 'ci/cd', 'testing']}
+            },
+            'data_analyst': {
+                'junior': {'avg_salary': 60000, 'common_skills': ['sql', 'excel', 'python', 'statistics']},
+                'mid': {'avg_salary': 80000, 'common_skills': ['sql', 'python', 'tableau', 'machine learning']},
+                'senior': {'avg_salary': 105000, 'common_skills': ['python', 'machine learning', 'aws', 'spark']}
+            }
+        }
+        
+        seniority_key = seniority.lower() if seniority != 'Not specified' else 'junior'
+        if seniority_key not in ['junior', 'mid', 'senior']:
+            seniority_key = 'junior'
+        
+        return benchmarks.get(role, benchmarks.get('web_developer', {})).get(seniority_key, {
+            'avg_salary': 70000,
+            'common_skills': ['programming', 'problem solving']
+        })
