@@ -213,10 +213,10 @@ def display_executive_templates():
     
     with col1:
         st.markdown("""
-        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #795548; margin: 0;'>🏢 C-Level Executive</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>For CEO, CTO, CFO, and other C-suite roles</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #bcaaa4; margin: 0;'>🏢 C-Level Executive</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>For CEO, CTO, CFO, and other C-suite roles</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Leadership achievements</li>
                 <li>Strategic initiatives focus</li>
                 <li>Board experience</li>
@@ -230,10 +230,10 @@ def display_executive_templates():
     
     with col2:
         st.markdown("""
-        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #795548; margin: 0;'>📈 VP/Director</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>For Vice Presidents and Director positions</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #bcaaa4; margin: 0;'>📈 VP/Director</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>For Vice Presidents and Director positions</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Team leadership focus</li>
                 <li>Department growth</li>
                 <li>Strategic planning</li>
@@ -247,10 +247,10 @@ def display_executive_templates():
     
     with col3:
         st.markdown("""
-        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #795548; margin: 0;'>🎯 Senior Manager</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>For senior management transitioning to executive roles</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #bcaaa4; margin: 0;'>🎯 Senior Manager</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>For senior management transitioning to executive roles</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Management experience</li>
                 <li>Process improvement</li>
                 <li>Budget management</li>
