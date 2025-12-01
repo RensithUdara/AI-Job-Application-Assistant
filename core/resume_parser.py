@@ -883,18 +883,18 @@ class ResumeParser:
         else:
             parsed_data['parsing_issues'].append('Email not detected')
         
-        phone_match = re.search(r'[+]?[1-9]?[-.\\s]?\\(?[0-9]{3}\\)?[-.\\s]?[0-9]{3}[-.\\s]?[0-9]{4}', text)
+        phone_match = re.search(r'[+]?[1-9]?[-.\s]?\(?[0-9]{3}\)?[-.\s]?[0-9]{3}[-.\s]?[0-9]{4}', text)
         if phone_match:
             parsed_data['personal_info']['phone'] = phone_match.group()
         else:
             parsed_data['parsing_issues'].append('Phone number not detected')
         
         # Extract name (first line usually)
-        lines = [line.strip() for line in text.split('\\n') if line.strip()]
+        lines = [line.strip() for line in text.split('\n') if line.strip()]
         if lines:
             # Simple heuristic: first non-empty line that's not an email/phone
             for line in lines[:3]:
-                if '@' not in line and not re.search(r'\\d{3}', line) and len(line.split()) <= 4:
+                if '@' not in line and not re.search(r'\d{3}', line) and len(line.split()) <= 4:
                     parsed_data['personal_info']['name'] = line
                     break
         
@@ -909,8 +909,8 @@ class ResumeParser:
                 parsed_data['sections'][section_name] = {
                     'detected': True,
                     'word_count': len(content.split()),
-                    'has_dates': bool(re.search(r'\\d{4}', content)),
-                    'has_bullets': bool(re.search(r'^[\\s]*[\u2022\\-\\*]', content, re.MULTILINE))
+                    'has_dates': bool(re.search(r'\d{4}', content)),
+                    'has_bullets': bool(re.search(r'^[\s]*[\u2022\-\*]', content, re.MULTILINE))
                 }
             else:
                 parsed_data['parsing_issues'].append(f'{section_name.title()} section not detected')
