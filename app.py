@@ -1603,6 +1603,450 @@ def display_advanced_ai_features_tab(resume_data, jd_data, match_data):
                 st.write(f"🎯 {strategy}")
             
             st.write(f"**Recommended Timeline:** {competition_data['timeline_advice']}")
+    
+    with tab9:
+        display_resume_scoring_tab(resume_data, jd_data)
+    
+    with tab10:
+        display_career_path_tab(resume_data, jd_data)
+
+def display_resume_scoring_tab(resume_data: Dict, jd_data: Dict):
+    """Display advanced resume scoring and ATS analysis."""
+    st.header("🎯 Intelligent Resume Scoring")
+    
+    # Initialize components
+    resume_parser = ResumeParser()
+    
+    # Get resume text for analysis
+    resume_text = resume_data.get('resume_text', str(resume_data))
+    jd_text = jd_data.get('jd_text', '')
+    
+    # Extract target role from JD
+    job_processor = JobDescriptionProcessor()
+    role_analysis = job_processor.analyze_role_type(jd_text)
+    target_role = role_analysis.get('primary_role_type', 'software_engineer')
+    
+    st.subheader("📊 Overall Resume Score")
+    
+    # Calculate intelligent resume score
+    scoring_result = resume_parser.calculate_intelligent_resume_score(resume_text, target_role)
+    
+    # Display overall score with color coding
+    overall_score = scoring_result['overall_score']
+    
+    if overall_score >= 85:
+        score_color = "🟢"
+        score_message = "Excellent! Your resume is highly optimized"
+    elif overall_score >= 70:
+        score_color = "🟡"
+        score_message = "Good resume with room for improvement"
+    elif overall_score >= 55:
+        score_color = "🟠"
+        score_message = "Fair resume that needs significant enhancement"
+    else:
+        score_color = "🔴"
+        score_message = "Your resume needs major improvements"
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Overall Score", f"{overall_score}/100", delta=None)
+    with col2:
+        st.metric("Score Category", score_color)
+    with col3:
+        st.metric("Target Role", target_role.replace('_', ' ').title())
+    
+    st.info(f"**Assessment:** {score_message}")
+    
+    # Individual score breakdown
+    st.subheader("📈 Score Breakdown")
+    
+    individual_scores = scoring_result['individual_scores']
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.write("**Content Quality (25%)**")
+        st.progress(individual_scores['content_quality'] / 100)
+        st.write(f"{individual_scores['content_quality']}/100")
+        
+        st.write("**ATS Compatibility (20%)**")
+        st.progress(individual_scores['ats_compatibility'] / 100)
+        st.write(f"{individual_scores['ats_compatibility']}/100")
+        
+        st.write("**Keyword Optimization (20%)**")
+        st.progress(individual_scores['keyword_optimization'] / 100)
+        st.write(f"{individual_scores['keyword_optimization']}/100")
+    
+    with col2:
+        st.write("**Formatting Score (10%)**")
+        st.progress(individual_scores['formatting_score'] / 100)
+        st.write(f"{individual_scores['formatting_score']}/100")
+        
+        st.write("**Experience Relevance (15%)**")
+        st.progress(individual_scores['experience_relevance'] / 100)
+        st.write(f"{individual_scores['experience_relevance']}/100")
+        
+        st.write("**Skill Match (10%)**")
+        st.progress(individual_scores['skill_match'] / 100)
+        st.write(f"{individual_scores['skill_match']}/100")
+    
+    # Recommendations
+    if scoring_result['recommendations']:
+        st.subheader("💡 Improvement Recommendations")
+        for i, rec in enumerate(scoring_result['recommendations'], 1):
+            st.write(f"{i}. {rec}")
+    
+    # Strengths and Weaknesses
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        if scoring_result['strengths']:
+            st.success("**🎯 Your Strengths:**")
+            for strength in scoring_result['strengths']:
+                st.write(f"✅ {strength.replace('_', ' ').title()}")
+    
+    with col2:
+        if scoring_result['weaknesses']:
+            st.warning("**⚠️ Areas to Improve:**")
+            for weakness in scoring_result['weaknesses']:
+                st.write(f"❌ {weakness.replace('_', ' ').title()}")
+    
+    # ATS Compatibility Analysis
+    st.markdown("---")
+    st.subheader("🤖 Advanced ATS Compatibility Analysis")
+    
+    ats_result = resume_parser.analyze_ats_compatibility_advanced(resume_text)
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("ATS Score", f"{ats_result['overall_ats_score']}/100")
+    with col2:
+        st.metric("ATS Grade", ats_result['ats_grade'])
+    with col3:
+        st.metric("Parsing Success Rate", ats_result['estimated_parsing_success'])
+    
+    st.info(f"**Parsing Confidence:** {ats_result['parsing_confidence']}")
+    
+    # ATS Compatibility Checks
+    st.write("**🔍 Detailed ATS Checks:**")
+    
+    checks = ats_result['compatibility_checks']
+    for check_name, check_data in checks.items():
+        col1, col2, col3 = st.columns([2, 1, 3])
+        
+        with col1:
+            st.write(f"**{check_name.replace('_', ' ').title()}**")
+        
+        with col2:
+            score = check_data['score']
+            if score >= 80:
+                st.success(f"{score}/100")
+            elif score >= 60:
+                st.warning(f"{score}/100")
+            else:
+                st.error(f"{score}/100")
+        
+        with col3:
+            st.write(check_data['note'])
+    
+    # ATS Recommendations
+    if ats_result['ats_recommendations']:
+        st.subheader("🛠️ ATS Optimization Recommendations")
+        for i, rec in enumerate(ats_result['ats_recommendations'], 1):
+            st.write(f"{i}. {rec}")
+
+def display_career_path_tab(resume_data: Dict, jd_data: Dict):
+    """Display career path analysis and skill gap analysis."""
+    st.header("🚀 Career Path & Skill Gap Analysis")
+    
+    # Initialize career analyzer
+    career_analyzer = CareerAnalyzer()
+    
+    # Extract current information
+    resume_skills = resume_data.get('resume_skills', {}).get('all_skills', [])
+    resume_text = resume_data.get('resume_text', str(resume_data))
+    
+    # Estimate experience years
+    import re
+    experience_patterns = re.findall(r'(\d+)\+?\s*(?:years?|yrs?)', resume_text.lower())
+    experience_years = max([int(year) for year in experience_patterns]) if experience_patterns else 2
+    
+    # Get target role from JD
+    job_processor = JobDescriptionProcessor()
+    role_analysis = job_processor.analyze_role_type(jd_data.get('jd_text', ''))
+    target_role = role_analysis.get('primary_role_type', 'software_engineer')
+    
+    # Input section for career path analysis
+    st.subheader("🎯 Career Path Configuration")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        current_role = st.selectbox(
+            "Current Role:",
+            ['junior_developer', 'software_engineer', 'web_developer', 'data_analyst', 'mobile_developer'],
+            index=1
+        )
+    
+    with col2:
+        selected_target_role = st.selectbox(
+            "Target Role:",
+            ['senior_software_engineer', 'tech_lead', 'data_scientist', 'devops_engineer', 'solution_architect'],
+            index=0
+        )
+    
+    with col3:
+        years_experience = st.number_input(
+            "Years of Experience:",
+            min_value=0,
+            max_value=20,
+            value=experience_years,
+            step=1
+        )
+    
+    # Career Progression Analysis
+    if st.button("🔍 Analyze Career Progression"):
+        st.markdown("---")
+        st.subheader("📊 Career Progression Analysis")
+        
+        progression_result = career_analyzer.analyze_career_progression(
+            current_role, selected_target_role, resume_skills, years_experience
+        )
+        
+        # Feasibility Score
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            feasibility_score = progression_result['feasibility_score']
+            st.metric("Feasibility Score", f"{feasibility_score}/100")
+            
+        with col2:
+            timeline = progression_result.get('progression_timeline', 'Unknown')
+            st.metric("Timeline", timeline)
+            
+        with col3:
+            if feasibility_score >= 80:
+                st.success("High Feasibility")
+            elif feasibility_score >= 60:
+                st.warning("Moderate Feasibility")
+            else:
+                st.error("Challenging Transition")
+        
+        # Success Factors
+        if progression_result['success_factors']:
+            st.write("**🎯 Success Factors:**")
+            for factor in progression_result['success_factors']:
+                st.write(f"✅ {factor}")
+        
+        # Intermediate Roles
+        if progression_result['intermediate_roles']:
+            st.write("**🛤️ Recommended Intermediate Roles:**")
+            for role in progression_result['intermediate_roles']:
+                st.write(f"🔄 {role.replace('_', ' ').title()}")
+        
+        # Learning Path
+        if progression_result['learning_path']:
+            st.subheader("📚 Structured Learning Path")
+            
+            for phase in progression_result['learning_path']:
+                with st.expander(f"📖 {phase['phase']}: {phase['focus']}"):
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        st.write("**Skills to Develop:**")
+                        for skill in phase['skills']:
+                            st.write(f"• {skill}")
+                    
+                    with col2:
+                        st.write("**Resources:**")
+                        for resource in phase['resources']:
+                            st.write(f"• {resource}")
+                    
+                    st.write(f"**Timeline:** {phase['timeline']}")
+                    st.write(f"**Success Metrics:** {', '.join(phase['success_metrics'])}")
+        
+        # Salary Progression
+        if progression_result['salary_progression']:
+            st.subheader("💰 Salary Progression Analysis")
+            
+            salary_data = progression_result['salary_progression']
+            
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.metric("Current Estimated Salary", f"${salary_data['current_estimated_salary']:,}")
+            
+            with col2:
+                st.metric("Target Estimated Salary", f"${salary_data['target_estimated_salary']:,}")
+            
+            with col3:
+                increase = salary_data['potential_increase']
+                percentage = salary_data.get('percentage_increase', 0)
+                st.metric("Potential Increase", f"${increase:,}", f"{percentage}%")
+            
+            st.info(f"**ROI Assessment:** {salary_data.get('roi_timeline', 'Not calculated')}")
+    
+    # Skill Gap Analysis
+    st.markdown("---")
+    st.subheader("🎯 Comprehensive Skill Gap Analysis")
+    
+    if st.button("📊 Generate Skill Gap Report"):
+        gap_report = career_analyzer.generate_skill_gap_report(
+            resume_skills, selected_target_role, 'technology'
+        )
+        
+        # Gap Analysis Summary
+        summary = gap_report['gap_analysis_summary']
+        
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            st.metric("Required Skills", summary['total_required_skills'])
+        
+        with col2:
+            st.metric("Skill Gaps", summary['total_skill_gaps'])
+        
+        with col3:
+            st.metric("Coverage", f"{summary['skill_coverage_percentage']}%")
+        
+        with col4:
+            readiness = summary['readiness_level']
+            if readiness == 'High':
+                st.success(f"Readiness: {readiness}")
+            elif readiness == 'Medium':
+                st.warning(f"Readiness: {readiness}")
+            else:
+                st.error(f"Readiness: {readiness}")
+        
+        st.write(f"**⏱️ Preparation Time:** {summary['estimated_preparation_time']}")
+        
+        # Critical vs Nice-to-Have Gaps
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            if gap_report['critical_gaps']:
+                st.error("**🚨 Critical Skill Gaps:**")
+                for gap in gap_report['critical_gaps']:
+                    st.write(f"❌ {gap}")
+            else:
+                st.success("**✅ No Critical Gaps Found!**")
+        
+        with col2:
+            if gap_report['nice_to_have_gaps']:
+                st.warning("**💡 Enhancement Opportunities:**")
+                for gap in gap_report['nice_to_have_gaps']:
+                    st.write(f"🔸 {gap}")
+        
+        # Skill Development Priority
+        if gap_report['skill_development_priority']:
+            st.subheader("📋 Skill Development Priority Matrix")
+            
+            priority_df = pd.DataFrame(gap_report['skill_development_priority'])
+            
+            # Display as a formatted table
+            for _, row in priority_df.iterrows():
+                with st.expander(f"{'🔴' if row['priority'] == 'High' else '🟡'} {row['skill']} ({row['priority']} Priority)"):
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.write(f"**Difficulty:** {row['learning_difficulty']}")
+                    
+                    with col2:
+                        st.write(f"**Market Demand:** {row['market_demand']}")
+                    
+                    with col3:
+                        st.write(f"**Timeline:** {row['recommended_timeline']}")
+        
+        # Learning Resources & Timeline
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader("📚 Recommended Resources")
+            resources = gap_report['learning_resources']
+            
+            st.write("**Online Courses:**")
+            for course in resources['online_courses']:
+                st.write(f"🎓 {course}")
+            
+            st.write("**Practice Platforms:**")
+            for platform in resources['practice_platforms']:
+                st.write(f"💻 {platform}")
+        
+        with col2:
+            st.subheader("💰 Investment Estimate")
+            costs = gap_report['cost_estimate']
+            
+            st.write(f"**Total Range:** {costs['total_estimated_range']}")
+            st.write(f"**Online Courses:** {costs['online_courses']}")
+            st.write(f"**Books & Resources:** {costs['books_resources']}")
+            st.write(f"**Certifications:** {costs['certification_exams']}")
+            
+            if costs['cost_saving_tips']:
+                st.info("**💡 Cost Saving Tips:**")
+                for tip in costs['cost_saving_tips']:
+                    st.write(f"• {tip}")
+        
+        # Progress Tracking Framework
+        st.subheader("📈 Progress Tracking Framework")
+        
+        tracking = gap_report['progress_tracking']
+        
+        st.write("**🎯 Key Milestones:**")
+        for milestone in tracking['milestones']:
+            st.write(f"Week {milestone['week']}: {milestone['goal']}")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.write("**✅ Success Metrics:**")
+            for metric in tracking['success_metrics']:
+                st.write(f"• {metric}")
+        
+        with col2:
+            st.write("**🛠️ Tracking Tools:**")
+            for tool in tracking['tracking_tools']:
+                st.write(f"• {tool}")
+    
+    # Industry Insights from JD
+    st.markdown("---")
+    st.subheader("🏢 Industry Insights")
+    
+    if jd_data.get('jd_text'):
+        job_processor = JobDescriptionProcessor()
+        
+        # Industry Analysis
+        industry_insights = job_processor.analyze_industry_insights(jd_data['jd_text'])
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.metric("Primary Industry", industry_insights['primary_industry'].replace('_', ' ').title())
+        
+        with col2:
+            st.metric("Growth Outlook", industry_insights['growth_outlook'])
+        
+        with col3:
+            st.metric("Company Size", industry_insights['company_size'].replace('_', ' ').title())
+        
+        # Market Insights
+        if industry_insights['market_insights']:
+            st.write("**📊 Market Insights:**")
+            for insight in industry_insights['market_insights']:
+                st.write(f"💡 {insight}")
+        
+        # Job Difficulty Assessment
+        difficulty_analysis = job_processor.assess_job_difficulty_advanced(jd_data['jd_text'])
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.write(f"**🎯 Difficulty Level:** {difficulty_analysis['difficulty_level']}")
+            st.progress(difficulty_analysis['difficulty_score'] / 100)
+            st.write(f"Score: {difficulty_analysis['difficulty_score']}/100")
+        
+        with col2:
+            st.write(f"**⏱️ Prep Timeline:** {difficulty_analysis['preparation_timeline']}")
+            st.write(f"**💡 Recommendation:** {difficulty_analysis['recommendation']}")
 
 if __name__ == "__main__":
     main()
