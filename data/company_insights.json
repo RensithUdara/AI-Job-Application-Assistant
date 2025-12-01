@@ -1,11 +1,21 @@
 {
     "company_profiles": {
         "faang": {
-            "companies": ["Meta", "Apple", "Amazon", "Netflix", "Google"],
+            "companies": [
+                "Meta",
+                "Apple",
+                "Amazon",
+                "Netflix",
+                "Google"
+            ],
             "hiring_criteria": {
                 "technical_bar": "extremely_high",
                 "interview_rounds": 5,
-                "emphasis": ["algorithms", "system_design", "cultural_fit"],
+                "emphasis": [
+                    "algorithms",
+                    "system_design",
+                    "cultural_fit"
+                ],
                 "preferred_experience": "top_tier_university_or_faang"
             },
             "compensation": {
@@ -21,11 +31,20 @@
             }
         },
         "startups": {
-            "characteristics": ["high_growth", "fast_paced", "flexible", "equity_heavy"],
+            "characteristics": [
+                "high_growth",
+                "fast_paced",
+                "flexible",
+                "equity_heavy"
+            ],
             "hiring_criteria": {
                 "technical_bar": "high",
                 "interview_rounds": 3,
-                "emphasis": ["adaptability", "ownership", "speed"],
+                "emphasis": [
+                    "adaptability",
+                    "ownership",
+                    "speed"
+                ],
                 "preferred_experience": "versatile_background"
             },
             "compensation": {
@@ -41,11 +60,21 @@
             }
         },
         "enterprise": {
-            "companies": ["IBM", "Oracle", "Salesforce", "SAP", "Cisco"],
+            "companies": [
+                "IBM",
+                "Oracle",
+                "Salesforce",
+                "SAP",
+                "Cisco"
+            ],
             "hiring_criteria": {
                 "technical_bar": "moderate_to_high",
                 "interview_rounds": 4,
-                "emphasis": ["domain_expertise", "reliability", "process"],
+                "emphasis": [
+                    "domain_expertise",
+                    "reliability",
+                    "process"
+                ],
                 "preferred_experience": "enterprise_background"
             },
             "compensation": {
@@ -62,11 +91,21 @@
             }
         },
         "consulting": {
-            "companies": ["Deloitte", "McKinsey", "Accenture", "PwC", "EY"],
+            "companies": [
+                "Deloitte",
+                "McKinsey",
+                "Accenture",
+                "PwC",
+                "EY"
+            ],
             "hiring_criteria": {
                 "technical_bar": "moderate",
                 "interview_rounds": 4,
-                "emphasis": ["communication", "problem_solving", "client_interaction"],
+                "emphasis": [
+                    "communication",
+                    "problem_solving",
+                    "client_interaction"
+                ],
                 "preferred_experience": "consulting_or_business_background"
             },
             "compensation": {
@@ -82,11 +121,21 @@
             }
         },
         "fintech": {
-            "companies": ["Stripe", "Square", "PayPal", "Coinbase", "Robinhood"],
+            "companies": [
+                "Stripe",
+                "Square",
+                "PayPal",
+                "Coinbase",
+                "Robinhood"
+            ],
             "hiring_criteria": {
                 "technical_bar": "high",
                 "interview_rounds": 4,
-                "emphasis": ["security", "scalability", "financial_domain"],
+                "emphasis": [
+                    "security",
+                    "scalability",
+                    "financial_domain"
+                ],
                 "preferred_experience": "fintech_or_finance_background"
             },
             "compensation": {
@@ -104,25 +153,63 @@
     },
     "company_size_analysis": {
         "startup_0_50": {
-            "advantages": ["high_impact", "equity_upside", "learning_opportunities", "flexibility"],
-            "disadvantages": ["high_risk", "limited_resources", "uncertain_future"],
-            "best_for": ["risk_tolerant", "generalists", "early_career"]
+            "advantages": [
+                "high_impact",
+                "equity_upside",
+                "learning_opportunities",
+                "flexibility"
+            ],
+            "disadvantages": [
+                "high_risk",
+                "limited_resources",
+                "uncertain_future"
+            ],
+            "best_for": [
+                "risk_tolerant",
+                "generalists",
+                "early_career"
+            ]
         },
         "scale_up_50_500": {
-            "advantages": ["growth_phase", "still_agile", "proven_product", "good_equity"],
-            "disadvantages": ["scaling_challenges", "process_gaps"],
-            "best_for": ["mid_career", "specialists", "leadership_roles"]
+            "advantages": [
+                "growth_phase",
+                "still_agile",
+                "proven_product",
+                "good_equity"
+            ],
+            "disadvantages": [
+                "scaling_challenges",
+                "process_gaps"
+            ],
+            "best_for": [
+                "mid_career",
+                "specialists",
+                "leadership_roles"
+            ]
         },
         "large_500_plus": {
-            "advantages": ["stability", "resources", "structured_growth", "benefits"],
-            "disadvantages": ["bureaucracy", "slower_innovation", "limited_equity"],
-            "best_for": ["stability_seekers", "specialists", "work_life_balance"]
+            "advantages": [
+                "stability",
+                "resources",
+                "structured_growth",
+                "benefits"
+            ],
+            "disadvantages": [
+                "bureaucracy",
+                "slower_innovation",
+                "limited_equity"
+            ],
+            "best_for": [
+                "stability_seekers",
+                "specialists",
+                "work_life_balance"
+            ]
         }
     },
     "red_flags": {
         "job_posting_red_flags": [
             "urgent_hiring",
-            "unrealistic_requirements", 
+            "unrealistic_requirements",
             "vague_job_description",
             "excessive_unpaid_overtime_mentions",
             "work_family_language",
