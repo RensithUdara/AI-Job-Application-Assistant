@@ -35,7 +35,6 @@ def display_ai_chat_tab():
         st.markdown("---")
         if st.button("🗑️ Clear Chat", use_container_width=True):
             st.session_state.chat_history = []
-            st.rerun()
     
     with col1:
         # Display chat history
@@ -74,7 +73,6 @@ def display_ai_chat_tab():
             if st.button("Send 📤", use_container_width=True):
                 if user_input.strip():
                     send_message(user_input.strip())
-                    st.rerun()
 
 def add_quick_response(topic):
     """Add a quick response for a specific topic."""
