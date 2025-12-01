@@ -551,7 +551,8 @@ class ResumeParser:
     
     def generate_resume_weakness_heatmap(self, text: str) -> Dict:
         """Generate visual heatmap of resume strengths and weaknesses."""
-        sections = self._parse_sections(text)
+        # Extract sections manually for analysis
+        sections = self._extract_text_sections(text)
         heatmap_data = {}
         
         # Analyze each section for strength (0-100)
@@ -714,6 +715,63 @@ class ResumeParser:
             recommendations.append("Standardize section headers (all CAPS or Title Case)")
         
         return recommendations
+    
+    def _extract_text_sections(self, text: str) -> Dict[str, str]:
+        """Extract text content for each major resume section."""
+        sections = {
+            'contact': '',
+            'summary': '',
+            'experience': '',
+            'skills': '',
+            'education': '',
+            'projects': ''
+        }
+        
+        # Split text into lines
+        lines = text.split('\n')
+        current_section = 'contact'  # Start with contact info
+        section_content = []
+        
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+                
+            # Check if line is a section header
+            line_upper = line.upper()
+            if any(header in line_upper for header in ['EXPERIENCE', 'WORK', 'EMPLOYMENT']):
+                if section_content:
+                    sections[current_section] = '\n'.join(section_content)
+                current_section = 'experience'
+                section_content = []
+            elif any(header in line_upper for header in ['SKILL', 'TECHNICAL', 'COMPETENCIES']):
+                if section_content:
+                    sections[current_section] = '\n'.join(section_content)
+                current_section = 'skills'
+                section_content = []
+            elif any(header in line_upper for header in ['EDUCATION', 'ACADEMIC']):
+                if section_content:
+                    sections[current_section] = '\n'.join(section_content)
+                current_section = 'education'
+                section_content = []
+            elif any(header in line_upper for header in ['PROJECT', 'PORTFOLIO']):
+                if section_content:
+                    sections[current_section] = '\n'.join(section_content)
+                current_section = 'projects'
+                section_content = []
+            elif any(header in line_upper for header in ['SUMMARY', 'PROFILE', 'OBJECTIVE']):
+                if section_content:
+                    sections[current_section] = '\n'.join(section_content)
+                current_section = 'summary'
+                section_content = []
+            else:
+                section_content.append(line)
+        
+        # Add final section content
+        if section_content:
+            sections[current_section] = '\n'.join(section_content)
+        
+        return sections
     
     def calculate_role_compatibility_scores(self, text: str, target_roles: List[str] = None) -> Dict:
         """Calculate compatibility scores for different roles."""
