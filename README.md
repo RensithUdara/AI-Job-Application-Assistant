@@ -503,22 +503,120 @@ streamlit run app.py --server.runOnSave true
 streamlit run app.py --server.enableCORS false
 ```
 
-## 💡 Usage Guide
+## 🎮 User Guide & Workflow
 
-### 1. Input Your Information
-- **Resume:** Upload PDF/DOCX file or paste text directly
-- **Job Description:** Copy and paste the job posting
+### **📋 Complete Usage Workflow**
 
-### 2. Analyze Application
-- Click "Analyze Application" button
-- Wait for processing (typically 10-30 seconds)
+```
+┌─ 📄 Input Documents ─┐    ┌─ 🔍 AI Analysis ─┐    ┌─ 📊 Results & Actions ─┐
+│                      │    │                  │    │                        │
+│  1. Upload Resume    │───▶│  • Parse Content │───▶│  • Review Summary      │
+│  2. Paste Job Desc   │    │  • Extract Skills│    │  • Check Skill Gaps    │
+│  3. Click Analyze    │    │  • Match & Score │    │  • Get Recommendations │
+│                      │    │  • Generate Tips │    │  • Practice Interviews │
+└──────────────────────┘    └──────────────────┘    └────────────────────────┘
+```
 
-### 3. Review Results
-- **Summary:** Check overall match score and key insights
-- **Skills:** Identify gaps and matched competencies
-- **Structure:** Review resume completeness
-- **Recommendations:** Follow improvement suggestions
-- **Interview Prep:** Practice with generated questions
+### **1. 📄 Document Input Methods**
+
+#### **Resume Input Options:**
+```
+📎 FILE UPLOAD           📝 TEXT PASTE          🔗 URL IMPORT
+├─ PDF files            ├─ Copy-paste text     ├─ LinkedIn profiles
+├─ DOCX documents       ├─ Direct typing       ├─ Online portfolios  
+├─ TXT files            └─ Rich text format    └─ GitHub profiles
+└─ Multiple formats
+```
+
+#### **Job Description Input:**
+```
+💼 JOB POSTING SOURCES
+├─ 🌐 Job boards (LinkedIn, Indeed, Glassdoor)
+├─ 🏢 Company career pages  
+├─ 📧 Email job descriptions
+├─ 📱 Mobile app job posts
+└─ 📄 PDF job descriptions
+```
+
+### **2. 🔍 Analysis Process**
+
+```
+⏱️ PROCESSING TIMELINE (15-45 seconds)
+
+Step 1: Document Parsing        [████░░░░░░] 2-5s
+Step 2: Content Extraction      [████████░░] 5-10s  
+Step 3: Skill Identification    [██████████] 8-15s
+Step 4: Matching & Scoring      [██████████] 3-8s
+Step 5: Recommendation Gen      [██████████] 5-12s
+Step 6: Visualization Prep      [██████████] 2-5s
+
+💡 Progress indicators show real-time status
+```
+
+### **3. 📊 Results Navigation**
+
+#### **Main Dashboard Navigation:**
+```
+🏠 Main Analysis ←→ 🤖 AI Chat ←→ 📄 Templates ←→ 🎤 Mock Interview
+     │                │            │              │
+     ▼                ▼            ▼              ▼
+┌─────────────┐  ┌──────────┐ ┌──────────┐  ┌──────────┐
+│• Summary    │  │• Career  │ │• 12+ Pro │  │• Practice│
+│• Skills     │  │  Advice  │ │  Templates│  │• Q&A     │
+│• Structure  │  │• Resume  │ │• Download│  │• Feedback│
+│• Actions    │  │  Tips    │ │• Custom  │  │• Analytics│
+│• Interview  │  │• Salary  │ │• Industry│  │• Progress│
+│• Analytics  │  │  Guide   │ │  Specific│  │  Track   │
+└─────────────┘  └──────────┘ └──────────┘  └──────────┘
+```
+
+### **4. 🎯 Action Implementation**
+
+#### **Priority-Based Action System:**
+```
+🔴 CRITICAL ACTIONS (Do First)
+├─ Fix major resume issues
+├─ Add missing critical skills
+└─ Prepare for immediate applications
+
+🟡 IMPORTANT ACTIONS (Next 1-4 weeks)  
+├─ Skill development courses
+├─ Portfolio project creation
+└─ Interview preparation
+
+🟢 ENHANCEMENT ACTIONS (1-3 months)
+├─ Networking and connections
+├─ Advanced certifications  
+└─ Long-term career planning
+```
+
+### **5. 🚀 Quick Actions Guide**
+
+```
+FIRST-TIME USERS:
+1. 📄 Start with Resume Templates tab
+2. 🤖 Ask AI Chat for resume advice  
+3. 🔍 Run analysis on main dashboard
+4. 🎤 Practice with Mock Interview
+
+RETURNING USERS:
+1. 🔄 Re-analyze with updated resume
+2. 📊 Check progress in Analytics
+3. 🎯 Complete recommended actions
+4. 📈 Track improvement over time
+```
+
+### **6. 💡 Pro Tips for Best Results**
+
+```
+✅ DO:                           ❌ AVOID:
+├─ Use recent job postings      ├─ Generic job descriptions
+├─ Upload high-quality resumes  ├─ Blurry or damaged files
+├─ Be specific about target role├─ Vague career objectives  
+├─ Update resume regularly      ├─ Outdated information
+├─ Practice mock interviews     ├─ Skipping interview prep
+└─ Act on recommendations       └─ Ignoring priority actions
+```
 
 ## 🎓 Educational Value
 
