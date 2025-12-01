@@ -17,6 +17,20 @@ class ResumeParser:
         for category, skills in self.skills_taxonomy.items():
             self.all_skills.update([skill.lower() for skill in skills])
         
+        # Professional action verbs for analysis
+        self.strong_action_verbs = [
+            'Achieved', 'Analyzed', 'Architected', 'Automated', 'Built', 'Collaborated',
+            'Configured', 'Created', 'Delivered', 'Designed', 'Developed', 'Engineered',
+            'Enhanced', 'Established', 'Executed', 'Implemented', 'Improved', 'Increased',
+            'Initiated', 'Launched', 'Led', 'Managed', 'Optimized', 'Orchestrated',
+            'Planned', 'Reduced', 'Resolved', 'Scaled', 'Streamlined', 'Transformed'
+        ]
+        
+        self.weak_action_verbs = [
+            'Did', 'Worked', 'Helped', 'Assisted', 'Participated', 'Involved',
+            'Responsible', 'Used', 'Tried', 'Handled', 'Dealt', 'Made'
+        ]
+        
         # Common section headers
         self.section_keywords = {
             'contact': ['contact', 'personal information', 'contact information'],
