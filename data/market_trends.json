@@ -1,0 +1,203 @@
+{
+    "2024_trends": {
+        "hot_skills": [
+            {
+                "skill": "artificial_intelligence",
+                "growth_rate": 45,
+                "demand_level": "extremely_high",
+                "average_salary_premium": 25000,
+                "job_count_increase": 78
+            },
+            {
+                "skill": "machine_learning",
+                "growth_rate": 42,
+                "demand_level": "extremely_high", 
+                "average_salary_premium": 22000,
+                "job_count_increase": 72
+            },
+            {
+                "skill": "blockchain",
+                "growth_rate": 38,
+                "demand_level": "very_high",
+                "average_salary_premium": 28000,
+                "job_count_increase": 65
+            },
+            {
+                "skill": "cybersecurity",
+                "growth_rate": 35,
+                "demand_level": "very_high",
+                "average_salary_premium": 15000,
+                "job_count_increase": 58
+            },
+            {
+                "skill": "cloud_computing",
+                "growth_rate": 32,
+                "demand_level": "very_high",
+                "average_salary_premium": 12000,
+                "job_count_increase": 62
+            },
+            {
+                "skill": "devops",
+                "growth_rate": 28,
+                "demand_level": "high",
+                "average_salary_premium": 10000,
+                "job_count_increase": 48
+            },
+            {
+                "skill": "react",
+                "growth_rate": 25,
+                "demand_level": "high",
+                "average_salary_premium": 8000,
+                "job_count_increase": 42
+            },
+            {
+                "skill": "python",
+                "growth_rate": 22,
+                "demand_level": "high",
+                "average_salary_premium": 6000,
+                "job_count_increase": 38
+            },
+            {
+                "skill": "kubernetes",
+                "growth_rate": 30,
+                "demand_level": "very_high",
+                "average_salary_premium": 14000,
+                "job_count_increase": 55
+            },
+            {
+                "skill": "typescript",
+                "growth_rate": 20,
+                "demand_level": "medium_high",
+                "average_salary_premium": 5000,
+                "job_count_increase": 35
+            }
+        ],
+        "declining_skills": [
+            {
+                "skill": "flash",
+                "decline_rate": -85,
+                "replacement": "html5_css3_javascript"
+            },
+            {
+                "skill": "jquery",
+                "decline_rate": -25,
+                "replacement": "react_vue_angular"
+            },
+            {
+                "skill": "php",
+                "decline_rate": -15,
+                "replacement": "node_python_go"
+            },
+            {
+                "skill": "perl",
+                "decline_rate": -30,
+                "replacement": "python_ruby"
+            }
+        ],
+        "emerging_technologies": [
+            {
+                "technology": "quantum_computing",
+                "maturity": "early",
+                "potential_impact": "revolutionary",
+                "timeline_to_mainstream": "5-10 years",
+                "key_companies": ["IBM", "Google", "Microsoft", "Amazon"]
+            },
+            {
+                "technology": "edge_computing",
+                "maturity": "growing",
+                "potential_impact": "high",
+                "timeline_to_mainstream": "2-3 years",
+                "key_companies": ["AWS", "Microsoft", "Google", "Cloudflare"]
+            },
+            {
+                "technology": "web3",
+                "maturity": "developing",
+                "potential_impact": "high",
+                "timeline_to_mainstream": "3-5 years",
+                "key_companies": ["Ethereum", "Polygon", "Solana", "Chainlink"]
+            },
+            {
+                "technology": "augmented_reality",
+                "maturity": "developing",
+                "potential_impact": "high",
+                "timeline_to_mainstream": "3-5 years",
+                "key_companies": ["Apple", "Meta", "Microsoft", "Magic Leap"]
+            }
+        ],
+        "industry_insights": {
+            "remote_work": {
+                "adoption_rate": 68,
+                "impact_on_salaries": "positive_10_percent",
+                "top_remote_friendly_roles": [
+                    "software_engineer",
+                    "web_developer", 
+                    "data_scientist",
+                    "devops_engineer",
+                    "product_manager"
+                ]
+            },
+            "ai_adoption": {
+                "companies_using_ai": 78,
+                "biggest_impact_areas": [
+                    "customer_service",
+                    "data_analysis", 
+                    "automation",
+                    "content_generation",
+                    "predictive_analytics"
+                ],
+                "job_displacement_risk": "low_to_medium",
+                "new_job_creation": "high"
+            },
+            "skills_shortage": {
+                "most_in_demand": [
+                    "cybersecurity_specialists",
+                    "ai_engineers",
+                    "cloud_architects",
+                    "data_scientists",
+                    "blockchain_developers"
+                ],
+                "shortage_severity": "critical",
+                "impact_on_salaries": "significant_increase"
+            }
+        }
+    },
+    "job_market_predictions": {
+        "2025": {
+            "fastest_growing_roles": [
+                {
+                    "role": "ai_engineer",
+                    "projected_growth": 55,
+                    "avg_salary_increase": 18
+                },
+                {
+                    "role": "cybersecurity_analyst", 
+                    "projected_growth": 42,
+                    "avg_salary_increase": 12
+                },
+                {
+                    "role": "blockchain_developer",
+                    "projected_growth": 48,
+                    "avg_salary_increase": 22
+                },
+                {
+                    "role": "cloud_architect",
+                    "projected_growth": 38,
+                    "avg_salary_increase": 15
+                },
+                {
+                    "role": "data_scientist",
+                    "projected_growth": 32,
+                    "avg_salary_increase": 10
+                }
+            ],
+            "market_outlook": "strong_growth",
+            "key_drivers": [
+                "digital_transformation",
+                "ai_adoption",
+                "cybersecurity_concerns", 
+                "cloud_migration",
+                "data_driven_decisions"
+            ]
+        }
+    }
+}
