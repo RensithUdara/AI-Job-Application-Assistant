@@ -63,6 +63,12 @@ class ResumeParser:
             quality_score = self._calculate_quality_score(sections_found, contact_info, resume_skills)
             ats_analysis = self.calculate_ats_score(text)
             
+            # Advanced analysis features
+            heatmap_analysis = self.generate_resume_weakness_heatmap(text)
+            consistency_analysis = self.check_resume_consistency(text)
+            role_compatibility = self.calculate_role_compatibility_scores(text)
+            ats_simulation = self.simulate_ats_parsing(text)
+            
             return {
                 'raw_text': text,
                 'cleaned_text': cleaned_text,
@@ -72,6 +78,10 @@ class ResumeParser:
                 'resume_skills': resume_skills,
                 'quality_score': quality_score,
                 'ats_analysis': ats_analysis,
+                'heatmap_analysis': heatmap_analysis,
+                'consistency_analysis': consistency_analysis,
+                'role_compatibility': role_compatibility,
+                'ats_simulation': ats_simulation,
                 'word_count': len(text.split()),
                 'character_count': len(text)
             }
@@ -538,3 +548,260 @@ class ResumeParser:
             'suggestions': suggestions,
             'sample_unquantified': unquantified_sentences[:3]  # Show first 3 examples
         }
+    
+    def generate_resume_weakness_heatmap(self, text: str) -> Dict:
+        """Generate visual heatmap of resume strengths and weaknesses."""
+        sections = self._parse_sections(text)
+        heatmap_data = {}
+        
+        # Analyze each section for strength (0-100)
+        for section_name, content in sections.items():
+            if not content:
+                heatmap_data[section_name] = {'strength': 0, 'color': '#ff4444', 'issues': ['Missing section']}
+                continue
+            
+            strength_score = 50  # Base score
+            issues = []
+            
+            # Word count analysis
+            word_count = len(content.split())
+            if word_count < 20:
+                strength_score -= 20
+                issues.append('Too brief')
+            elif word_count > 200:
+                strength_score -= 10
+                issues.append('Too verbose')
+            else:
+                strength_score += 10
+            
+            # Keyword density
+            if section_name == 'skills':
+                skill_count = len([skill for skill in self.all_skills if skill in content.lower()])
+                if skill_count >= 8:
+                    strength_score += 20
+                elif skill_count >= 4:
+                    strength_score += 10
+                else:
+                    issues.append('Few skills detected')
+            
+            # Action verb presence for experience/projects
+            if section_name in ['experience', 'projects']:
+                strong_verbs = sum(1 for verb in self.strong_action_verbs if verb.lower() in content.lower())
+                if strong_verbs >= 3:
+                    strength_score += 15
+                elif strong_verbs >= 1:
+                    strength_score += 5
+                else:
+                    strength_score -= 10
+                    issues.append('Lacks strong action verbs')
+            
+            # Quantification check
+            if re.search(r'\d', content):
+                strength_score += 10
+            else:
+                issues.append('Missing quantifiable metrics')
+            
+            # Determine color based on strength
+            strength_score = max(0, min(100, strength_score))
+            if strength_score >= 80:
+                color = '#22c55e'  # Green
+            elif strength_score >= 60:
+                color = '#eab308'  # Yellow
+            elif strength_score >= 40:
+                color = '#f97316'  # Orange
+            else:
+                color = '#ef4444'  # Red
+            
+            heatmap_data[section_name] = {
+                'strength': strength_score,
+                'color': color,
+                'issues': issues
+            }
+        
+        return {
+            'heatmap_data': heatmap_data,
+            'overall_strength': sum(data['strength'] for data in heatmap_data.values()) / len(heatmap_data),
+            'weakest_sections': sorted(heatmap_data.keys(), key=lambda k: heatmap_data[k]['strength'])[:3],
+            'strongest_sections': sorted(heatmap_data.keys(), key=lambda k: heatmap_data[k]['strength'], reverse=True)[:3]
+        }
+    
+    def check_resume_consistency(self, text: str) -> Dict:
+        """Check for consistency issues in resume formatting and content."""
+        issues = []
+        consistency_score = 100
+        
+        # Check date formats
+        date_patterns = [
+            r'\d{4}\s*-\s*\d{4}',  # 2019 - 2021
+            r'\d{2}\s*-\s*\d{2}',  # 19 - 21
+            r'\w+\s+\d{4}',        # January 2019
+            r'\d{1,2}/\d{4}'       # 01/2019
+        ]
+        
+        date_formats_found = []
+        for pattern in date_patterns:
+            if re.search(pattern, text):
+                date_formats_found.append(pattern)
+        
+        if len(date_formats_found) > 1:
+            issues.append('Mixed date formats detected')
+            consistency_score -= 15
+        
+        # Check bullet point consistency
+        bullet_patterns = [r'^\s*•', r'^\s*-', r'^\s*\*']
+        bullet_types_found = []
+        for pattern in bullet_patterns:
+            if re.search(pattern, text, re.MULTILINE):
+                bullet_types_found.append(pattern)
+        
+        if len(bullet_types_found) > 1:
+            issues.append('Inconsistent bullet point styles')
+            consistency_score -= 10
+        
+        # Check for mixed tenses
+        past_tense_words = ['worked', 'developed', 'created', 'built', 'managed']
+        present_tense_words = ['work', 'develop', 'create', 'build', 'manage']
+        
+        past_count = sum(1 for word in past_tense_words if word in text.lower())
+        present_count = sum(1 for word in present_tense_words if word in text.lower())
+        
+        if past_count > 0 and present_count > 0 and abs(past_count - present_count) < 2:
+            issues.append('Mixed verb tenses (past/present)')
+            consistency_score -= 12
+        
+        # Check capitalization consistency
+        section_headers = re.findall(r'^([A-Z][A-Z\s]+)$', text, re.MULTILINE)
+        if section_headers:
+            all_caps = all(header.isupper() for header in section_headers)
+            title_case = all(header.istitle() for header in section_headers)
+            
+            if not (all_caps or title_case):
+                issues.append('Inconsistent section header capitalization')
+                consistency_score -= 8
+        
+        return {
+            'consistency_score': max(0, consistency_score),
+            'issues_found': issues,
+            'consistency_level': self._get_consistency_level(consistency_score),
+            'recommendations': self._get_consistency_recommendations(issues)
+        }
+    
+    def _get_consistency_level(self, score: int) -> str:
+        """Convert consistency score to level."""
+        if score >= 90:
+            return "Excellent - Highly consistent"
+        elif score >= 75:
+            return "Good - Minor inconsistencies"
+        elif score >= 60:
+            return "Fair - Some consistency issues"
+        else:
+            return "Poor - Major consistency problems"
+    
+    def _get_consistency_recommendations(self, issues: List[str]) -> List[str]:
+        """Generate recommendations based on consistency issues."""
+        recommendations = []
+        
+        if 'Mixed date formats' in str(issues):
+            recommendations.append("Standardize all dates to same format (e.g., 'Jan 2019 - Dec 2021')")
+        
+        if 'Inconsistent bullet' in str(issues):
+            recommendations.append("Use consistent bullet points throughout (• or - but not both)")
+        
+        if 'Mixed verb tenses' in str(issues):
+            recommendations.append("Use past tense for previous roles, present tense for current role")
+        
+        if 'capitalization' in str(issues):
+            recommendations.append("Standardize section headers (all CAPS or Title Case)")
+        
+        return recommendations
+    
+    def calculate_role_compatibility_scores(self, text: str, target_roles: List[str] = None) -> Dict:
+        """Calculate compatibility scores for different roles."""
+        if not target_roles:
+            target_roles = ['mobile_developer', 'web_developer', 'data_analyst', 'software_engineer']
+        
+        role_keywords = {
+            'mobile_developer': ['flutter', 'android', 'ios', 'kotlin', 'swift', 'react native', 'mobile', 'app store'],
+            'web_developer': ['javascript', 'react', 'html', 'css', 'node.js', 'angular', 'vue', 'web', 'frontend', 'backend'],
+            'data_analyst': ['sql', 'python', 'excel', 'tableau', 'statistics', 'data', 'analytics', 'visualization'],
+            'software_engineer': ['programming', 'algorithms', 'data structures', 'system design', 'api', 'database'],
+            'devops_engineer': ['docker', 'kubernetes', 'aws', 'ci/cd', 'jenkins', 'terraform', 'cloud'],
+            'full_stack_developer': ['frontend', 'backend', 'database', 'api', 'full stack', 'end-to-end']
+        }
+        
+        text_lower = text.lower()
+        role_scores = {}
+        
+        for role in target_roles:
+            if role not in role_keywords:
+                continue
+            
+            keywords = role_keywords[role]
+            matches = sum(1 for keyword in keywords if keyword in text_lower)
+            
+            # Calculate base score
+            base_score = (matches / len(keywords)) * 100
+            
+            # Bonus for multiple mentions of same keyword
+            keyword_frequency = sum(text_lower.count(keyword) for keyword in keywords)
+            frequency_bonus = min(20, keyword_frequency * 2)
+            
+            # Experience relevance bonus
+            experience_bonus = 0
+            if 'experience' in text_lower and any(keyword in text_lower for keyword in keywords[:3]):
+                experience_bonus = 15
+            
+            final_score = min(100, base_score + frequency_bonus + experience_bonus)
+            
+            role_scores[role] = {
+                'score': round(final_score, 1),
+                'matched_keywords': [kw for kw in keywords if kw in text_lower],
+                'missing_keywords': [kw for kw in keywords if kw not in text_lower][:5],  # Top 5 missing
+                'strength_level': self._get_role_strength_level(final_score)
+            }
+        
+        # Find best fit
+        best_role = max(role_scores.keys(), key=lambda k: role_scores[k]['score'])
+        
+        return {
+            'role_scores': role_scores,
+            'best_fit_role': best_role,
+            'best_fit_score': role_scores[best_role]['score'],
+            'role_recommendations': self._get_role_recommendations(role_scores)
+        }
+    
+    def _get_role_strength_level(self, score: float) -> str:
+        """Convert role compatibility score to strength level."""
+        if score >= 80:
+            return "Excellent Match"
+        elif score >= 60:
+            return "Good Match"
+        elif score >= 40:
+            return "Fair Match"
+        elif score >= 20:
+            return "Weak Match"
+        else:
+            return "Poor Match"
+    
+    def _get_role_recommendations(self, role_scores: Dict) -> List[str]:
+        """Generate role-based recommendations."""
+        recommendations = []
+        
+        # Find top 2 roles
+        sorted_roles = sorted(role_scores.items(), key=lambda x: x[1]['score'], reverse=True)
+        
+        if len(sorted_roles) >= 2:
+            best_role, best_data = sorted_roles[0]
+            second_role, second_data = sorted_roles[1]
+            
+            if best_data['score'] >= 70:
+                recommendations.append(f"Strong candidate for {best_role.replace('_', ' ').title()} roles")
+            elif best_data['score'] >= 50:
+                recommendations.append(f"Consider targeting {best_role.replace('_', ' ').title()} positions with skill enhancement")
+            
+            # Gap analysis
+            if best_data['score'] < 60:
+                missing = best_data['missing_keywords'][:3]
+                recommendations.append(f"Focus on learning: {', '.join(missing)} to improve {best_role.replace('_', ' ')} compatibility")
+        
+        return recommendations
