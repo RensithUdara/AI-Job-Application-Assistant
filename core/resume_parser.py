@@ -68,6 +68,9 @@ class ResumeParser:
             consistency_analysis = self.check_resume_consistency(text)
             role_compatibility = self.calculate_role_compatibility_scores(text)
             ats_simulation = self.simulate_ats_parsing(text)
+            duplicate_analysis = self.detect_duplicate_content(text)
+            timeline_analysis = self.validate_resume_timeline(text)
+            project_analysis = self.analyze_project_impact(text)
             
             return {
                 'raw_text': text,
@@ -82,6 +85,9 @@ class ResumeParser:
                 'consistency_analysis': consistency_analysis,
                 'role_compatibility': role_compatibility,
                 'ats_simulation': ats_simulation,
+                'duplicate_analysis': duplicate_analysis,
+                'timeline_analysis': timeline_analysis,
+                'project_analysis': project_analysis,
                 'word_count': len(text.split()),
                 'character_count': len(text)
             }
