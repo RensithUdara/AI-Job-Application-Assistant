@@ -46,16 +46,16 @@ def display_ai_chat_tab():
             for i, message in enumerate(st.session_state.chat_history):
                 if message['role'] == 'user':
                     st.markdown(f"""
-                    <div style='background: #e8f4f8; padding: 1rem; border-radius: 10px; margin: 0.5rem 0; border-left: 4px solid #2196F3;'>
-                        <strong>👤 You:</strong><br>{message['content']}
-                        <small style='color: #666; font-size: 0.8rem;'><br>{message['timestamp']}</small>
+                    <div style='background: rgba(33, 150, 243, 0.1); padding: 1rem; border-radius: 10px; margin: 0.5rem 0; border-left: 4px solid #2196F3; color: #1565C0;'>
+                        <strong style='color: #1565C0;'>👤 You:</strong><br><span style='color: #1976D2;'>{message['content']}</span>
+                        <small style='color: #1976D2; font-size: 0.8rem;'><br>{message['timestamp']}</small>
                     </div>
                     """, unsafe_allow_html=True)
                 else:
                     st.markdown(f"""
-                    <div style='background: #f0f8e8; padding: 1rem; border-radius: 10px; margin: 0.5rem 0; border-left: 4px solid #4CAF50;'>
-                        <strong>🤖 AI Assistant:</strong><br>{message['content']}
-                        <small style='color: #666; font-size: 0.8rem;'><br>{message['timestamp']}</small>
+                    <div style='background: rgba(76, 175, 80, 0.1); padding: 1rem; border-radius: 10px; margin: 0.5rem 0; border-left: 4px solid #4CAF50; color: #2E7D32;'>
+                        <strong style='color: #2E7D32;'>🤖 AI Assistant:</strong><br><span style='color: #388E3C;'>{message['content']}</span>
+                        <small style='color: #388E3C; font-size: 0.8rem;'><br>{message['timestamp']}</small>
                     </div>
                     """, unsafe_allow_html=True)
         
