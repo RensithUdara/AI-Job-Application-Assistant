@@ -1043,4 +1043,4 @@ class JobDescriptionProcessor:
     def process_job_description(self, jd_text: str) -> Dict:
         """Main method to process job description with all features."""
         # This method should exist to maintain compatibility
-        return self.extract_job_info(jd_text)
+        return self.process_jd(jd_text)
