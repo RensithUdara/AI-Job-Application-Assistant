@@ -23,14 +23,18 @@ def display_mock_interview_tab():
     # Main interface
     tab1, tab2, tab3 = st.tabs(["🎯 Start Interview", "📊 Practice Questions", "📈 Performance Analytics"])
     
-    with tab1:
-        display_interview_setup()
-    
-    with tab2:
-        display_practice_questions()
-    
-    with tab3:
-        display_performance_analytics()
+    # Check if interview is in progress
+    if st.session_state.interview_session and st.session_state.interview_session['current_question'] < len(st.session_state.interview_session['questions']):
+        display_active_interview()
+    else:
+        with tab1:
+            display_interview_setup()
+        
+        with tab2:
+            display_practice_questions()
+        
+        with tab3:
+            display_performance_analytics()
 
 def display_interview_setup():
     """Display interview setup and configuration."""
@@ -120,7 +124,6 @@ def start_interview_session(interview_type, experience_level, industry, role_foc
     }
     
     st.success("🎬 Interview session started! Good luck!")
-    st.rerun()
 
 def generate_interview_questions(interview_type, experience_level, industry, difficulty, count):
     """Generate interview questions based on parameters."""
@@ -293,7 +296,6 @@ def display_active_interview():
                     # Move to next question
                     session['current_question'] += 1
                     st.session_state.interview_session = session
-                    st.rerun()
                 else:
                     st.warning("Please provide a response before moving to the next question.")
     
@@ -425,7 +427,6 @@ def display_interview_results(session):
         st.session_state.interview_session = None
         st.session_state.current_question = 0
         st.session_state.interview_responses = []
-        st.rerun()
 
 def display_practice_questions():
     """Display practice questions by category."""
