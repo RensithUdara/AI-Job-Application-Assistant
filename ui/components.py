@@ -189,28 +189,30 @@ def display_footer():
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     
     .footer-section {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        padding: 2rem;
-        border-radius: 15px;
-        margin: 1rem 0;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        background: transparent;
+        padding: 1rem 0;
+        border-radius: 0;
+        margin: 0;
+        box-shadow: none;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     }
     .footer-column {
         padding: 1.5rem;
-        background: white;
+        background: rgba(102, 126, 234, 0.1);
         border-radius: 10px;
         margin: 0.5rem;
         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         transition: transform 0.3s ease;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        color: #2d3748 !important;
+        border: 1px solid rgba(102, 126, 234, 0.2);
     }
     .footer-column:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
     .footer-link {
-        color: #667eea !important;
+        color: #4a5568 !important;
         text-decoration: none !important;
         padding: 8px 12px;
         border-radius: 6px;
@@ -228,7 +230,7 @@ def display_footer():
     .footer-link:hover {
         background-color: #f8f9ff !important;
         border-left: 3px solid #667eea;
-        color: #5a67d8 !important;
+        color: #667eea !important;
         transform: translateX(5px);
     }
     .section-header {
