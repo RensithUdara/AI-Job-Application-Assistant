@@ -198,21 +198,21 @@ def display_footer():
     }
     .footer-column {
         padding: 1.5rem;
-        background: rgba(102, 126, 234, 0.1);
+        background: rgba(45, 55, 72, 0.9);
         border-radius: 10px;
         margin: 0.5rem;
         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         transition: transform 0.3s ease;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-        color: #2d3748 !important;
-        border: 1px solid rgba(102, 126, 234, 0.2);
+        color: #ffffff !important;
+        border: 1px solid rgba(102, 126, 234, 0.3);
     }
     .footer-column:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
     .footer-link {
-        color: #4a5568 !important;
+        color: #e2e8f0 !important;
         text-decoration: none !important;
         padding: 8px 12px;
         border-radius: 6px;
@@ -228,13 +228,13 @@ def display_footer():
         -moz-osx-font-smoothing: grayscale;
     }
     .footer-link:hover {
-        background-color: #f8f9ff !important;
-        border-left: 3px solid #667eea;
-        color: #667eea !important;
+        background-color: rgba(102, 126, 234, 0.2) !important;
+        border-left: 3px solid #90cdf4;
+        color: #90cdf4 !important;
         transform: translateX(5px);
     }
     .section-header {
-        color: #2d3748 !important;
+        color: #ffffff !important;
         font-weight: 700;
         margin-bottom: 1rem;
         font-size: 1.2rem;
