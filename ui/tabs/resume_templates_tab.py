@@ -97,10 +97,10 @@ def display_creative_templates():
     
     with col1:
         st.markdown("""
-        <div style='border: 2px solid #e91e63; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #e91e63; margin: 0;'>🎨 Designer Portfolio</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>Perfect for designers and creative professionals</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #e91e63; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #f48fb1; margin: 0;'>🎨 Designer Portfolio</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>Perfect for designers and creative professionals</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Portfolio section included</li>
                 <li>Visual hierarchy emphasis</li>
                 <li>Color-coordinated design</li>
@@ -114,10 +114,10 @@ def display_creative_templates():
     
     with col2:
         st.markdown("""
-        <div style='border: 2px solid #e91e63; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #e91e63; margin: 0;'>📱 Digital Marketing</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>Tailored for marketing and social media roles</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #e91e63; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #f48fb1; margin: 0;'>📱 Digital Marketing</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>Tailored for marketing and social media roles</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Campaign results focus</li>
                 <li>Metrics-driven layout</li>
                 <li>Social media integration</li>
