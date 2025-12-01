@@ -638,3 +638,187 @@ class JobDescriptionProcessor:
             return 0.0
         
         return round(classified_count / total_count, 2)
+    
+    def detect_job_red_flags(self, jd_text: str) -> Dict:
+        """Detect potential warning signs in job descriptions."""
+        text_lower = jd_text.lower()
+        red_flags = []
+        risk_score = 0
+        
+        # High pressure indicators
+        pressure_keywords = [
+            'high pressure', 'fast paced', 'tight deadline', 'aggressive timeline',
+            'work under pressure', 'demanding environment', 'high stress'
+        ]
+        
+        for keyword in pressure_keywords:
+            if keyword in text_lower:
+                red_flags.append(f'High pressure environment: "{keyword}"')
+                risk_score += 15
+        
+        # Work-life balance concerns
+        worklife_keywords = [
+            'work weekends', 'overtime required', 'long hours', 'available 24/7',
+            'on-call rotation', 'flexible schedule' # can be code for unpredictable hours
+        ]
+        
+        for keyword in worklife_keywords:
+            if keyword in text_lower:
+                red_flags.append(f'Work-life balance concern: "{keyword}"')
+                risk_score += 20
+        
+        # Compensation red flags
+        compensation_flags = [
+            'competitive salary', 'salary commensurate', 'based on experience',
+            'equity in lieu', 'deferred compensation'
+        ]
+        
+        for flag in compensation_flags:
+            if flag in text_lower:
+                red_flags.append(f'Vague compensation: "{flag}"')
+                risk_score += 10
+        
+        # Unrealistic requirements
+        if '5+ years' in text_lower and ('entry' in text_lower or 'junior' in text_lower):
+            red_flags.append('Unrealistic experience requirements for level')
+            risk_score += 25
+        
+        # Excessive requirements
+        skill_count = len(self.all_skills.intersection(set(text_lower.split())))
+        if skill_count > 15:
+            red_flags.append(f'Excessive skill requirements ({skill_count} skills listed)')
+            risk_score += 15
+        
+        # Determine risk level
+        if risk_score >= 60:
+            risk_level = 'High Risk - Proceed with caution'
+        elif risk_score >= 30:
+            risk_level = 'Moderate Risk - Ask detailed questions'
+        elif risk_score >= 10:
+            risk_level = 'Low Risk - Minor concerns'
+        else:
+            risk_level = 'Low Risk - Good opportunity'
+        
+        return {
+            'red_flags': red_flags,
+            'risk_score': min(100, risk_score),
+            'risk_level': risk_level,
+            'recommendation': self._get_risk_recommendation(risk_score),
+            'questions_to_ask': self._generate_clarifying_questions(red_flags)
+        }
+    
+    def _get_risk_recommendation(self, score: int) -> str:
+        """Generate recommendation based on risk score."""
+        if score >= 60:
+            return "High risk job. Research company culture thoroughly before applying."
+        elif score >= 30:
+            return "Some concerns present. Prepare specific questions for interview."
+        else:
+            return "Appears to be a reasonable opportunity with standard expectations."
+    
+    def _generate_clarifying_questions(self, red_flags: List[str]) -> List[str]:
+        """Generate questions to ask during interview based on red flags."""
+        questions = []
+        
+        if any('pressure' in flag.lower() for flag in red_flags):
+            questions.append('What does a typical workweek look like for this role?')
+            questions.append('How does the team handle tight deadlines?')
+        
+        if any('weekend' in flag.lower() or 'hour' in flag.lower() for flag in red_flags):
+            questions.append('What are the expectations for work-life balance?')
+            questions.append('How often do team members work outside normal hours?')
+        
+        if any('salary' in flag.lower() or 'compensation' in flag.lower() for flag in red_flags):
+            questions.append('What is the salary range for this position?')
+            questions.append('What does the complete compensation package include?')
+        
+        return questions
+    
+    def predict_interview_process(self, jd_text: str) -> Dict:
+        """Predict interview process based on job description keywords."""
+        text_lower = jd_text.lower()
+        
+        # Technical assessment indicators
+        technical_keywords = [
+            'coding challenge', 'technical assessment', 'programming test',
+            'algorithm', 'data structure', 'system design', 'code review'
+        ]
+        
+        technical_likely = any(keyword in text_lower for keyword in technical_keywords)
+        
+        # Cultural fit indicators
+        culture_keywords = [
+            'culture fit', 'team player', 'collaboration', 'values',
+            'mission driven', 'fast-paced', 'startup environment'
+        ]
+        
+        culture_focus = sum(1 for keyword in culture_keywords if keyword in text_lower)
+        
+        # Technical depth indicators
+        tech_stack_mentioned = len([skill for skill in self.all_skills if skill in text_lower])
+        
+        # Predict interview stages
+        predicted_stages = ['Initial HR Screening']
+        
+        if technical_likely or tech_stack_mentioned >= 5:
+            predicted_stages.extend(['Technical Phone Screen', 'Coding Challenge'])
+        
+        if culture_focus >= 3:
+            predicted_stages.append('Culture Fit Interview')
+        
+        predicted_stages.append('Final Interview with Hiring Manager')
+        
+        # Experience level affects process
+        if 'senior' in text_lower or 'lead' in text_lower:
+            predicted_stages.append('System Design Interview')
+        
+        # Estimate timeline
+        timeline_days = len(predicted_stages) * 3 + 5  # Rough estimate
+        
+        return {
+            'predicted_stages': predicted_stages,
+            'technical_assessment_likely': technical_likely,
+            'culture_focus_level': 'High' if culture_focus >= 3 else 'Medium' if culture_focus >= 1 else 'Low',
+            'estimated_timeline': f'{timeline_days-5}-{timeline_days+5} days',
+            'preparation_tips': self._get_interview_prep_tips(predicted_stages),
+            'confidence_level': self._calculate_prediction_confidence(technical_likely, culture_focus, tech_stack_mentioned)
+        }
+    
+    def _get_interview_prep_tips(self, stages: List[str]) -> List[str]:
+        """Generate preparation tips based on predicted interview stages."""
+        tips = []
+        
+        if 'Technical Phone Screen' in stages:
+            tips.append('Prepare to explain technical concepts clearly over phone')
+        
+        if 'Coding Challenge' in stages:
+            tips.append('Practice coding problems on platforms like LeetCode')
+            tips.append('Focus on clean, readable code with good time complexity')
+        
+        if 'Culture Fit Interview' in stages:
+            tips.append('Research company values and prepare behavioral examples')
+            tips.append('Prepare questions about team dynamics and company culture')
+        
+        if 'System Design Interview' in stages:
+            tips.append('Study system design fundamentals (scalability, databases, APIs)')
+            tips.append('Practice designing systems relevant to the company\'s domain')
+        
+        return tips
+    
+    def _calculate_prediction_confidence(self, technical_likely: bool, culture_focus: int, tech_count: int) -> str:
+        """Calculate confidence in interview prediction."""
+        confidence_score = 50  # Base confidence
+        
+        if technical_likely:
+            confidence_score += 20
+        if culture_focus >= 2:
+            confidence_score += 15
+        if tech_count >= 8:
+            confidence_score += 15
+        
+        if confidence_score >= 80:
+            return 'High Confidence'
+        elif confidence_score >= 60:
+            return 'Medium Confidence'
+        else:
+            return 'Low Confidence'
