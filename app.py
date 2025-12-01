@@ -2526,21 +2526,26 @@ def display_networking_hub_tab(resume_data: Dict, jd_data: Dict, match_data: Dic
             for event in networking_strategy.get('networking_events', []):
                 st.write(f"🎪 {event}")
         
-        # LinkedIn optimization
-        st.subheader("💼 LinkedIn Profile Optimization")
+        # Additional networking strategies
+        st.subheader("🌐 Online Communities & Content Strategy")
         
-        linkedin_tips = [
-            "Optimize your headline with target role keywords",
-            "Write a compelling summary highlighting achievements",
-            "Get endorsements for key skills from connections",
-            "Share industry-relevant content regularly",
-            "Join professional groups in your field",
-            "Engage with posts from target companies",
-            "Request informational interviews with industry professionals"
-        ]
+        col1, col2 = st.columns(2)
         
-        for tip in linkedin_tips:
-            st.write(f"✅ {tip}")
+        with col1:
+            st.write("**💬 Online Communities:**")
+            for community in networking_strategy.get('online_communities', []):
+                st.write(f"🌐 {community}")
+        
+        with col2:
+            st.write("**📝 Content Strategy:**")
+            for strategy in networking_strategy.get('content_strategy', []):
+                st.write(f"📄 {strategy}")
+        
+        # Timeline
+        st.subheader("📅 Networking Timeline")
+        timeline = networking_strategy.get('timeline', {})
+        for period, action in timeline.items():
+            st.write(f"**{period.replace('_', ' ').title()}:** {action}")
         
         # Professional associations
         st.subheader("🏛️ Professional Associations & Communities")
