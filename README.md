@@ -408,34 +408,100 @@ ai-job-application-assistant/
 └─────────────────────────────────────────────────────┘
 ```
 
-## 🔧 Installation & Setup
+## 🚀 Quick Start Guide
 
-### Prerequisites
-- Python 3.8 or higher
-- pip package manager
-
-### Step 1: Clone the Repository
+### **📋 Prerequisites**
 ```bash
-git clone <repository-url>
-cd ai-job-application-assistant
+# System Requirements
+✅ Python 3.8+ (Recommended: 3.9 or 3.10)
+✅ pip package manager
+✅ 4GB RAM minimum (8GB recommended)
+✅ Modern web browser (Chrome, Firefox, Safari, Edge)
 ```
 
-### Step 2: Install Dependencies
+### **⚡ Installation Flow**
+
+```
+Step 1: Clone Repository
+         │
+         ▼
+Step 2: Install Dependencies
+         │
+         ▼
+Step 3: Download NLP Models
+         │
+         ▼
+Step 4: Launch Application
+         │
+         ▼
+Step 5: Access Web Interface
+```
+
+### **1. 📥 Clone Repository**
 ```bash
+# Clone the repository
+git clone https://github.com/RensithUdara/Ai-Job-Application-Assistant.git
+cd ai-job-application-assistant
+
+# Verify structure
+ls -la
+```
+
+### **2. 📦 Install Dependencies**
+```bash
+# Create virtual environment (recommended)
+python -m venv venv
+
+# Activate virtual environment
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+
+# Install required packages
 pip install -r requirements.txt
 ```
 
-### Step 3: Download spaCy Language Model
+### **3. 🧠 Download NLP Models**
 ```bash
+# Download spaCy English model
 python -m spacy download en_core_web_sm
+
+# Verify installation
+python -c "import spacy; nlp = spacy.load('en_core_web_sm'); print('✅ spaCy model loaded successfully')"
 ```
 
-### Step 4: Run the Application
+### **4. 🚀 Launch Application**
 ```bash
+# Start the Streamlit server
 streamlit run app.py
+
+# Alternative: Specify port
+streamlit run app.py --server.port 8504
+
+# Alternative: For external access
+streamlit run app.py --server.address 0.0.0.0
 ```
 
-The app will open in your default browser at `http://localhost:8501`
+### **5. 🌐 Access Interface**
+```
+🖥️  Local Access:    http://localhost:8501
+🌍 Network Access:   http://[your-ip]:8501
+📱 Mobile Friendly:  Responsive design works on all devices
+```
+
+### **⚙️ Configuration Options**
+
+```bash
+# Custom port configuration
+streamlit run app.py --server.port 8080
+
+# Enable development mode
+streamlit run app.py --server.runOnSave true
+
+# Disable CORS (for development)
+streamlit run app.py --server.enableCORS false
+```
 
 ## 💡 Usage Guide
 
