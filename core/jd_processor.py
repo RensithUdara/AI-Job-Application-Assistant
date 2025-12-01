@@ -62,6 +62,8 @@ class JobDescriptionProcessor:
             # Advanced analysis features
             red_flag_analysis = self.detect_job_red_flags(jd_text)
             interview_prediction = self.predict_interview_process(jd_text)
+            keyword_ranking = self.rank_keyword_importance(jd_text)
+            role_expansion = self.generate_role_expansion_summary(jd_text)
             
             return {
                 'jd_text': jd_text,
@@ -78,6 +80,8 @@ class JobDescriptionProcessor:
                 'job_requirements': job_requirements,
                 'red_flag_analysis': red_flag_analysis,
                 'interview_prediction': interview_prediction,
+                'keyword_ranking': keyword_ranking,
+                'role_expansion': role_expansion,
                 'word_count': len(jd_text.split())
             }
         
