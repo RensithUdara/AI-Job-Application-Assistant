@@ -11,7 +11,7 @@
             {
                 "skill": "machine_learning",
                 "growth_rate": 42,
-                "demand_level": "extremely_high", 
+                "demand_level": "extremely_high",
                 "average_salary_premium": 22000,
                 "job_count_increase": 72
             },
@@ -100,28 +100,48 @@
                 "maturity": "early",
                 "potential_impact": "revolutionary",
                 "timeline_to_mainstream": "5-10 years",
-                "key_companies": ["IBM", "Google", "Microsoft", "Amazon"]
+                "key_companies": [
+                    "IBM",
+                    "Google",
+                    "Microsoft",
+                    "Amazon"
+                ]
             },
             {
                 "technology": "edge_computing",
                 "maturity": "growing",
                 "potential_impact": "high",
                 "timeline_to_mainstream": "2-3 years",
-                "key_companies": ["AWS", "Microsoft", "Google", "Cloudflare"]
+                "key_companies": [
+                    "AWS",
+                    "Microsoft",
+                    "Google",
+                    "Cloudflare"
+                ]
             },
             {
                 "technology": "web3",
                 "maturity": "developing",
                 "potential_impact": "high",
                 "timeline_to_mainstream": "3-5 years",
-                "key_companies": ["Ethereum", "Polygon", "Solana", "Chainlink"]
+                "key_companies": [
+                    "Ethereum",
+                    "Polygon",
+                    "Solana",
+                    "Chainlink"
+                ]
             },
             {
                 "technology": "augmented_reality",
                 "maturity": "developing",
                 "potential_impact": "high",
                 "timeline_to_mainstream": "3-5 years",
-                "key_companies": ["Apple", "Meta", "Microsoft", "Magic Leap"]
+                "key_companies": [
+                    "Apple",
+                    "Meta",
+                    "Microsoft",
+                    "Magic Leap"
+                ]
             }
         ],
         "industry_insights": {
@@ -130,7 +150,7 @@
                 "impact_on_salaries": "positive_10_percent",
                 "top_remote_friendly_roles": [
                     "software_engineer",
-                    "web_developer", 
+                    "web_developer",
                     "data_scientist",
                     "devops_engineer",
                     "product_manager"
@@ -140,7 +160,7 @@
                 "companies_using_ai": 78,
                 "biggest_impact_areas": [
                     "customer_service",
-                    "data_analysis", 
+                    "data_analysis",
                     "automation",
                     "content_generation",
                     "predictive_analytics"
@@ -170,7 +190,7 @@
                     "avg_salary_increase": 18
                 },
                 {
-                    "role": "cybersecurity_analyst", 
+                    "role": "cybersecurity_analyst",
                     "projected_growth": 42,
                     "avg_salary_increase": 12
                 },
@@ -194,7 +214,7 @@
             "key_drivers": [
                 "digital_transformation",
                 "ai_adoption",
-                "cybersecurity_concerns", 
+                "cybersecurity_concerns",
                 "cloud_migration",
                 "data_driven_decisions"
             ]
