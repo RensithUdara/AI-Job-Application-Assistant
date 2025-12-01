@@ -991,3 +991,213 @@ class ResumeParser:
         ])
         
         return suggestions
+    
+    def detect_duplicate_content(self, resume_text: str) -> Dict:
+        """Detect duplicate or generic content in resume."""
+        generic_phrases = [
+            'hardworking', 'team player', 'detail oriented', 'fast learner', 
+            'passionate about', 'innovative solutions', 'proven track record',
+            'dynamic professional', 'excellent communication', 'self motivated'
+        ]
+        
+        duplicate_issues = []
+        duplicate_score = 100
+        
+        # Check for generic phrases
+        text_lower = resume_text.lower()
+        for phrase in generic_phrases:
+            if phrase in text_lower:
+                duplicate_issues.append(f"Generic phrase detected: '{phrase}'")
+                duplicate_score -= 5
+        
+        # Check for repeated words/phrases
+        words = re.findall(r'\b\w+\b', text_lower)
+        word_counts = {}
+        for word in words:
+            if len(word) > 4:  # Only check longer words
+                word_counts[word] = word_counts.get(word, 0) + 1
+        
+        for word, count in word_counts.items():
+            if count > 8:  # Appears more than 8 times
+                duplicate_issues.append(f"Overused word: '{word}' ({count} times)")
+                duplicate_score -= 3
+        
+        # Determine uniqueness level
+        if duplicate_score >= 90:
+            uniqueness_level = "Highly Unique"
+        elif duplicate_score >= 70:
+            uniqueness_level = "Moderately Unique"
+        else:
+            uniqueness_level = "Needs Improvement"
+        
+        return {
+            'duplicate_score': max(0, duplicate_score),
+            'uniqueness_level': uniqueness_level,
+            'duplicate_issues': duplicate_issues[:10],  # Limit to 10 issues
+            'improvement_suggestions': [
+                'Replace generic phrases with specific achievements',
+                'Use varied vocabulary and action verbs',
+                'Focus on quantifiable results and outcomes',
+                'Personalize content to match job requirements'
+            ]
+        }
+    
+    def validate_resume_timeline(self, resume_text: str) -> Dict:
+        """Validate resume timeline for gaps and consistency."""
+        # Extract years from resume
+        years = re.findall(r'\b(19|20)\d{2}\b', resume_text)
+        years = [int(year) for year in years]
+        
+        timeline_score = 100
+        timeline_issues = []
+        
+        if not years:
+            return {
+                'timeline_score': 0,
+                'timeline_status': 'No dates detected',
+                'timeline_issues': ['No dates found in resume'],
+                'year_range': 'Unknown'
+            }
+        
+        years.sort()
+        year_range = f"{min(years)}-{max(years)}"
+        
+        # Check for large gaps
+        current_year = 2024
+        if years:
+            gaps = []
+            for i in range(len(years) - 1):
+                gap = years[i + 1] - years[i]
+                if gap > 2:  # Gap larger than 2 years
+                    gaps.append(gap)
+                    timeline_issues.append(f"Potential {gap}-year gap detected")
+                    timeline_score -= 15
+        
+        # Check if timeline is too old
+        if max(years) < current_year - 1:
+            timeline_issues.append("Resume appears outdated - no recent dates")
+            timeline_score -= 20
+        
+        # Check for future dates
+        future_dates = [year for year in years if year > current_year]
+        if future_dates:
+            timeline_issues.append("Future dates detected - check for errors")
+            timeline_score -= 10
+        
+        # Determine status
+        if timeline_score >= 90:
+            timeline_status = "Excellent Timeline"
+        elif timeline_score >= 70:
+            timeline_status = "Good Timeline"
+        elif timeline_score >= 50:
+            timeline_status = "Timeline Concerns"
+        else:
+            timeline_status = "Timeline Issues"
+        
+        return {
+            'timeline_score': max(0, timeline_score),
+            'timeline_status': timeline_status,
+            'timeline_issues': timeline_issues,
+            'year_range': year_range,
+            'validation_suggestions': [
+                'Fill in any employment gaps with explanations',
+                'Use consistent date formats throughout',
+                'Include month and year for better clarity',
+                'Add current or expected graduation dates'
+            ]
+        }
+    
+    def analyze_project_impact(self, resume_text: str) -> Dict:
+        """Analyze project descriptions for impact and outcomes."""
+        # Look for project sections and quantifiable results
+        impact_keywords = [
+            'increased', 'decreased', 'improved', 'reduced', 'achieved', 'generated',
+            'saved', 'boosted', 'optimized', 'streamlined', 'enhanced', 'delivered'
+        ]
+        
+        quantifiers = re.findall(r'\d+(?:\.\d+)?%|\$\d+(?:,\d{3})*|\d+(?:,\d{3})*\+?', resume_text)
+        
+        # Find project mentions
+        project_patterns = [
+            r'project[s]?\s*:?\s*([^\n]+)',
+            r'built\s+([^\n]+)',
+            r'developed\s+([^\n]+)',
+            r'created\s+([^\n]+)',
+            r'designed\s+([^\n]+)'
+        ]
+        
+        projects = []
+        for pattern in project_patterns:
+            matches = re.findall(pattern, resume_text, re.IGNORECASE)
+            projects.extend(matches)
+        
+        projects_found = len(projects)
+        
+        # Analyze impact for each project
+        impact_analysis = {}
+        total_impact_score = 0
+        
+        for i, project in enumerate(projects[:5]):  # Analyze top 5 projects
+            project_name = f"Project {i+1}"
+            
+            # Check for impact indicators
+            impact_score = 50  # Base score
+            strengths = []
+            issues = []
+            
+            # Check for quantifiable results
+            project_lower = project.lower()
+            has_numbers = any(q in project for q in quantifiers)
+            has_impact_words = any(word in project_lower for word in impact_keywords)
+            
+            if has_numbers:
+                impact_score += 25
+                strengths.append('Quantifiable results')
+            else:
+                issues.append('No quantifiable results')
+            
+            if has_impact_words:
+                impact_score += 15
+                strengths.append('Impact-focused language')
+            else:
+                issues.append('Lacks impact-focused language')
+            
+            # Check project description length
+            if len(project.split()) > 10:
+                impact_score += 10
+                strengths.append('Detailed description')
+            else:
+                issues.append('Too brief - needs more detail')
+            
+            # Determine improvement priority
+            if impact_score >= 80:
+                priority = 'Low'
+            elif impact_score >= 60:
+                priority = 'Medium'
+            else:
+                priority = 'High'
+            
+            impact_analysis[project_name] = {
+                'description': project[:100] + '...' if len(project) > 100 else project,
+                'impact_score': min(100, impact_score),
+                'strengths': strengths,
+                'issues': issues,
+                'improvement_priority': priority
+            }
+            
+            total_impact_score += impact_score
+        
+        average_impact_score = int(total_impact_score / max(1, projects_found))
+        
+        return {
+            'projects_found': projects_found,
+            'average_impact_score': average_impact_score,
+            'impact_analysis': impact_analysis,
+            'improvement_suggestions': [
+                'Add specific metrics and percentages to project descriptions',
+                'Use strong action verbs to describe project outcomes',
+                'Include technologies and tools used in each project',
+                'Describe the business impact or problem solved',
+                'Mention team size and your specific role'
+            ]
+        }
