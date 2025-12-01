@@ -225,7 +225,7 @@ def display_results(results: Dict):
     recommendations = results['recommendations']
     
     # Create tabs
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13, tab14, tab15 = st.tabs([
         "📊 Summary", 
         "🎯 Skills Analysis", 
         "📋 Resume Structure", 
@@ -235,7 +235,12 @@ def display_results(results: Dict):
         "🚀 Professional Tools",
         "🔥 AI Features",
         "🎯 Resume Scoring",
-        "🚀 Career Path"
+        "🚀 Career Path",
+        "💰 Salary Intelligence",
+        "🌐 Market Analytics",
+        "🤝 Networking Hub",
+        "🏢 Company Culture",
+        "⚡ Resume Builder"
     ])
     
     with tab1:
@@ -267,6 +272,21 @@ def display_results(results: Dict):
     
     with tab10:
         display_career_path_tab(resume_data, jd_data)
+    
+    with tab11:
+        display_salary_intelligence_tab(resume_data, jd_data, match_data)
+    
+    with tab12:
+        display_market_analytics_tab(resume_data, jd_data, match_data)
+    
+    with tab13:
+        display_networking_hub_tab(resume_data, jd_data, match_data)
+    
+    with tab14:
+        display_company_culture_tab(resume_data, jd_data, match_data)
+    
+    with tab15:
+        display_resume_builder_tab(resume_data, jd_data, match_data)
 
 def display_summary_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
     """Display summary information."""
