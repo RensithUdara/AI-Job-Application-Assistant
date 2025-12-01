@@ -453,23 +453,21 @@ class TestAdvancedAIFeatures(unittest.TestCase):
         
         # Validate salary estimation structure
         required_fields = [
-            'base_salary_range', 'adjusted_salary_range', 'location_factor',
-            'experience_factor', 'skill_premiums', 'market_insights',
-            'negotiation_tips', 'salary_growth_projection'
+            'salary_range', 'growth_projections', 'market_insights', 'negotiation_tips'
         ]
         
         for field in required_fields:
             self.assertIn(field, salary_result)
         
         # Validate salary ranges
-        base_range = salary_result['base_salary_range']
-        self.assertIn('min', base_range)
-        self.assertIn('max', base_range)
-        self.assertGreater(base_range['max'], base_range['min'])
+        salary_range = salary_result['salary_range']
+        self.assertIn('min', salary_range)
+        self.assertIn('max', salary_range)
+        self.assertGreater(salary_range['max'], salary_range['min'])
         
-        print(f"✅ Base Range: ${base_range['min']:,} - ${base_range['max']:,}")
-        print(f"✅ Location Factor: {salary_result['location_factor']}")
+        print(f"✅ Salary Range: ${salary_range['min']:,} - ${salary_range['max']:,}")
         print(f"✅ Market Insights: {len(salary_result['market_insights'])} insights")
+        print(f"✅ Negotiation Tips: {len(salary_result['negotiation_tips'])} tips")
 
     def test_integration_workflow(self):
         """Test complete integration workflow with all features."""
