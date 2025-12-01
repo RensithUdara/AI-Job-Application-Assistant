@@ -42,30 +42,136 @@ Built with a **modular, scalable architecture** that separates concerns and enab
 | **Text Analysis** | TF-IDF, Cosine Similarity, Semantic Matching |
 | **UI/UX** | Custom CSS, Interactive Components, Responsive Design |
 
-## 📁 Project Structure
+## 📁 Modular Project Architecture
+
+### **📂 Directory Structure**
+```
+ai-job-application-assistant/
+├── 📄 app.py                           # Main application entry point
+├── 📋 requirements.txt                 # Python dependencies
+├── 📖 README.md                       # Comprehensive documentation
+│
+├── 🧠 core/                           # Business Logic Layer
+│   ├── __init__.py                    # Package initialization
+│   ├── 📄 resume_parser.py            # Multi-format resume processing
+│   ├── 💼 jd_processor.py             # Job description analysis
+│   ├── 🔍 matcher.py                  # Intelligent matching algorithms
+│   ├── 🎯 recommender.py              # Personalized recommendations
+│   ├── 📊 career_analyzer.py          # Career intelligence & analytics
+│   └── 🛠️ utils.py                    # Shared utilities & helpers
+│
+├── 🎨 ui/                             # User Interface Layer
+│   ├── __init__.py                    # UI package initialization
+│   ├── 🧩 components.py               # Reusable UI components
+│   ├── 📊 sidebar.py                  # Navigation & settings
+│   ├── 💬 modals.py                   # Modal dialogs & popups
+│   ├── 📝 input_section.py            # Input handling & validation
+│   ├── 📋 results_display.py          # Results visualization
+│   │
+│   └── 📑 tabs/                       # Feature-specific tabs
+│       ├── 📊 summary_tab.py          # Overview & key metrics
+│       ├── 🎯 skills_analysis_tab.py  # Skills gap analysis
+│       ├── 📋 resume_structure_tab.py # Resume quality assessment
+│       ├── 💡 recommendations_tab.py  # Improvement suggestions
+│       ├── 🎤 interview_prep_tab.py   # Interview preparation
+│       ├── 📈 analytics_tab.py        # Advanced analytics
+│       ├── 🤖 ai_chat_tab.py          # AI career assistant
+│       ├── 📄 resume_templates_tab.py # Professional templates
+│       ├── 🎪 mock_interview_tab.py   # Interview simulator
+│       └── 📚 [13 more specialized tabs...]
+│
+├── 📊 data/                           # Knowledge Base & Data
+│   ├── 🧬 skills_taxonomy.json        # Comprehensive skills database
+│   ├── 💼 job_templates.json          # Role-specific templates
+│   ├── 🎤 interview_questions.csv     # Question bank by domain
+│   ├── 💰 salary_data.json            # Market salary intelligence
+│   ├── 📈 market_trends.json          # Industry trends & insights
+│   └── 🏢 company_insights.json       # Company-specific data
+│
+├── 📄 assets/                         # Sample Files & Resources
+│   ├── 📄 sample_resume.txt           # Example resume
+│   └── 💼 sample_jd.txt               # Example job description
+│
+└── 📚 docs/                           # Documentation
+    ├── 🚀 quick_start_guide.md        # Getting started guide
+    ├── 🏗️ enhanced_project_summary.md # Technical overview
+    └── 📝 project_report_notes.txt     # Development notes
+```
+
+### **🏗️ System Architecture Diagram**
 
 ```
-ai-job-assistant/
-│
-├── app.py                      # Main Streamlit application
-├── requirements.txt            # Python dependencies
-│
-├── core/                       # Core processing modules
-│   ├── resume_parser.py        # Extract resume sections & skills
-│   ├── jd_processor.py         # Process job descriptions
-│   ├── matcher.py              # Resume-JD matching & scoring
-│   ├── recommender.py          # Generate recommendations
-│   └── utils.py                # Shared utility functions
-│
-├── data/                       # Data files and knowledge base
-│   ├── skills_taxonomy.json    # Categorized skills database
-│   ├── job_templates.json      # Job role templates & requirements
-│   ├── interview_questions.csv # Question bank by role/skill
-│   └── stopwords_custom.txt    # Custom stopwords (optional)
-│
-└── docs/                       # Documentation
-    ├── architecture_diagram.png
-    └── project_report_notes.txt
+┌─────────────────────────────────────────────────────────────────┐
+│                    🎯 AI JOB APPLICATION ASSISTANT               │
+│                         Streamlit Web Application                │
+└─────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        🎨 USER INTERFACE LAYER                   │
+├─────────────────────────────────────────────────────────────────┤
+│  📊 Main Dashboard     │  🤖 AI Chat        │  📄 Templates      │
+│  ├─ Summary & Analytics│  ├─ Career Guidance │  ├─ ATS-Friendly  │
+│  ├─ Skills Analysis    │  ├─ Resume Tips     │  ├─ Creative Pro   │
+│  ├─ Recommendations    │  └─ Interview Prep  │  ├─ Technical      │
+│  └─ Interview Simulator│                     │  └─ Executive      │
+├─────────────────────────────────────────────────────────────────┤
+│  🧩 Shared Components: Navigation, Modals, Charts, Forms        │
+└─────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      🧠 BUSINESS LOGIC LAYER                     │
+├─────────────────────────────────────────────────────────────────┤
+│  📄 Resume Parser     │  💼 JD Processor    │  🔍 Smart Matcher  │
+│  ├─ PDF/DOCX Support │  ├─ Role Detection  │  ├─ Semantic Match  │
+│  ├─ Section Detection│  ├─ Skill Extraction│  ├─ Score Calculation│
+│  ├─ Skill Extraction │  ├─ Requirement     │  └─ Gap Analysis    │
+│  └─ Content Analysis │  │   Analysis       │                     │
+│                       │  └─ Salary Intelligence               │
+├─────────────────────────────────────────────────────────────────┤
+│  🎯 Recommender       │  📊 Career Analyzer │  🛠️ Utilities      │
+│  ├─ Learning Paths   │  ├─ Market Intelligence│ ├─ Text Processing│
+│  ├─ Action Items     │  ├─ Competitiveness  │  ├─ Data Validation│
+│  ├─ Resource Links   │  ├─ Growth Projection │  └─ Helper Functions│
+│  └─ Priority Scoring │  └─ Trend Analysis    │                   │
+└─────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                       📊 DATA & KNOWLEDGE LAYER                  │
+├─────────────────────────────────────────────────────────────────┤
+│  🧬 Skills Taxonomy   │  💼 Job Templates   │  🎤 Question Bank   │
+│  ├─ 2000+ Skills     │  ├─ Role Definitions│  ├─ Technical Q's   │
+│  ├─ Categorization   │  ├─ Requirements    │  ├─ Behavioral Q's  │
+│  ├─ Skill Relations  │  ├─ Career Paths    │  └─ Case Studies    │
+│  └─ Market Demand    │  └─ Salary Ranges   │                     │
+├─────────────────────────────────────────────────────────────────┤
+│  📈 Market Data       │  🏢 Company Info    │  📚 Learning Resources│
+│  ├─ Salary Trends    │  ├─ Culture Insights│  ├─ Course Links     │
+│  ├─ Skill Demand     │  ├─ Tech Stack      │  ├─ Certification   │
+│  └─ Industry Growth  │  └─ Hiring Patterns │  └─ Practice Projects│
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### **🔄 Data Flow Architecture**
+
+```
+📄 Resume Input ──┐
+                  ├──→ 🧠 Processing Engine ──→ 📊 Analysis Results
+💼 Job Description ┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    PROCESSING PIPELINE                          │
+├─────────────────────────────────────────────────────────────────┤
+│  Step 1: Document Parsing & Text Extraction                    │
+│  Step 2: NLP Processing & Entity Recognition                    │
+│  Step 3: Skill Extraction & Categorization                     │
+│  Step 4: Semantic Matching & Similarity Scoring                │
+│  Step 5: Gap Analysis & Recommendation Generation              │
+│  Step 6: Visualization & Interactive Display                   │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ## 🚀 Enhanced Features
