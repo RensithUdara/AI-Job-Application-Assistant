@@ -2,6 +2,7 @@ import pandas as pd
 from typing import Dict, List, Optional
 import random
 import re
+import json
 
 class Recommender:
     def __init__(self, interview_questions_path: str = "data/interview_questions.csv"):
