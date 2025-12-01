@@ -1134,8 +1134,8 @@ class JobDescriptionProcessor:
             'remote_friendliness': remote_friendliness,
             'market_insights': [
                 f'This {primary_industry} role shows {current_insights["growth_outlook"].lower()} growth potential',
-                f'Industry trends include: {', '.join(current_insights["key_trends"][:2])}',
-                f'Skills commanding premium: {', '.join(current_insights["skill_premiums"][:2])}'
+                f'Industry trends include: {", ".join(current_insights["key_trends"][:2])}',
+                f'Skills commanding premium: {", ".join(current_insights["skill_premiums"][:2])}'
             ]
         }
     
