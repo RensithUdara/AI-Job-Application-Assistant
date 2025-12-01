@@ -13,6 +13,7 @@ from core.resume_parser import ResumeParser
 from core.jd_processor import JobDescriptionProcessor
 from core.matcher import Matcher
 from core.recommender import Recommender
+from core.career_analyzer import CareerAnalyzer
 # Import utility functions
 def format_skills_list(skills):
     if not skills:
@@ -1337,10 +1338,130 @@ def display_advanced_ai_features_tab(resume_data, jd_data, match_data):
                     st.write(f"❓ {question}")
         else:
             st.warning("Please upload a job description to detect red flags.")
+        
+        # Keyword Importance Ranking
+        if jd_data and 'keyword_ranking' in jd_data:
+            st.markdown("---")
+            st.subheader("🔑 Keyword Importance Ranking")
+            keyword_data = jd_data['keyword_ranking']
+            
+            # Display skill categories
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Critical Skills", len(keyword_data['critical_skills']))
+                for skill in keyword_data['critical_skills'][:3]:
+                    st.error(f"🔥 {skill}")
+            
+            with col2:
+                st.metric("Important Skills", len(keyword_data['important_skills']))
+                for skill in keyword_data['important_skills'][:3]:
+                    st.warning(f"⚡ {skill}")
+            
+            with col3:
+                st.metric("Nice-to-Have", len(keyword_data['nice_to_have_skills']))
+                for skill in keyword_data['nice_to_have_skills'][:3]:
+                    st.info(f"💫 {skill}")
+            
+            # Show top 5 skills breakdown
+            st.write("**Top 5 Skills Breakdown:**")
+            for i, skill in enumerate(keyword_data['top_5_skills'], 1):
+                skill_info = keyword_data['ranked_skills'][skill]
+                col1, col2, col3, col4 = st.columns(4)
+                with col1:
+                    st.write(f"**{i}. {skill}**")
+                with col2:
+                    st.write(f"Frequency: {skill_info['frequency']}")
+                with col3:
+                    st.write(f"Score: {skill_info['importance_score']}")
+                with col4:
+                    priority_color = {'Critical': '🔴', 'Important': '🟡', 'Nice-to-have': '🟢'}
+                    st.write(f"{priority_color.get(skill_info['priority'], '⚪')} {skill_info['priority']}")
+        
+        # Role Expansion Summary
+        if jd_data and 'role_expansion' in jd_data:
+            st.markdown("---")
+            st.subheader("🎯 AI Role Analysis & Expansion")
+            role_data = jd_data['role_expansion']
+            
+            st.success(f"**Primary Role Type:** {role_data['primary_role_type'].replace('_', ' ').title()}")
+            st.write(f"**Explanation:** {role_data['role_explanation']}")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                if role_data['key_aspects']:
+                    st.write("**Key Aspects:**")
+                    for aspect in role_data['key_aspects']:
+                        st.write(f"• {aspect.replace('_', ' ').title()}")
+                
+                if role_data['technical_focus']:
+                    st.write("**Technical Focus Areas:**")
+                    for focus in role_data['technical_focus']:
+                        st.write(f"🔧 {focus}")
+            
+            with col2:
+                if role_data['work_environment']:
+                    st.write("**Work Environment:**")
+                    for env in role_data['work_environment']:
+                        st.write(f"🏢 {env.title()}")
+                
+                st.write(f"**Career Level:** {role_data['career_level']}")
+                st.write(f"**Growth Potential:** {role_data['growth_potential']}")
     
     with adv_tabs[5]:  # Multiple Resume Versions
         st.subheader("📄 Multiple Resume Version Generator")
         st.write("*Generate customized resume versions for different roles*")
+        
+        # Additional new features display
+        if 'duplicate_analysis' in resume_data:
+            st.markdown("---")
+            st.subheader("🔍 Duplicate Content Analysis")
+            dup_data = resume_data['duplicate_analysis']
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Uniqueness Score", f"{dup_data['duplicate_score']}/100")
+            with col2:
+                st.info(dup_data['uniqueness_level'])
+            
+            if dup_data['duplicate_issues']:
+                st.warning("**Issues Found:**")
+                for issue in dup_data['duplicate_issues'][:5]:
+                    st.write(f"• {issue}")
+        
+        if 'timeline_analysis' in resume_data:
+            st.markdown("---")
+            st.subheader("⏱️ Resume Timeline Validation")
+            timeline_data = resume_data['timeline_analysis']
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Timeline Score", f"{timeline_data['timeline_score']}/100")
+            with col2:
+                st.info(timeline_data['timeline_status'])
+            with col3:
+                if 'year_range' in timeline_data:
+                    st.metric("Year Range", timeline_data['year_range'])
+        
+        if 'project_analysis' in resume_data:
+            st.markdown("---")
+            st.subheader("🚀 Project Impact Analysis")
+            proj_data = resume_data['project_analysis']
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Projects Found", proj_data['projects_found'])
+            with col2:
+                if proj_data['projects_found'] > 0:
+                    st.metric("Avg Impact Score", f"{proj_data['average_impact_score']}/100")
+            
+            if 'impact_analysis' in proj_data:
+                for proj_name, proj_info in proj_data['impact_analysis'].items():
+                    with st.expander(f"{proj_name} - {proj_info['improvement_priority']} Priority"):
+                        st.write(f"**Score:** {proj_info['impact_score']}/100")
+                        if proj_info['strengths']:
+                            st.success(f"Strengths: {', '.join(proj_info['strengths'])}")
+                        if proj_info['issues']:
+                            st.error(f"Issues: {', '.join(proj_info['issues'])}")
         
         target_roles = st.multiselect(
             "Select Target Roles",
@@ -1383,6 +1504,103 @@ def display_advanced_ai_features_tab(resume_data, jd_data, match_data):
             strategy = versions['application_strategy']
             for key, value in strategy.items():
                 st.write(f"• **{key.replace('_', ' ').title()}:** {value}")
+        
+        # Salary Comparison Tool
+        st.markdown("---")
+        st.subheader("💰 Salary Comparison & Market Analysis")
+        
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            salary_role = st.selectbox("Role", ["software_engineer", "web_developer", "mobile_developer", "data_analyst"], key="salary_role")
+        with col2:
+            salary_location = st.selectbox("Location", ["US", "California", "New York", "Texas", "Remote", "Europe"], key="salary_loc")
+        with col3:
+            salary_exp = st.selectbox("Experience", ["entry", "mid", "senior"], key="salary_exp")
+        
+        if st.button("🔍 Analyze Salary Range"):
+            from core.recommender import Recommender
+            recommender = Recommender()
+            
+            salary_data = recommender.estimate_salary_range(salary_role, salary_location, salary_exp)
+            
+            # Display salary range
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Minimum", f"${salary_data['salary_range']['min']:,}")
+            with col2:
+                st.metric("Average", f"${salary_data['salary_range']['average']:,}")
+            with col3:
+                st.metric("Maximum", f"${salary_data['salary_range']['max']:,}")
+            
+            # Market insights
+            st.write("**Market Insights:**")
+            for insight in salary_data['market_insights']:
+                st.info(f"📊 {insight}")
+            
+            # Negotiation tips
+            st.write("**Negotiation Tips:**")
+            for tip in salary_data['negotiation_tips']:
+                st.write(f"💡 {tip}")
+        
+        # Job Trends Analysis (if multiple JDs analyzed)
+        st.markdown("---")
+        st.subheader("📈 Job Market Trends Analysis")
+        
+        # Sample job trends analysis (would normally use historical data)
+        if st.button("🔍 Analyze Market Trends"):
+            # Simulate trend analysis with sample data
+            st.info("**📊 Market Trends Simulation**")
+            
+            trending_skills = [
+                {'skill': 'Python', 'trend': 'High', 'percentage': 78},
+                {'skill': 'JavaScript', 'trend': 'High', 'percentage': 72},
+                {'skill': 'React', 'trend': 'Medium', 'percentage': 65},
+                {'skill': 'SQL', 'trend': 'High', 'percentage': 69},
+                {'skill': 'AWS', 'trend': 'High', 'percentage': 58}
+            ]
+            
+            st.write("**Top Trending Skills:**")
+            for skill_data in trending_skills:
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.write(f"**{skill_data['skill']}**")
+                with col2:
+                    st.progress(skill_data['percentage'] / 100)
+                    st.write(f"{skill_data['percentage']}% of jobs")
+                with col3:
+                    trend_color = {'High': '🔥', 'Medium': '📈', 'Low': '📊'}
+                    st.write(f"{trend_color[skill_data['trend']]} {skill_data['trend']} Demand")
+            
+            st.success("💡 **Recommendation:** Focus on Python and JavaScript for maximum opportunities")
+        
+        # Competition Level Analysis
+        if jd_data and 'keyword_ranking' in jd_data:
+            st.markdown("---")
+            st.subheader("🏆 Job Competition Analysis")
+            
+            from core.recommender import Recommender
+            recommender = Recommender()
+            
+            competition_data = recommender.detect_competition_level(jd_data['jd_text'], jd_data)
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Competition Level", competition_data['competition_level'])
+            with col2:
+                st.metric("Competition Score", f"{competition_data['competition_score']}/100")
+            
+            st.info(competition_data['description'])
+            
+            if competition_data['factors']:
+                st.write("**Competition Factors:**")
+                for factor in competition_data['factors']:
+                    st.write(f"• {factor}")
+            
+            st.write("**Application Strategy:**")
+            for strategy in competition_data['application_strategy']:
+                st.write(f"🎯 {strategy}")
+            
+            st.write(f"**Recommended Timeline:** {competition_data['timeline_advice']}")
 
 if __name__ == "__main__":
     main()

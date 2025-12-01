@@ -1,0 +1,207 @@
+{
+    "base_salaries": {
+        "software_engineer": {
+            "entry": 75000,
+            "mid": 100000,
+            "senior": 135000,
+            "lead": 165000,
+            "principal": 200000
+        },
+        "web_developer": {
+            "entry": 65000,
+            "mid": 85000,
+            "senior": 110000,
+            "lead": 140000,
+            "principal": 170000
+        },
+        "mobile_developer": {
+            "entry": 70000,
+            "mid": 95000,
+            "senior": 125000,
+            "lead": 155000,
+            "principal": 185000
+        },
+        "data_analyst": {
+            "entry": 60000,
+            "mid": 80000,
+            "senior": 105000,
+            "lead": 130000,
+            "principal": 155000
+        },
+        "data_scientist": {
+            "entry": 85000,
+            "mid": 115000,
+            "senior": 145000,
+            "lead": 180000,
+            "principal": 220000
+        },
+        "ai_engineer": {
+            "entry": 95000,
+            "mid": 130000,
+            "senior": 165000,
+            "lead": 200000,
+            "principal": 250000
+        },
+        "devops_engineer": {
+            "entry": 80000,
+            "mid": 105000,
+            "senior": 135000,
+            "lead": 165000,
+            "principal": 195000
+        },
+        "cybersecurity_analyst": {
+            "entry": 75000,
+            "mid": 100000,
+            "senior": 130000,
+            "lead": 160000,
+            "principal": 190000
+        },
+        "blockchain_developer": {
+            "entry": 90000,
+            "mid": 125000,
+            "senior": 160000,
+            "lead": 195000,
+            "principal": 240000
+        },
+        "cloud_architect": {
+            "entry": 100000,
+            "mid": 135000,
+            "senior": 170000,
+            "lead": 210000,
+            "principal": 260000
+        },
+        "product_manager": {
+            "entry": 85000,
+            "mid": 115000,
+            "senior": 145000,
+            "lead": 180000,
+            "principal": 220000
+        },
+        "ui_ux_designer": {
+            "entry": 55000,
+            "mid": 75000,
+            "senior": 95000,
+            "lead": 120000,
+            "principal": 145000
+        },
+        "qa_engineer": {
+            "entry": 55000,
+            "mid": 75000,
+            "senior": 95000,
+            "lead": 120000,
+            "principal": 145000
+        },
+        "business_analyst": {
+            "entry": 60000,
+            "mid": 80000,
+            "senior": 105000,
+            "lead": 130000,
+            "principal": 155000
+        }
+    },
+    "location_multipliers": {
+        "california": 1.45,
+        "san_francisco": 1.6,
+        "silicon_valley": 1.65,
+        "los_angeles": 1.35,
+        "new_york": 1.4,
+        "new_york_city": 1.5,
+        "seattle": 1.35,
+        "boston": 1.25,
+        "austin": 1.15,
+        "dallas": 1.1,
+        "denver": 1.05,
+        "chicago": 1.1,
+        "atlanta": 1.05,
+        "miami": 1.0,
+        "phoenix": 0.95,
+        "remote": 1.1,
+        "us_average": 1.0,
+        "canada": 0.8,
+        "toronto": 0.85,
+        "vancouver": 0.9,
+        "europe": 0.75,
+        "london": 0.9,
+        "berlin": 0.7,
+        "amsterdam": 0.8,
+        "zurich": 1.1,
+        "asia": 0.6,
+        "singapore": 0.8,
+        "tokyo": 0.7,
+        "bangalore": 0.3,
+        "mumbai": 0.35,
+        "australia": 0.8,
+        "sydney": 0.85,
+        "melbourne": 0.8
+    },
+    "industry_multipliers": {
+        "fintech": 1.2,
+        "finance": 1.15,
+        "healthcare": 1.1,
+        "technology": 1.0,
+        "startup": 0.85,
+        "enterprise": 1.05,
+        "consulting": 1.1,
+        "government": 0.9,
+        "education": 0.8,
+        "non_profit": 0.75,
+        "gaming": 1.05,
+        "e_commerce": 1.0,
+        "media": 0.95,
+        "automotive": 1.0,
+        "aerospace": 1.05,
+        "telecommunications": 1.0,
+        "retail": 0.9,
+        "manufacturing": 0.95,
+        "energy": 1.05,
+        "real_estate": 0.95
+    },
+    "skill_premiums": {
+        "machine_learning": 15000,
+        "ai": 18000,
+        "deep_learning": 20000,
+        "blockchain": 25000,
+        "kubernetes": 12000,
+        "aws": 8000,
+        "azure": 8000,
+        "google_cloud": 8000,
+        "react": 5000,
+        "python": 3000,
+        "go": 8000,
+        "rust": 12000,
+        "scala": 10000,
+        "security": 10000,
+        "devops": 8000,
+        "microservices": 7000,
+        "graphql": 5000,
+        "typescript": 4000,
+        "flutter": 6000,
+        "react_native": 5000
+    },
+    "certification_bonuses": {
+        "aws_solutions_architect": 8000,
+        "aws_devops": 10000,
+        "azure_solutions_architect": 8000,
+        "google_cloud_architect": 8000,
+        "pmp": 5000,
+        "scrum_master": 3000,
+        "cissp": 12000,
+        "ceh": 8000,
+        "cisa": 10000,
+        "comptia_security": 5000,
+        "oracle_dba": 6000,
+        "salesforce_admin": 4000,
+        "tableau_certified": 3000,
+        "power_bi_certified": 3000
+    },
+    "growth_rates": {
+        "annual_average": 0.08,
+        "high_demand_roles": 0.12,
+        "emerging_tech": 0.15,
+        "ai_ml": 0.18,
+        "blockchain": 0.20,
+        "cybersecurity": 0.14,
+        "cloud": 0.12,
+        "data_science": 0.10
+    }
+}

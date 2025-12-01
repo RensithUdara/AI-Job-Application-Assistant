@@ -62,6 +62,8 @@ class JobDescriptionProcessor:
             # Advanced analysis features
             red_flag_analysis = self.detect_job_red_flags(jd_text)
             interview_prediction = self.predict_interview_process(jd_text)
+            keyword_ranking = self.rank_keyword_importance(jd_text)
+            role_expansion = self.generate_role_expansion_summary(jd_text)
             
             return {
                 'jd_text': jd_text,
@@ -78,6 +80,8 @@ class JobDescriptionProcessor:
                 'job_requirements': job_requirements,
                 'red_flag_analysis': red_flag_analysis,
                 'interview_prediction': interview_prediction,
+                'keyword_ranking': keyword_ranking,
+                'role_expansion': role_expansion,
                 'word_count': len(jd_text.split())
             }
         
@@ -828,3 +832,513 @@ class JobDescriptionProcessor:
             return 'Medium Confidence'
         else:
             return 'Low Confidence'
+    
+    def extract_job_trends(self, jd_text: str) -> Dict:
+        """Extract job market trends from job description."""
+        trending_tech = [
+            'python', 'react', 'node.js', 'aws', 'docker', 'kubernetes', 
+            'microservices', 'machine learning', 'ai', 'cloud', 'devops',
+            'javascript', 'typescript', 'angular', 'vue', 'mongodb', 'postgresql'
+        ]
+        
+        jd_lower = jd_text.lower()
+        
+        # Find trending technologies mentioned
+        mentioned_trends = []
+        for tech in trending_tech:
+            if tech in jd_lower:
+                mentioned_trends.append(tech)
+        
+        # Determine market demand level
+        if len(mentioned_trends) >= 8:
+            demand_level = 'Very High'
+        elif len(mentioned_trends) >= 5:
+            demand_level = 'High'
+        elif len(mentioned_trends) >= 2:
+            demand_level = 'Medium'
+        else:
+            demand_level = 'Low'
+        
+        return {
+            'trending_skills': mentioned_trends,
+            'market_demand_level': demand_level,
+            'trend_analysis': {
+                'hot_technologies': mentioned_trends[:5],
+                'skill_diversity': len(set(mentioned_trends)),
+                'future_proof_rating': min(100, len(mentioned_trends) * 10)
+            },
+            'recommendations': [
+                'Focus on trending technologies for better opportunities',
+                'Combine multiple trending skills for competitive advantage',
+                'Stay updated with emerging technologies'
+            ]
+        }
+    
+    def rank_keyword_importance(self, jd_text: str) -> Dict:
+        """Rank keywords by importance and frequency in job description."""
+        # Clean and process text
+        jd_lower = jd_text.lower()
+        
+        # Technical skills keywords
+        technical_keywords = [
+            'python', 'javascript', 'java', 'react', 'angular', 'vue', 'node.js',
+            'aws', 'azure', 'docker', 'kubernetes', 'sql', 'mongodb', 'postgresql',
+            'html', 'css', 'git', 'agile', 'scrum', 'machine learning', 'ai'
+        ]
+        
+        # Experience keywords
+        experience_keywords = [
+            'experience', 'years', 'senior', 'junior', 'lead', 'manager', 'architect'
+        ]
+        
+        # Soft skills keywords
+        soft_skills = [
+            'communication', 'teamwork', 'leadership', 'problem solving', 
+            'analytical', 'creative', 'collaborative'
+        ]
+        
+        # Count keyword frequencies
+        keyword_counts = {}
+        all_keywords = technical_keywords + experience_keywords + soft_skills
+        
+        for keyword in all_keywords:
+            count = jd_lower.count(keyword)
+            if count > 0:
+                keyword_counts[keyword] = count
+        
+        # Calculate importance scores
+        ranked_skills = {}
+        critical_skills = []
+        important_skills = []
+        nice_to_have_skills = []
+        
+        for keyword, count in keyword_counts.items():
+            # Base importance score
+            importance_score = count * 10
+            
+            # Boost technical skills
+            if keyword in technical_keywords:
+                importance_score *= 1.5
+            
+            # Determine priority level
+            if importance_score >= 20:
+                priority = 'Critical'
+                critical_skills.append(keyword)
+            elif importance_score >= 10:
+                priority = 'Important'
+                important_skills.append(keyword)
+            else:
+                priority = 'Nice-to-have'
+                nice_to_have_skills.append(keyword)
+            
+            ranked_skills[keyword] = {
+                'frequency': count,
+                'importance_score': int(importance_score),
+                'priority': priority
+            }
+        
+        # Get top 5 skills
+        top_5_skills = sorted(keyword_counts.keys(), 
+                             key=lambda x: ranked_skills[x]['importance_score'], 
+                             reverse=True)[:5]
+        
+        return {
+            'ranked_skills': ranked_skills,
+            'top_5_skills': top_5_skills,
+            'critical_skills': critical_skills,
+            'important_skills': important_skills,
+            'nice_to_have_skills': nice_to_have_skills,
+            'keyword_analysis': {
+                'total_keywords_found': len(keyword_counts),
+                'technical_keywords_found': len([k for k in keyword_counts if k in technical_keywords]),
+                'skill_diversity_score': min(100, len(keyword_counts) * 5)
+            }
+        }
+    
+    def generate_role_expansion_summary(self, jd_text: str) -> Dict:
+        """Generate AI-powered role expansion and analysis."""
+        jd_lower = jd_text.lower()
+        
+        # Role type classification
+        role_indicators = {
+            'frontend_developer': ['frontend', 'react', 'angular', 'vue', 'html', 'css', 'javascript'],
+            'backend_developer': ['backend', 'api', 'server', 'database', 'python', 'java', 'node'],
+            'fullstack_developer': ['fullstack', 'full stack', 'frontend', 'backend'],
+            'data_analyst': ['data', 'analytics', 'sql', 'tableau', 'power bi', 'excel'],
+            'devops_engineer': ['devops', 'aws', 'docker', 'kubernetes', 'ci/cd', 'deployment'],
+            'mobile_developer': ['mobile', 'android', 'ios', 'react native', 'flutter']
+        }
+        
+        # Determine primary role
+        role_scores = {}
+        for role, keywords in role_indicators.items():
+            score = sum(1 for keyword in keywords if keyword in jd_lower)
+            if score > 0:
+                role_scores[role] = score
+        
+        primary_role = max(role_scores, key=role_scores.get) if role_scores else 'general_software_engineer'
+        
+        # Extract key aspects
+        key_aspects = []
+        if 'team' in jd_lower or 'collaboration' in jd_lower:
+            key_aspects.append('team_collaboration')
+        if 'leadership' in jd_lower or 'lead' in jd_lower:
+            key_aspects.append('leadership')
+        if 'mentoring' in jd_lower or 'mentor' in jd_lower:
+            key_aspects.append('mentoring')
+        if 'architecture' in jd_lower or 'design' in jd_lower:
+            key_aspects.append('system_design')
+        
+        # Technical focus areas
+        technical_focus = []
+        tech_areas = {
+            'Web Development': ['web', 'html', 'css', 'javascript'],
+            'Cloud Computing': ['aws', 'azure', 'cloud', 'docker'],
+            'Database Management': ['sql', 'database', 'mongodb', 'postgresql'],
+            'Mobile Development': ['mobile', 'android', 'ios'],
+            'AI/ML': ['machine learning', 'ai', 'data science']
+        }
+        
+        for area, keywords in tech_areas.items():
+            if any(keyword in jd_lower for keyword in keywords):
+                technical_focus.append(area)
+        
+        # Work environment
+        work_environment = []
+        if 'remote' in jd_lower:
+            work_environment.append('remote')
+        if 'agile' in jd_lower or 'scrum' in jd_lower:
+            work_environment.append('agile')
+        if 'startup' in jd_lower:
+            work_environment.append('startup')
+        
+        # Career level assessment
+        experience_mentions = re.findall(r'(\d+)\+?\s*years?', jd_lower)
+        if experience_mentions:
+            years = max([int(year) for year in experience_mentions])
+            if years >= 7:
+                career_level = 'Senior Level'
+                growth_potential = 'Leadership Track'
+            elif years >= 3:
+                career_level = 'Mid Level'
+                growth_potential = 'Senior Track'
+            else:
+                career_level = 'Entry Level'
+                growth_potential = 'Mid-Level Track'
+        else:
+            career_level = 'Not Specified'
+            growth_potential = 'Variable'
+        
+        return {
+            'primary_role_type': primary_role,
+            'role_explanation': f"This position is primarily a {primary_role.replace('_', ' ')} role based on required skills and responsibilities.",
+            'key_aspects': key_aspects,
+            'technical_focus': technical_focus,
+            'work_environment': work_environment,
+            'career_level': career_level,
+            'growth_potential': growth_potential,
+            'role_complexity_score': min(100, len(key_aspects) * 15 + len(technical_focus) * 10)
+        }
+    
+    def analyze_industry_insights(self, jd_text: str) -> Dict:
+        """Analyze industry-specific insights from job description."""
+        jd_lower = jd_text.lower()
+        
+        # Industry detection
+        industry_indicators = {
+            'fintech': ['fintech', 'financial', 'banking', 'payment', 'trading', 'cryptocurrency', 'blockchain'],
+            'healthcare': ['healthcare', 'medical', 'hospital', 'patient', 'clinical', 'pharma', 'biotech'],
+            'e_commerce': ['e-commerce', 'ecommerce', 'retail', 'marketplace', 'shopping', 'customer'],
+            'gaming': ['gaming', 'game', 'entertainment', 'mobile games', 'console', 'unity', 'unreal'],
+            'education': ['education', 'learning', 'student', 'academic', 'school', 'university', 'edtech'],
+            'enterprise': ['enterprise', 'b2b', 'saas', 'corporate', 'business', 'crm', 'erp'],
+            'media': ['media', 'content', 'streaming', 'video', 'social media', 'publishing'],
+            'automotive': ['automotive', 'car', 'vehicle', 'transportation', 'mobility', 'autonomous'],
+            'cybersecurity': ['security', 'cybersecurity', 'threat', 'vulnerability', 'compliance', 'privacy']
+        }
+        
+        detected_industries = []
+        industry_scores = {}
+        
+        for industry, keywords in industry_indicators.items():
+            score = sum(1 for keyword in keywords if keyword in jd_lower)
+            if score > 0:
+                industry_scores[industry] = score
+                detected_industries.append(industry)
+        
+        primary_industry = max(industry_scores, key=industry_scores.get) if industry_scores else 'general_tech'
+        
+        # Industry-specific insights
+        industry_insights = {
+            'fintech': {
+                'growth_outlook': 'High',
+                'key_trends': ['Digital payments', 'DeFi', 'RegTech', 'Open banking'],
+                'skill_premiums': ['Blockchain', 'Security', 'Compliance'],
+                'avg_salary_multiplier': 1.2
+            },
+            'healthcare': {
+                'growth_outlook': 'Very High',
+                'key_trends': ['Telemedicine', 'AI diagnostics', 'Health data'],
+                'skill_premiums': ['HIPAA compliance', 'Medical data', 'AI/ML'],
+                'avg_salary_multiplier': 1.15
+            },
+            'e_commerce': {
+                'growth_outlook': 'High',
+                'key_trends': ['Mobile commerce', 'Personalization', 'AR/VR shopping'],
+                'skill_premiums': ['Microservices', 'Cloud', 'Analytics'],
+                'avg_salary_multiplier': 1.1
+            },
+            'gaming': {
+                'growth_outlook': 'Very High',
+                'key_trends': ['Mobile gaming', 'VR/AR', 'Cloud gaming'],
+                'skill_premiums': ['Unity', 'Unreal Engine', 'Graphics programming'],
+                'avg_salary_multiplier': 1.05
+            }
+        }
+        
+        current_insights = industry_insights.get(primary_industry, {
+            'growth_outlook': 'Moderate',
+            'key_trends': ['Digital transformation', 'Cloud adoption'],
+            'skill_premiums': ['Cloud', 'DevOps', 'Security'],
+            'avg_salary_multiplier': 1.0
+        })
+        
+        # Company size detection
+        company_size_indicators = {
+            'startup': ['startup', 'early stage', 'seed', 'series a', 'fast-paced', 'agile environment'],
+            'scale_up': ['scale-up', 'growing', 'expanding', 'series b', 'series c'],
+            'enterprise': ['enterprise', 'fortune', 'established', 'large company', 'multinational'],
+            'mid_size': ['mid-size', 'medium', '100-500', 'growing company']
+        }
+        
+        company_size = 'unknown'
+        for size, indicators in company_size_indicators.items():
+            if any(indicator in jd_lower for indicator in indicators):
+                company_size = size
+                break
+        
+        # Remote work analysis
+        remote_indicators = ['remote', 'work from home', 'distributed', 'anywhere', 'flexible location']
+        remote_score = sum(1 for indicator in remote_indicators if indicator in jd_lower)
+        remote_friendliness = 'High' if remote_score >= 2 else 'Medium' if remote_score == 1 else 'Low'
+        
+        return {
+            'primary_industry': primary_industry,
+            'detected_industries': detected_industries,
+            'industry_confidence': max(industry_scores.values()) if industry_scores else 0,
+            'growth_outlook': current_insights['growth_outlook'],
+            'key_trends': current_insights['key_trends'],
+            'skill_premiums': current_insights['skill_premiums'],
+            'salary_multiplier': current_insights['avg_salary_multiplier'],
+            'company_size': company_size,
+            'remote_friendliness': remote_friendliness,
+            'market_insights': [
+                f'This {primary_industry} role shows {current_insights["growth_outlook"].lower()} growth potential',
+                f'Industry trends include: {', '.join(current_insights["key_trends"][:2])}',
+                f'Skills commanding premium: {', '.join(current_insights["skill_premiums"][:2])}'
+            ]
+        }
+    
+    def assess_job_difficulty_advanced(self, jd_text: str) -> Dict:
+        """Advanced job difficulty assessment with multiple factors."""
+        difficulty_score = 0
+        difficulty_factors = []
+        
+        jd_lower = jd_text.lower()
+        
+        # Experience requirements
+        experience_patterns = re.findall(r'(\d+)\+?\s*(?:years?|yrs?)', jd_lower)
+        if experience_patterns:
+            max_years = max([int(year) for year in experience_patterns])
+            if max_years >= 7:
+                difficulty_score += 30
+                difficulty_factors.append(f'{max_years}+ years experience required')
+            elif max_years >= 5:
+                difficulty_score += 20
+                difficulty_factors.append(f'{max_years}+ years experience required')
+            elif max_years >= 3:
+                difficulty_score += 10
+                difficulty_factors.append(f'{max_years}+ years experience required')
+        
+        # Technical skills complexity
+        advanced_skills = [
+            'machine learning', 'deep learning', 'kubernetes', 'microservices',
+            'system design', 'distributed systems', 'blockchain', 'ai',
+            'computer vision', 'nlp', 'big data', 'spark', 'kafka'
+        ]
+        
+        advanced_skill_count = sum(1 for skill in advanced_skills if skill in jd_lower)
+        difficulty_score += min(25, advanced_skill_count * 5)
+        if advanced_skill_count > 3:
+            difficulty_factors.append(f'{advanced_skill_count} advanced technical skills required')
+        
+        # Education requirements
+        education_keywords = ['phd', 'masters', 'ms', 'mba', 'bachelor', 'bs', 'degree']
+        education_mentions = sum(1 for keyword in education_keywords if keyword in jd_lower)
+        if 'phd' in jd_lower:
+            difficulty_score += 20
+            difficulty_factors.append('PhD preferred or required')
+        elif any(keyword in jd_lower for keyword in ['masters', 'ms', 'mba']):
+            difficulty_score += 10
+            difficulty_factors.append('Advanced degree preferred')
+        
+        # Competitive indicators
+        competitive_terms = [
+            'top talent', 'exceptional', 'world-class', 'elite', 'cutting-edge',
+            'innovative', 'disruptive', 'game-changing', 'revolutionary'
+        ]
+        competitive_count = sum(1 for term in competitive_terms if term in jd_lower)
+        difficulty_score += min(15, competitive_count * 3)
+        if competitive_count >= 3:
+            difficulty_factors.append('Highly competitive position language')
+        
+        # Responsibility level
+        leadership_terms = ['lead', 'senior', 'principal', 'architect', 'manager', 'director']
+        leadership_mentions = sum(1 for term in leadership_terms if term in jd_lower)
+        if leadership_mentions >= 2:
+            difficulty_score += 15
+            difficulty_factors.append('Leadership responsibilities')
+        
+        # Multiple technology stacks
+        tech_stacks = ['frontend', 'backend', 'mobile', 'devops', 'data', 'ml', 'security']
+        stack_count = sum(1 for stack in tech_stacks if stack in jd_lower)
+        if stack_count >= 4:
+            difficulty_score += 10
+            difficulty_factors.append('Multiple technology stack knowledge required')
+        
+        # Determine difficulty level
+        if difficulty_score >= 80:
+            difficulty_level = 'Extremely Hard'
+            difficulty_description = 'This is an extremely challenging role requiring top-tier expertise'
+        elif difficulty_score >= 60:
+            difficulty_level = 'Hard'
+            difficulty_description = 'This role requires significant experience and advanced skills'
+        elif difficulty_score >= 40:
+            difficulty_level = 'Moderate'
+            difficulty_description = 'This role requires solid experience and technical competency'
+        elif difficulty_score >= 20:
+            difficulty_level = 'Easy-Moderate'
+            difficulty_description = 'This role is accessible to candidates with some experience'
+        else:
+            difficulty_level = 'Easy'
+            difficulty_description = 'This role is suitable for entry-level or junior candidates'
+        
+        return {
+            'difficulty_score': min(100, difficulty_score),
+            'difficulty_level': difficulty_level,
+            'difficulty_description': difficulty_description,
+            'difficulty_factors': difficulty_factors,
+            'preparation_timeline': self._get_preparation_timeline(difficulty_score),
+            'success_probability': self._calculate_success_probability(difficulty_score),
+            'recommendation': self._get_difficulty_recommendation(difficulty_score)
+        }
+    
+    def _get_preparation_timeline(self, difficulty_score: int) -> str:
+        """Get recommended preparation timeline based on difficulty."""
+        if difficulty_score >= 80:
+            return '6-12 months intensive preparation'
+        elif difficulty_score >= 60:
+            return '3-6 months focused preparation'
+        elif difficulty_score >= 40:
+            return '1-3 months preparation'
+        elif difficulty_score >= 20:
+            return '2-4 weeks preparation'
+        else:
+            return '1-2 weeks preparation'
+    
+    def _calculate_success_probability(self, difficulty_score: int) -> Dict:
+        """Calculate success probability for different candidate levels."""
+        base_probabilities = {
+            'entry_level': max(5, 80 - difficulty_score),
+            'mid_level': max(15, 90 - (difficulty_score * 0.8)),
+            'senior_level': max(25, 95 - (difficulty_score * 0.6))
+        }
+        return base_probabilities
+    
+    def _get_difficulty_recommendation(self, difficulty_score: int) -> str:
+        """Get personalized recommendation based on difficulty."""
+        if difficulty_score >= 80:
+            return 'Consider building more experience before applying. Focus on skill development and networking.'
+        elif difficulty_score >= 60:
+            return 'Prepare thoroughly. Consider highlighting transferable skills and relevant projects.'
+        elif difficulty_score >= 40:
+            return 'Good fit with proper preparation. Tailor your application to match key requirements.'
+        else:
+            return 'Well-suited for your level. Apply with confidence while highlighting relevant experience.'
+    
+    def analyze_benefits_package(self, jd_text: str) -> Dict:
+        """Analyze benefits and compensation package from job description."""
+        benefits_analysis = {
+            'salary_mentioned': False,
+            'equity_mentioned': False,
+            'benefits_score': 0,
+            'benefits_found': [],
+            'missing_benefits': [],
+            'package_competitiveness': 'Unknown'
+        }
+        
+        jd_lower = jd_text.lower()
+        
+        # Salary detection
+        salary_patterns = [
+            r'\$\d{2,3}[,k]\d{0,3}',
+            r'salary.*\$\d+',
+            r'\d{2,3}k',
+            r'competitive salary'
+        ]
+        
+        for pattern in salary_patterns:
+            if re.search(pattern, jd_lower):
+                benefits_analysis['salary_mentioned'] = True
+                break
+        
+        # Equity detection
+        equity_terms = ['equity', 'stock options', 'rsu', 'espp', 'ownership']
+        benefits_analysis['equity_mentioned'] = any(term in jd_lower for term in equity_terms)
+        
+        # Standard benefits
+        benefit_categories = {
+            'health_insurance': ['health insurance', 'medical', 'dental', 'vision'],
+            'retirement': ['401k', 'retirement', 'pension', 'matching'],
+            'time_off': ['pto', 'vacation', 'paid time off', 'unlimited pto'],
+            'flexible_work': ['remote', 'flexible', 'work from home', 'hybrid'],
+            'professional_development': ['training', 'learning', 'conference', 'education'],
+            'wellness': ['gym', 'fitness', 'wellness', 'mental health'],
+            'family': ['parental leave', 'family', 'childcare'],
+            'transportation': ['commuter', 'parking', 'transit']
+        }
+        
+        found_benefits = []
+        for category, keywords in benefit_categories.items():
+            if any(keyword in jd_lower for keyword in keywords):
+                found_benefits.append(category)
+        
+        benefits_analysis['benefits_found'] = found_benefits
+        benefits_analysis['benefits_score'] = min(100, len(found_benefits) * 12.5)
+        
+        # Standard benefits that should be mentioned
+        expected_benefits = ['health_insurance', 'retirement', 'time_off']
+        benefits_analysis['missing_benefits'] = [b for b in expected_benefits if b not in found_benefits]
+        
+        # Competitiveness assessment
+        total_score = (
+            (20 if benefits_analysis['salary_mentioned'] else 0) +
+            (15 if benefits_analysis['equity_mentioned'] else 0) +
+            (benefits_analysis['benefits_score'] * 0.65)
+        )
+        
+        if total_score >= 85:
+            benefits_analysis['package_competitiveness'] = 'Excellent'
+        elif total_score >= 70:
+            benefits_analysis['package_competitiveness'] = 'Good'
+        elif total_score >= 50:
+            benefits_analysis['package_competitiveness'] = 'Average'
+        else:
+            benefits_analysis['package_competitiveness'] = 'Below Average'
+        
+        return benefits_analysis
+    
+    def process_job_description(self, jd_text: str) -> Dict:
+        """Main method to process job description with all features."""
+        # This method should exist to maintain compatibility
+        return self.process_jd(jd_text)
