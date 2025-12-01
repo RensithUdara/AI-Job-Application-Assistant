@@ -21,27 +21,26 @@ def display_sidebar():
     with st.sidebar:
         st.markdown("### 🏠 Navigation")
         
+        # Current page indicator
+        current_page = st.session_state.get('current_page', 'main')
+        
         # Main page
-        if st.button("🏠 Main Dashboard", use_container_width=True):
+        if st.button("🏠 Main Dashboard", use_container_width=True, disabled=(current_page == 'main')):
             st.session_state.current_page = 'main'
-            st.rerun()
         
         st.markdown("### 🚀 Quick Actions")
         
         # AI Assistant Chat
-        if st.button("💬 AI Career Chat", use_container_width=True):
+        if st.button("💬 AI Career Chat", use_container_width=True, disabled=(current_page == 'ai_chat')):
             st.session_state.current_page = 'ai_chat'
-            st.rerun()
         
         # Resume Templates
-        if st.button("📄 Resume Templates", use_container_width=True):
+        if st.button("📄 Resume Templates", use_container_width=True, disabled=(current_page == 'resume_templates')):
             st.session_state.current_page = 'resume_templates'
-            st.rerun()
         
         # Interview Prep
-        if st.button("🎤 Mock Interview", use_container_width=True):
+        if st.button("🎤 Mock Interview", use_container_width=True, disabled=(current_page == 'mock_interview')):
             st.session_state.current_page = 'mock_interview'
-            st.rerun()
         
         st.markdown("---")
         
