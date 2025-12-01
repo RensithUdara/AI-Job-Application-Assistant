@@ -550,6 +550,26 @@ def display_structure_tab(resume_data: Dict):
         - Skills diversity
         - Overall structure
         """)
+    
+    # Consistency Analysis (New Advanced Feature)
+    if 'consistency_analysis' in resume_data:
+        st.subheader("📏 Resume Consistency Analysis")
+        consistency = resume_data['consistency_analysis']
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("Consistency Score", f"{consistency['consistency_score']}/100")
+        with col2:
+            st.info(consistency['consistency_level'])
+        
+        if consistency['issues_found']:
+            st.warning("**Consistency Issues Found:**")
+            for issue in consistency['issues_found']:
+                st.write(f"• {issue}")
+            
+            st.info("**Recommendations:**")
+            for rec in consistency['recommendations']:
+                st.write(f"• {rec}")
 
 def display_recommendations_tab(recommendations: Dict):
     """Display recommendations."""
