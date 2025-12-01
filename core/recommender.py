@@ -2,6 +2,7 @@ import pandas as pd
 from typing import Dict, List, Optional
 import random
 import re
+import json
 
 class Recommender:
     def __init__(self, interview_questions_path: str = "data/interview_questions.csv"):
@@ -1278,7 +1279,7 @@ class Recommender:
         # Confidence boosters based on resume strengths
         resume_skills = resume_data.get('resume_skills', {}).get('all_skills', [])
         strategy['confidence_boosters'] = [
-            f'Strong technical foundation in {', '.join(resume_skills[:3])}',
+            f'Strong technical foundation in {", ".join(resume_skills[:3])}',
             'Relevant project experience demonstrated',
             'Clear communication of technical concepts',
             'Problem-solving methodology'

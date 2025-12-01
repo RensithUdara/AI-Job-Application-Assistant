@@ -1623,7 +1623,7 @@ def display_resume_scoring_tab(resume_data: Dict, jd_data: Dict):
     
     # Extract target role from JD
     job_processor = JobDescriptionProcessor()
-    role_analysis = job_processor.analyze_role_type(jd_text)
+    role_analysis = job_processor.generate_role_expansion_summary(jd_text)
     target_role = role_analysis.get('primary_role_type', 'software_engineer')
     
     st.subheader("📊 Overall Resume Score")
@@ -1773,7 +1773,7 @@ def display_career_path_tab(resume_data: Dict, jd_data: Dict):
     
     # Get target role from JD
     job_processor = JobDescriptionProcessor()
-    role_analysis = job_processor.analyze_role_type(jd_data.get('jd_text', ''))
+    role_analysis = job_processor.generate_role_expansion_summary(jd_data.get('jd_text', ''))
     target_role = role_analysis.get('primary_role_type', 'software_engineer')
     
     # Input section for career path analysis
