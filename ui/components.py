@@ -186,12 +186,15 @@ def display_footer():
     # Enhanced Footer with attractive design and real links
     st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
     .footer-section {
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         padding: 2rem;
         border-radius: 15px;
         margin: 1rem 0;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     }
     .footer-column {
         padding: 1.5rem;
@@ -200,6 +203,7 @@ def display_footer():
         margin: 0.5rem;
         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         transition: transform 0.3s ease;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     }
     .footer-column:hover {
         transform: translateY(-2px);
@@ -215,6 +219,11 @@ def display_footer():
         transition: all 0.3s ease;
         border-left: 3px solid transparent;
         font-weight: 500;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+        font-size: 14px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
     .footer-link:hover {
         background-color: #f8f9ff !important;
@@ -228,10 +237,15 @@ def display_footer():
         margin-bottom: 1rem;
         font-size: 1.2rem;
         text-shadow: none;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
     .section-icon {
         font-size: 1.2rem;
         margin-right: 8px;
+        display: inline-block;
+        vertical-align: middle;
     }
     /* Dark theme compatibility */
     [data-theme="dark"] .footer-column {
@@ -247,6 +261,10 @@ def display_footer():
     [data-theme="dark"] .footer-link:hover {
         background-color: #2d3748 !important;
         color: #63b3ed !important;
+    }
+    /* Font fallback for better compatibility */
+    .footer-section *, .footer-column *, .footer-link *, .section-header * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
     }
     </style>
     """, unsafe_allow_html=True)
