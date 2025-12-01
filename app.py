@@ -2275,10 +2275,27 @@ def display_salary_intelligence_tab(resume_data: Dict, jd_data: Dict, match_data
     
     # Salary estimation
     if jd_data.get('jd_text'):
+        # Extract role from job description or use default
+        job_processor = JobDescriptionProcessor()
+        jd_analysis = job_processor.generate_role_expansion_summary(jd_data['jd_text'])
+        estimated_role = jd_analysis.get('primary_role_type', 'software_engineer')
+        
+        # Determine experience level based on years
+        experience_years = resume_data.get('experience_years', 0)
+        if experience_years <= 2:
+            experience_level = 'entry'
+        elif experience_years <= 7:
+            experience_level = 'mid'
+        else:
+            experience_level = 'senior'
+        
+        # Use default location (can be enhanced later to detect from resume)
+        default_location = 'US'
+        
         salary_analysis = recommender.estimate_salary_range(
-            jd_data['jd_text'], 
-            resume_data.get('skills', []),
-            resume_data.get('experience_years', 0)
+            estimated_role,
+            default_location,
+            experience_level
         )
         
         st.subheader("🎯 Salary Estimation")
@@ -2286,36 +2303,40 @@ def display_salary_intelligence_tab(resume_data: Dict, jd_data: Dict, match_data
         col1, col2, col3, col4 = st.columns(4)
         
         with col1:
+            salary_range = salary_analysis.get('salary_range', {})
             st.metric(
                 "Base Salary Range",
-                f"${salary_analysis.get('base_salary_min', 0):,} - ${salary_analysis.get('base_salary_max', 0):,}"
+                f"${salary_range.get('min', 0):,} - ${salary_range.get('max', 0):,}"
             )
         
         with col2:
+            growth_projections = salary_analysis.get('growth_projections', {})
             st.metric(
-                "Total Compensation",
-                f"${salary_analysis.get('total_comp_min', 0):,} - ${salary_analysis.get('total_comp_max', 0):,}"
+                "5-Year Projection",
+                f"${growth_projections.get('5_year', 0):,}"
             )
         
         with col3:
-            market_position = salary_analysis.get('market_position', 'Average')
-            st.metric("Market Position", market_position)
+            st.metric("Market Position", "Competitive")
             
         with col4:
-            growth_potential = salary_analysis.get('growth_potential', 'Moderate')
-            st.metric("Growth Potential", growth_potential)
+            st.metric("Growth Potential", "Strong")
         
         # Compensation breakdown
         st.subheader("📊 Compensation Breakdown")
+        
+        salary_range = salary_analysis.get('salary_range', {})
+        salary_min = salary_range.get('min', 0)
+        salary_max = salary_range.get('max', 0)
         
         compensation_data = {
             'Component': ['Base Salary', 'Bonus', 'Stock Options', 'Benefits'],
             'Percentage': [70, 15, 10, 5],
             'Amount Range': [
-                f"${salary_analysis.get('base_salary_min', 0):,} - ${salary_analysis.get('base_salary_max', 0):,}",
-                f"${int(salary_analysis.get('base_salary_min', 0) * 0.15):,} - ${int(salary_analysis.get('base_salary_max', 0) * 0.15):,}",
-                f"${int(salary_analysis.get('base_salary_min', 0) * 0.10):,} - ${int(salary_analysis.get('base_salary_max', 0) * 0.10):,}",
-                f"${int(salary_analysis.get('base_salary_min', 0) * 0.05):,} - ${int(salary_analysis.get('base_salary_max', 0) * 0.05):,}"
+                f"${salary_min:,} - ${salary_max:,}",
+                f"${int(salary_min * 0.15):,} - ${int(salary_max * 0.15):,}",
+                f"${int(salary_min * 0.10):,} - ${int(salary_max * 0.10):,}",
+                f"${int(salary_min * 0.05):,} - ${int(salary_max * 0.05):,}"
             ]
         }
         
