@@ -988,23 +988,31 @@ class Recommender:
         return steps
     
     def estimate_salary_range(self, role: str, location: str, experience: str) -> Dict:
-        """Estimate salary range based on role, location, and experience."""
-        # Base salary data (simplified for demo)
-        base_salaries = {
-            'software_engineer': {'entry': 75000, 'mid': 100000, 'senior': 135000},
-            'web_developer': {'entry': 65000, 'mid': 85000, 'senior': 110000},
-            'mobile_developer': {'entry': 70000, 'mid': 95000, 'senior': 125000},
-            'data_analyst': {'entry': 60000, 'mid': 80000, 'senior': 105000}
-        }
+        """Estimate salary range based on role, location, and experience using enhanced data."""
+        # Load salary data from JSON file
+        try:
+            with open('data/salary_data.json', 'r', encoding='utf-8') as f:
+                salary_data = json.load(f)
+        except FileNotFoundError:
+            # Fallback to basic data
+            salary_data = {
+                'base_salaries': {
+                    'software_engineer': {'entry': 75000, 'mid': 100000, 'senior': 135000},
+                    'web_developer': {'entry': 65000, 'mid': 85000, 'senior': 110000}
+                },
+                'location_multipliers': {'US': 1.0, 'California': 1.4}
+            }
         
-        # Location multipliers
-        location_multipliers = {
-            'California': 1.4, 'New York': 1.3, 'Texas': 1.1, 
-            'Remote': 1.0, 'US': 1.0, 'Europe': 0.8
-        }
+        base_salaries = salary_data.get('base_salaries', {})
+        location_multipliers = salary_data.get('location_multipliers', {})
         
-        base_salary = base_salaries.get(role, base_salaries['software_engineer'])[experience]
-        multiplier = location_multipliers.get(location, 1.0)
+        # Get base salary
+        role_salaries = base_salaries.get(role, base_salaries.get('software_engineer', {'entry': 70000, 'mid': 95000, 'senior': 130000}))
+        base_salary = role_salaries.get(experience, role_salaries.get('mid', 95000))
+        
+        # Apply location multiplier
+        location_key = location.lower().replace(' ', '_')
+        multiplier = location_multipliers.get(location_key, location_multipliers.get(location, 1.0))
         
         adjusted_salary = int(base_salary * multiplier)
         
@@ -1205,3 +1213,284 @@ class Recommender:
             'application_strategy': application_strategy,
             'total_versions_generated': len(versions)
         }
+    
+    def generate_interview_strategy(self, resume_data: Dict, jd_data: Dict, role: str) -> Dict:
+        """Generate personalized interview preparation strategy."""
+        # Load interview questions data
+        try:
+            import pandas as pd
+            questions_df = pd.read_csv('data/interview_questions.csv')
+        except:
+            questions_df = None
+        
+        strategy = {
+            'preparation_timeline': self._calculate_prep_timeline(jd_data),
+            'focus_areas': [],
+            'technical_questions': [],
+            'behavioral_questions': [],
+            'company_research': [],
+            'mock_interview_topics': [],
+            'confidence_boosters': []
+        }
+        
+        # Determine focus areas based on role and JD
+        jd_text = jd_data.get('jd_text', '').lower()
+        
+        if 'senior' in jd_text or 'lead' in jd_text:
+            strategy['focus_areas'].extend(['Leadership examples', 'System design', 'Mentoring experience'])
+        if 'startup' in jd_text or 'fast-paced' in jd_text:
+            strategy['focus_areas'].extend(['Adaptability', 'Ownership mindset', 'Fast execution'])
+        if 'team' in jd_text:
+            strategy['focus_areas'].append('Collaboration and teamwork')
+        
+        # Technical questions based on role
+        if questions_df is not None:
+            role_questions = questions_df[questions_df['role'] == role]
+            if not role_questions.empty:
+                strategy['technical_questions'] = role_questions['question'].head(5).tolist()
+            
+            # Get behavioral questions
+            behavioral_questions = questions_df[
+                (questions_df['type'] == 'behavioral') & 
+                (questions_df['role'] == 'general')
+            ]
+            if not behavioral_questions.empty:
+                strategy['behavioral_questions'] = behavioral_questions['question'].head(5).tolist()
+        
+        # Company research areas
+        strategy['company_research'] = [
+            'Recent company news and funding rounds',
+            'Product portfolio and target market',
+            'Company culture and values',
+            'Recent technical blog posts or publications',
+            'Leadership team and engineering culture'
+        ]
+        
+        # Mock interview topics
+        strategy['mock_interview_topics'] = [
+            'Code review simulation',
+            'System design discussion',
+            'Behavioral scenario practice',
+            'Technical deep-dive on past projects',
+            'Problem-solving walkthrough'
+        ]
+        
+        # Confidence boosters based on resume strengths
+        resume_skills = resume_data.get('resume_skills', {}).get('all_skills', [])
+        strategy['confidence_boosters'] = [
+            f'Strong technical foundation in {', '.join(resume_skills[:3])}',
+            'Relevant project experience demonstrated',
+            'Clear communication of technical concepts',
+            'Problem-solving methodology'
+        ]
+        
+        return strategy
+    
+    def _calculate_prep_timeline(self, jd_data: Dict) -> str:
+        """Calculate recommended interview preparation timeline."""
+        complexity_factors = 0
+        
+        jd_text = jd_data.get('jd_text', '').lower()
+        
+        # Check complexity indicators
+        if 'senior' in jd_text or 'lead' in jd_text:
+            complexity_factors += 2
+        if 'system design' in jd_text:
+            complexity_factors += 2
+        if any(term in jd_text for term in ['machine learning', 'ai', 'distributed systems']):
+            complexity_factors += 1
+        
+        total_requirements = jd_data.get('job_requirements', {}).get('total_requirements', 0)
+        if total_requirements > 10:
+            complexity_factors += 1
+        
+        if complexity_factors >= 4:
+            return '3-4 weeks intensive preparation'
+        elif complexity_factors >= 2:
+            return '2-3 weeks focused preparation'
+        else:
+            return '1-2 weeks preparation'
+    
+    def analyze_market_positioning(self, resume_data: Dict, target_role: str, location: str) -> Dict:
+        """Analyze candidate's market positioning and competitiveness."""
+        positioning = {
+            'market_tier': 'Unknown',
+            'competitiveness_score': 0,
+            'positioning_factors': [],
+            'improvement_areas': [],
+            'market_advantages': [],
+            'salary_positioning': {},
+            'competition_analysis': {}
+        }
+        
+        # Calculate competitiveness score
+        score = 0
+        factors = []
+        
+        # Experience level assessment
+        experience_years = self._extract_experience_years(resume_data)
+        if experience_years >= 7:
+            score += 30
+            factors.append('Senior level experience (7+ years)')
+        elif experience_years >= 3:
+            score += 20
+            factors.append('Mid-level experience (3-6 years)')
+        else:
+            score += 10
+            factors.append('Entry to junior level experience')
+        
+        # Technical skills assessment
+        skills = resume_data.get('resume_skills', {}).get('all_skills', [])
+        high_demand_skills = ['python', 'react', 'aws', 'kubernetes', 'machine learning', 'ai']
+        matching_skills = [skill for skill in skills if any(hd_skill in skill.lower() for hd_skill in high_demand_skills)]
+        
+        if len(matching_skills) >= 5:
+            score += 25
+            factors.append(f'Strong portfolio of in-demand skills ({len(matching_skills)} skills)')
+        elif len(matching_skills) >= 3:
+            score += 15
+            factors.append(f'Good technical skill set ({len(matching_skills)} skills)')
+        else:
+            score += 5
+            factors.append('Limited high-demand technical skills')
+        
+        # Education and certifications
+        if any(term in str(resume_data).lower() for term in ['masters', 'phd', 'mba']):
+            score += 15
+            factors.append('Advanced degree')
+        
+        if any(term in str(resume_data).lower() for term in ['aws certified', 'google cloud', 'azure certified']):
+            score += 10
+            factors.append('Cloud certifications')
+        
+        # Project impact
+        if 'project_analysis' in resume_data:
+            project_score = resume_data['project_analysis'].get('average_impact_score', 0)
+            if project_score >= 80:
+                score += 20
+                factors.append('High-impact project portfolio')
+            elif project_score >= 60:
+                score += 10
+                factors.append('Solid project portfolio')
+        
+        positioning['competitiveness_score'] = min(100, score)
+        positioning['positioning_factors'] = factors
+        
+        # Market tier assessment
+        if score >= 85:
+            positioning['market_tier'] = 'Top Tier (FAANG/Unicorn ready)'
+        elif score >= 70:
+            positioning['market_tier'] = 'High Tier (Scale-up/Enterprise ready)'
+        elif score >= 55:
+            positioning['market_tier'] = 'Mid Tier (Growing company ready)'
+        elif score >= 40:
+            positioning['market_tier'] = 'Entry Tier (Startup/Junior roles)'
+        else:
+            positioning['market_tier'] = 'Development Needed'
+        
+        # Market advantages
+        if experience_years >= 5:
+            positioning['market_advantages'].append('Seasoned professional with proven track record')
+        if len(matching_skills) >= 4:
+            positioning['market_advantages'].append('Versatile technical skill set')
+        if 'remote' in location.lower():
+            positioning['market_advantages'].append('Open to remote opportunities (expanded market)')
+        
+        # Improvement areas
+        if len(matching_skills) < 3:
+            positioning['improvement_areas'].append('Expand technical skills in high-demand areas')
+        if experience_years < 3:
+            positioning['improvement_areas'].append('Build more professional experience')
+        if not any(cert in str(resume_data).lower() for cert in ['certified', 'certification']):
+            positioning['improvement_areas'].append('Consider relevant certifications')
+        
+        return positioning
+    
+    def _extract_experience_years(self, resume_data: Dict) -> int:
+        """Extract years of experience from resume data."""
+        # Try to extract from resume text or parsed data
+        resume_text = str(resume_data)
+        experience_patterns = re.findall(r'(\d+)\+?\s*(?:years?|yrs?)', resume_text.lower())
+        
+        if experience_patterns:
+            return max([int(year) for year in experience_patterns])
+        
+        # Fallback: estimate from employment history
+        if 'sections' in resume_data and 'experience' in resume_data['sections']:
+            # Simple heuristic: assume each job mentioned represents ~2 years
+            job_count = resume_text.lower().count('experience') + resume_text.lower().count('developer') + resume_text.lower().count('engineer')
+            return min(10, job_count * 2)
+        
+        return 1  # Default to 1 year for new graduates
+    
+    def generate_networking_strategy(self, target_role: str, target_companies: List[str], location: str) -> Dict:
+        """Generate personalized networking strategy for job search."""
+        strategy = {
+            'linkedin_optimization': [],
+            'networking_events': [],
+            'online_communities': [],
+            'informational_interviews': [],
+            'content_strategy': [],
+            'timeline': {}
+        }
+        
+        # LinkedIn optimization
+        strategy['linkedin_optimization'] = [
+            f'Optimize headline for {target_role.replace("_", " ")} positions',
+            'Update summary to highlight relevant experience and goals',
+            'Add target role keywords throughout profile',
+            'Request recommendations from former colleagues',
+            'Join relevant LinkedIn groups and engage with content',
+            'Follow target companies and engage with their posts'
+        ]
+        
+        # Role-specific networking events
+        role_events = {
+            'software_engineer': ['Local tech meetups', 'Developer conferences', 'Hackathons'],
+            'data_scientist': ['Data science meetups', 'ML conferences', 'Analytics events'],
+            'web_developer': ['Frontend meetups', 'JavaScript conferences', 'Web dev workshops'],
+            'mobile_developer': ['Mobile dev meetups', 'iOS/Android conferences', 'App dev workshops'],
+            'devops_engineer': ['DevOps meetups', 'Cloud conferences', 'Infrastructure events']
+        }
+        
+        strategy['networking_events'] = role_events.get(target_role, ['General tech events', 'Industry meetups'])
+        
+        # Online communities
+        role_communities = {
+            'software_engineer': ['GitHub', 'Stack Overflow', 'Reddit r/programming', 'Dev.to'],
+            'data_scientist': ['Kaggle', 'Reddit r/MachineLearning', 'Towards Data Science', 'Analytics Vidhya'],
+            'web_developer': ['Codepen', 'Reddit r/webdev', 'Hashnode', 'CSS-Tricks community'],
+            'mobile_developer': ['Reddit r/FlutterDev', 'iOS Dev Slack', 'Android Dev community'],
+            'devops_engineer': ['Reddit r/devops', 'DevOps.com community', 'Kubernetes Slack']
+        }
+        
+        strategy['online_communities'] = role_communities.get(target_role, ['General tech communities'])
+        
+        # Informational interview targets
+        strategy['informational_interviews'] = [
+            f'Current {target_role.replace("_", " ")}s at target companies',
+            'Engineering managers in relevant domains',
+            'Recruiters specializing in tech roles',
+            'Alumni working in target companies',
+            'Industry professionals in similar roles'
+        ]
+        
+        # Content strategy
+        strategy['content_strategy'] = [
+            f'Share insights about {target_role.replace("_", " ")} trends',
+            'Write technical blog posts about projects',
+            'Comment thoughtfully on industry posts',
+            'Share relevant articles with personal insights',
+            'Showcase project work and learnings'
+        ]
+        
+        # Timeline
+        strategy['timeline'] = {
+            'week_1': 'Optimize LinkedIn profile and identify target connections',
+            'week_2': 'Join relevant communities and start engaging',
+            'week_3': 'Reach out for informational interviews',
+            'week_4': 'Attend networking events and follow up on connections',
+            'ongoing': 'Maintain regular content sharing and community engagement'
+        }
+        
+        return strategy
