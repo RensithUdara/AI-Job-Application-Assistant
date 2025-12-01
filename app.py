@@ -90,9 +90,9 @@ st.markdown("""
     border-radius: 15px;
     border-left: 5px solid #667eea;
     margin: 1rem 0;
-    color: #2d3748;
+    color: #2d3748 !important;
     box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    border: 1px solid rgba(255,255,255,0.8);
+    border: 1px solid #e2e8f0;
     transition: all 0.3s ease;
     position: relative;
     backdrop-filter: blur(10px);
