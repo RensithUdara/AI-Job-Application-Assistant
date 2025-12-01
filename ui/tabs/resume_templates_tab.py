@@ -39,10 +39,10 @@ def display_ats_templates():
     
     with col1:
         st.markdown("""
-        <div style='border: 2px solid #667eea; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #667eea; margin: 0;'>📋 Classic Professional</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>Clean, traditional layout perfect for corporate roles</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #667eea; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #90cdf4; margin: 0;'>📋 Classic Professional</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>Clean, traditional layout perfect for corporate roles</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Simple, clean design</li>
                 <li>Standard sections layout</li>
                 <li>ATS-optimized formatting</li>
@@ -56,10 +56,10 @@ def display_ats_templates():
     
     with col2:
         st.markdown("""
-        <div style='border: 2px solid #667eea; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #667eea; margin: 0;'>📊 Modern Minimalist</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>Contemporary design with subtle accents</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #667eea; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #90cdf4; margin: 0;'>📊 Modern Minimalist</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>Contemporary design with subtle accents</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Modern, clean lines</li>
                 <li>Subtle color accents</li>
                 <li>Excellent readability</li>
@@ -73,10 +73,10 @@ def display_ats_templates():
     
     with col3:
         st.markdown("""
-        <div style='border: 2px solid #667eea; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #667eea; margin: 0;'>🎯 Skills-Focused</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>Highlights skills and achievements prominently</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #667eea; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #90cdf4; margin: 0;'>🎯 Skills-Focused</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>Highlights skills and achievements prominently</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Skills section prominent</li>
                 <li>Achievement-focused</li>
                 <li>Great for career changers</li>
