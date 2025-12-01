@@ -183,47 +183,150 @@ def display_footer():
     </div>
     """, unsafe_allow_html=True)
     
-    # Quick Resources Footer
+    # Enhanced Footer with attractive design and real links
+    st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    .footer-section {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 2rem;
+        border-radius: 15px;
+        margin: 1rem 0;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    }
+    .footer-column {
+        padding: 1.5rem;
+        background: white;
+        border-radius: 10px;
+        margin: 0.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    }
+    .footer-column:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .footer-link {
+        color: #667eea !important;
+        text-decoration: none !important;
+        padding: 8px 12px;
+        border-radius: 6px;
+        display: inline-block;
+        margin: 2px 0;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+        font-weight: 500;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+        font-size: 14px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .footer-link:hover {
+        background-color: #f8f9ff !important;
+        border-left: 3px solid #667eea;
+        color: #5a67d8 !important;
+        transform: translateX(5px);
+    }
+    .section-header {
+        color: #2d3748 !important;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        text-shadow: none;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .section-icon {
+        font-size: 1.2rem;
+        margin-right: 8px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    /* Dark theme compatibility */
+    [data-theme="dark"] .footer-column {
+        background: #1a202c !important;
+        color: #e2e8f0 !important;
+    }
+    [data-theme="dark"] .section-header {
+        color: #f7fafc !important;
+    }
+    [data-theme="dark"] .footer-link {
+        color: #90cdf4 !important;
+    }
+    [data-theme="dark"] .footer-link:hover {
+        background-color: #2d3748 !important;
+        color: #63b3ed !important;
+    }
+    /* Font fallback for better compatibility */
+    .footer-section *, .footer-column *, .footer-link *, .section-header * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Quick Resources Footer with enhanced design
+    st.markdown('<div class="footer-section">', unsafe_allow_html=True)
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        st.markdown("### 📚 Resources")
         st.markdown("""
-        - [Resume Writing Guide](/)
-        - [Interview Preparation](/)
-        - [Salary Negotiation](/)
-        - [Career Planning](/)
-        """)
+        <div class="footer-column">
+            <h3 class="section-header"><span class="section-icon">📚</span>Resources</h3>
+            <a href="https://www.indeed.com/career-advice/resumes-cover-letters" target="_blank" class="footer-link">📝 Resume Writing Guide</a><br>
+            <a href="https://www.glassdoor.com/blog/common-interview-questions/" target="_blank" class="footer-link">🎤 Interview Preparation</a><br>
+            <a href="https://www.harvard.edu/career-advice/salary-negotiation-tips" target="_blank" class="footer-link">💰 Salary Negotiation</a><br>
+            <a href="https://www.linkedin.com/advice/0/how-do-you-create-career-development-plan" target="_blank" class="footer-link">📈 Career Planning</a>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col2:
-        st.markdown("### 🛠️ Tools")
         st.markdown("""
-        - [ATS Checker](/)
-        - [Skills Gap Analysis](/)
-        - [Mock Interview](/)
-        - [Market Analytics](/)
-        """)
+        <div class="footer-column">
+            <h3 class="section-header"><span class="section-icon">🛠️</span>Tools</h3>
+            <a href="https://resumeworded.com/ats-resume-scanner" target="_blank" class="footer-link">🤖 ATS Checker</a><br>
+            <a href="https://www.coursera.org/skills-assessment" target="_blank" class="footer-link">📊 Skills Gap Analysis</a><br>
+            <a href="https://www.pramp.com/" target="_blank" class="footer-link">🎯 Mock Interview</a><br>
+            <a href="https://www.bls.gov/ooh/" target="_blank" class="footer-link">📈 Market Analytics</a>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col3:
-        st.markdown("### 🤝 Community")
         st.markdown("""
-        - [Job Seeker Forum](/)
-        - [Career Coaching](/)
-        - [Networking Events](/)
-        - [Success Stories](/)
-        """)
+        <div class="footer-column">
+            <h3 class="section-header"><span class="section-icon">🤝</span>Community</h3>
+            <a href="https://www.reddit.com/r/jobs/" target="_blank" class="footer-link">💬 Job Seeker Forum</a><br>
+            <a href="https://www.themusejobs.com/coaching" target="_blank" class="footer-link">👥 Career Coaching</a><br>
+            <a href="https://www.meetup.com/find/?keywords=networking" target="_blank" class="footer-link">🌐 Networking Events</a><br>
+            <a href="https://www.linkedin.com/pulse/topics/success-stories" target="_blank" class="footer-link">🎉 Success Stories</a>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col4:
-        st.markdown("### ℹ️ Support")
         st.markdown("""
-        - [Help Center](/)
-        - [Contact Support](/)
-        - [Feature Requests](/)
-        - [Bug Reports](/)
-        """)
+        <div class="footer-column">
+            <h3 class="section-header"><span class="section-icon">ℹ️</span>Support</h3>
+            <a href="https://docs.streamlit.io/" target="_blank" class="footer-link">❓ Help Center</a><br>
+            <a href="mailto:support@jobassistant.ai" class="footer-link">📧 Contact Support</a><br>
+            <a href="https://github.com/RensithUdara/Ai-Job-Application-Assistant/issues" target="_blank" class="footer-link">💡 Feature Requests</a><br>
+            <a href="https://github.com/RensithUdara/Ai-Job-Application-Assistant/issues/new?template=bug_report.md" target="_blank" class="footer-link">🐛 Bug Reports</a>
+        </div>
+        """, unsafe_allow_html=True)
     
-    # Performance stats
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Performance stats with enhanced styling
     st.markdown("---")
+    st.markdown("""
+    <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 15px; color: white; text-align: center; margin: 2rem 0;'>
+        <h3 style='margin-bottom: 1.5rem; color: white;'>📊 Platform Statistics</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
     col1, col2, col3, col4, col5 = st.columns(5)
     
     with col1:
