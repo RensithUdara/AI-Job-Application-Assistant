@@ -2517,13 +2517,13 @@ def display_networking_hub_tab(resume_data: Dict, jd_data: Dict, match_data: Dic
         col1, col2 = st.columns(2)
         
         with col1:
-            st.write("**🌟 Key Networking Targets:**")
-            for target in networking_strategy.get('key_targets', []):
-                st.write(f"👤 {target}")
+            st.write("**🌟 LinkedIn Optimization:**")
+            for tip in networking_strategy.get('linkedin_optimization', [])[:5]:
+                st.write(f"✅ {tip}")
         
         with col2:
             st.write("**📍 Networking Events:**")
-            for event in networking_strategy.get('recommended_events', []):
+            for event in networking_strategy.get('networking_events', []):
                 st.write(f"🎪 {event}")
         
         # LinkedIn optimization
