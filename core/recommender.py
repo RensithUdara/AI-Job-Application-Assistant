@@ -1278,7 +1278,7 @@ class Recommender:
         # Confidence boosters based on resume strengths
         resume_skills = resume_data.get('resume_skills', {}).get('all_skills', [])
         strategy['confidence_boosters'] = [
-            f'Strong technical foundation in {', '.join(resume_skills[:3])}',
+            f'Strong technical foundation in {", ".join(resume_skills[:3])}',
             'Relevant project experience demonstrated',
             'Clear communication of technical concepts',
             'Problem-solving methodology'
