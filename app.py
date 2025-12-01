@@ -13,6 +13,7 @@ from core.resume_parser import ResumeParser
 from core.jd_processor import JobDescriptionProcessor
 from core.matcher import Matcher
 from core.recommender import Recommender
+from core.career_analyzer import CareerAnalyzer
 # Import utility functions
 def format_skills_list(skills):
     if not skills:
