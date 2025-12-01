@@ -2068,5 +2068,648 @@ def display_career_path_tab(resume_data: Dict, jd_data: Dict):
             st.write(f"**⏱️ Prep Timeline:** {difficulty_analysis['preparation_timeline']}")
             st.write(f"**💡 Recommendation:** {difficulty_analysis['recommendation']}")
 
+def display_salary_intelligence_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
+    """Display salary intelligence and compensation analysis."""
+    st.header("💰 Salary Intelligence & Compensation Analysis")
+    
+    # Initialize components
+    recommender = Recommender()
+    job_processor = JobDescriptionProcessor()
+    
+    # Salary estimation
+    if jd_data.get('jd_text'):
+        salary_analysis = recommender.estimate_salary_range(
+            jd_data['jd_text'], 
+            resume_data.get('skills', []),
+            resume_data.get('experience_years', 0)
+        )
+        
+        st.subheader("🎯 Salary Estimation")
+        
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            st.metric(
+                "Base Salary Range",
+                f"${salary_analysis.get('base_salary_min', 0):,} - ${salary_analysis.get('base_salary_max', 0):,}"
+            )
+        
+        with col2:
+            st.metric(
+                "Total Compensation",
+                f"${salary_analysis.get('total_comp_min', 0):,} - ${salary_analysis.get('total_comp_max', 0):,}"
+            )
+        
+        with col3:
+            market_position = salary_analysis.get('market_position', 'Average')
+            st.metric("Market Position", market_position)
+            
+        with col4:
+            growth_potential = salary_analysis.get('growth_potential', 'Moderate')
+            st.metric("Growth Potential", growth_potential)
+        
+        # Compensation breakdown
+        st.subheader("📊 Compensation Breakdown")
+        
+        compensation_data = {
+            'Component': ['Base Salary', 'Bonus', 'Stock Options', 'Benefits'],
+            'Percentage': [70, 15, 10, 5],
+            'Amount Range': [
+                f"${salary_analysis.get('base_salary_min', 0):,} - ${salary_analysis.get('base_salary_max', 0):,}",
+                f"${int(salary_analysis.get('base_salary_min', 0) * 0.15):,} - ${int(salary_analysis.get('base_salary_max', 0) * 0.15):,}",
+                f"${int(salary_analysis.get('base_salary_min', 0) * 0.10):,} - ${int(salary_analysis.get('base_salary_max', 0) * 0.10):,}",
+                f"${int(salary_analysis.get('base_salary_min', 0) * 0.05):,} - ${int(salary_analysis.get('base_salary_max', 0) * 0.05):,}"
+            ]
+        }
+        
+        df_comp = pd.DataFrame(compensation_data)
+        
+        col1, col2 = st.columns([1, 1])
+        
+        with col1:
+            fig_pie = px.pie(df_comp, values='Percentage', names='Component', 
+                           title="Compensation Structure")
+            st.plotly_chart(fig_pie, use_container_width=True)
+        
+        with col2:
+            st.dataframe(df_comp, use_container_width=True)
+        
+        # Negotiation insights
+        st.subheader("🤝 Negotiation Intelligence")
+        
+        negotiation_tips = salary_analysis.get('negotiation_tips', [
+            "Research market rates for your role and location",
+            "Highlight your unique skills and achievements",
+            "Consider total compensation, not just base salary",
+            "Be prepared to negotiate benefits and perks",
+            "Practice your negotiation conversation beforehand"
+        ])
+        
+        for tip in negotiation_tips:
+            st.write(f"💡 {tip}")
+        
+        # Industry comparison
+        st.subheader("🏭 Industry Salary Comparison")
+        
+        industry_comparison = {
+            'Industry': ['Technology', 'Finance', 'Healthcare', 'Consulting', 'Retail'],
+            'Average Salary': [120000, 115000, 85000, 110000, 65000],
+            'Growth Rate': [8.5, 6.2, 7.1, 5.8, 3.2]
+        }
+        
+        df_industry = pd.DataFrame(industry_comparison)
+        
+        fig_bar = px.bar(df_industry, x='Industry', y='Average Salary',
+                        title="Average Salaries by Industry",
+                        color='Growth Rate', color_continuous_scale='Viridis')
+        st.plotly_chart(fig_bar, use_container_width=True)
+
+def display_market_analytics_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
+    """Display real-time market analytics and trends."""
+    st.header("🌐 Real-Time Market Analytics & Trends")
+    
+    # Market demand analysis
+    st.subheader("📈 Market Demand Analysis")
+    
+    # Skills demand trends
+    skills_demand = {
+        'Skill': ['Python', 'JavaScript', 'AWS', 'React', 'Docker', 'Kubernetes', 'Machine Learning', 'Data Analysis'],
+        'Demand Score': [95, 90, 88, 85, 82, 78, 92, 87],
+        'Growth Trend': [12, 8, 15, 7, 18, 22, 25, 14],
+        'Job Openings': [45000, 38000, 32000, 28000, 25000, 18000, 35000, 31000]
+    }
+    
+    df_skills = pd.DataFrame(skills_demand)
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        fig_scatter = px.scatter(df_skills, x='Demand Score', y='Growth Trend', 
+                               size='Job Openings', hover_name='Skill',
+                               title="Skills Market Analysis",
+                               labels={'Growth Trend': 'Growth Rate (%)', 'Demand Score': 'Market Demand'})
+        st.plotly_chart(fig_scatter, use_container_width=True)
+    
+    with col2:
+        fig_bar = px.bar(df_skills, x='Skill', y='Job Openings',
+                        title="Current Job Openings by Skill",
+                        color='Demand Score', color_continuous_scale='Blues')
+        fig_bar.update_xaxis(tickangle=45)
+        st.plotly_chart(fig_bar, use_container_width=True)
+    
+    # Geographic market analysis
+    st.subheader("🗺️ Geographic Market Hotspots")
+    
+    geographic_data = {
+        'Location': ['San Francisco', 'New York', 'Seattle', 'Austin', 'Boston', 'Chicago', 'Los Angeles', 'Denver'],
+        'Job Opportunities': [8500, 7200, 6800, 4500, 4200, 3800, 5200, 3200],
+        'Average Salary': [145000, 125000, 135000, 95000, 115000, 85000, 120000, 90000],
+        'Cost of Living Index': [180, 150, 140, 95, 130, 100, 145, 105]
+    }
+    
+    df_geo = pd.DataFrame(geographic_data)
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        fig_bubble = px.scatter(df_geo, x='Average Salary', y='Job Opportunities',
+                              size='Cost of Living Index', hover_name='Location',
+                              title="Market Opportunities by Location")
+        st.plotly_chart(fig_bubble, use_container_width=True)
+    
+    with col2:
+        df_geo['Opportunity Score'] = (df_geo['Job Opportunities'] / df_geo['Cost of Living Index'] * 100).round(1)
+        fig_bar_geo = px.bar(df_geo, x='Location', y='Opportunity Score',
+                           title="Location Opportunity Score",
+                           color='Opportunity Score', color_continuous_scale='Greens')
+        fig_bar_geo.update_xaxis(tickangle=45)
+        st.plotly_chart(fig_bar_geo, use_container_width=True)
+    
+    # Industry trends
+    st.subheader("📊 Industry Growth Trends")
+    
+    industry_trends = {
+        'Quarter': ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024'],
+        'Technology': [15, 18, 22, 25],
+        'Finance': [8, 10, 12, 14],
+        'Healthcare': [12, 14, 16, 18],
+        'E-commerce': [20, 25, 28, 32]
+    }
+    
+    df_trends = pd.DataFrame(industry_trends)
+    df_melted = pd.melt(df_trends, id_vars=['Quarter'], var_name='Industry', value_name='Growth %')
+    
+    fig_line = px.line(df_melted, x='Quarter', y='Growth %', color='Industry',
+                      title="Industry Growth Trends Over Time",
+                      markers=True)
+    st.plotly_chart(fig_line, use_container_width=True)
+    
+    # Remote work trends
+    st.subheader("🏠 Remote Work Market Analysis")
+    
+    remote_stats = {
+        'Work Type': ['Fully Remote', 'Hybrid', 'On-site', 'Flexible'],
+        'Job Postings %': [35, 40, 20, 5],
+        'Salary Premium %': [5, 2, 0, 8]
+    }
+    
+    df_remote = pd.DataFrame(remote_stats)
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        fig_pie_remote = px.pie(df_remote, values='Job Postings %', names='Work Type',
+                              title="Distribution of Work Arrangements")
+        st.plotly_chart(fig_pie_remote, use_container_width=True)
+    
+    with col2:
+        fig_bar_remote = px.bar(df_remote, x='Work Type', y='Salary Premium %',
+                              title="Salary Premium by Work Type",
+                              color='Salary Premium %', color_continuous_scale='RdYlBu')
+        st.plotly_chart(fig_bar_remote, use_container_width=True)
+
+def display_networking_hub_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
+    """Display networking opportunities and professional connections."""
+    st.header("🤝 Professional Networking Hub")
+    
+    # Initialize recommender
+    recommender = Recommender()
+    
+    # Networking strategy
+    if jd_data.get('jd_text'):
+        networking_strategy = recommender.generate_networking_strategy(
+            jd_data['jd_text'],
+            resume_data.get('skills', [])
+        )
+        
+        st.subheader("🎯 Personalized Networking Strategy")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.write("**🌟 Key Networking Targets:**")
+            for target in networking_strategy.get('key_targets', []):
+                st.write(f"👤 {target}")
+        
+        with col2:
+            st.write("**📍 Networking Events:**")
+            for event in networking_strategy.get('recommended_events', []):
+                st.write(f"🎪 {event}")
+        
+        # LinkedIn optimization
+        st.subheader("💼 LinkedIn Profile Optimization")
+        
+        linkedin_tips = [
+            "Optimize your headline with target role keywords",
+            "Write a compelling summary highlighting achievements",
+            "Get endorsements for key skills from connections",
+            "Share industry-relevant content regularly",
+            "Join professional groups in your field",
+            "Engage with posts from target companies",
+            "Request informational interviews with industry professionals"
+        ]
+        
+        for tip in linkedin_tips:
+            st.write(f"✅ {tip}")
+        
+        # Professional associations
+        st.subheader("🏛️ Professional Associations & Communities")
+        
+        associations = {
+            'Organization': [
+                'IEEE Computer Society',
+                'ACM (Association for Computing Machinery)',
+                'Product Management Association',
+                'Data Science Society',
+                'Cloud Security Alliance',
+                'DevOps Institute'
+            ],
+            'Membership Cost': ['$100/year', '$99/year', '$150/year', '$75/year', '$200/year', '$120/year'],
+            'Benefits': [
+                'Technical publications, conferences',
+                'Research access, networking events',
+                'PM certification, job board',
+                'Workshops, peer connections',
+                'Security training, certifications',
+                'DevOps certification, community'
+            ]
+        }
+        
+        df_associations = pd.DataFrame(associations)
+        st.dataframe(df_associations, use_container_width=True)
+        
+        # Mentorship opportunities
+        st.subheader("🎓 Mentorship & Learning Opportunities")
+        
+        mentorship_platforms = [
+            "**ADPList** - Free mentorship platform with industry experts",
+            "**MentorCruise** - Paid mentorship with senior professionals",
+            "**Ten Thousand Coffees** - Corporate mentoring programs",
+            "**SCORE Mentors** - Business mentorship and advice",
+            "**Industry-specific Slack communities** - Real-time peer support",
+            "**Local meetup groups** - Face-to-face networking"
+        ]
+        
+        for platform in mentorship_platforms:
+            st.write(f"🌟 {platform}")
+        
+        # Conference recommendations
+        st.subheader("🎪 Upcoming Tech Conferences")
+        
+        conferences = {
+            'Conference': [
+                'AWS re:Invent 2024',
+                'Google I/O 2024',
+                'Microsoft Build 2024',
+                'PyCon 2024',
+                'React Summit 2024',
+                'DevOps World 2024'
+            ],
+            'Date': [
+                'Dec 2-6, 2024',
+                'May 14-15, 2024',
+                'May 21-23, 2024',
+                'May 15-23, 2024',
+                'Jun 14-18, 2024',
+                'Sep 24-26, 2024'
+            ],
+            'Location': [
+                'Las Vegas, NV',
+                'Mountain View, CA',
+                'Seattle, WA',
+                'Pittsburgh, PA',
+                'Amsterdam, NL',
+                'Orlando, FL'
+            ],
+            'Cost': ['$1,599', '$375', '$2,395', '$665', '$899', '$1,200']
+        }
+        
+        df_conferences = pd.DataFrame(conferences)
+        st.dataframe(df_conferences, use_container_width=True)
+
+def display_company_culture_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
+    """Display company culture analysis and fit assessment."""
+    st.header("🏢 Company Culture & Fit Analysis")
+    
+    # Culture assessment
+    if jd_data.get('jd_text'):
+        job_processor = JobDescriptionProcessor()
+        
+        # Extract company insights
+        st.subheader("🔍 Company Culture Insights")
+        
+        # Simulated culture analysis (would normally use NLP on job description)
+        culture_indicators = {
+            'Culture Aspect': [
+                'Innovation Focus',
+                'Work-Life Balance',
+                'Team Collaboration',
+                'Growth Opportunities',
+                'Diversity & Inclusion',
+                'Remote Flexibility'
+            ],
+            'Score': [85, 70, 90, 80, 75, 95],
+            'Evidence': [
+                'Mentions "innovative solutions" and "cutting-edge"',
+                'Standard benefits package mentioned',
+                'Emphasizes "team player" and "cross-functional"',
+                'Career development and learning opportunities',
+                'Equal opportunity employer statement',
+                'Hybrid/remote work options available'
+            ]
+        }
+        
+        df_culture = pd.DataFrame(culture_indicators)
+        
+        col1, col2 = st.columns([1, 2])
+        
+        with col1:
+            fig_radar = go.Figure()
+            
+            fig_radar.add_trace(go.Scatterpolar(
+                r=df_culture['Score'],
+                theta=df_culture['Culture Aspect'],
+                fill='toself',
+                name='Company Culture'
+            ))
+            
+            fig_radar.update_layout(
+                polar=dict(
+                    radialaxis=dict(
+                        visible=True,
+                        range=[0, 100]
+                    )),
+                title="Company Culture Profile"
+            )
+            
+            st.plotly_chart(fig_radar, use_container_width=True)
+        
+        with col2:
+            st.dataframe(df_culture[['Culture Aspect', 'Score', 'Evidence']], use_container_width=True)
+        
+        # Values alignment
+        st.subheader("🎯 Values Alignment Assessment")
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.metric("Overall Culture Fit", "87%", "↗ +5%")
+        
+        with col2:
+            st.metric("Mission Alignment", "92%", "↗ +8%")
+        
+        with col3:
+            st.metric("Work Style Match", "78%", "→ 0%")
+        
+        # Company benefits analysis
+        st.subheader("💼 Benefits & Perks Analysis")
+        
+        benefits_categories = {
+            'Category': ['Health & Wellness', 'Financial', 'Time Off', 'Professional Development', 'Work Environment'],
+            'Score': [85, 70, 90, 95, 80],
+            'Details': [
+                'Health insurance, dental, vision, gym membership',
+                '401k matching, stock options, bonus structure',
+                'Unlimited PTO, sabbatical options, holidays',
+                'Conference budget, training courses, certifications',
+                'Flexible hours, remote work, modern office'
+            ]
+        }
+        
+        df_benefits = pd.DataFrame(benefits_categories)
+        
+        fig_benefits = px.bar(df_benefits, x='Category', y='Score',
+                            title="Benefits Package Analysis",
+                            color='Score', color_continuous_scale='Greens',
+                            hover_data=['Details'])
+        fig_benefits.update_xaxis(tickangle=45)
+        st.plotly_chart(fig_benefits, use_container_width=True)
+        
+        # Employee reviews simulation
+        st.subheader("⭐ Employee Sentiment Analysis")
+        
+        sentiment_data = {
+            'Review Source': ['Glassdoor', 'Indeed', 'Blind', 'LinkedIn'],
+            'Overall Rating': [4.2, 4.0, 3.8, 4.5],
+            'Work-Life Balance': [3.9, 4.1, 3.6, 4.2],
+            'Career Growth': [4.0, 3.8, 3.9, 4.3],
+            'Compensation': [4.3, 4.2, 4.0, 4.1]
+        }
+        
+        df_sentiment = pd.DataFrame(sentiment_data)
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            fig_ratings = px.bar(df_sentiment, x='Review Source', y='Overall Rating',
+                               title="Employee Ratings by Platform",
+                               color='Overall Rating', color_continuous_scale='RdYlGn')
+            st.plotly_chart(fig_ratings, use_container_width=True)
+        
+        with col2:
+            # Create a heatmap of all ratings
+            rating_cols = ['Overall Rating', 'Work-Life Balance', 'Career Growth', 'Compensation']
+            fig_heatmap = px.imshow(df_sentiment[rating_cols].T, 
+                                  x=df_sentiment['Review Source'],
+                                  y=rating_cols,
+                                  title="Detailed Ratings Heatmap",
+                                  color_continuous_scale='RdYlGn')
+            st.plotly_chart(fig_heatmap, use_container_width=True)
+
+def display_resume_builder_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
+    """Display interactive resume builder and optimizer."""
+    st.header("⚡ AI-Powered Resume Builder & Optimizer")
+    
+    # Resume optimization suggestions
+    st.subheader("🎯 Resume Optimization Suggestions")
+    
+    resume_parser = ResumeParser()
+    
+    if resume_data.get('resume_text'):
+        # ATS optimization
+        ats_analysis = resume_parser.analyze_ats_compatibility_advanced(resume_data['resume_text'])
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.metric("ATS Score", f"{ats_analysis['overall_score']}/100")
+        
+        with col2:
+            st.metric("Keyword Density", f"{ats_analysis.get('keyword_density', 0)}%")
+        
+        with col3:
+            formatting_score = ats_analysis.get('formatting_score', 0)
+            st.metric("Format Score", f"{formatting_score}/100")
+        
+        # Specific improvements
+        st.subheader("📝 Specific Improvements Needed")
+        
+        improvements = ats_analysis.get('improvement_suggestions', [])
+        for improvement in improvements:
+            st.write(f"🔧 {improvement}")
+        
+        # Resume sections optimization
+        st.subheader("📋 Section-by-Section Analysis")
+        
+        section_analysis = {
+            'Section': [
+                'Professional Summary',
+                'Work Experience', 
+                'Skills',
+                'Education',
+                'Projects',
+                'Certifications'
+            ],
+            'Current Score': [75, 85, 90, 70, 65, 80],
+            'Optimization Tips': [
+                'Add more quantified achievements and metrics',
+                'Include more action verbs and specific results',
+                'Categorize skills (technical, soft, domain-specific)',
+                'Add relevant coursework and GPA if recent graduate',
+                'Highlight technologies used and outcomes achieved',
+                'Include completion dates and renewal status'
+            ]
+        }
+        
+        df_sections = pd.DataFrame(section_analysis)
+        
+        col1, col2 = st.columns([1, 2])
+        
+        with col1:
+            fig_sections = px.bar(df_sections, x='Current Score', y='Section',
+                                orientation='h', title="Section Scores",
+                                color='Current Score', color_continuous_scale='RdYlGn')
+            st.plotly_chart(fig_sections, use_container_width=True)
+        
+        with col2:
+            st.dataframe(df_sections[['Section', 'Optimization Tips']], use_container_width=True)
+    
+    # Interactive resume editor
+    st.subheader("✏️ Interactive Resume Editor")
+    
+    # Professional summary generator
+    with st.expander("📝 AI Professional Summary Generator"):
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            target_role = st.text_input("Target Role", placeholder="e.g., Senior Software Engineer")
+            years_exp = st.number_input("Years of Experience", min_value=0, max_value=50, value=5)
+            key_skills = st.text_area("Key Skills (comma-separated)", 
+                                    placeholder="Python, React, AWS, Team Leadership")
+        
+        with col2:
+            industry = st.selectbox("Industry", 
+                                  ["Technology", "Finance", "Healthcare", "Consulting", "E-commerce"])
+            achievements = st.text_area("Top Achievements", 
+                                      placeholder="Led team of 10, Increased efficiency by 30%")
+        
+        if st.button("🤖 Generate Professional Summary"):
+            if target_role and key_skills:
+                generated_summary = f"""
+                Experienced {target_role} with {years_exp}+ years in {industry.lower()}. 
+                Expertise in {key_skills.replace(',', ', ')}. 
+                Proven track record: {achievements}. 
+                Strong problem-solving abilities and team collaboration skills.
+                """
+                
+                st.success("Generated Professional Summary:")
+                st.text_area("Copy this summary:", generated_summary, height=100)
+    
+    # Bullet point optimizer
+    with st.expander("🔫 Bullet Point Optimizer"):
+        st.write("Transform weak bullet points into powerful, quantified achievements:")
+        
+        weak_bullet = st.text_area("Enter your current bullet point:", 
+                                 placeholder="Worked on improving the system")
+        
+        if st.button("🚀 Optimize Bullet Point"):
+            if weak_bullet:
+                # Simple optimization suggestions
+                optimized_suggestions = [
+                    f"Optimized system performance, resulting in 25% faster response times and improved user experience",
+                    f"Led system improvement initiative, reducing processing time by 30% and serving 10,000+ daily users",
+                    f"Implemented system enhancements that decreased downtime by 40% and increased customer satisfaction to 95%"
+                ]
+                
+                st.success("Optimized versions:")
+                for i, suggestion in enumerate(optimized_suggestions, 1):
+                    st.write(f"**Option {i}:** {suggestion}")
+    
+    # Keywords suggester
+    with st.expander("🔑 Keyword Optimization"):
+        if jd_data.get('jd_text'):
+            job_processor = JobDescriptionProcessor()
+            
+            # Extract key terms from job description
+            jd_skills = job_processor.extract_skills(jd_data['jd_text'])
+            
+            st.write("**Keywords found in job description:**")
+            
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.write("**Technical Skills:**")
+                for skill in jd_skills.get('technical_skills', [])[:5]:
+                    st.write(f"• {skill}")
+            
+            with col2:
+                st.write("**Soft Skills:**")
+                for skill in jd_skills.get('soft_skills', [])[:5]:
+                    st.write(f"• {skill}")
+            
+            with col3:
+                st.write("**Domain Skills:**")
+                for skill in jd_skills.get('domain_specific', [])[:5]:
+                    st.write(f"• {skill}")
+        
+        else:
+            st.info("Upload a job description to get targeted keyword suggestions!")
+    
+    # Resume templates
+    st.subheader("📄 Professional Resume Templates")
+    
+    template_options = {
+        'Modern ATS-Friendly': {
+            'description': 'Clean, single-column layout optimized for ATS systems',
+            'best_for': 'Corporate roles, traditional industries',
+            'features': ['Single column', 'Standard fonts', 'Clear sections']
+        },
+        'Creative Professional': {
+            'description': 'Visually appealing with subtle design elements',
+            'best_for': 'Design, marketing, creative roles',
+            'features': ['Color accents', 'Icons', 'Visual hierarchy']
+        },
+        'Technical Focused': {
+            'description': 'Emphasizes technical skills and projects',
+            'best_for': 'Software engineers, data scientists',
+            'features': ['Skills matrix', 'Project highlights', 'Technical sections']
+        },
+        'Executive Level': {
+            'description': 'Professional layout for senior positions',
+            'best_for': 'C-level, director, VP roles',
+            'features': ['Leadership focus', 'Achievement metrics', 'Board format']
+        }
+    }
+    
+    selected_template = st.selectbox("Choose a template:", list(template_options.keys()))
+    
+    if selected_template:
+        template_info = template_options[selected_template]
+        
+        col1, col2 = st.columns([2, 1])
+        
+        with col1:
+            st.write(f"**Description:** {template_info['description']}")
+            st.write(f"**Best for:** {template_info['best_for']}")
+        
+        with col2:
+            st.write("**Key Features:**")
+            for feature in template_info['features']:
+                st.write(f"• {feature}")
+        
+        if st.button(f"📥 Download {selected_template} Template"):
+            st.success(f"Template '{selected_template}' would be downloaded!")
+            st.info("💡 Pro tip: Customize the template with your optimized content for best results.")
+
 if __name__ == "__main__":
     main()
