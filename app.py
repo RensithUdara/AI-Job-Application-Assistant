@@ -13,9 +13,13 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'core'))
 # Import UI modules
 from ui.components import setup_page_config, apply_custom_css, display_main_header, display_footer
 from ui.sidebar import initialize_session_state, display_sidebar
-from ui.modals import display_chat_modal, display_interview_modal, display_templates_modal
 from ui.input_section import display_input_section, process_analysis_request
 from ui.results_display import display_results
+
+# Import new tab modules
+from ui.tabs.ai_chat_tab import display_ai_chat_tab
+from ui.tabs.resume_templates_tab import display_resume_templates_tab
+from ui.tabs.mock_interview_tab import display_mock_interview_tab
 
 def main():
     """Main application function."""
