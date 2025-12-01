@@ -35,417 +35,88 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for professional styling
+# Custom CSS for better styling
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* Global Styles */
-.stApp {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-/* Main Header with Advanced Gradient */
 .main-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-    padding: 2.5rem;
-    border-radius: 20px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+    border-radius: 10px;
     color: white;
     text-align: center;
     margin-bottom: 2rem;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-    position: relative;
-    overflow: hidden;
 }
 
-.main-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
-    pointer-events: none;
-}
-
-.main-header h1 {
-    font-weight: 700;
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-}
-
-.main-header p {
-    font-weight: 300;
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
-
-/* Enhanced Metric Cards */
 .metric-card {
-    background: linear-gradient(145deg, #ffffff 0%, #f8f9fb 100%);
-    padding: 1.5rem;
-    border-radius: 15px;
-    border-left: 5px solid #667eea;
-    margin: 1rem 0;
-    color: #2d3748 !important;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-    border: 1px solid #e2e8f0;
-    transition: all 0.3s ease;
-    position: relative;
-    backdrop-filter: blur(10px);
-}
-
-.metric-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.12);
-}
-
-.metric-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #667eea, transparent);
-    border-radius: 15px 15px 0 0;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    margin: 0.5rem 0;
+    color: #212529;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
 }
 
 .metric-card strong {
-    color: #1a202c !important;
+    color: #495057;
     font-weight: 600;
-    font-size: 1.1rem;
 }
 
 .metric-card small {
-    color: #4a5568 !important;
-    font-weight: 400;
+    color: #6c757d;
 }
 
-.metric-card * {
-    color: inherit !important;
-}
-
-/* Priority Cards with Glassmorphism */
 .priority-high {
-    border-left-color: #e53e3e;
-    background: linear-gradient(145deg, #fed7d7 0%, #feb2b2 100%);
-    box-shadow: 0 8px 32px rgba(229, 62, 62, 0.2);
-    color: #742a2a !important;
+    border-left-color: #dc3545;
+    background-color: #fff5f5;
 }
 
 .priority-high strong {
-    color: #742a2a !important;
-    text-shadow: 1px 1px 2px rgba(116, 42, 42, 0.2);
-}
-
-.priority-high * {
-    color: #742a2a !important;
+    color: #c53030;
 }
 
 .priority-medium {
-    border-left-color: #d69e2e;
-    background: linear-gradient(145deg, #fefcbf 0%, #faf089 100%);
-    box-shadow: 0 8px 32px rgba(214, 158, 46, 0.2);
-    color: #744210 !important;
+    border-left-color: #ffc107;
+    background-color: #fffbeb;
 }
 
 .priority-medium strong {
-    color: #744210 !important;
-    text-shadow: 1px 1px 2px rgba(116, 66, 16, 0.2);
-}
-
-.priority-medium * {
-    color: #744210 !important;
+    color: #d69e2e;
 }
 
 .priority-low {
-    border-left-color: #38a169;
-    background: linear-gradient(145deg, #c6f6d5 0%, #9ae6b4 100%);
-    box-shadow: 0 8px 32px rgba(56, 161, 105, 0.2);
-    color: #22543d !important;
+    border-left-color: #28a745;
+    background-color: #f0fff4;
 }
 
 .priority-low strong {
-    color: #22543d !important;
-    text-shadow: 1px 1px 2px rgba(34, 84, 61, 0.2);
+    color: #38a169;
 }
 
-.priority-low * {
-    color: #22543d !important;
-}
-
-/* Enhanced Tab Styling */
 .stTabs [data-baseweb="tab-list"] {
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 8px;
-    margin-bottom: 2rem;
+    gap: 24px;
 }
 
 .stTabs [data-baseweb="tab"] {
-    height: 55px;
-    padding: 12px 24px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    background: transparent;
-}
-
-.stTabs [data-baseweb="tab"]:hover {
-    background: rgba(102, 126, 234, 0.1);
-    transform: translateY(-1px);
-}
-
-.stTabs [data-baseweb="tab"][aria-selected="true"] {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white !important;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-}
-
-/* Professional Input Sections */
-.upload-section {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2rem;
-    border-radius: 15px;
-    margin: 1rem 0;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-    border: 1px solid #e2e8f0;
-    color: #2d3748 !important;
-}
-
-.upload-section * {
-    color: #2d3748 !important;
-}
-
-.upload-section h3 {
-    color: #2d3748 !important;
-}
-
-/* Custom Buttons */
-.stButton > button {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 0.6rem 2rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-}
-
-.stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-    background: linear-gradient(135deg, #5a6fd8 0%, #6a42a0 100%);
-}
-
-.stButton > button:active {
-    transform: translateY(0);
-}
-
-/* Enhanced Metrics */
-.metric-container {
-    background: linear-gradient(145deg, #ffffff 0%, #f7fafc 100%);
-    padding: 1.5rem;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    transition: transform 0.2s ease;
-}
-
-.metric-container:hover {
-    transform: scale(1.02);
-}
-
-/* Success/Warning/Error Messages */
-.stAlert {
-    border-radius: 10px;
-    border: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-/* Progress Bars */
-.stProgress > div > div > div > div {
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    border-radius: 10px;
-}
-
-/* Expanders */
-.streamlit-expanderHeader {
-    background: rgba(102, 126, 234, 0.05);
-    border-radius: 10px;
-    border: 1px solid rgba(102, 126, 234, 0.1);
-}
-
-/* Text Areas and Inputs */
-.stTextArea > div > div > textarea,
-.stTextInput > div > div > input {
-    border-radius: 10px;
-    border: 2px solid #e2e8f0;
-    transition: border-color 0.3s ease;
-}
-
-.stTextArea > div > div > textarea:focus,
-.stTextInput > div > div > input:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-/* File Uploader */
-.uploadedFile {
-    background: linear-gradient(145deg, #f7fafc 0%, #edf2f7 100%);
-    border-radius: 10px;
-    border: 2px dashed #cbd5e0;
-}
-
-/* Sidebar Styling */
-.css-1d391kg {
-    background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
-}
-
-/* Animation Classes */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.fade-in-up {
-    animation: fadeInUp 0.6s ease-out;
-}
-
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
-    }
-}
-
-.pulse {
-    animation: pulse 2s infinite;
-}
-
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-    .metric-card {
-        background: linear-gradient(145deg, #2d3748 0%, #4a5568 100%);
-        color: #e2e8f0;
-        border-color: #4a5568;
-    }
-    
-    .main-header {
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .main-header {
-        padding: 1.5rem;
-    }
-    
-    .main-header h1 {
-        font-size: 2rem;
-    }
-    
-    .metric-card {
-        padding: 1rem;
-        margin: 0.5rem 0;
-    }
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #5a6fd8, #6a42a0);
+    height: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 /* Ensure text visibility in all themes */
 .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
-    color: #2d3748 !important;
-    font-family: 'Inter', sans-serif !important;
-}
-
-.stMarkdown p, .stMarkdown div, .stMarkdown span {
-    color: #2d3748 !important;
-}
-
-/* Fix white text on white background */
-.element-container .stMarkdown {
-    color: #2d3748 !important;
-}
-
-/* Streamlit specific fixes */
-.stSelectbox label, .stTextArea label, .stTextInput label {
-    color: #2d3748 !important;
-}
-
-.stRadio label, .stCheckbox label {
-    color: #2d3748 !important;
-}
-
-/* Fix metric display */
-[data-testid="metric-container"] {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 1rem;
-}
-
-[data-testid="metric-container"] * {
-    color: #2d3748 !important;
-}
-
-/* Fix expander text */
-.streamlit-expanderContent {
-    color: #2d3748 !important;
-}
-
-.streamlit-expanderContent * {
-    color: #2d3748 !important;
+    color: inherit !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
 def main():
-    # Enhanced Header with Animation
+    # Header
     st.markdown("""
-    <div class="main-header fade-in-up">
+    <div class="main-header">
         <h1>🎯 AI Job Application Assistant</h1>
-        <p>Transform your career with intelligent analysis, professional insights, and personalized recommendations</p>
-        <div style="margin-top: 1rem; opacity: 0.8; font-size: 0.9rem;">
-            ✨ Professional • 🚀 Intelligent • 📊 Comprehensive • 🎯 Results-Driven
-        </div>
+        <p>Analyze how well your resume matches job requirements and get personalized recommendations</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -455,36 +126,19 @@ def main():
     if 'results' not in st.session_state:
         st.session_state.results = {}
     
-    # Enhanced Input Section
-    st.markdown("""
-    <div class="fade-in-up" style="margin-top: 2rem;">
-        <h2 style="color: #2d3748; font-weight: 600; margin-bottom: 1.5rem; text-align: center;">
-            📄 Input Your Information
-        </h2>
-        <p style="text-align: center; color: #718096; margin-bottom: 2rem; font-size: 1.1rem;">
-            Upload your resume and job description to get started with professional analysis
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    # Input Section
+    st.header("📄 Input Your Information")
     
-    col1, col2 = st.columns(2, gap="large")
+    col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("""
-        <div class="upload-section">
-            <h3 style="color: #2d3748; margin-bottom: 1rem; display: flex; align-items: center;">
-                📄 Your Resume
-                <span style="margin-left: 0.5rem; font-size: 0.7rem; background: #667eea; color: white; padding: 0.2rem 0.5rem; border-radius: 20px;">REQUIRED</span>
-            </h3>
-        </div>
-        """, unsafe_allow_html=True)
+        st.subheader("Resume")
         
-        # Resume input options with enhanced styling
+        # Resume input options
         input_method = st.radio(
             "Choose input method:",
             ["Upload File", "Paste Text"],
-            key="resume_input_method",
-            help="Upload a PDF/DOCX file or paste your resume text directly"
+            key="resume_input_method"
         )
         
         resume_content = None
@@ -508,97 +162,49 @@ def main():
                 resume_content = resume_text
     
     with col2:
-        st.markdown("""
-        <div class="upload-section">
-            <h3 style="color: #2d3748; margin-bottom: 1rem; display: flex; align-items: center;">
-                🎯 Job Description
-                <span style="margin-left: 0.5rem; font-size: 0.7rem; background: #667eea; color: white; padding: 0.2rem 0.5rem; border-radius: 20px;">REQUIRED</span>
-            </h3>
-        </div>
-        """, unsafe_allow_html=True)
-        
+        st.subheader("Job Description")
         jd_text = st.text_area(
-            "Paste the complete job description:",
+            "Paste the job description here:",
             height=350,
-            placeholder="📋 Copy and paste the complete job description here...\n\nInclude:\n• Job title and responsibilities\n• Required skills and qualifications\n• Experience requirements\n• Company information\n• Salary range (if mentioned)",
-            help="The more detailed the job description, the better our analysis will be!"
+            placeholder="Copy and paste the job description you're applying for..."
         )
     
-    # Professional Analysis Button
-    st.markdown("""
-    <div style="text-align: center; margin: 2rem 0;">
-    </div>
-    """, unsafe_allow_html=True)
-    
-    analyze_col1, analyze_col2, analyze_col3 = st.columns([1, 2, 1])
-    with analyze_col2:
-        if st.button("🚀 Start Professional Analysis", type="primary", use_container_width=True):
-            if resume_content and jd_text.strip():
-                # Enhanced loading with progress
-                progress_bar = st.progress(0)
-                status_text = st.empty()
-                
+    # Analysis button
+    if st.button("🔍 Analyze Application", type="primary"):
+        if resume_content and jd_text.strip():
+            with st.spinner("Analyzing your application... This may take a moment."):
                 try:
-                    with st.spinner('🔍 Performing comprehensive analysis...'):
-                        status_text.text('Initializing AI processors...')
-                        progress_bar.progress(20)
-                        
-                        # Initialize components
-                        resume_parser = ResumeParser()
-                        jd_processor = JobDescriptionProcessor()
-                        matcher = Matcher()
-                        recommender = Recommender()
-                        
-                        status_text.text('Analyzing resume content...')
-                        progress_bar.progress(40)
-                        
-                        # Process resume
-                        if isinstance(resume_content, str):
-                            resume_data = resume_parser.parse_resume(text_content=resume_content)
-                        else:
-                            resume_data = resume_parser.parse_resume(file_content=resume_content)
-                        
-                        status_text.text('Processing job description...')
-                        progress_bar.progress(60)
-                        
-                        # Process job description
-                        jd_data = jd_processor.process_jd(jd_text)
-                        
-                        status_text.text('Performing intelligent matching...')
-                        progress_bar.progress(80)
-                        
-                        # Match resume to job
-                        match_data = matcher.match_resume_to_jd(resume_data, jd_data)
-                        
-                        status_text.text('Generating personalized recommendations...')
-                        progress_bar.progress(90)
-                        
-                        # Generate recommendations
-                        recommendations = recommender.build_recommendations(resume_data, jd_data, match_data)
-                        
-                        status_text.text('Finalizing analysis...')
-                        progress_bar.progress(100)
-                        
-                        # Store results in session state
-                        st.session_state.results = {
-                            'resume_data': resume_data,
-                            'jd_data': jd_data,
-                            'match_data': match_data,
-                            'recommendations': recommendations
-                        }
-                        st.session_state.analysis_done = True
-                        
-                        # Clear progress indicators
-                        progress_bar.empty()
-                        status_text.empty()
-                        
-                        # Success message with animation
-                        st.markdown("""
-                        <div class="fade-in-up" style="text-align: center; padding: 1rem; background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); border-radius: 10px; margin: 1rem 0; border-left: 4px solid #28a745;">
-                            <h3 style="color: #155724; margin: 0;">✅ Analysis Completed Successfully!</h3>
-                            <p style="color: #155724; margin: 0.5rem 0 0 0;">Professional insights and recommendations are ready below</p>
-                        </div>
-                        """, unsafe_allow_html=True)
+                    # Initialize components
+                    resume_parser = ResumeParser()
+                    jd_processor = JobDescriptionProcessor()
+                    matcher = Matcher()
+                    recommender = Recommender()
+                    
+                    # Process resume
+                    if isinstance(resume_content, str):
+                        resume_data = resume_parser.parse_resume(text_content=resume_content)
+                    else:
+                        resume_data = resume_parser.parse_resume(file_content=resume_content)
+                    
+                    # Process job description
+                    jd_data = jd_processor.process_jd(jd_text)
+                    
+                    # Match resume to job
+                    match_data = matcher.match_resume_to_jd(resume_data, jd_data)
+                    
+                    # Generate recommendations
+                    recommendations = recommender.build_recommendations(resume_data, jd_data, match_data)
+                    
+                    # Store results in session state
+                    st.session_state.results = {
+                        'resume_data': resume_data,
+                        'jd_data': jd_data,
+                        'match_data': match_data,
+                        'recommendations': recommendations
+                    }
+                    st.session_state.analysis_done = True
+                    
+                    st.success("✅ Analysis completed! Check the results below.")
                     
                 except Exception as e:
                     st.error(f"❌ Error during analysis: {str(e)}")
@@ -617,26 +223,14 @@ def display_results(results: Dict):
     match_data = results['match_data']
     recommendations = results['recommendations']
     
-    # Enhanced Results Header
-    st.markdown("""
-    <div class="fade-in-up" style="text-align: center; margin: 3rem 0 2rem 0;">
-        <h2 style="color: #2d3748; font-weight: 600; margin-bottom: 0.5rem;">
-            📊 Professional Analysis Results
-        </h2>
-        <p style="color: #718096; font-size: 1.1rem;">
-            Comprehensive insights and personalized recommendations for your career success
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Create enhanced tabs
+    # Create tabs
     tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
-        "📊 Executive Summary", 
-        "🎯 Skills Intelligence", 
-        "📋 Resume Analysis", 
-        "💡 Smart Recommendations", 
-        "🎤 Interview Mastery",
-        "📈 Market Analytics",
+        "📊 Summary", 
+        "🎯 Skills Analysis", 
+        "📋 Resume Structure", 
+        "💡 Recommendations", 
+        "🎤 Interview Prep",
+        "📈 Advanced Analytics",
         "🚀 Professional Tools"
     ])
     
