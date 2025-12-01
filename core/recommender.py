@@ -985,3 +985,149 @@ class Recommender:
             steps.append('Optimize resume for ATS systems with better keyword usage')
         
         return steps
+    
+    def estimate_salary_range(self, role: str, location: str, experience: str) -> Dict:
+        """Estimate salary range based on role, location, and experience."""
+        # Base salary data (simplified for demo)
+        base_salaries = {
+            'software_engineer': {'entry': 75000, 'mid': 100000, 'senior': 135000},
+            'web_developer': {'entry': 65000, 'mid': 85000, 'senior': 110000},
+            'mobile_developer': {'entry': 70000, 'mid': 95000, 'senior': 125000},
+            'data_analyst': {'entry': 60000, 'mid': 80000, 'senior': 105000}
+        }
+        
+        # Location multipliers
+        location_multipliers = {
+            'California': 1.4, 'New York': 1.3, 'Texas': 1.1, 
+            'Remote': 1.0, 'US': 1.0, 'Europe': 0.8
+        }
+        
+        base_salary = base_salaries.get(role, base_salaries['software_engineer'])[experience]
+        multiplier = location_multipliers.get(location, 1.0)
+        
+        adjusted_salary = int(base_salary * multiplier)
+        
+        # Calculate range (±15%)
+        salary_range = {
+            'min': int(adjusted_salary * 0.85),
+            'average': adjusted_salary,
+            'max': int(adjusted_salary * 1.15)
+        }
+        
+        # Growth projections
+        growth_projections = {
+            '1_year': int(adjusted_salary * 1.08),
+            '3_year': int(adjusted_salary * 1.25),
+            '5_year': int(adjusted_salary * 1.45)
+        }
+        
+        return {
+            'salary_range': salary_range,
+            'growth_projections': growth_projections,
+            'market_insights': [
+                f'{role.replace("_", " ").title()} roles in {location} show strong demand',
+                f'Average salary growth is 8-12% annually for {experience} level',
+                'Remote work options can expand salary opportunities'
+            ],
+            'negotiation_tips': [
+                'Highlight specific technical skills and achievements',
+                'Research company-specific salary data before negotiations',
+                'Consider total compensation including benefits and equity',
+                'Time negotiations around performance reviews or job offers'
+            ]
+        }
+    
+    def detect_competition_level(self, jd_text: str, jd_data: Dict) -> Dict:
+        """Analyze and detect competition level for a job posting."""
+        competition_score = 50  # Base score
+        factors = []
+        
+        jd_lower = jd_text.lower()
+        
+        # High competition indicators
+        high_competition_terms = [
+            'competitive salary', 'top talent', 'best candidates', 'exceptional',
+            'unicorn', 'rockstar', 'ninja', 'guru', 'world-class'
+        ]
+        
+        # Experience requirements
+        experience_requirements = jd_data.get('job_requirements', {}).get('total_requirements', 0)
+        
+        # Check for high competition terms
+        competition_terms_found = sum(1 for term in high_competition_terms if term in jd_lower)
+        if competition_terms_found > 0:
+            competition_score += competition_terms_found * 15
+            factors.append(f'Uses competitive language ({competition_terms_found} terms)')
+        
+        # Analyze requirements complexity
+        if experience_requirements > 10:
+            competition_score += 20
+            factors.append('Extensive requirements list')
+        elif experience_requirements > 6:
+            competition_score += 10
+            factors.append('Moderate requirements list')
+        
+        # Check for multiple technical skills
+        tech_skills = ['python', 'javascript', 'react', 'angular', 'aws', 'docker', 'kubernetes']
+        tech_count = sum(1 for skill in tech_skills if skill in jd_lower)
+        
+        if tech_count >= 6:
+            competition_score += 15
+            factors.append('Requires multiple advanced technologies')
+        elif tech_count >= 3:
+            competition_score += 8
+            factors.append('Requires several technologies')
+        
+        # Check for years of experience
+        experience_mentions = re.findall(r'(\d+)\+?\s*years?', jd_lower)
+        if experience_mentions:
+            max_years = max([int(year) for year in experience_mentions])
+            if max_years >= 7:
+                competition_score += 20
+                factors.append(f'Requires {max_years}+ years experience')
+            elif max_years >= 5:
+                competition_score += 15
+                factors.append(f'Requires {max_years}+ years experience')
+        
+        # Determine competition level
+        if competition_score >= 85:
+            level = 'Very High'
+            description = 'Extremely competitive position requiring top-tier candidates'
+            timeline = 'Apply within 2-3 days, prepare extensively'
+        elif competition_score >= 70:
+            level = 'High'
+            description = 'Highly competitive position with many qualified applicants'
+            timeline = 'Apply within 1 week, tailor application carefully'
+        elif competition_score >= 55:
+            level = 'Medium'
+            description = 'Moderately competitive position'
+            timeline = 'Apply within 2 weeks, customize resume'
+        else:
+            level = 'Low'
+            description = 'Lower competition, good opportunities for qualified candidates'
+            timeline = 'Apply within 3-4 weeks'
+        
+        # Application strategy
+        if competition_score >= 70:
+            strategy = [
+                'Customize resume extensively for exact keyword matching',
+                'Write compelling cover letter highlighting unique value',
+                'Apply as early as possible',
+                'Network with current employees if possible',
+                'Prepare for multiple interview rounds'
+            ]
+        else:
+            strategy = [
+                'Customize resume to match key requirements',
+                'Apply with professional presentation',
+                'Highlight relevant experience clearly'
+            ]
+        
+        return {
+            'competition_level': level,
+            'competition_score': min(100, competition_score),
+            'description': description,
+            'factors': factors,
+            'application_strategy': strategy,
+            'timeline_advice': timeline
+        }
