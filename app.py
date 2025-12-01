@@ -2495,9 +2495,21 @@ def display_networking_hub_tab(resume_data: Dict, jd_data: Dict, match_data: Dic
     
     # Networking strategy
     if jd_data.get('jd_text'):
+        # Extract role from job description
+        job_processor = JobDescriptionProcessor()
+        jd_analysis = job_processor.generate_role_expansion_summary(jd_data['jd_text'])
+        target_role = jd_analysis.get('primary_role_type', 'software_engineer')
+        
+        # Create target companies list (can be enhanced to extract from JD)
+        target_companies = ['Google', 'Microsoft', 'Amazon', 'Meta', 'Apple']
+        
+        # Use default location
+        location = 'US'
+        
         networking_strategy = recommender.generate_networking_strategy(
-            jd_data['jd_text'],
-            resume_data.get('skills', [])
+            target_role,
+            target_companies,
+            location
         )
         
         st.subheader("🎯 Personalized Networking Strategy")
