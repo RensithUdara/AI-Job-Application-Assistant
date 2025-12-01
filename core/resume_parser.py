@@ -550,7 +550,7 @@ class ResumeParser:
         }
     
     def generate_resume_weakness_heatmap(self, text: str) -> Dict:
-        \"\"\"Generate visual heatmap of resume strengths and weaknesses.\"\"\"
+        """Generate visual heatmap of resume strengths and weaknesses."""
         # Extract sections manually for analysis
         sections = self._extract_text_sections(text)
         heatmap_data = {}
