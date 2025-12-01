@@ -59,6 +59,10 @@ class JobDescriptionProcessor:
             company_info = self._extract_company_info(jd_text)
             job_requirements = self._analyze_job_requirements(cleaned_text)
             
+            # Advanced analysis features
+            red_flag_analysis = self.detect_job_red_flags(jd_text)
+            interview_prediction = self.predict_interview_process(jd_text)
+            
             return {
                 'jd_text': jd_text,
                 'cleaned_text': cleaned_text,
@@ -72,6 +76,8 @@ class JobDescriptionProcessor:
                 'salary_info': salary_info,
                 'company_info': company_info,
                 'job_requirements': job_requirements,
+                'red_flag_analysis': red_flag_analysis,
+                'interview_prediction': interview_prediction,
                 'word_count': len(jd_text.split())
             }
         
