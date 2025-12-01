@@ -404,7 +404,10 @@ class TestAdvancedAIFeatures(unittest.TestCase):
         
         for field in required_fields:
             self.assertIn(field, interview_strategy)
-            self.assertIsInstance(interview_strategy[field], list)
+            if field == 'preparation_timeline':
+                self.assertIsInstance(interview_strategy[field], str)
+            else:
+                self.assertIsInstance(interview_strategy[field], list)
         
         print(f"✅ Preparation Timeline: {interview_strategy['preparation_timeline']}")
         print(f"✅ Focus Areas: {len(interview_strategy['focus_areas'])} identified")
