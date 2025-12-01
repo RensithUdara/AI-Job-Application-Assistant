@@ -863,3 +863,125 @@ class ResumeParser:
                 recommendations.append(f"Focus on learning: {', '.join(missing)} to improve {best_role.replace('_', ' ')} compatibility")
         
         return recommendations
+    
+    def simulate_ats_parsing(self, text: str) -> Dict:
+        """Simulate how ATS systems would parse the resume."""
+        # Extract structured data as ATS would
+        parsed_data = {
+            'personal_info': {},
+            'sections': {},
+            'skills': [],
+            'education': [],
+            'experience': [],
+            'parsing_issues': []
+        }
+        
+        # Extract personal information
+        email_match = re.search(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}', text)
+        if email_match:
+            parsed_data['personal_info']['email'] = email_match.group()
+        else:
+            parsed_data['parsing_issues'].append('Email not detected')
+        
+        phone_match = re.search(r'[+]?[1-9]?[-.\\s]?\\(?[0-9]{3}\\)?[-.\\s]?[0-9]{3}[-.\\s]?[0-9]{4}', text)
+        if phone_match:
+            parsed_data['personal_info']['phone'] = phone_match.group()
+        else:
+            parsed_data['parsing_issues'].append('Phone number not detected')
+        
+        # Extract name (first line usually)
+        lines = [line.strip() for line in text.split('\\n') if line.strip()]
+        if lines:
+            # Simple heuristic: first non-empty line that's not an email/phone
+            for line in lines[:3]:
+                if '@' not in line and not re.search(r'\\d{3}', line) and len(line.split()) <= 4:
+                    parsed_data['personal_info']['name'] = line
+                    break
+        
+        # Extract skills
+        skills_found = [skill for skill in self.all_skills if skill.lower() in text.lower()]
+        parsed_data['skills'] = skills_found[:15]  # ATS typically extracts top skills
+        
+        # Section detection
+        sections = self._extract_text_sections(text)
+        for section_name, content in sections.items():
+            if content:
+                parsed_data['sections'][section_name] = {
+                    'detected': True,
+                    'word_count': len(content.split()),
+                    'has_dates': bool(re.search(r'\\d{4}', content)),
+                    'has_bullets': bool(re.search(r'^[\\s]*[\u2022\\-\\*]', content, re.MULTILINE))
+                }
+            else:
+                parsed_data['parsing_issues'].append(f'{section_name.title()} section not detected')
+        
+        # Calculate parsing success rate
+        expected_fields = ['email', 'phone', 'name']
+        detected_fields = [field for field in expected_fields if field in parsed_data['personal_info']]
+        parsing_success = (len(detected_fields) / len(expected_fields)) * 100
+        
+        # Add section detection success
+        expected_sections = ['experience', 'education', 'skills']
+        detected_sections = [sec for sec in expected_sections if sec in parsed_data['sections']]
+        section_success = (len(detected_sections) / len(expected_sections)) * 100
+        
+        overall_success = (parsing_success + section_success) / 2
+        
+        return {
+            'parsed_data': parsed_data,
+            'parsing_success_rate': round(overall_success, 1),
+            'ats_readability': self._get_ats_readability_level(overall_success),
+            'json_output': self._generate_ats_json_output(parsed_data),
+            'improvement_suggestions': self._get_ats_parsing_suggestions(parsed_data['parsing_issues'])
+        }
+    
+    def _get_ats_readability_level(self, success_rate: float) -> str:
+        """Convert ATS parsing success rate to readability level."""
+        if success_rate >= 90:
+            return "Excellent - ATS will parse accurately"
+        elif success_rate >= 75:
+            return "Good - Minor parsing issues possible"
+        elif success_rate >= 60:
+            return "Fair - Some information may be missed"
+        else:
+            return "Poor - High risk of parsing errors"
+    
+    def _generate_ats_json_output(self, parsed_data: Dict) -> str:
+        """Generate ATS-style JSON output."""
+        import json
+        
+        ats_json = {
+            "candidate": {
+                "name": parsed_data['personal_info'].get('name', 'Unknown'),
+                "email": parsed_data['personal_info'].get('email', ''),
+                "phone": parsed_data['personal_info'].get('phone', '')
+            },
+            "skills": parsed_data['skills'][:10],
+            "sections_detected": list(parsed_data['sections'].keys()),
+            "parsing_confidence": len(parsed_data['personal_info']) * 25  # Simple confidence metric
+        }
+        
+        return json.dumps(ats_json, indent=2)
+    
+    def _get_ats_parsing_suggestions(self, issues: List[str]) -> List[str]:
+        """Generate suggestions to improve ATS parsing."""
+        suggestions = []
+        
+        if 'Email not detected' in issues:
+            suggestions.append('Add clear email address at the top of resume')
+        
+        if 'Phone number not detected' in issues:
+            suggestions.append('Include properly formatted phone number')
+        
+        if any('section not detected' in issue for issue in issues):
+            suggestions.append('Use standard section headers (EXPERIENCE, EDUCATION, SKILLS)')
+            suggestions.append('Avoid using tables or complex formatting for section content')
+        
+        suggestions.extend([
+            'Use standard fonts (Arial, Calibri, Times New Roman)',
+            'Avoid images, graphics, and logos',
+            'Save in both PDF and Word format',
+            'Keep formatting simple and clean'
+        ])
+        
+        return suggestions
