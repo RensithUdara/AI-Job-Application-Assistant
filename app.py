@@ -2412,7 +2412,7 @@ def display_market_analytics_tab(resume_data: Dict, jd_data: Dict, match_data: D
         fig_bar = px.bar(df_skills, x='Skill', y='Job Openings',
                         title="Current Job Openings by Skill",
                         color='Demand Score', color_continuous_scale='Blues')
-        fig_bar.update_xaxis(tickangle=45)
+        fig_bar.update_xaxes(tickangle=45)
         st.plotly_chart(fig_bar, use_container_width=True)
     
     # Geographic market analysis
@@ -2440,7 +2440,7 @@ def display_market_analytics_tab(resume_data: Dict, jd_data: Dict, match_data: D
         fig_bar_geo = px.bar(df_geo, x='Location', y='Opportunity Score',
                            title="Location Opportunity Score",
                            color='Opportunity Score', color_continuous_scale='Greens')
-        fig_bar_geo.update_xaxis(tickangle=45)
+        fig_bar_geo.update_xaxes(tickangle=45)
         st.plotly_chart(fig_bar_geo, use_container_width=True)
     
     # Industry trends
@@ -2700,7 +2700,7 @@ def display_company_culture_tab(resume_data: Dict, jd_data: Dict, match_data: Di
                             title="Benefits Package Analysis",
                             color='Score', color_continuous_scale='Greens',
                             hover_data=['Details'])
-        fig_benefits.update_xaxis(tickangle=45)
+        fig_benefits.update_xaxes(tickangle=45)
         st.plotly_chart(fig_benefits, use_container_width=True)
         
         # Employee reviews simulation
