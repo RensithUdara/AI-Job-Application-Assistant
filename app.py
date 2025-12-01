@@ -224,13 +224,14 @@ def display_results(results: Dict):
     recommendations = results['recommendations']
     
     # Create tabs
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
         "📊 Summary", 
         "🎯 Skills Analysis", 
         "📋 Resume Structure", 
         "💡 Recommendations", 
         "🎤 Interview Prep",
-        "📈 Advanced Analytics"
+        "📈 Advanced Analytics",
+        "🚀 Professional Tools"
     ])
     
     with tab1:
@@ -250,6 +251,9 @@ def display_results(results: Dict):
     
     with tab6:
         display_advanced_analytics_tab(resume_data, jd_data, match_data, recommendations)
+    
+    with tab7:
+        display_professional_tools_tab(resume_data, jd_data, match_data, recommendations)
 
 def display_summary_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
     """Display summary information."""
@@ -855,6 +859,230 @@ def display_advanced_analytics_tab(resume_data: Dict, jd_data: Dict, match_data:
             min_sal = salary_info.get('min_salary', 0)
             max_sal = salary_info.get('max_salary', 0)
             st.write(f"• Salary Range: ${min_sal:,} - ${max_sal:,}")
+
+def display_professional_tools_tab(resume_data: Dict, jd_data: Dict, match_data: Dict, recommendations: Dict):
+    """Display professional tools and advanced features."""
+    st.header("🚀 Professional Tools & AI Analysis")
+    
+    # Initialize parsers for advanced analysis
+    resume_parser = ResumeParser()
+    jd_processor = JobDescriptionProcessor()
+    recommender = Recommender()
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("📝 Resume Quality Analysis")
+        
+        # Bullet point analysis
+        text_content = resume_data.get('text', '')
+        if text_content:
+            bullet_analysis = resume_parser.analyze_bullet_points(text_content)
+            
+            # Display bullet scores
+            st.markdown("**Bullet Point Quality:**")
+            avg_score = bullet_analysis.get('average_score', 0)
+            st.metric("Average Score", f"{avg_score}/10", f"{bullet_analysis.get('quality_level', 'Unknown')}")
+            
+            # Show individual bullet scores
+            bullets = bullet_analysis.get('bullets', [])
+            if bullets:
+                with st.expander(f"📋 Bullet Analysis ({len(bullets)} bullets found)"):
+                    for i, bullet in enumerate(bullets[:5], 1):  # Show top 5
+                        score = bullet.get('score', 0)
+                        feedback = bullet.get('feedback', '')
+                        
+                        # Color coding based on score
+                        if score >= 8:
+                            st.success(f"**Bullet {i}** (Score: {score}/10)")
+                        elif score >= 6:
+                            st.info(f"**Bullet {i}** (Score: {score}/10)")
+                        else:
+                            st.warning(f"**Bullet {i}** (Score: {score}/10)")
+                        
+                        st.caption(bullet.get('text', '')[:100] + "...")
+                        st.write(feedback)
+                        
+                        suggestions = bullet.get('suggestions', [])
+                        if suggestions:
+                            for suggestion in suggestions:
+                                st.caption(f"💡 {suggestion}")
+                        st.markdown("---")
+            
+            # Action verb analysis
+            st.markdown("**Action Verb Analysis:**")
+            verb_analysis = resume_parser.analyze_action_verbs(text_content)
+            
+            col_a, col_b = st.columns(2)
+            with col_a:
+                st.metric("Strong Verbs", verb_analysis.get('strong_count', 0))
+            with col_b:
+                st.metric("Weak Verbs", verb_analysis.get('weak_count', 0))
+            
+            # Show verb improvement suggestions
+            verb_recommendations = verb_analysis.get('verb_recommendations', [])
+            if verb_recommendations:
+                with st.expander("🔄 Verb Improvement Suggestions"):
+                    for rec in verb_recommendations[:3]:
+                        weak_verb = rec.get('weak_verb', '')
+                        alternatives = rec.get('alternatives', [])
+                        st.write(f"**Replace '{weak_verb}'** with: {', '.join(alternatives)}")
+        
+        # Quantification analysis
+        st.subheader("📊 Quantification Analysis")
+        if text_content:
+            quant_analysis = resume_parser.analyze_quantification(text_content)
+            
+            col_q1, col_q2 = st.columns(2)
+            with col_q1:
+                st.metric("Numbers Found", quant_analysis.get('numbers_count', 0))
+                st.metric("Percentages", quant_analysis.get('percentages_count', 0))
+            
+            with col_q2:
+                st.metric("Timeframes", quant_analysis.get('timeframes_count', 0))
+                score = quant_analysis.get('quantification_score', 0)
+                st.metric("Quantification Score", f"{score}/10")
+            
+            # Show unquantified opportunities
+            unquantified = quant_analysis.get('sample_unquantified', [])
+            if unquantified:
+                with st.expander("⚠️ Opportunities to Add Numbers"):
+                    for sentence in unquantified:
+                        st.caption(f"• {sentence.strip()}")
+                    st.info("💡 Add specific numbers, percentages, or timeframes to these statements")
+    
+    with col2:
+        st.subheader("🎯 Job Analysis & Intelligence")
+        
+        # Role seniority analysis
+        jd_text = jd_data.get('text', '')
+        if jd_text:
+            seniority_analysis = jd_processor.classify_seniority_level(jd_text)
+            
+            st.markdown("**Role Seniority Classification:**")
+            primary_level = seniority_analysis.get('primary_level', 'Unknown')
+            confidence = seniority_analysis.get('confidence_score', 0)
+            
+            st.metric("Seniority Level", primary_level.title(), f"{confidence*100:.0f}% confidence")
+            st.caption(seniority_analysis.get('level_description', ''))
+            
+            years_mentioned = seniority_analysis.get('experience_years_mentioned', [])
+            if years_mentioned:
+                st.write(f"**Experience Required:** {min(years_mentioned)}-{max(years_mentioned)} years")
+        
+        # Job difficulty analysis
+        if jd_text:
+            skills_required = jd_data.get('skills_found', [])
+            difficulty_analysis = jd_processor.estimate_job_difficulty(jd_text, skills_required)
+            
+            st.markdown("**Job Difficulty Assessment:**")
+            difficulty_score = difficulty_analysis.get('difficulty_score', 0)
+            difficulty_level = difficulty_analysis.get('difficulty_level', 'Unknown')
+            
+            # Create a gauge-like progress bar
+            progress_color = "🔴" if difficulty_score >= 80 else "🟡" if difficulty_score >= 50 else "🟢"
+            st.metric("Difficulty Score", f"{difficulty_score}/100", difficulty_level)
+            st.progress(difficulty_score / 100)
+            
+            # Show difficulty breakdown
+            breakdown = difficulty_analysis.get('breakdown', {})
+            with st.expander("📊 Difficulty Breakdown"):
+                for factor, score in breakdown.items():
+                    factor_name = factor.replace('_', ' ').title()
+                    st.write(f"• **{factor_name}:** {score} points")
+        
+        # Must-have vs Nice-to-have analysis
+        if jd_text and skills_required:
+            skill_categorization = jd_processor.analyze_must_have_vs_nice_to_have(jd_text, skills_required)
+            
+            st.markdown("**Skill Priority Analysis:**")
+            
+            col_m1, col_m2 = st.columns(2)
+            with col_m1:
+                must_have_count = skill_categorization.get('must_have_count', 0)
+                st.metric("Must-Have Skills", must_have_count)
+            
+            with col_m2:
+                nice_to_have_count = skill_categorization.get('nice_to_have_count', 0)
+                st.metric("Nice-to-Have Skills", nice_to_have_count)
+            
+            confidence = skill_categorization.get('classification_confidence', 0)
+            st.caption(f"Classification Confidence: {confidence*100:.0f}%")
+    
+    # Professional Tools Section
+    st.markdown("---")
+    st.subheader("🔧 Professional Enhancement Tools")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("**📝 Professional Summary Generator**")
+        if st.button("Generate Summary Options"):
+            summary_generator = recommender.generate_professional_summary(resume_data)
+            summaries = summary_generator.get('summary_options', {})
+            
+            for style, summary in summaries.items():
+                st.markdown(f"**{style.replace('_', ' ').title()}:**")
+                st.text_area(f"summary_{style}", summary, height=100, key=f"summary_{style}")
+    
+    with col2:
+        st.markdown("**💼 LinkedIn Headlines**")
+        if st.button("Generate LinkedIn Headlines"):
+            headlines = recommender.generate_linkedin_headlines(resume_data)
+            
+            st.markdown("**Choose your favorite:**")
+            for i, headline in enumerate(headlines, 1):
+                st.write(f"{i}. {headline}")
+    
+    with col3:
+        st.markdown("**🎯 Interview Prep Plan**")
+        if st.button("Generate Interview Plan"):
+            prep_plan = recommender.generate_interview_preparation_plan(resume_data, jd_data, match_data)
+            
+            with st.expander("📚 Technical Preparation"):
+                tech_prep = prep_plan.get('technical_preparation', {})
+                st.write("**Skills to Review:**", ', '.join(tech_prep.get('skills_to_review', [])))
+                st.write("**Skills to Study:**", ', '.join(tech_prep.get('skills_to_study', [])))
+                
+                coding_topics = tech_prep.get('coding_topics', [])
+                if coding_topics:
+                    st.write("**Coding Topics:**")
+                    for topic in coding_topics:
+                        st.write(f"• {topic}")
+    
+    # Resume Weakness Analysis
+    st.markdown("---")
+    st.subheader("⚠️ Comprehensive Weakness Analysis")
+    
+    weakness_analysis = recommender.analyze_resume_weaknesses(resume_data)
+    weaknesses = weakness_analysis.get('weaknesses_found', [])
+    improvements = weakness_analysis.get('improvement_suggestions', [])
+    
+    if weaknesses:
+        priority_level = weakness_analysis.get('priority_level', 'medium')
+        
+        if priority_level == 'high':
+            st.error(f"🚨 **High Priority Issues Found** ({len(weaknesses)} issues)")
+        elif priority_level == 'medium':
+            st.warning(f"⚠️ **Medium Priority Issues** ({len(weaknesses)} issues)")
+        else:
+            st.info(f"ℹ️ **Minor Issues** ({len(weaknesses)} issues)")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("**Issues Found:**")
+            for weakness in weaknesses:
+                st.write(f"• {weakness}")
+        
+        with col2:
+            st.markdown("**Improvement Actions:**")
+            for improvement in improvements:
+                st.write(f"💡 {improvement}")
+        
+        st.caption(weakness_analysis.get('overall_assessment', ''))
+    else:
+        st.success("🎉 **Excellent!** No major weaknesses detected in your resume.")
 
 if __name__ == "__main__":
     main()

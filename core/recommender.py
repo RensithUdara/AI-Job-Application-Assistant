@@ -502,3 +502,217 @@ class Recommender:
         ])
         
         return strategy
+    
+    def generate_professional_summary(self, resume_data: Dict, target_role: str = None) -> Dict:
+        """Generate professional summary options for resume."""
+        skills = resume_data.get('skills_found', [])
+        experience_sections = resume_data.get('sections', {}).get('experience', '')
+        
+        # Extract years of experience (simplified)
+        years_exp = 2  # Default for students
+        if 'intern' in experience_sections.lower():
+            years_exp = 1
+        elif 'years' in experience_sections.lower():
+            years_exp = 3
+        
+        # Generate different summary styles
+        summaries = {
+            'achievement_focused': self._create_achievement_summary(skills, years_exp, target_role),
+            'skill_focused': self._create_skill_summary(skills, years_exp, target_role),
+            'passion_focused': self._create_passion_summary(skills, years_exp, target_role)
+        }
+        
+        return {
+            'summary_options': summaries,
+            'recommendation': 'Choose the summary that best matches the job description tone',
+            'tips': [
+                'Keep it concise (2-3 sentences)',
+                'Include your target role',
+                'Mention your strongest skills',
+                'Add quantifiable achievements if possible'
+            ]
+        }
+    
+    def _create_achievement_summary(self, skills: List[str], years: int, role: str) -> str:
+        """Create achievement-focused summary."""
+        skill_str = ', '.join(skills[:3]) if skills else 'programming'
+        
+        if years <= 1:
+            return f"Computer Science student with hands-on experience in {skill_str}. Successfully completed multiple projects including web applications and mobile apps, demonstrating strong problem-solving abilities and passion for software development."
+        else:
+            return f"Results-driven software developer with {years}+ years of experience in {skill_str}. Proven track record of delivering high-quality applications and collaborating effectively in team environments. Passionate about creating innovative solutions."
+    
+    def _create_skill_summary(self, skills: List[str], years: int, role: str) -> str:
+        """Create skill-focused summary."""
+        skill_str = ', '.join(skills[:4]) if skills else 'Python, JavaScript, React'
+        
+        return f"Skilled software developer proficient in {skill_str}. Strong foundation in full-stack development with experience in both frontend and backend technologies. Eager to apply technical expertise in a dynamic development environment."
+    
+    def _create_passion_summary(self, skills: List[str], years: int, role: str) -> str:
+        """Create passion-focused summary."""
+        return f"Passionate software developer with expertise in modern technologies and a drive for continuous learning. Experienced in building scalable applications and solving complex technical challenges. Seeking opportunities to contribute to innovative projects and grow professionally."
+    
+    def generate_linkedin_headlines(self, resume_data: Dict, target_role: str = None) -> List[str]:
+        """Generate LinkedIn headline options."""
+        skills = resume_data.get('skills_found', [])
+        top_skills = skills[:3] if len(skills) >= 3 else skills
+        
+        headlines = []
+        
+        # Skill-focused headlines
+        if top_skills:
+            headlines.append(f"{' | '.join(top_skills)} Developer | Problem Solver")
+            headlines.append(f"Software Developer | {' • '.join(top_skills)} | Open to Opportunities")
+        
+        # Role-focused headlines
+        if target_role:
+            headlines.append(f"Aspiring {target_role} | Building Amazing Applications")
+            headlines.append(f"{target_role} | Passionate about Technology & Innovation")
+        
+        # Generic but effective options
+        headlines.extend([
+            "Software Developer | Full-Stack Enthusiast | Always Learning",
+            "Computer Science Student | Future Software Engineer | Tech Enthusiast",
+            "Passionate Developer | Building the Future, One Line of Code at a Time"
+        ])
+        
+        return headlines[:5]  # Return top 5 options
+    
+    def analyze_resume_weaknesses(self, resume_data: Dict) -> Dict:
+        """Comprehensive weakness analysis with improvement suggestions."""
+        weaknesses = []
+        improvements = []
+        
+        # Analyze bullet points if available
+        bullet_analysis = resume_data.get('bullet_analysis', {})
+        if bullet_analysis:
+            avg_score = bullet_analysis.get('average_score', 0)
+            if avg_score < 6:
+                weaknesses.append("Weak bullet points lacking impact and quantification")
+                improvements.extend([
+                    "Rewrite bullets using STAR method (Situation, Task, Action, Result)",
+                    "Add specific numbers and metrics to show impact",
+                    "Start each bullet with strong action verbs"
+                ])
+        
+        # Analyze action verbs
+        action_verb_analysis = resume_data.get('action_verb_analysis', {})
+        if action_verb_analysis:
+            ratio = action_verb_analysis.get('verb_strength_ratio', 0)
+            if ratio < 1:
+                weaknesses.append("Overuse of weak action verbs")
+                improvements.append("Replace weak verbs (helped, worked) with strong ones (implemented, achieved)")
+        
+        # Analyze quantification
+        quant_analysis = resume_data.get('quantification_analysis', {})
+        if quant_analysis:
+            quant_score = quant_analysis.get('quantification_score', 0)
+            if quant_score < 5:
+                weaknesses.append("Lack of quantified achievements")
+                improvements.append("Add numbers, percentages, and timeframes to demonstrate impact")
+        
+        # Check ATS compatibility
+        ats_analysis = resume_data.get('ats_analysis', {})
+        if ats_analysis:
+            ats_score = ats_analysis.get('ats_score', 100)
+            if ats_score < 80:
+                weaknesses.append("Poor ATS compatibility")
+                improvements.extend([
+                    "Use standard section headings",
+                    "Avoid complex formatting and tables",
+                    "Include more relevant keywords"
+                ])
+        
+        # Check sections
+        missing_sections = resume_data.get('missing_sections', [])
+        if missing_sections:
+            weaknesses.append(f"Missing important sections: {', '.join(missing_sections)}")
+            improvements.append("Add missing resume sections for completeness")
+        
+        # Overall assessment
+        priority_level = 'high' if len(weaknesses) >= 4 else 'medium' if len(weaknesses) >= 2 else 'low'
+        
+        return {
+            'weaknesses_found': weaknesses,
+            'improvement_suggestions': improvements,
+            'priority_level': priority_level,
+            'overall_assessment': self._get_weakness_assessment(len(weaknesses))
+        }
+    
+    def _get_weakness_assessment(self, weakness_count: int) -> str:
+        """Get overall assessment based on weakness count."""
+        if weakness_count >= 5:
+            return "Significant improvements needed across multiple areas"
+        elif weakness_count >= 3:
+            return "Several areas need attention for better impact"
+        elif weakness_count >= 1:
+            return "Minor improvements can enhance resume effectiveness"
+        else:
+            return "Resume is well-structured with minimal issues"
+    
+    def generate_interview_preparation_plan(self, resume_data: Dict, jd_data: Dict, 
+                                          match_data: Dict) -> Dict:
+        """Generate comprehensive interview preparation plan."""
+        skills_found = resume_data.get('skills_found', [])
+        missing_skills = match_data.get('missing_skills', [])
+        role = jd_data.get('jd_role', 'software_developer')
+        
+        # Technical preparation based on skills
+        technical_prep = {
+            'skills_to_review': skills_found[:5],  # Top 5 skills to highlight
+            'skills_to_study': missing_skills[:3],  # Top 3 gaps to address
+            'coding_topics': self._get_coding_topics(role),
+            'system_design_topics': self._get_system_design_topics(role)
+        }
+        
+        # Behavioral preparation
+        behavioral_prep = {
+            'star_examples_needed': [
+                'Tell me about a challenging project you worked on',
+                'Describe a time you had to learn a new technology quickly',
+                'Give an example of when you collaborated with a team',
+                'Tell me about a time you solved a difficult problem'
+            ],
+            'company_research': [
+                'Study company mission, values, and recent news',
+                'Understand their products/services and target market',
+                'Research the team and company culture',
+                'Prepare thoughtful questions about the role'
+            ]
+        }
+        
+        # Timeline and priorities
+        timeline = {
+            '1_week_before': ['Complete company research', 'Prepare STAR examples'],
+            '3_days_before': ['Review technical concepts', 'Practice coding problems'],
+            '1_day_before': ['Mock interview practice', 'Prepare questions to ask'],
+            'day_of': ['Review key points', 'Prepare materials', 'Arrive early']
+        }
+        
+        return {
+            'technical_preparation': technical_prep,
+            'behavioral_preparation': behavioral_prep,
+            'timeline': timeline,
+            'confidence_tips': [
+                'Practice explaining technical concepts in simple terms',
+                'Prepare specific examples from your projects',
+                'Focus on problem-solving approach, not just solutions',
+                'Show enthusiasm for learning and growth'
+            ]
+        }
+    
+    def _get_coding_topics(self, role: str) -> List[str]:
+        """Get relevant coding topics based on role."""
+        topics_by_role = {
+            'web_developer': ['JavaScript fundamentals', 'React/Vue concepts', 'REST API design', 'Database queries'],
+            'mobile_developer': ['Mobile UI patterns', 'State management', 'API integration', 'Platform-specific features'],
+            'data_analyst': ['SQL queries', 'Data manipulation with Python', 'Statistical concepts', 'Data visualization']
+        }
+        return topics_by_role.get(role, topics_by_role['web_developer'])
+    
+    def _get_system_design_topics(self, role: str) -> List[str]:
+        """Get system design topics based on role."""
+        if 'senior' in role.lower() or 'lead' in role.lower():
+            return ['Database design', 'API architecture', 'Scalability concepts', 'Caching strategies']
+        else:
+            return ['Basic architecture patterns', 'Database relationships', 'API design principles']

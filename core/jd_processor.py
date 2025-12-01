@@ -26,6 +26,15 @@ class JobDescriptionProcessor:
         self.all_skills = set()
         for category, skills in self.skills_taxonomy.items():
             self.all_skills.update([skill.lower() for skill in skills])
+        
+        # Seniority level indicators
+        self.seniority_keywords = {
+            'intern': ['intern', 'internship', 'student', 'entry-level', 'graduate'],
+            'junior': ['junior', 'associate', 'entry-level', '0-2 years', 'new grad'],
+            'mid': ['mid-level', '2-5 years', '3-7 years', 'experienced', 'professional'],
+            'senior': ['senior', '5+ years', '7+ years', 'lead', 'principal', 'expert'],
+            'lead': ['lead', 'manager', 'director', 'head', 'chief', '10+ years']
+        }
     
     def process_jd(self, jd_text: str) -> Dict:
         """Process job description and extract relevant information."""
@@ -374,3 +383,258 @@ class JobDescriptionProcessor:
             'avg_salary': 70000,
             'common_skills': ['programming', 'problem solving']
         })
+    
+    def classify_seniority_level(self, jd_text: str) -> Dict:
+        """Advanced seniority level classification with confidence scoring."""
+        text_lower = jd_text.lower()
+        seniority_scores = {}
+        
+        # Score each seniority level based on keyword presence
+        for level, keywords in self.seniority_keywords.items():
+            score = 0
+            for keyword in keywords:
+                if keyword in text_lower:
+                    score += 1
+            seniority_scores[level] = score
+        
+        # Extract years of experience mentioned
+        experience_years = self._extract_years_experience(text_lower)
+        
+        # Determine primary seniority level
+        if seniority_scores:
+            primary_level = max(seniority_scores, key=seniority_scores.get)
+            confidence = seniority_scores[primary_level] / max(1, sum(seniority_scores.values()))
+        else:
+            primary_level = 'mid'  # Default
+            confidence = 0.5
+        
+        # Adjust based on experience years
+        if experience_years:
+            if min(experience_years) == 0:
+                primary_level = 'junior'
+            elif max(experience_years) >= 7:
+                primary_level = 'senior'
+            elif max(experience_years) >= 3:
+                primary_level = 'mid'
+        
+        return {
+            'primary_level': primary_level,
+            'confidence_score': round(confidence, 2),
+            'seniority_scores': seniority_scores,
+            'experience_years_mentioned': experience_years,
+            'level_description': self._get_seniority_description(primary_level)
+        }
+    
+    def _extract_years_experience(self, text: str) -> List[int]:
+        """Extract years of experience mentioned in job description."""
+        # Pattern to match years of experience
+        patterns = [
+            r'(\d+)[\-\+]*\s*years?\s*(?:of\s*)?experience',
+            r'(\d+)[\-\+]*\s*yrs?\s*(?:of\s*)?experience',
+            r'(\d+)[\-\+]*\s*years?\s*in',
+            r'minimum\s*(\d+)\s*years?',
+            r'at least\s*(\d+)\s*years?'
+        ]
+        
+        years = []
+        for pattern in patterns:
+            matches = re.findall(pattern, text, re.IGNORECASE)
+            years.extend([int(match) for match in matches])
+        
+        return sorted(list(set(years)))
+    
+    def _get_seniority_description(self, level: str) -> str:
+        """Get description for seniority level."""
+        descriptions = {
+            'intern': 'Internship or student position with learning focus',
+            'junior': 'Entry-level position requiring 0-2 years experience',
+            'mid': 'Mid-level position requiring 3-5 years experience',
+            'senior': 'Senior position requiring 5+ years experience and leadership skills',
+            'lead': 'Leadership position requiring 7+ years and team management experience'
+        }
+        return descriptions.get(level, 'Professional position')
+    
+    def estimate_job_difficulty(self, jd_text: str, skills_required: List[str]) -> Dict:
+        """Estimate job difficulty based on multiple factors."""
+        text_lower = jd_text.lower()
+        difficulty_score = 0
+        factors = {}
+        
+        # Factor 1: Number of required skills (0-25 points)
+        skill_count = len(skills_required)
+        skill_difficulty = min(25, skill_count * 2)
+        difficulty_score += skill_difficulty
+        factors['skills_complexity'] = skill_difficulty
+        
+        # Factor 2: Advanced technology requirements (0-20 points)
+        advanced_tech = ['machine learning', 'ai', 'blockchain', 'kubernetes', 'microservices', 'devops']
+        advanced_count = sum(1 for tech in advanced_tech if tech in text_lower)
+        tech_difficulty = min(20, advanced_count * 5)
+        difficulty_score += tech_difficulty
+        factors['technology_complexity'] = tech_difficulty
+        
+        # Factor 3: Leadership/management requirements (0-15 points)
+        leadership_keywords = ['lead', 'manage', 'mentor', 'architect', 'design', 'strategy']
+        leadership_count = sum(1 for keyword in leadership_keywords if keyword in text_lower)
+        leadership_difficulty = min(15, leadership_count * 3)
+        difficulty_score += leadership_difficulty
+        factors['leadership_requirements'] = leadership_difficulty
+        
+        # Factor 4: Education/certification requirements (0-15 points)
+        education_keywords = ['degree', 'certification', 'phd', 'masters', 'bachelor']
+        education_count = sum(1 for keyword in education_keywords if keyword in text_lower)
+        education_difficulty = min(15, education_count * 5)
+        difficulty_score += education_difficulty
+        factors['education_requirements'] = education_difficulty
+        
+        # Factor 5: Multi-domain expertise (0-10 points)
+        domains = ['frontend', 'backend', 'database', 'mobile', 'cloud', 'security']
+        domain_count = sum(1 for domain in domains if domain in text_lower)
+        domain_difficulty = min(10, domain_count * 2)
+        difficulty_score += domain_difficulty
+        factors['domain_breadth'] = domain_difficulty
+        
+        # Factor 6: Experience level (0-15 points) 
+        years_mentioned = self._extract_years_experience(text_lower)
+        if years_mentioned:
+            max_years = max(years_mentioned)
+            experience_difficulty = min(15, max_years * 2)
+        else:
+            experience_difficulty = 5  # Default moderate
+        difficulty_score += experience_difficulty
+        factors['experience_level'] = experience_difficulty
+        
+        # Normalize to 0-100 scale
+        normalized_score = min(100, difficulty_score)
+        
+        return {
+            'difficulty_score': normalized_score,
+            'difficulty_level': self._get_difficulty_level(normalized_score),
+            'breakdown': factors,
+            'recommendations': self._get_difficulty_recommendations(normalized_score)
+        }
+    
+    def _get_difficulty_level(self, score: int) -> str:
+        """Convert difficulty score to level description."""
+        if score >= 80:
+            return "Very High - Expert level position"
+        elif score >= 65:
+            return "High - Advanced professional role"
+        elif score >= 45:
+            return "Moderate - Mid-level professional role"
+        elif score >= 25:
+            return "Low-Moderate - Junior to mid-level role"
+        else:
+            return "Low - Entry-level or simple role"
+    
+    def _get_difficulty_recommendations(self, score: int) -> List[str]:
+        """Generate recommendations based on difficulty score."""
+        recommendations = []
+        
+        if score >= 80:
+            recommendations.extend([
+                "This is a very challenging role requiring extensive experience",
+                "Consider applying only if you meet 80%+ of requirements",
+                "Focus on highlighting leadership and advanced technical skills"
+            ])
+        elif score >= 65:
+            recommendations.extend([
+                "This role requires strong technical expertise",
+                "Ensure you have most of the listed technical skills",
+                "Prepare for technical interviews and coding challenges"
+            ])
+        elif score >= 45:
+            recommendations.extend([
+                "Moderate difficulty role suitable for mid-level professionals",
+                "Focus on demonstrating relevant project experience",
+                "Good opportunity for career growth"
+            ])
+        else:
+            recommendations.extend([
+                "Entry to mid-level role, good for career development",
+                "Focus on willingness to learn and adapt",
+                "Highlight relevant coursework and projects"
+            ])
+        
+        return recommendations
+    
+    def analyze_must_have_vs_nice_to_have(self, jd_text: str, skills_found: List[str]) -> Dict:
+        """Advanced skill categorization using NLP patterns."""
+        text_lower = jd_text.lower()
+        
+        # Patterns that indicate must-have requirements
+        must_have_patterns = [
+            r'required?[:\s]*([^.]*)',
+            r'must have[:\s]*([^.]*)', 
+            r'essential[:\s]*([^.]*)',
+            r'minimum requirements?[:\s]*([^.]*)',
+            r'qualifications?[:\s]*([^.]*)'
+        ]
+        
+        # Patterns that indicate nice-to-have requirements
+        nice_to_have_patterns = [
+            r'preferred?[:\s]*([^.]*)',
+            r'nice to have[:\s]*([^.]*)',
+            r'bonus[:\s]*([^.]*)',
+            r'additional[:\s]*([^.]*)',
+            r'plus[:\s]*([^.]*)',
+            r'would be great[:\s]*([^.]*)'
+        ]
+        
+        must_have_skills = []
+        nice_to_have_skills = []
+        
+        # Extract must-have skills
+        for pattern in must_have_patterns:
+            matches = re.finditer(pattern, text_lower, re.IGNORECASE)
+            for match in matches:
+                text_section = match.group(1)
+                section_skills = [skill for skill in skills_found if skill.lower() in text_section]
+                must_have_skills.extend(section_skills)
+        
+        # Extract nice-to-have skills
+        for pattern in nice_to_have_patterns:
+            matches = re.finditer(pattern, text_lower, re.IGNORECASE)
+            for match in matches:
+                text_section = match.group(1)
+                section_skills = [skill for skill in skills_found if skill.lower() in text_section]
+                nice_to_have_skills.extend(section_skills)
+        
+        # Remove duplicates and classify remaining skills
+        must_have_skills = list(set(must_have_skills))
+        nice_to_have_skills = list(set(nice_to_have_skills))
+        
+        # Skills not explicitly categorized - use position in text as heuristic
+        unclassified_skills = [skill for skill in skills_found 
+                              if skill not in must_have_skills and skill not in nice_to_have_skills]
+        
+        # Heuristic: skills mentioned early are more likely to be must-have
+        text_parts = text_lower.split()
+        early_text = ' '.join(text_parts[:len(text_parts)//2])  # First half
+        
+        for skill in unclassified_skills:
+            if skill.lower() in early_text:
+                must_have_skills.append(skill)
+            else:
+                nice_to_have_skills.append(skill)
+        
+        return {
+            'must_have_skills': list(set(must_have_skills)),
+            'nice_to_have_skills': list(set(nice_to_have_skills)),
+            'must_have_count': len(set(must_have_skills)),
+            'nice_to_have_count': len(set(nice_to_have_skills)),
+            'classification_confidence': self._calculate_classification_confidence(
+                must_have_skills, nice_to_have_skills, skills_found
+            )
+        }
+    
+    def _calculate_classification_confidence(self, must_have: List[str], 
+                                          nice_to_have: List[str], all_skills: List[str]) -> float:
+        """Calculate confidence in skill classification."""
+        classified_count = len(set(must_have + nice_to_have))
+        total_count = len(all_skills)
+        
+        if total_count == 0:
+            return 0.0
+        
+        return round(classified_count / total_count, 2)
