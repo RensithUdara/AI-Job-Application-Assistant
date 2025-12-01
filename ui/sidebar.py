@@ -7,12 +7,8 @@ import streamlit as st
 
 def initialize_session_state():
     """Initialize session state variables."""
-    if 'show_chat' not in st.session_state:
-        st.session_state.show_chat = False
-    if 'show_templates' not in st.session_state:
-        st.session_state.show_templates = False
-    if 'show_interview' not in st.session_state:
-        st.session_state.show_interview = False
+    if 'current_page' not in st.session_state:
+        st.session_state.current_page = 'main'
     if 'chat_history' not in st.session_state:
         st.session_state.chat_history = []
     if 'analysis_done' not in st.session_state:
@@ -23,19 +19,28 @@ def initialize_session_state():
 def display_sidebar():
     """Display the enhanced sidebar with quick actions and settings."""
     with st.sidebar:
+        st.markdown("### 🏠 Navigation")
+        
+        # Current page indicator
+        current_page = st.session_state.get('current_page', 'main')
+        
+        # Main page
+        if st.button("🏠 Main Dashboard", use_container_width=True, disabled=(current_page == 'main')):
+            st.session_state.current_page = 'main'
+        
         st.markdown("### 🚀 Quick Actions")
         
         # AI Assistant Chat
-        if st.button("💬 AI Career Chat", use_container_width=True):
-            st.session_state.show_chat = True
+        if st.button("💬 AI Career Chat", use_container_width=True, disabled=(current_page == 'ai_chat')):
+            st.session_state.current_page = 'ai_chat'
         
         # Resume Templates
-        if st.button("📄 Resume Templates", use_container_width=True):
-            st.session_state.show_templates = True
+        if st.button("📄 Resume Templates", use_container_width=True, disabled=(current_page == 'resume_templates')):
+            st.session_state.current_page = 'resume_templates'
         
         # Interview Prep
-        if st.button("🎤 Mock Interview", use_container_width=True):
-            st.session_state.show_interview = True
+        if st.button("🎤 Mock Interview", use_container_width=True, disabled=(current_page == 'mock_interview')):
+            st.session_state.current_page = 'mock_interview'
         
         st.markdown("---")
         

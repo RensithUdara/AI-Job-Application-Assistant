@@ -13,9 +13,13 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'core'))
 # Import UI modules
 from ui.components import setup_page_config, apply_custom_css, display_main_header, display_footer
 from ui.sidebar import initialize_session_state, display_sidebar
-from ui.modals import display_chat_modal, display_interview_modal, display_templates_modal
 from ui.input_section import display_input_section, process_analysis_request
 from ui.results_display import display_results
+
+# Import new tab modules
+from ui.tabs.ai_chat_tab import display_ai_chat_tab
+from ui.tabs.resume_templates_tab import display_resume_templates_tab
+from ui.tabs.mock_interview_tab import display_mock_interview_tab
 
 def main():
     """Main application function."""
@@ -34,11 +38,25 @@ def main():
     # Display main header
     display_main_header()
     
-    # Display modal dialogs if active
-    display_chat_modal()
-    display_interview_modal()
-    display_templates_modal()
+    # Get current page
+    current_page = st.session_state.get('current_page', 'main')
     
+    # Display appropriate page content
+    if current_page == 'ai_chat':
+        display_ai_chat_tab()
+    elif current_page == 'resume_templates':
+        display_resume_templates_tab()
+    elif current_page == 'mock_interview':
+        display_mock_interview_tab()
+    else:
+        # Default main application interface
+        display_main_dashboard(sidebar_settings)
+    
+    # Display footer
+    display_footer()
+
+def display_main_dashboard(sidebar_settings):
+    """Display the main dashboard interface."""
     # Display input section
     resume_content, jd_text = display_input_section()
     
@@ -53,9 +71,6 @@ def main():
     if st.session_state.analysis_done and st.session_state.results:
         st.markdown("---")
         display_results(st.session_state.results)
-    
-    # Display footer
-    display_footer()
 
 if __name__ == "__main__":
     main()
