@@ -320,24 +320,3 @@ def display_footer():
         """, unsafe_allow_html=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Performance stats with enhanced styling
-    st.markdown("---")
-    st.markdown("""
-    <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 15px; color: white; text-align: center; margin: 2rem 0;'>
-        <h3 style='margin-bottom: 1.5rem; color: white;'>📊 Platform Statistics</h3>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    col1, col2, col3, col4, col5 = st.columns(5)
-    
-    with col1:
-        st.metric("Resumes Analyzed", "50,000+")
-    with col2:
-        st.metric("Job Matches Found", "125,000+")
-    with col3:
-        st.metric("Interview Success Rate", "87%")
-    with col4:
-        st.metric("Salary Improvements", "$8.5M+")
-    with col5:
-        st.metric("User Satisfaction", "4.9⭐")
