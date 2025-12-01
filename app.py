@@ -1088,5 +1088,281 @@ def display_professional_tools_tab(resume_data: Dict, jd_data: Dict, match_data:
     else:
         st.success("🎉 **Excellent!** No major weaknesses detected in your resume.")
 
+def display_advanced_ai_features_tab(resume_data, jd_data, match_data):
+    """Display Advanced AI Features tab with cutting-edge analysis."""
+    st.header("🔥 Advanced AI Features & Deep Analytics")
+    
+    if not resume_data or 'error' in resume_data:
+        st.warning("⚠️ Upload a resume to access advanced AI features")
+        return
+    
+    # Create sub-tabs for different advanced features
+    adv_tabs = st.tabs(["🔥 Resume Heatmap", "🤖 ATS Simulation", "🎯 Role Compatibility", 
+                       "🛤️ Career Roadmap", "⚠️ Red Flag Detection", "📄 Multiple Versions"])
+    
+    with adv_tabs[0]:  # Resume Heatmap
+        st.subheader("📊 Resume Weakness Heatmap")
+        st.write("*Visual analysis of resume strengths and weaknesses*")
+        
+        if 'heatmap_analysis' in resume_data:
+            heatmap_data = resume_data['heatmap_analysis']
+            
+            # Display overall strength
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Overall Strength", f"{heatmap_data['overall_strength']:.1f}%")
+            with col2:
+                st.metric("Weakest Section", heatmap_data['weakest_sections'][0] if heatmap_data['weakest_sections'] else "N/A")
+            with col3:
+                st.metric("Strongest Section", heatmap_data['strongest_sections'][0] if heatmap_data['strongest_sections'] else "N/A")
+            
+            # Display heatmap visualization
+            st.write("**Section Analysis:**")
+            for section, data in heatmap_data['heatmap_data'].items():
+                col1, col2, col3 = st.columns([2, 1, 3])
+                with col1:
+                    st.write(f"**{section.title()}**")
+                with col2:
+                    # Create colored metric based on strength
+                    color = data['color']
+                    st.markdown(f"<div style='background-color: {color}; color: white; padding: 5px; border-radius: 3px; text-align: center;'>{data['strength']}/100</div>", unsafe_allow_html=True)
+                with col3:
+                    if data['issues']:
+                        st.error(f"Issues: {', '.join(data['issues'])}")
+                    else:
+                        st.success("✅ No issues detected")
+        else:
+            st.info("Heatmap analysis not available. Please re-upload your resume.")
+    
+    with adv_tabs[1]:  # ATS Simulation
+        st.subheader("🤖 ATS Parsing Simulation")
+        st.write("*See how Applicant Tracking Systems will parse your resume*")
+        
+        if 'ats_simulation' in resume_data:
+            ats_data = resume_data['ats_simulation']
+            
+            # Display parsing success rate
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("ATS Parsing Success Rate", f"{ats_data['parsing_success_rate']}%")
+            with col2:
+                st.info(f"**ATS Readability:** {ats_data['ats_readability']}")
+            
+            # Show ATS JSON output
+            st.write("**ATS JSON Output:**")
+            st.code(ats_data['json_output'], language='json')
+            
+            # Show parsed data details
+            parsed_data = ats_data['parsed_data']
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.write("**Personal Information Detected:**")
+                for key, value in parsed_data['personal_info'].items():
+                    st.write(f"• {key.title()}: {value}")
+            
+            with col2:
+                st.write("**Skills Extracted:**")
+                skills = parsed_data['skills'][:10]
+                for skill in skills:
+                    st.write(f"• {skill}")
+            
+            # Show improvement suggestions
+            if ats_data['improvement_suggestions']:
+                st.write("**ATS Optimization Suggestions:**")
+                for suggestion in ats_data['improvement_suggestions']:
+                    st.write(f"• {suggestion}")
+        else:
+            st.info("ATS simulation not available. Please re-upload your resume.")
+    
+    with adv_tabs[2]:  # Role Compatibility
+        st.subheader("🎯 Multi-Role Compatibility Analysis")
+        st.write("*Analyze compatibility with different career roles*")
+        
+        if 'role_compatibility' in resume_data:
+            role_data = resume_data['role_compatibility']
+            
+            # Display best fit
+            st.success(f"🏆 **Best Fit Role:** {role_data['best_fit_role'].replace('_', ' ').title()} ({role_data['best_fit_score']}% match)")
+            
+            # Display all role scores
+            st.write("**Compatibility Breakdown:**")
+            
+            for role, data in role_data['role_scores'].items():
+                col1, col2, col3 = st.columns([2, 1, 2])
+                
+                with col1:
+                    st.write(f"**{role.replace('_', ' ').title()}**")
+                
+                with col2:
+                    # Progress bar for score
+                    st.progress(data['score'] / 100)
+                    st.write(f"{data['score']}%")
+                
+                with col3:
+                    st.write(data['strength_level'])
+                
+                # Show matched and missing keywords
+                with st.expander(f"Details for {role.replace('_', ' ').title()}"):
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.write("**Matched Keywords:**")
+                        for kw in data['matched_keywords'][:5]:
+                            st.success(f"✅ {kw}")
+                    
+                    with col2:
+                        st.write("**Missing Keywords:**")
+                        for kw in data['missing_keywords'][:5]:
+                            st.error(f"❌ {kw}")
+            
+            # Show recommendations
+            if role_data['role_recommendations']:
+                st.write("**Recommendations:**")
+                for rec in role_data['role_recommendations']:
+                    st.info(f"💡 {rec}")
+        else:
+            st.info("Role compatibility analysis not available.")
+    
+    with adv_tabs[3]:  # Career Roadmap
+        st.subheader("🛤️ Personalized Career Roadmap")
+        st.write("*AI-generated learning path based on your goals*")
+        
+        # Input for career roadmap
+        col1, col2 = st.columns(2)
+        with col1:
+            target_role = st.selectbox("Target Role", 
+                                     ["web_developer", "mobile_developer", "data_analyst", "software_engineer"])
+        with col2:
+            experience_level = st.selectbox("Experience Level", ["beginner", "intermediate"])
+        
+        if st.button("🚀 Generate Career Roadmap"):
+            # Get current skills from resume
+            current_skills = list(resume_data.get('resume_skills', {}).get('all_skills', []))
+            
+            # Generate roadmap using the recommender
+            from core.recommender import Recommender
+            recommender = Recommender()
+            roadmap = recommender.generate_career_roadmap(current_skills, target_role, experience_level)
+            
+            st.success(f"📅 **Total Timeline:** {roadmap['total_timeline_months']} months ({roadmap['estimated_total_hours']} hours)")
+            
+            # Display roadmap steps
+            for step in roadmap['roadmap_steps']:
+                with st.expander(f"Month {step['month']}: {', '.join(step['skills_to_learn'][:2])}... ({step['priority']} Priority)"):
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        st.write("**Skills to Learn:**")
+                        for skill in step['skills_to_learn']:
+                            st.write(f"• {skill}")
+                        
+                        st.write(f"**Estimated Time:** {step['estimated_hours']} hours")
+                    
+                    with col2:
+                        st.write("**Recommended Projects:**")
+                        for project in step['projects']:
+                            st.write(f"• {project}")
+                    
+                    # Show learning resources
+                    if 'resources' in step:
+                        st.write("**Learning Resources:**")
+                        resources = step['resources']
+                        for category, items in resources.items():
+                            if items:
+                                st.write(f"**{category.title()}:** {', '.join(items[:3])}")
+            
+            # Show career advice
+            if roadmap['career_advice']:
+                st.write("**Career Advice:**")
+                for advice in roadmap['career_advice']:
+                    st.info(f"💡 {advice}")
+    
+    with adv_tabs[4]:  # Red Flag Detection
+        st.subheader("⚠️ Job Red Flag Detection")
+        st.write("*AI analysis of potential warning signs in job descriptions*")
+        
+        if jd_data and 'red_flag_analysis' in jd_data:
+            red_flags = jd_data['red_flag_analysis']
+            
+            # Display risk assessment
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Risk Score", f"{red_flags['risk_score']}/100")
+            with col2:
+                risk_level = red_flags['risk_level']
+                if 'High Risk' in risk_level:
+                    st.error(f"🚨 {risk_level}")
+                elif 'Moderate Risk' in risk_level:
+                    st.warning(f"⚠️ {risk_level}")
+                else:
+                    st.success(f"✅ {risk_level}")
+            with col3:
+                st.write(f"**Red Flags Found:** {len(red_flags['red_flags'])}")
+            
+            # Display detected red flags
+            if red_flags['red_flags']:
+                st.write("**⚠️ Detected Red Flags:**")
+                for flag in red_flags['red_flags']:
+                    st.error(f"🚩 {flag}")
+            else:
+                st.success("✅ No red flags detected!")
+            
+            # Show recommendation
+            st.info(f"**Recommendation:** {red_flags['recommendation']}")
+            
+            # Show questions to ask
+            if red_flags['questions_to_ask']:
+                st.write("**Questions to Ask in Interview:**")
+                for question in red_flags['questions_to_ask']:
+                    st.write(f"❓ {question}")
+        else:
+            st.warning("Please upload a job description to detect red flags.")
+    
+    with adv_tabs[5]:  # Multiple Resume Versions
+        st.subheader("📄 Multiple Resume Version Generator")
+        st.write("*Generate customized resume versions for different roles*")
+        
+        target_roles = st.multiselect(
+            "Select Target Roles",
+            ["mobile_developer", "web_developer", "data_analyst", "software_engineer", "devops_engineer"],
+            default=["web_developer", "mobile_developer"]
+        )
+        
+        if st.button("🎯 Generate Resume Versions") and target_roles:
+            from core.recommender import Recommender
+            recommender = Recommender()
+            
+            versions = recommender.generate_multiple_resume_versions(resume_data, target_roles)
+            
+            st.success(f"✅ Generated {len(versions['versions'])} resume versions!")
+            
+            for role, version_data in versions['versions'].items():
+                with st.expander(f"📋 {role.replace('_', ' ').title()} Version"):
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        st.write("**Customized Summary:**")
+                        st.write(version_data['summary'])
+                        
+                        st.write("**Prioritized Skills:**")
+                        high_priority = version_data['prioritized_skills']['high_priority']
+                        for skill in high_priority[:5]:
+                            st.success(f"🔥 {skill}")
+                    
+                    with col2:
+                        st.write("**Customization Tips:**")
+                        for tip in version_data['customization_tips']:
+                            st.info(f"💡 {tip}")
+                        
+                        st.write("**Key Optimization Keywords:**")
+                        for keyword in version_data['keyword_optimization'][:4]:
+                            st.code(keyword)
+            
+            # Show general strategy
+            st.write("**Application Strategy:**")
+            strategy = versions['application_strategy']
+            for key, value in strategy.items():
+                st.write(f"• **{key.replace('_', ' ').title()}:** {value}")
+
 if __name__ == "__main__":
     main()
