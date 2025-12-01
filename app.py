@@ -113,6 +113,63 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 def main():
+    # Enhanced Sidebar
+    with st.sidebar:
+        st.markdown("### 🚀 Quick Actions")
+        
+        # AI Assistant Chat
+        if st.button("💬 AI Career Chat", use_container_width=True):
+            st.session_state.show_chat = True
+        
+        # Resume Templates
+        if st.button("📄 Resume Templates", use_container_width=True):
+            st.session_state.show_templates = True
+        
+        # Interview Prep
+        if st.button("🎤 Mock Interview", use_container_width=True):
+            st.session_state.show_interview = True
+        
+        st.markdown("---")
+        
+        # Settings
+        st.markdown("### ⚙️ Analysis Settings")
+        
+        analysis_depth = st.selectbox(
+            "Analysis Depth:",
+            ["Basic", "Comprehensive", "Expert"],
+            index=1,
+            help="Choose the level of analysis detail"
+        )
+        
+        include_soft_skills = st.checkbox("Include Soft Skills Analysis", value=True)
+        include_culture_fit = st.checkbox("Include Culture Fit Analysis", value=True)
+        include_salary_insights = st.checkbox("Include Salary Intelligence", value=True)
+        
+        st.markdown("---")
+        
+        # Quick Stats
+        st.markdown("### 📊 Today's Insights")
+        st.metric("Jobs Analyzed Today", "1,247", "↗ +12%")
+        st.metric("Average Match Score", "78%", "↗ +3%")
+        st.metric("Success Rate", "94%", "→ 0%")
+        
+        st.markdown("---")
+        
+        # Tips of the day
+        st.markdown("### 💡 Daily Tip")
+        daily_tips = [
+            "Use action verbs to start your bullet points",
+            "Quantify your achievements with specific numbers",
+            "Tailor your resume keywords to the job description",
+            "Keep your resume to 1-2 pages maximum",
+            "Use a professional email address",
+            "Include relevant certifications and courses"
+        ]
+        
+        import random
+        tip_of_day = random.choice(daily_tips)
+        st.info(f"💡 {tip_of_day}")
+    
     # Header
     st.markdown("""
     <div class="main-header">
