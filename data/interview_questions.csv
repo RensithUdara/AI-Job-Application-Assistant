@@ -115,3 +115,943 @@ enterprise,compliance,How do you ensure code quality in large teams?,technical,a
 enterprise,scalability,How would you design a system for millions of users?,technical,expert
 remote_work,communication,How do you stay connected with remote team members?,behavioral,intermediate
 remote_work,productivity,How do you maintain productivity while working from home?,behavioral,intermediate
+frontend_developer,html,What are the new semantic elements in HTML5?,technical,beginner
+frontend_developer,html,How do you handle SEO optimization in HTML?,technical,intermediate
+frontend_developer,html,What is the purpose of the DOCTYPE declaration?,technical,beginner
+frontend_developer,html,Explain form validation in HTML5.,technical,intermediate
+frontend_developer,html,What are data attributes and how are they used?,technical,intermediate
+frontend_developer,css,What is the CSS box model?,technical,beginner
+frontend_developer,css,How do you center a div both horizontally and vertically?,technical,intermediate
+frontend_developer,css,What are CSS preprocessors and their benefits?,technical,intermediate
+frontend_developer,css,Explain CSS animations vs transitions.,technical,advanced
+frontend_developer,css,What is critical CSS and why is it important?,technical,advanced
+frontend_developer,css,How do you implement dark mode in CSS?,technical,intermediate
+frontend_developer,css,What are CSS custom properties (variables)?,technical,intermediate
+frontend_developer,css,Explain CSS Grid layout system.,technical,advanced
+frontend_developer,css,What is the difference between absolute and relative positioning?,technical,beginner
+frontend_developer,css,How do you optimize CSS for better performance?,technical,advanced
+frontend_developer,javascript,What is hoisting in JavaScript?,technical,intermediate
+frontend_developer,javascript,Explain the 'this' keyword in JavaScript.,technical,advanced
+frontend_developer,javascript,What are arrow functions and their differences from regular functions?,technical,intermediate
+frontend_developer,javascript,How do you handle memory leaks in JavaScript?,technical,advanced
+frontend_developer,javascript,What are JavaScript modules (ES6)?,technical,intermediate
+frontend_developer,javascript,Explain event delegation in JavaScript.,technical,advanced
+frontend_developer,javascript,What is the difference between null and undefined?,technical,beginner
+frontend_developer,javascript,How do you implement debouncing and throttling?,technical,advanced
+frontend_developer,javascript,What are Web APIs and how do you use them?,technical,intermediate
+frontend_developer,javascript,Explain the prototype chain in JavaScript.,technical,advanced
+frontend_developer,react,What are React fragments and why use them?,technical,intermediate
+frontend_developer,react,How do you handle error boundaries in React?,technical,advanced
+frontend_developer,react,What is Context API and when to use it?,technical,advanced
+frontend_developer,react,Explain React.memo and useMemo differences.,technical,advanced
+frontend_developer,react,How do you implement code splitting in React?,technical,expert
+frontend_developer,react,What are controlled vs uncontrolled components?,technical,intermediate
+frontend_developer,react,How do you test React components?,technical,advanced
+frontend_developer,react,What is server-side rendering (SSR) in React?,technical,expert
+frontend_developer,react,Explain React Suspense and lazy loading.,technical,advanced
+frontend_developer,react,How do you manage global state in React applications?,technical,advanced
+frontend_developer,vue,What is the Vue.js reactivity system?,technical,intermediate
+frontend_developer,vue,How do you handle component communication in Vue?,technical,intermediate
+frontend_developer,vue,What are Vue directives and custom directives?,technical,intermediate
+frontend_developer,vue,Explain Vue.js lifecycle hooks.,technical,intermediate
+frontend_developer,vue,What is Vuex and how does it work?,technical,advanced
+frontend_developer,angular,What is Angular dependency injection?,technical,intermediate
+frontend_developer,angular,How do you handle routing in Angular?,technical,intermediate
+frontend_developer,angular,What are Angular services and providers?,technical,intermediate
+frontend_developer,angular,Explain Angular pipes and custom pipes.,technical,intermediate
+frontend_developer,angular,What is RxJS and how is it used in Angular?,technical,advanced
+backend_developer,java,What are the main features of Java 8?,technical,intermediate
+backend_developer,java,Explain multithreading in Java.,technical,advanced
+backend_developer,java,What is the difference between ArrayList and LinkedList?,technical,intermediate
+backend_developer,java,How do you handle exceptions in Java?,technical,intermediate
+backend_developer,java,What are Java generics and their benefits?,technical,advanced
+backend_developer,java,Explain the Singleton pattern implementation in Java.,technical,intermediate
+backend_developer,java,What is garbage collection in Java?,technical,advanced
+backend_developer,java,How do you implement RESTful services in Java?,technical,advanced
+backend_developer,java,What are annotations in Java and how do you create custom ones?,technical,advanced
+backend_developer,java,Explain JVM architecture.,technical,expert
+backend_developer,spring,What is Spring Framework and its core modules?,technical,intermediate
+backend_developer,spring,How does dependency injection work in Spring?,technical,advanced
+backend_developer,spring,What is Spring Boot and its advantages?,technical,intermediate
+backend_developer,spring,How do you handle security in Spring applications?,technical,advanced
+backend_developer,spring,What are Spring profiles and how do you use them?,technical,intermediate
+backend_developer,spring,Explain AOP (Aspect Oriented Programming) in Spring.,technical,advanced
+backend_developer,spring,How do you implement caching in Spring?,technical,advanced
+backend_developer,spring,What is Spring Data JPA?,technical,intermediate
+backend_developer,spring,How do you handle transactions in Spring?,technical,advanced
+backend_developer,spring,What are Spring Boot actuators?,technical,intermediate
+backend_developer,python,What is the difference between list and tuple in Python?,technical,beginner
+backend_developer,python,How do you handle virtual environments in Python?,technical,intermediate
+backend_developer,python,What are Python generators and their benefits?,technical,advanced
+backend_developer,python,Explain the GIL (Global Interpreter Lock) in Python.,technical,advanced
+backend_developer,python,How do you implement multithreading vs multiprocessing in Python?,technical,advanced
+backend_developer,python,What are Python metaclasses?,technical,expert
+backend_developer,python,How do you handle database connections in Python?,technical,intermediate
+backend_developer,python,What is the difference between @staticmethod and @classmethod?,technical,intermediate
+backend_developer,python,How do you implement design patterns in Python?,technical,advanced
+backend_developer,python,What are Python context managers?,technical,advanced
+backend_developer,django,What is the Django MVC architecture?,technical,intermediate
+backend_developer,django,How do you handle user authentication in Django?,technical,intermediate
+backend_developer,django,What are Django middlewares and how do you create custom ones?,technical,advanced
+backend_developer,django,How do you optimize Django queries?,technical,advanced
+backend_developer,django,What is Django REST framework?,technical,intermediate
+backend_developer,django,How do you handle database migrations in Django?,technical,intermediate
+backend_developer,django,What are Django signals and when to use them?,technical,advanced
+backend_developer,django,How do you implement caching in Django?,technical,advanced
+backend_developer,django,What is Django ORM and how does it work?,technical,intermediate
+backend_developer,django,How do you handle file uploads in Django?,technical,intermediate
+backend_developer,flask,What is the difference between Django and Flask?,technical,intermediate
+backend_developer,flask,How do you structure a large Flask application?,technical,advanced
+backend_developer,flask,What are Flask blueprints?,technical,intermediate
+backend_developer,flask,How do you handle database operations in Flask?,technical,intermediate
+backend_developer,flask,What is Flask-SQLAlchemy?,technical,intermediate
+backend_developer,node.js,What are the advantages of Node.js?,technical,beginner
+backend_developer,node.js,How do you handle file operations in Node.js?,technical,intermediate
+backend_developer,node.js,What are streams in Node.js?,technical,advanced
+backend_developer,node.js,How do you implement authentication in Node.js?,technical,intermediate
+backend_developer,node.js,What is clustering in Node.js?,technical,advanced
+backend_developer,node.js,How do you handle environment variables in Node.js?,technical,intermediate
+backend_developer,node.js,What are worker threads in Node.js?,technical,advanced
+backend_developer,node.js,How do you implement rate limiting in Node.js?,technical,advanced
+backend_developer,node.js,What is the difference between npm and yarn?,technical,beginner
+backend_developer,node.js,How do you debug Node.js applications?,technical,intermediate
+backend_developer,express.js,What are Express.js middlewares?,technical,intermediate
+backend_developer,express.js,How do you handle routing in Express.js?,technical,beginner
+backend_developer,express.js,What is Express.js body parser?,technical,intermediate
+backend_developer,express.js,How do you implement CORS in Express.js?,technical,intermediate
+backend_developer,express.js,What are Express.js routers?,technical,intermediate
+backend_developer,php,What are the new features in PHP 8?,technical,intermediate
+backend_developer,php,How do you handle sessions in PHP?,technical,intermediate
+backend_developer,php,What is PHP autoloading?,technical,intermediate
+backend_developer,php,How do you implement OOP in PHP?,technical,intermediate
+backend_developer,php,What are PHP namespaces?,technical,intermediate
+backend_developer,laravel,What is Laravel Eloquent ORM?,technical,intermediate
+backend_developer,laravel,How do you handle authentication in Laravel?,technical,intermediate
+backend_developer,laravel,What are Laravel migrations and seeders?,technical,intermediate
+backend_developer,laravel,How do you implement queues in Laravel?,technical,advanced
+backend_developer,laravel,What are Laravel service providers?,technical,advanced
+database_developer,sql,What is database normalization?,technical,intermediate
+database_developer,sql,Explain ACID properties in databases.,technical,advanced
+database_developer,sql,What are database indexes and how do they improve performance?,technical,intermediate
+database_developer,sql,How do you handle database transactions?,technical,advanced
+database_developer,sql,What is the difference between clustered and non-clustered indexes?,technical,advanced
+database_developer,sql,How do you optimize database performance?,technical,expert
+database_developer,sql,What are stored procedures and functions?,technical,intermediate
+database_developer,sql,Explain different isolation levels in databases.,technical,advanced
+database_developer,sql,What are triggers in SQL?,technical,intermediate
+database_developer,sql,How do you handle database backup and recovery?,technical,advanced
+database_developer,postgresql,What are PostgreSQL extensions?,technical,intermediate
+database_developer,postgresql,How do you implement full-text search in PostgreSQL?,technical,advanced
+database_developer,postgresql,What are PostgreSQL JSONB capabilities?,technical,advanced
+database_developer,postgresql,How do you handle partitioning in PostgreSQL?,technical,expert
+database_developer,postgresql,What are PostgreSQL views and materialized views?,technical,intermediate
+database_developer,mysql,What is the difference between MyISAM and InnoDB?,technical,intermediate
+database_developer,mysql,How do you implement replication in MySQL?,technical,advanced
+database_developer,mysql,What are MySQL storage engines?,technical,intermediate
+database_developer,mysql,How do you optimize MySQL queries?,technical,advanced
+database_developer,mysql,What is MySQL partitioning?,technical,advanced
+database_developer,mongodb,What is the difference between SQL and NoSQL databases?,technical,beginner
+database_developer,mongodb,How do you design schemas in MongoDB?,technical,intermediate
+database_developer,mongodb,What are MongoDB aggregation pipelines?,technical,advanced
+database_developer,mongodb,How do you handle indexing in MongoDB?,technical,intermediate
+database_developer,mongodb,What is sharding in MongoDB?,technical,advanced
+database_developer,redis,What is Redis and its use cases?,technical,intermediate
+database_developer,redis,How do you implement caching with Redis?,technical,intermediate
+database_developer,redis,What are Redis data structures?,technical,intermediate
+database_developer,redis,How do you handle Redis persistence?,technical,advanced
+database_developer,redis,What is Redis clustering?,technical,advanced
+data_engineer,etl,What is ETL and ELT processes?,technical,intermediate
+data_engineer,etl,How do you handle data quality in ETL pipelines?,technical,advanced
+data_engineer,etl,What are the best practices for data pipeline design?,technical,advanced
+data_engineer,etl,How do you implement error handling in data pipelines?,technical,advanced
+data_engineer,etl,What is data lineage and why is it important?,technical,intermediate
+data_engineer,apache_spark,What is Apache Spark and its advantages?,technical,intermediate
+data_engineer,apache_spark,How do you optimize Spark jobs?,technical,advanced
+data_engineer,apache_spark,What are Spark DataFrames and RDDs?,technical,intermediate
+data_engineer,apache_spark,How do you handle streaming data in Spark?,technical,advanced
+data_engineer,apache_spark,What is Spark SQL and how do you use it?,technical,intermediate
+data_engineer,apache_kafka,What is Apache Kafka and its use cases?,technical,intermediate
+data_engineer,apache_kafka,How do you handle message ordering in Kafka?,technical,advanced
+data_engineer,apache_kafka,What are Kafka partitions and replicas?,technical,intermediate
+data_engineer,apache_kafka,How do you monitor Kafka performance?,technical,advanced
+data_engineer,apache_kafka,What is Kafka Connect?,technical,intermediate
+data_engineer,airflow,What is Apache Airflow and its components?,technical,intermediate
+data_engineer,airflow,How do you create DAGs in Airflow?,technical,intermediate
+data_engineer,airflow,How do you handle task dependencies in Airflow?,technical,intermediate
+data_engineer,airflow,What are Airflow operators?,technical,intermediate
+data_engineer,airflow,How do you monitor and troubleshoot Airflow pipelines?,technical,advanced
+data_engineer,hadoop,What is Hadoop ecosystem?,technical,intermediate
+data_engineer,hadoop,How does HDFS work?,technical,intermediate
+data_engineer,hadoop,What is MapReduce paradigm?,technical,intermediate
+data_engineer,hadoop,How do you optimize Hadoop performance?,technical,advanced
+data_engineer,hadoop,What is Hive and how does it work?,technical,intermediate
+mobile_developer,ios,What is the iOS app lifecycle?,technical,intermediate
+mobile_developer,ios,How do you handle memory management in iOS?,technical,advanced
+mobile_developer,ios,What are iOS design patterns?,technical,intermediate
+mobile_developer,ios,How do you implement Core Data in iOS?,technical,advanced
+mobile_developer,ios,What is Auto Layout in iOS?,technical,intermediate
+mobile_developer,swift,What are optionals in Swift?,technical,intermediate
+mobile_developer,swift,How do you handle error handling in Swift?,technical,intermediate
+mobile_developer,swift,What are Swift protocols?,technical,intermediate
+mobile_developer,swift,How do you implement delegates in Swift?,technical,intermediate
+mobile_developer,swift,What are Swift generics?,technical,advanced
+mobile_developer,flutter,How do you implement navigation in Flutter?,technical,intermediate
+mobile_developer,flutter,What are Flutter packages and plugins?,technical,intermediate
+mobile_developer,flutter,How do you handle platform-specific code in Flutter?,technical,advanced
+mobile_developer,flutter,What is Flutter's rendering pipeline?,technical,expert
+mobile_developer,flutter,How do you implement testing in Flutter?,technical,advanced
+mobile_developer,react_native,How do you debug React Native applications?,technical,intermediate
+mobile_developer,react_native,What is the Metro bundler in React Native?,technical,intermediate
+mobile_developer,react_native,How do you handle navigation in React Native?,technical,intermediate
+mobile_developer,react_native,What are React Native performance optimization techniques?,technical,advanced
+mobile_developer,react_native,How do you implement push notifications in React Native?,technical,advanced
+mobile_developer,android,What are Android fragments and their lifecycle?,technical,intermediate
+mobile_developer,android,How do you implement RecyclerView in Android?,technical,intermediate
+mobile_developer,android,What is Android Jetpack?,technical,intermediate
+mobile_developer,android,How do you handle permissions in Android?,technical,intermediate
+mobile_developer,android,What are Android Content Providers?,technical,advanced
+mobile_developer,android,How do you implement Material Design in Android?,technical,intermediate
+mobile_developer,android,What is Android Room database?,technical,intermediate
+mobile_developer,android,How do you handle network requests in Android?,technical,intermediate
+mobile_developer,android,What are Android broadcast receivers?,technical,intermediate
+mobile_developer,android,How do you implement dependency injection in Android?,technical,advanced
+game_developer,unity,What is Unity game engine and its features?,technical,beginner
+game_developer,unity,How do you implement physics in Unity?,technical,intermediate
+game_developer,unity,What are Unity GameObjects and Components?,technical,beginner
+game_developer,unity,How do you optimize Unity games for mobile?,technical,advanced
+game_developer,unity,What is Unity's rendering pipeline?,technical,advanced
+game_developer,unreal_engine,What is Unreal Engine Blueprint system?,technical,intermediate
+game_developer,unreal_engine,How do you implement AI in Unreal Engine?,technical,advanced
+game_developer,unreal_engine,What are Unreal Engine materials and shaders?,technical,advanced
+game_developer,unreal_engine,How do you optimize Unreal Engine performance?,technical,expert
+game_developer,unreal_engine,What is Unreal Engine's multiplayer framework?,technical,expert
+game_developer,c++,What are pointers and references in C++?,technical,intermediate
+game_developer,c++,How do you manage memory in C++?,technical,advanced
+game_developer,c++,What are virtual functions in C++?,technical,intermediate
+game_developer,c++,How do you implement templates in C++?,technical,advanced
+game_developer,c++,What is RAII in C++?,technical,advanced
+game_developer,c#,What is garbage collection in C#?,technical,intermediate
+game_developer,c#,How do you implement delegates and events in C#?,technical,intermediate
+game_developer,c#,What are C# generics?,technical,intermediate
+game_developer,c#,How do you handle async programming in C#?,technical,advanced
+game_developer,c#,What is LINQ in C#?,technical,intermediate
+machine_learning_engineer,scikit_learn,How do you evaluate machine learning models?,technical,intermediate
+machine_learning_engineer,scikit_learn,What are ensemble methods in machine learning?,technical,advanced
+machine_learning_engineer,scikit_learn,How do you handle feature selection?,technical,intermediate
+machine_learning_engineer,scikit_learn,What is cross-validation and why is it important?,technical,intermediate
+machine_learning_engineer,scikit_learn,How do you handle imbalanced datasets?,technical,advanced
+machine_learning_engineer,tensorflow,What are TensorFlow computational graphs?,technical,advanced
+machine_learning_engineer,tensorflow,How do you implement custom layers in TensorFlow?,technical,expert
+machine_learning_engineer,tensorflow,What is TensorFlow Serving?,technical,advanced
+machine_learning_engineer,tensorflow,How do you optimize TensorFlow models?,technical,advanced
+machine_learning_engineer,tensorflow,What are TensorFlow estimators?,technical,intermediate
+machine_learning_engineer,pytorch,What is PyTorch dynamic computation graph?,technical,advanced
+machine_learning_engineer,pytorch,How do you implement custom datasets in PyTorch?,technical,intermediate
+machine_learning_engineer,pytorch,What is PyTorch Lightning?,technical,intermediate
+machine_learning_engineer,pytorch,How do you handle model deployment with PyTorch?,technical,advanced
+machine_learning_engineer,pytorch,What are PyTorch hooks and how do you use them?,technical,expert
+machine_learning_engineer,mlops,What is MLOps and why is it important?,technical,intermediate
+machine_learning_engineer,mlops,How do you implement model versioning?,technical,advanced
+machine_learning_engineer,mlops,What are ML pipelines and how do you build them?,technical,advanced
+machine_learning_engineer,mlops,How do you monitor ML models in production?,technical,advanced
+machine_learning_engineer,mlops,What is model drift and how do you detect it?,technical,advanced
+system_administrator,linux,What are Linux file permissions?,technical,beginner
+system_administrator,linux,How do you monitor system performance in Linux?,technical,intermediate
+system_administrator,linux,What are Linux shell scripts and how do you write them?,technical,intermediate
+system_administrator,linux,How do you manage services in Linux?,technical,intermediate
+system_administrator,linux,What is the Linux boot process?,technical,advanced
+system_administrator,windows,How do you manage Active Directory?,technical,intermediate
+system_administrator,windows,What are Windows Group Policies?,technical,intermediate
+system_administrator,windows,How do you troubleshoot Windows performance issues?,technical,advanced
+system_administrator,windows,What is Windows PowerShell DSC?,technical,advanced
+system_administrator,windows,How do you manage Windows updates?,technical,intermediate
+system_administrator,networking,What is the OSI model?,technical,intermediate
+system_administrator,networking,How do you troubleshoot network connectivity issues?,technical,intermediate
+system_administrator,networking,What are VLANs and how do they work?,technical,intermediate
+system_administrator,networking,How do you configure routing protocols?,technical,advanced
+system_administrator,networking,What is network security and best practices?,technical,advanced
+system_administrator,virtualization,What is virtualization and its types?,technical,intermediate
+system_administrator,virtualization,How do you manage VMware vSphere?,technical,advanced
+system_administrator,virtualization,What is containerization vs virtualization?,technical,intermediate
+system_administrator,virtualization,How do you implement disaster recovery?,technical,advanced
+system_administrator,virtualization,What are hypervisors and their types?,technical,intermediate
+security_engineer,cryptography,What are symmetric vs asymmetric encryption?,technical,intermediate
+security_engineer,cryptography,How do digital certificates work?,technical,advanced
+security_engineer,cryptography,What is hashing and its applications?,technical,intermediate
+security_engineer,cryptography,How do you implement PKI infrastructure?,technical,advanced
+security_engineer,cryptography,What are the latest cryptographic standards?,technical,expert
+security_engineer,ethical_hacking,What are the phases of penetration testing?,technical,intermediate
+security_engineer,ethical_hacking,How do you perform social engineering attacks?,technical,advanced
+security_engineer,ethical_hacking,What are common web application vulnerabilities?,technical,intermediate
+security_engineer,ethical_hacking,How do you conduct network reconnaissance?,technical,advanced
+security_engineer,ethical_hacking,What are post-exploitation techniques?,technical,expert
+security_engineer,compliance,What is GDPR and its requirements?,technical,intermediate
+security_engineer,compliance,How do you implement SOX compliance?,technical,advanced
+security_engineer,compliance,What are PCI DSS standards?,technical,intermediate
+security_engineer,compliance,How do you conduct security audits?,technical,advanced
+security_engineer,compliance,What is risk assessment methodology?,technical,advanced
+ui_designer,figma,How do you create design systems in Figma?,technical,intermediate
+ui_designer,figma,What are Figma components and variants?,technical,intermediate
+ui_designer,figma,How do you implement prototyping in Figma?,technical,intermediate
+ui_designer,figma,What are Figma plugins and how do you use them?,technical,intermediate
+ui_designer,figma,How do you collaborate with developers using Figma?,technical,intermediate
+ui_designer,adobe_xd,What are Adobe XD repeat grids?,technical,intermediate
+ui_designer,adobe_xd,How do you create interactive prototypes in Adobe XD?,technical,intermediate
+ui_designer,adobe_xd,What is Adobe XD voice prototyping?,technical,advanced
+ui_designer,adobe_xd,How do you implement responsive design in Adobe XD?,technical,intermediate
+ui_designer,adobe_xd,What are Adobe XD creative cloud libraries?,technical,intermediate
+ui_designer,sketch,What are Sketch symbols and how do you use them?,technical,intermediate
+ui_designer,sketch,How do you create design systems in Sketch?,technical,intermediate
+ui_designer,sketch,What are Sketch plugins and their benefits?,technical,intermediate
+ui_designer,sketch,How do you handle version control in Sketch?,technical,advanced
+ui_designer,sketch,What is Sketch prototyping capabilities?,technical,intermediate
+ux_designer,user_research,What are different user research methods?,behavioral,intermediate
+ux_designer,user_research,How do you conduct user interviews?,behavioral,intermediate
+ux_designer,user_research,What is the difference between qualitative and quantitative research?,behavioral,intermediate
+ux_designer,user_research,How do you create user personas?,behavioral,intermediate
+ux_designer,user_research,What are usability testing best practices?,behavioral,advanced
+ux_designer,information_architecture,What is information architecture?,behavioral,intermediate
+ux_designer,information_architecture,How do you create site maps?,behavioral,intermediate
+ux_designer,information_architecture,What are card sorting techniques?,behavioral,intermediate
+ux_designer,information_architecture,How do you design navigation systems?,behavioral,advanced
+ux_designer,information_architecture,What are content strategy principles?,behavioral,advanced
+ux_designer,wireframing,What are low-fidelity vs high-fidelity wireframes?,behavioral,beginner
+ux_designer,wireframing,How do you create effective wireframes?,behavioral,intermediate
+ux_designer,wireframing,What tools do you use for wireframing?,behavioral,beginner
+ux_designer,wireframing,How do you iterate on wireframe designs?,behavioral,intermediate
+ux_designer,wireframing,What is the wireframing process?,behavioral,intermediate
+project_manager,agile,What is the Scrum framework?,behavioral,intermediate
+project_manager,agile,How do you conduct sprint planning?,behavioral,intermediate
+project_manager,agile,What are the roles in Scrum?,behavioral,beginner
+project_manager,agile,How do you handle scope creep in Agile?,behavioral,advanced
+project_manager,agile,What is Kanban methodology?,behavioral,intermediate
+project_manager,waterfall,What is the Waterfall methodology?,behavioral,beginner
+project_manager,waterfall,How do you create project schedules?,behavioral,intermediate
+project_manager,waterfall,What are project dependencies?,behavioral,intermediate
+project_manager,waterfall,How do you manage project risks?,behavioral,advanced
+project_manager,waterfall,What is change management process?,behavioral,advanced
+project_manager,tools,How do you use Jira for project management?,technical,intermediate
+project_manager,tools,What is Microsoft Project used for?,technical,intermediate
+project_manager,tools,How do you track project progress?,behavioral,intermediate
+project_manager,tools,What are Gantt charts and their purpose?,behavioral,intermediate
+project_manager,tools,How do you manage project budgets?,behavioral,advanced
+technical_writer,documentation,What makes good technical documentation?,behavioral,intermediate
+technical_writer,documentation,How do you write for different audiences?,behavioral,intermediate
+technical_writer,documentation,What are documentation best practices?,behavioral,advanced
+technical_writer,documentation,How do you maintain documentation consistency?,behavioral,advanced
+technical_writer,documentation,What is API documentation?,technical,intermediate
+technical_writer,tools,How do you use Markdown for documentation?,technical,beginner
+technical_writer,tools,What is GitBook and its features?,technical,intermediate
+technical_writer,tools,How do you create interactive documentation?,technical,advanced
+technical_writer,tools,What are documentation generation tools?,technical,intermediate
+technical_writer,tools,How do you implement version control for documentation?,technical,advanced
+sales_engineer,technical_sales,How do you explain complex technical concepts to non-technical customers?,behavioral,intermediate
+sales_engineer,technical_sales,What is solution selling methodology?,behavioral,intermediate
+sales_engineer,technical_sales,How do you conduct technical demos?,behavioral,intermediate
+sales_engineer,technical_sales,What is consultative selling approach?,behavioral,advanced
+sales_engineer,technical_sales,How do you handle technical objections?,behavioral,advanced
+sales_engineer,crm,How do you use Salesforce effectively?,technical,intermediate
+sales_engineer,crm,What are lead qualification criteria?,behavioral,intermediate
+sales_engineer,crm,How do you track sales pipeline?,behavioral,intermediate
+sales_engineer,crm,What is customer lifecycle management?,behavioral,advanced
+sales_engineer,crm,How do you implement account-based marketing?,behavioral,advanced
+marketing_analyst,analytics,What is Google Analytics and its key metrics?,technical,intermediate
+marketing_analyst,analytics,How do you set up conversion tracking?,technical,intermediate
+marketing_analyst,analytics,What is attribution modeling?,technical,advanced
+marketing_analyst,analytics,How do you analyze customer behavior?,behavioral,intermediate
+marketing_analyst,analytics,What are cohort analysis techniques?,technical,advanced
+marketing_analyst,seo,What is search engine optimization?,technical,beginner
+marketing_analyst,seo,How do you conduct keyword research?,technical,intermediate
+marketing_analyst,seo,What are on-page SEO factors?,technical,intermediate
+marketing_analyst,seo,How do you analyze SEO performance?,technical,intermediate
+marketing_analyst,seo,What is technical SEO?,technical,advanced
+marketing_analyst,social_media,How do you measure social media ROI?,behavioral,intermediate
+marketing_analyst,social_media,What are social media analytics tools?,technical,intermediate
+marketing_analyst,social_media,How do you create social media strategies?,behavioral,intermediate
+marketing_analyst,social_media,What is influencer marketing?,behavioral,intermediate
+marketing_analyst,social_media,How do you handle social media crises?,behavioral,advanced
+hr_specialist,recruitment,What is the recruitment process?,behavioral,beginner
+hr_specialist,recruitment,How do you screen candidates effectively?,behavioral,intermediate
+hr_specialist,recruitment,What are behavioral interview techniques?,behavioral,intermediate
+hr_specialist,recruitment,How do you assess cultural fit?,behavioral,advanced
+hr_specialist,recruitment,What is diversity and inclusion in hiring?,behavioral,advanced
+hr_specialist,performance_management,How do you conduct performance reviews?,behavioral,intermediate
+hr_specialist,performance_management,What is 360-degree feedback?,behavioral,intermediate
+hr_specialist,performance_management,How do you set SMART goals?,behavioral,intermediate
+hr_specialist,performance_management,What is performance improvement planning?,behavioral,advanced
+hr_specialist,performance_management,How do you handle underperformance?,behavioral,advanced
+hr_specialist,employee_relations,How do you resolve workplace conflicts?,behavioral,intermediate
+hr_specialist,employee_relations,What is employee engagement?,behavioral,intermediate
+hr_specialist,employee_relations,How do you conduct exit interviews?,behavioral,intermediate
+hr_specialist,employee_relations,What are employee retention strategies?,behavioral,advanced
+hr_specialist,employee_relations,How do you handle workplace harassment?,behavioral,advanced
+finance_analyst,financial_modeling,What is discounted cash flow analysis?,technical,intermediate
+finance_analyst,financial_modeling,How do you build financial models?,technical,advanced
+finance_analyst,financial_modeling,What is sensitivity analysis?,technical,advanced
+finance_analyst,financial_modeling,How do you value a company?,technical,expert
+finance_analyst,financial_modeling,What are the key financial ratios?,technical,intermediate
+finance_analyst,excel,How do you use pivot tables in Excel?,technical,intermediate
+finance_analyst,excel,What are Excel financial functions?,technical,intermediate
+finance_analyst,excel,How do you create dashboards in Excel?,technical,advanced
+finance_analyst,excel,What is VBA and its applications?,technical,advanced
+finance_analyst,excel,How do you perform scenario analysis in Excel?,technical,advanced
+finance_analyst,accounting,What are the fundamental accounting principles?,technical,beginner
+finance_analyst,accounting,How do you prepare financial statements?,technical,intermediate
+finance_analyst,accounting,What is the difference between GAAP and IFRS?,technical,intermediate
+finance_analyst,accounting,How do you analyze working capital?,technical,advanced
+finance_analyst,accounting,What is cost accounting?,technical,intermediate
+operations_manager,process_improvement,What is Lean methodology?,behavioral,intermediate
+operations_manager,process_improvement,How do you implement Six Sigma?,behavioral,advanced
+operations_manager,process_improvement,What is process mapping?,behavioral,intermediate
+operations_manager,process_improvement,How do you identify bottlenecks?,behavioral,intermediate
+operations_manager,process_improvement,What is continuous improvement?,behavioral,intermediate
+operations_manager,supply_chain,What is supply chain management?,behavioral,intermediate
+operations_manager,supply_chain,How do you optimize inventory levels?,behavioral,advanced
+operations_manager,supply_chain,What is vendor management?,behavioral,intermediate
+operations_manager,supply_chain,How do you handle supply chain disruptions?,behavioral,advanced
+operations_manager,supply_chain,What is demand forecasting?,behavioral,advanced
+operations_manager,quality_control,What is quality assurance vs quality control?,behavioral,intermediate
+operations_manager,quality_control,How do you implement quality management systems?,behavioral,advanced
+operations_manager,quality_control,What are statistical process control methods?,technical,advanced
+operations_manager,quality_control,How do you conduct root cause analysis?,behavioral,advanced
+operations_manager,quality_control,What is total quality management?,behavioral,advanced
+customer_success_manager,retention,What is customer lifetime value?,behavioral,intermediate
+customer_success_manager,retention,How do you reduce customer churn?,behavioral,advanced
+customer_success_manager,retention,What are customer success metrics?,behavioral,intermediate
+customer_success_manager,retention,How do you onboard new customers?,behavioral,intermediate
+customer_success_manager,retention,What is customer health scoring?,behavioral,advanced
+customer_success_manager,support,How do you handle escalated customer issues?,behavioral,intermediate
+customer_success_manager,support,What is multi-channel customer support?,behavioral,intermediate
+customer_success_manager,support,How do you measure customer satisfaction?,behavioral,intermediate
+customer_success_manager,support,What are best practices for customer communication?,behavioral,intermediate
+customer_success_manager,support,How do you build customer relationships?,behavioral,advanced
+general,adaptability,How do you handle rapid technology changes?,behavioral,intermediate
+general,adaptability,Describe a time when you had to pivot your approach.,behavioral,intermediate
+general,adaptability,How do you learn new skills quickly?,behavioral,intermediate
+general,adaptability,How do you handle uncertainty in projects?,behavioral,advanced
+general,adaptability,What strategies do you use to stay current with industry trends?,behavioral,intermediate
+general,collaboration,How do you work with difficult team members?,behavioral,intermediate
+general,collaboration,Describe your experience with cross-functional teams.,behavioral,intermediate
+general,collaboration,How do you handle conflicting priorities from different stakeholders?,behavioral,advanced
+general,collaboration,What tools do you use for team collaboration?,behavioral,beginner
+general,collaboration,How do you ensure effective communication in remote teams?,behavioral,intermediate
+general,critical_thinking,How do you approach complex problem solving?,behavioral,intermediate
+general,critical_thinking,Describe a time when you challenged the status quo.,behavioral,advanced
+general,critical_thinking,How do you evaluate the credibility of information?,behavioral,intermediate
+general,critical_thinking,What is your process for making difficult decisions?,behavioral,advanced
+general,critical_thinking,How do you handle ambiguous requirements?,behavioral,intermediate
+general,innovation,Describe an innovative solution you've implemented.,behavioral,advanced
+general,innovation,How do you foster creativity in your work?,behavioral,intermediate
+general,innovation,What is your approach to experimenting with new technologies?,behavioral,intermediate
+general,innovation,How do you balance innovation with practicality?,behavioral,advanced
+general,innovation,Describe a time when you automated a manual process.,behavioral,intermediate
+general,customer_focus,How do you understand customer needs?,behavioral,intermediate
+general,customer_focus,Describe a time when you went above and beyond for a customer.,behavioral,intermediate
+general,customer_focus,How do you handle negative customer feedback?,behavioral,intermediate
+general,customer_focus,What is your approach to improving customer experience?,behavioral,advanced
+general,customer_focus,How do you prioritize competing customer requests?,behavioral,advanced
+general,results_orientation,How do you set and achieve goals?,behavioral,intermediate
+general,results_orientation,Describe a time when you exceeded expectations.,behavioral,intermediate
+general,results_orientation,How do you measure success in your role?,behavioral,intermediate
+general,results_orientation,What do you do when you're not meeting targets?,behavioral,advanced
+general,results_orientation,How do you maintain quality while working under pressure?,behavioral,advanced
+general,ownership,Describe a project you owned from start to finish.,behavioral,intermediate
+general,ownership,How do you take accountability for mistakes?,behavioral,intermediate
+general,ownership,What does ownership mean to you in a work context?,behavioral,intermediate
+general,ownership,How do you ensure projects stay on track?,behavioral,advanced
+general,ownership,Describe a time when you took initiative without being asked.,behavioral,intermediate
+startup,mvp,What is a minimum viable product?,behavioral,beginner
+startup,mvp,How do you prioritize features for an MVP?,behavioral,intermediate
+startup,mvp,What is the build-measure-learn cycle?,behavioral,intermediate
+startup,mvp,How do you validate product-market fit?,behavioral,advanced
+startup,mvp,What metrics do you track for early-stage products?,behavioral,intermediate
+startup,scaling,How do you scale a technical team?,behavioral,advanced
+startup,scaling,What challenges arise when scaling infrastructure?,technical,advanced
+startup,scaling,How do you maintain company culture during growth?,behavioral,advanced
+startup,scaling,What is technical debt and how do you manage it?,technical,advanced
+startup,scaling,How do you scale customer support operations?,behavioral,advanced
+startup,fundraising,What are the different stages of startup funding?,behavioral,intermediate
+startup,fundraising,How do you prepare for investor pitches?,behavioral,advanced
+startup,fundraising,What metrics do investors look for?,behavioral,advanced
+startup,fundraising,How do you value an early-stage startup?,behavioral,expert
+startup,fundraising,What is due diligence in fundraising?,behavioral,advanced
+enterprise,governance,What is IT governance?,behavioral,intermediate
+enterprise,governance,How do you ensure regulatory compliance?,behavioral,advanced
+enterprise,governance,What are change management processes?,behavioral,intermediate
+enterprise,governance,How do you handle data governance?,behavioral,advanced
+enterprise,governance,What is enterprise risk management?,behavioral,advanced
+enterprise,architecture,What is enterprise architecture?,technical,advanced
+enterprise,architecture,How do you design scalable systems?,technical,expert
+enterprise,architecture,What are microservices vs monoliths?,technical,advanced
+enterprise,architecture,How do you handle system integration?,technical,advanced
+enterprise,architecture,What is API gateway architecture?,technical,advanced
+consulting,client_management,How do you manage client expectations?,behavioral,intermediate
+consulting,client_management,Describe a challenging client situation you handled.,behavioral,advanced
+consulting,client_management,How do you build trust with new clients?,behavioral,intermediate
+consulting,client_management,What is your approach to stakeholder management?,behavioral,advanced
+consulting,client_management,How do you handle scope creep in consulting projects?,behavioral,advanced
+consulting,analysis,How do you conduct business analysis?,behavioral,intermediate
+consulting,analysis,What frameworks do you use for strategic analysis?,behavioral,advanced
+consulting,analysis,How do you gather requirements from stakeholders?,behavioral,intermediate
+consulting,analysis,What is your approach to data analysis?,behavioral,intermediate
+consulting,analysis,How do you present findings to executives?,behavioral,advanced
+freelancer,time_management,How do you manage multiple client projects?,behavioral,intermediate
+freelancer,time_management,What tools do you use for project tracking?,behavioral,intermediate
+freelancer,time_management,How do you handle competing deadlines?,behavioral,advanced
+freelancer,time_management,What is your process for estimating project timelines?,behavioral,advanced
+freelancer,time_management,How do you maintain work-life balance as a freelancer?,behavioral,intermediate
+freelancer,business_development,How do you find new clients?,behavioral,intermediate
+freelancer,business_development,What is your pricing strategy?,behavioral,advanced
+freelancer,business_development,How do you handle contract negotiations?,behavioral,advanced
+freelancer,business_development,What is your approach to client retention?,behavioral,advanced
+freelancer,business_development,How do you handle difficult clients?,behavioral,advanced
+intern,learning,What are your learning goals for this internship?,behavioral,beginner
+intern,learning,How do you approach learning new technologies?,behavioral,beginner
+intern,learning,What resources do you use to improve your skills?,behavioral,beginner
+intern,learning,How do you seek feedback and apply it?,behavioral,intermediate
+intern,learning,What challenges do you expect in this role?,behavioral,beginner
+intern,contribution,What unique perspective do you bring?,behavioral,beginner
+intern,contribution,How do you plan to contribute to the team?,behavioral,beginner
+intern,contribution,What projects are you most excited to work on?,behavioral,beginner
+intern,contribution,How do you handle tasks outside your comfort zone?,behavioral,intermediate
+intern,contribution,What questions do you have about the role?,behavioral,beginner
+cloud_engineer,aws,What are AWS EC2 instance types?,technical,intermediate
+cloud_engineer,aws,How do you implement auto-scaling in AWS?,technical,advanced
+cloud_engineer,aws,What is AWS Lambda and its use cases?,technical,intermediate
+cloud_engineer,aws,How do you design highly available architecture in AWS?,technical,expert
+cloud_engineer,aws,What are AWS VPC components?,technical,intermediate
+cloud_engineer,aws,How do you implement AWS security best practices?,technical,advanced
+cloud_engineer,aws,What is AWS CloudFormation?,technical,intermediate
+cloud_engineer,aws,How do you optimize AWS costs?,technical,advanced
+cloud_engineer,aws,What are AWS storage services and when to use each?,technical,intermediate
+cloud_engineer,aws,How do you implement disaster recovery in AWS?,technical,advanced
+cloud_engineer,azure,What are Azure resource groups?,technical,intermediate
+cloud_engineer,azure,How do you implement Azure Active Directory?,technical,intermediate
+cloud_engineer,azure,What is Azure DevOps and its components?,technical,intermediate
+cloud_engineer,azure,How do you design Azure network topology?,technical,advanced
+cloud_engineer,azure,What are Azure monitoring and logging services?,technical,intermediate
+cloud_engineer,gcp,What are Google Cloud compute services?,technical,intermediate
+cloud_engineer,gcp,How do you implement BigQuery for analytics?,technical,advanced
+cloud_engineer,gcp,What is Google Kubernetes Engine?,technical,intermediate
+cloud_engineer,gcp,How do you design multi-region architecture in GCP?,technical,advanced
+cloud_engineer,gcp,What are GCP identity and access management features?,technical,intermediate
+sre_engineer,monitoring,What is observability in distributed systems?,technical,advanced
+sre_engineer,monitoring,How do you implement SLIs and SLOs?,technical,advanced
+sre_engineer,monitoring,What are the four golden signals of monitoring?,technical,intermediate
+sre_engineer,monitoring,How do you design alerting strategies?,technical,advanced
+sre_engineer,monitoring,What is distributed tracing?,technical,advanced
+sre_engineer,reliability,What is the error budget concept?,technical,advanced
+sre_engineer,reliability,How do you conduct blameless postmortems?,behavioral,advanced
+sre_engineer,reliability,What is chaos engineering?,technical,advanced
+sre_engineer,reliability,How do you implement circuit breakers?,technical,advanced
+sre_engineer,reliability,What is the difference between availability and reliability?,technical,intermediate
+sre_engineer,automation,How do you implement infrastructure as code?,technical,advanced
+sre_engineer,automation,What are runbooks and their importance?,behavioral,intermediate
+sre_engineer,automation,How do you automate incident response?,technical,advanced
+sre_engineer,automation,What is configuration management?,technical,intermediate
+sre_engineer,automation,How do you implement automated testing for infrastructure?,technical,advanced
+network_engineer,protocols,What is the TCP/IP protocol suite?,technical,intermediate
+network_engineer,protocols,How does BGP routing work?,technical,advanced
+network_engineer,protocols,What is OSPF and its features?,technical,advanced
+network_engineer,protocols,How do you troubleshoot DNS issues?,technical,intermediate
+network_engineer,protocols,What are the differences between IPv4 and IPv6?,technical,intermediate
+network_engineer,security,How do you implement network segmentation?,technical,advanced
+network_engineer,security,What are intrusion detection systems?,technical,intermediate
+network_engineer,security,How do you configure VPN tunnels?,technical,intermediate
+network_engineer,security,What is network access control?,technical,advanced
+network_engineer,security,How do you implement zero trust networking?,technical,expert
+network_engineer,wireless,How do you design Wi-Fi networks?,technical,intermediate
+network_engineer,wireless,What are wireless security protocols?,technical,intermediate
+network_engineer,wireless,How do you troubleshoot wireless connectivity?,technical,intermediate
+network_engineer,wireless,What is Wi-Fi 6 and its improvements?,technical,intermediate
+network_engineer,wireless,How do you optimize wireless performance?,technical,advanced
+platform_engineer,containerization,What is container orchestration?,technical,intermediate
+platform_engineer,containerization,How do you design Kubernetes clusters?,technical,advanced
+platform_engineer,containerization,What are Helm charts and their benefits?,technical,intermediate
+platform_engineer,containerization,How do you implement service mesh?,technical,expert
+platform_engineer,containerization,What is container security best practices?,technical,advanced
+platform_engineer,cicd,How do you design CI/CD pipelines?,technical,advanced
+platform_engineer,cicd,What is GitOps methodology?,technical,advanced
+platform_engineer,cicd,How do you implement blue-green deployments?,technical,advanced
+platform_engineer,cicd,What are canary deployments?,technical,intermediate
+platform_engineer,cicd,How do you handle secrets in CI/CD pipelines?,technical,advanced
+security_architect,design,How do you design secure architecture?,technical,expert
+security_architect,design,What is defense in depth strategy?,technical,advanced
+security_architect,design,How do you implement zero trust architecture?,technical,expert
+security_architect,design,What are security design principles?,technical,advanced
+security_architect,design,How do you conduct threat modeling?,technical,advanced
+security_architect,compliance,How do you implement security frameworks?,technical,advanced
+security_architect,compliance,What is security governance?,behavioral,advanced
+security_architect,compliance,How do you ensure continuous compliance?,technical,advanced
+security_architect,compliance,What is security risk assessment?,technical,advanced
+security_architect,compliance,How do you handle security incidents?,behavioral,advanced
+data_architect,modeling,What is dimensional modeling?,technical,advanced
+data_architect,modeling,How do you design data warehouses?,technical,expert
+data_architect,modeling,What is data lake architecture?,technical,advanced
+data_architect,modeling,How do you implement data governance?,behavioral,advanced
+data_architect,modeling,What are data modeling best practices?,technical,advanced
+data_architect,integration,How do you design ETL vs ELT processes?,technical,advanced
+data_architect,integration,What is real-time data processing?,technical,advanced
+data_architect,integration,How do you handle data quality issues?,technical,advanced
+data_architect,integration,What is master data management?,technical,advanced
+data_architect,integration,How do you implement data lineage?,technical,advanced
+solution_architect,design,How do you gather architectural requirements?,behavioral,advanced
+solution_architect,design,What is service-oriented architecture?,technical,advanced
+solution_architect,design,How do you design for scalability?,technical,expert
+solution_architect,design,What are architectural patterns?,technical,advanced
+solution_architect,design,How do you make technology decisions?,behavioral,advanced
+solution_architect,communication,How do you present architecture to stakeholders?,behavioral,advanced
+solution_architect,communication,How do you document architectural decisions?,behavioral,intermediate
+solution_architect,communication,What is your approach to technical leadership?,behavioral,advanced
+solution_architect,communication,How do you handle architectural trade-offs?,behavioral,expert
+solution_architect,communication,How do you ensure architectural compliance?,behavioral,advanced
+technical_lead,mentorship,How do you mentor junior developers?,behavioral,advanced
+technical_lead,mentorship,What is your approach to code reviews?,behavioral,intermediate
+technical_lead,mentorship,How do you handle knowledge sharing?,behavioral,intermediate
+technical_lead,mentorship,How do you develop team technical skills?,behavioral,advanced
+technical_lead,mentorship,What is your leadership style?,behavioral,advanced
+technical_lead,decision_making,How do you make technical decisions?,behavioral,advanced
+technical_lead,decision_making,How do you balance technical debt vs new features?,technical,advanced
+technical_lead,decision_making,What is your approach to technology evaluation?,behavioral,advanced
+technical_lead,decision_making,How do you handle disagreements on technical approach?,behavioral,advanced
+technical_lead,decision_making,How do you ensure code quality standards?,behavioral,advanced
+engineering_manager,people_management,How do you conduct one-on-one meetings?,behavioral,advanced
+engineering_manager,people_management,What is your approach to performance management?,behavioral,advanced
+engineering_manager,people_management,How do you handle team conflicts?,behavioral,advanced
+engineering_manager,people_management,How do you recruit and hire engineers?,behavioral,advanced
+engineering_manager,people_management,What is your approach to team building?,behavioral,intermediate
+engineering_manager,planning,How do you plan engineering roadmaps?,behavioral,advanced
+engineering_manager,planning,How do you estimate project timelines?,behavioral,advanced
+engineering_manager,planning,What is your approach to resource allocation?,behavioral,advanced
+engineering_manager,planning,How do you handle changing priorities?,behavioral,advanced
+engineering_manager,planning,How do you communicate with other departments?,behavioral,advanced
+product_owner,backlog,How do you prioritize product backlog?,behavioral,intermediate
+product_owner,backlog,What is your approach to user story writing?,behavioral,intermediate
+product_owner,backlog,How do you handle conflicting requirements?,behavioral,advanced
+product_owner,backlog,What is acceptance criteria?,behavioral,intermediate
+product_owner,backlog,How do you estimate user stories?,behavioral,intermediate
+product_owner,stakeholders,How do you manage product stakeholders?,behavioral,advanced
+product_owner,stakeholders,How do you gather product requirements?,behavioral,intermediate
+product_owner,stakeholders,What is your approach to user feedback?,behavioral,intermediate
+product_owner,stakeholders,How do you communicate product vision?,behavioral,advanced
+product_owner,stakeholders,How do you handle feature requests?,behavioral,intermediate
+scrum_master,facilitation,How do you facilitate scrum ceremonies?,behavioral,intermediate
+scrum_master,facilitation,What is your approach to retrospectives?,behavioral,intermediate
+scrum_master,facilitation,How do you handle team impediments?,behavioral,advanced
+scrum_master,facilitation,How do you coach agile practices?,behavioral,advanced
+scrum_master,facilitation,What is servant leadership?,behavioral,intermediate
+scrum_master,metrics,What metrics do you track in Scrum?,behavioral,intermediate
+scrum_master,metrics,How do you measure team velocity?,behavioral,intermediate
+scrum_master,metrics,What is burndown chart analysis?,behavioral,intermediate
+scrum_master,metrics,How do you track sprint goals?,behavioral,intermediate
+scrum_master,metrics,What is team health assessment?,behavioral,advanced
+systems_analyst,requirements,How do you gather system requirements?,behavioral,intermediate
+systems_analyst,requirements,What is requirements traceability?,behavioral,intermediate
+systems_analyst,requirements,How do you validate requirements?,behavioral,intermediate
+systems_analyst,requirements,What is use case analysis?,behavioral,intermediate
+systems_analyst,requirements,How do you handle changing requirements?,behavioral,advanced
+systems_analyst,modeling,What is system modeling?,technical,intermediate
+systems_analyst,modeling,How do you create process flows?,behavioral,intermediate
+systems_analyst,modeling,What are UML diagrams?,technical,intermediate
+systems_analyst,modeling,How do you document system architecture?,behavioral,intermediate
+systems_analyst,modeling,What is gap analysis?,behavioral,intermediate
+research_scientist,methodology,What is the scientific method?,behavioral,intermediate
+research_scientist,methodology,How do you design experiments?,behavioral,advanced
+research_scientist,methodology,What is statistical significance?,technical,intermediate
+research_scientist,methodology,How do you handle research ethics?,behavioral,advanced
+research_scientist,methodology,What is peer review process?,behavioral,intermediate
+research_scientist,publication,How do you write research papers?,behavioral,intermediate
+research_scientist,publication,What is literature review process?,behavioral,intermediate
+research_scientist,publication,How do you present research findings?,behavioral,intermediate
+research_scientist,publication,What are research collaboration strategies?,behavioral,advanced
+research_scientist,publication,How do you handle research data management?,behavioral,advanced
+academic,teaching,What is your teaching philosophy?,behavioral,intermediate
+academic,teaching,How do you engage students in learning?,behavioral,intermediate
+academic,teaching,What are active learning techniques?,behavioral,advanced
+academic,teaching,How do you assess student learning?,behavioral,intermediate
+academic,teaching,How do you handle diverse learning styles?,behavioral,advanced
+academic,curriculum,How do you design course curricula?,behavioral,advanced
+academic,curriculum,What is outcome-based education?,behavioral,intermediate
+academic,curriculum,How do you integrate technology in teaching?,behavioral,intermediate
+academic,curriculum,What is continuous curriculum improvement?,behavioral,advanced
+academic,curriculum,How do you stay current with field developments?,behavioral,intermediate
+startup_founder,vision,How do you develop product vision?,behavioral,advanced
+startup_founder,vision,What is your approach to market research?,behavioral,intermediate
+startup_founder,vision,How do you identify market opportunities?,behavioral,advanced
+startup_founder,vision,What is competitive analysis?,behavioral,intermediate
+startup_founder,vision,How do you validate business ideas?,behavioral,advanced
+startup_founder,execution,How do you build a founding team?,behavioral,advanced
+startup_founder,execution,What is your approach to product development?,behavioral,advanced
+startup_founder,execution,How do you manage cash flow?,behavioral,advanced
+startup_founder,execution,What is lean startup methodology?,behavioral,intermediate
+startup_founder,execution,How do you handle failure and pivoting?,behavioral,advanced
+entrepreneur,business_model,What are different business models?,behavioral,intermediate
+entrepreneur,business_model,How do you create value propositions?,behavioral,intermediate
+entrepreneur,business_model,What is customer segmentation?,behavioral,intermediate
+entrepreneur,business_model,How do you design revenue streams?,behavioral,advanced
+entrepreneur,business_model,What is business model validation?,behavioral,advanced
+entrepreneur,growth,What are growth hacking strategies?,behavioral,advanced
+entrepreneur,growth,How do you acquire first customers?,behavioral,advanced
+entrepreneur,growth,What is viral marketing?,behavioral,intermediate
+entrepreneur,growth,How do you scale customer acquisition?,behavioral,expert
+entrepreneur,growth,What are retention strategies?,behavioral,advanced
+venture_capitalist,evaluation,How do you evaluate startups?,behavioral,expert
+venture_capitalist,evaluation,What are key investment criteria?,behavioral,advanced
+venture_capitalist,evaluation,How do you assess market size?,behavioral,advanced
+venture_capitalist,evaluation,What is due diligence process?,behavioral,advanced
+venture_capitalist,evaluation,How do you value early-stage companies?,behavioral,expert
+venture_capitalist,portfolio,How do you support portfolio companies?,behavioral,advanced
+venture_capitalist,portfolio,What is your approach to board participation?,behavioral,expert
+venture_capitalist,portfolio,How do you help with strategic decisions?,behavioral,advanced
+venture_capitalist,portfolio,What is exit strategy planning?,behavioral,expert
+venture_capitalist,portfolio,How do you handle underperforming investments?,behavioral,advanced
+investment_banker,modeling,How do you build financial models for M&A?,technical,expert
+investment_banker,modeling,What is leveraged buyout analysis?,technical,expert
+investment_banker,modeling,How do you perform comparable company analysis?,technical,advanced
+investment_banker,modeling,What is discounted cash flow modeling?,technical,advanced
+investment_banker,modeling,How do you analyze credit risk?,technical,advanced
+investment_banker,transactions,What is the M&A process?,behavioral,advanced
+investment_banker,transactions,How do you conduct due diligence?,behavioral,advanced
+investment_banker,transactions,What are different deal structures?,behavioral,expert
+investment_banker,transactions,How do you negotiate transaction terms?,behavioral,expert
+investment_banker,transactions,What is post-merger integration?,behavioral,advanced
+management_consultant,frameworks,What is the McKinsey framework?,behavioral,advanced
+management_consultant,frameworks,How do you use the BCG matrix?,behavioral,intermediate
+management_consultant,frameworks,What is Porter's Five Forces?,behavioral,intermediate
+management_consultant,frameworks,How do you conduct SWOT analysis?,behavioral,intermediate
+management_consultant,frameworks,What is value chain analysis?,behavioral,advanced
+management_consultant,problem_solving,How do you structure complex problems?,behavioral,advanced
+management_consultant,problem_solving,What is hypothesis-driven approach?,behavioral,advanced
+management_consultant,problem_solving,How do you prioritize recommendations?,behavioral,advanced
+management_consultant,problem_solving,What is root cause analysis methodology?,behavioral,advanced
+management_consultant,problem_solving,How do you validate solutions?,behavioral,advanced
+brand_manager,strategy,How do you develop brand strategy?,behavioral,advanced
+brand_manager,strategy,What is brand positioning?,behavioral,intermediate
+brand_manager,strategy,How do you measure brand equity?,behavioral,advanced
+brand_manager,strategy,What is competitive brand analysis?,behavioral,intermediate
+brand_manager,strategy,How do you handle brand crises?,behavioral,advanced
+brand_manager,campaigns,How do you develop marketing campaigns?,behavioral,intermediate
+brand_manager,campaigns,What is integrated marketing communications?,behavioral,advanced
+brand_manager,campaigns,How do you measure campaign effectiveness?,behavioral,intermediate
+brand_manager,campaigns,What is digital brand management?,behavioral,intermediate
+brand_manager,campaigns,How do you manage brand partnerships?,behavioral,advanced
+digital_marketer,channels,What are digital marketing channels?,behavioral,beginner
+digital_marketer,channels,How do you optimize social media marketing?,behavioral,intermediate
+digital_marketer,channels,What is content marketing strategy?,behavioral,intermediate
+digital_marketer,channels,How do you implement email marketing?,behavioral,intermediate
+digital_marketer,channels,What is influencer marketing approach?,behavioral,intermediate
+digital_marketer,analytics,How do you track digital marketing ROI?,behavioral,intermediate
+digital_marketer,analytics,What are marketing attribution models?,behavioral,advanced
+digital_marketer,analytics,How do you use Google Analytics?,technical,intermediate
+digital_marketer,analytics,What is marketing automation?,behavioral,intermediate
+digital_marketer,analytics,How do you optimize conversion funnels?,behavioral,advanced
+content_creator,strategy,What is content strategy development?,behavioral,intermediate
+content_creator,strategy,How do you identify target audiences?,behavioral,intermediate
+content_creator,strategy,What is editorial calendar planning?,behavioral,intermediate
+content_creator,strategy,How do you measure content performance?,behavioral,intermediate
+content_creator,strategy,What is content distribution strategy?,behavioral,advanced
+content_creator,production,What is your content creation process?,behavioral,intermediate
+content_creator,production,How do you maintain content quality?,behavioral,intermediate
+content_creator,production,What tools do you use for content creation?,technical,intermediate
+content_creator,production,How do you optimize content for SEO?,behavioral,intermediate
+content_creator,production,What is multimedia content strategy?,behavioral,advanced
+growth_marketer,experimentation,What is growth hacking methodology?,behavioral,advanced
+growth_marketer,experimentation,How do you design A/B tests?,behavioral,intermediate
+growth_marketer,experimentation,What is statistical significance in testing?,technical,intermediate
+growth_marketer,experimentation,How do you prioritize growth experiments?,behavioral,advanced
+growth_marketer,experimentation,What is conversion rate optimization?,behavioral,intermediate
+growth_marketer,metrics,What are North Star metrics?,behavioral,intermediate
+growth_marketer,metrics,How do you track user acquisition costs?,behavioral,intermediate
+growth_marketer,metrics,What is lifetime value calculation?,behavioral,intermediate
+growth_marketer,metrics,How do you analyze cohort data?,behavioral,advanced
+growth_marketer,metrics,What are pirate metrics (AARRR)?,behavioral,intermediate
+community_manager,engagement,How do you build online communities?,behavioral,intermediate
+community_manager,engagement,What is community engagement strategy?,behavioral,intermediate
+community_manager,engagement,How do you handle community conflicts?,behavioral,advanced
+community_manager,engagement,What are community guidelines?,behavioral,intermediate
+community_manager,engagement,How do you measure community health?,behavioral,advanced
+community_manager,content,How do you create community content?,behavioral,intermediate
+community_manager,content,What is user-generated content strategy?,behavioral,intermediate
+community_manager,content,How do you moderate community discussions?,behavioral,intermediate
+community_manager,content,What is community event planning?,behavioral,intermediate
+community_manager,content,How do you encourage community participation?,behavioral,advanced
+legal_counsel,contracts,How do you draft commercial contracts?,behavioral,advanced
+legal_counsel,contracts,What is contract negotiation strategy?,behavioral,advanced
+legal_counsel,contracts,How do you handle contract disputes?,behavioral,advanced
+legal_counsel,contracts,What is risk assessment in contracts?,behavioral,advanced
+legal_counsel,contracts,How do you ensure regulatory compliance?,behavioral,advanced
+legal_counsel,intellectual_property,What is intellectual property protection?,behavioral,intermediate
+legal_counsel,intellectual_property,How do you handle patent applications?,behavioral,advanced
+legal_counsel,intellectual_property,What is trademark management?,behavioral,intermediate
+legal_counsel,intellectual_property,How do you conduct IP due diligence?,behavioral,advanced
+legal_counsel,intellectual_property,What is copyright law application?,behavioral,intermediate
+compliance_officer,regulations,How do you stay updated on regulations?,behavioral,intermediate
+compliance_officer,regulations,What is regulatory risk assessment?,behavioral,advanced
+compliance_officer,regulations,How do you implement compliance programs?,behavioral,advanced
+compliance_officer,regulations,What is regulatory reporting?,behavioral,intermediate
+compliance_officer,regulations,How do you handle regulatory changes?,behavioral,advanced
+compliance_officer,auditing,How do you conduct compliance audits?,behavioral,advanced
+compliance_officer,auditing,What is audit trail documentation?,behavioral,intermediate
+compliance_officer,auditing,How do you remediate compliance issues?,behavioral,advanced
+compliance_officer,auditing,What is internal controls assessment?,behavioral,advanced
+compliance_officer,auditing,How do you work with external auditors?,behavioral,advanced
+cto,strategy,What is your technology vision for the company?,behavioral,expert
+cto,strategy,How do you align technology with business goals?,behavioral,expert
+cto,strategy,What is your approach to technology investment?,behavioral,expert
+cto,strategy,How do you evaluate emerging technologies?,behavioral,expert
+cto,strategy,What is digital transformation strategy?,behavioral,expert
+cto,leadership,How do you build and scale engineering teams?,behavioral,expert
+cto,leadership,What is your approach to technical culture?,behavioral,expert
+cto,leadership,How do you communicate with the board?,behavioral,expert
+cto,leadership,What is your technology roadmap process?,behavioral,expert
+cto,leadership,How do you handle technology crises?,behavioral,expert
+cio,governance,What is IT governance framework?,behavioral,expert
+cio,governance,How do you manage IT budgets?,behavioral,expert
+cio,governance,What is enterprise architecture strategy?,behavioral,expert
+cio,governance,How do you ensure IT security?,behavioral,expert
+cio,governance,What is IT service management?,behavioral,advanced
+cio,digital_transformation,How do you lead digital initiatives?,behavioral,expert
+cio,digital_transformation,What is enterprise modernization?,behavioral,expert
+cio,digital_transformation,How do you manage legacy systems?,behavioral,expert
+cio,digital_transformation,What is cloud adoption strategy?,behavioral,expert
+cio,digital_transformation,How do you measure digital ROI?,behavioral,expert
+vp_engineering,scaling,How do you scale engineering organizations?,behavioral,expert
+vp_engineering,scaling,What is your hiring and retention strategy?,behavioral,expert
+vp_engineering,scaling,How do you maintain engineering quality at scale?,behavioral,expert
+vp_engineering,scaling,What is your approach to engineering metrics?,behavioral,expert
+vp_engineering,scaling,How do you handle technical debt across teams?,behavioral,expert
+vp_engineering,culture,How do you build engineering culture?,behavioral,expert
+vp_engineering,culture,What is your approach to innovation?,behavioral,expert
+vp_engineering,culture,How do you promote technical excellence?,behavioral,expert
+vp_engineering,culture,What is your diversity and inclusion strategy?,behavioral,expert
+vp_engineering,culture,How do you handle remote engineering teams?,behavioral,expert
+director_product,vision,How do you develop product strategy?,behavioral,expert
+director_product,vision,What is your approach to market research?,behavioral,expert
+director_product,vision,How do you define product roadmaps?,behavioral,expert
+director_product,vision,What is competitive positioning?,behavioral,expert
+director_product,vision,How do you measure product success?,behavioral,expert
+director_product,execution,How do you prioritize product initiatives?,behavioral,expert
+director_product,execution,What is your approach to product launches?,behavioral,expert
+director_product,execution,How do you work with engineering teams?,behavioral,expert
+director_product,execution,What is agile product management?,behavioral,expert
+director_product,execution,How do you handle product failures?,behavioral,expert
+head_of_design,strategy,What is design strategy development?,behavioral,expert
+head_of_design,strategy,How do you align design with business goals?,behavioral,expert
+head_of_design,strategy,What is design system governance?,behavioral,expert
+head_of_design,strategy,How do you measure design impact?,behavioral,expert
+head_of_design,strategy,What is user experience strategy?,behavioral,expert
+head_of_design,team,How do you build design teams?,behavioral,expert
+head_of_design,team,What is design culture development?,behavioral,expert
+head_of_design,team,How do you mentor design leaders?,behavioral,expert
+head_of_design,team,What is design process optimization?,behavioral,expert
+head_of_design,team,How do you promote design thinking?,behavioral,expert
+senior_architect,patterns,What are enterprise integration patterns?,technical,expert
+senior_architect,patterns,How do you design event-driven architectures?,technical,expert
+senior_architect,patterns,What is CQRS and event sourcing?,technical,expert
+senior_architect,patterns,How do you implement saga patterns?,technical,expert
+senior_architect,patterns,What are distributed system patterns?,technical,expert
+senior_architect,performance,How do you design for high performance?,technical,expert
+senior_architect,performance,What is performance testing strategy?,technical,expert
+senior_architect,performance,How do you optimize system latency?,technical,expert
+senior_architect,performance,What is capacity planning?,technical,expert
+senior_architect,performance,How do you handle system bottlenecks?,technical,expert
+principal_engineer,innovation,How do you drive technical innovation?,behavioral,expert
+principal_engineer,innovation,What is your approach to R&D?,behavioral,expert
+principal_engineer,innovation,How do you evaluate new technologies?,behavioral,expert
+principal_engineer,innovation,What is technical vision development?,behavioral,expert
+principal_engineer,innovation,How do you prototype solutions?,technical,expert
+principal_engineer,influence,How do you influence without authority?,behavioral,expert
+principal_engineer,influence,What is cross-team technical leadership?,behavioral,expert
+principal_engineer,influence,How do you mentor senior engineers?,behavioral,expert
+principal_engineer,influence,What is technical strategy communication?,behavioral,expert
+principal_engineer,influence,How do you drive architectural decisions?,behavioral,expert
+distinguished_engineer,expertise,What is deep technical expertise?,behavioral,expert
+distinguished_engineer,expertise,How do you stay at cutting edge?,behavioral,expert
+distinguished_engineer,expertise,What is technical thought leadership?,behavioral,expert
+distinguished_engineer,expertise,How do you contribute to open source?,behavioral,expert
+distinguished_engineer,expertise,What is industry standard contribution?,behavioral,expert
+distinguished_engineer,impact,How do you create company-wide impact?,behavioral,expert
+distinguished_engineer,impact,What is strategic technical planning?,behavioral,expert
+distinguished_engineer,impact,How do you influence industry direction?,behavioral,expert
+distinguished_engineer,impact,What is your publication strategy?,behavioral,expert
+distinguished_engineer,impact,How do you build external reputation?,behavioral,expert
+staff_engineer,leadership,What is staff engineer responsibility?,behavioral,expert
+staff_engineer,leadership,How do you lead technical initiatives?,behavioral,expert
+staff_engineer,leadership,What is your approach to technical mentoring?,behavioral,expert
+staff_engineer,leadership,How do you drive technical standards?,behavioral,expert
+staff_engineer,leadership,What is cross-functional collaboration?,behavioral,expert
+staff_engineer,execution,How do you deliver complex projects?,behavioral,expert
+staff_engineer,execution,What is technical project management?,behavioral,expert
+staff_engineer,execution,How do you handle technical risks?,behavioral,expert
+staff_engineer,execution,What is quality assurance approach?,behavioral,expert
+staff_engineer,execution,How do you ensure delivery timelines?,behavioral,expert
+senior_staff_engineer,vision,What is long-term technical vision?,behavioral,expert
+senior_staff_engineer,vision,How do you shape technology direction?,behavioral,expert
+senior_staff_engineer,vision,What is architectural evolution?,behavioral,expert
+senior_staff_engineer,vision,How do you anticipate technical needs?,behavioral,expert
+senior_staff_engineer,vision,What is technology trend analysis?,behavioral,expert
+senior_staff_engineer,organization,How do you influence organizational change?,behavioral,expert
+senior_staff_engineer,organization,What is technical culture development?,behavioral,expert
+senior_staff_engineer,organization,How do you scale technical practices?,behavioral,expert
+senior_staff_engineer,organization,What is engineering excellence?,behavioral,expert
+senior_staff_engineer,organization,How do you drive technical transformation?,behavioral,expert
+blockchain_architect,consensus,What are consensus mechanisms in blockchain?,technical,expert
+blockchain_architect,consensus,How do you design blockchain protocols?,technical,expert
+blockchain_architect,consensus,What is Byzantine fault tolerance?,technical,expert
+blockchain_architect,consensus,How do you handle blockchain scalability?,technical,expert
+blockchain_architect,consensus,What are layer 2 solutions?,technical,expert
+blockchain_architect,defi,What is decentralized finance architecture?,technical,expert
+blockchain_architect,defi,How do you design smart contract systems?,technical,expert
+blockchain_architect,defi,What are tokenomics principles?,technical,expert
+blockchain_architect,defi,How do you implement governance tokens?,technical,expert
+blockchain_architect,defi,What is yield farming mechanism?,technical,expert
+quantum_computing_engineer,algorithms,What are quantum algorithms?,technical,expert
+quantum_computing_engineer,algorithms,How does quantum supremacy work?,technical,expert
+quantum_computing_engineer,algorithms,What is quantum error correction?,technical,expert
+quantum_computing_engineer,algorithms,How do you implement quantum gates?,technical,expert
+quantum_computing_engineer,algorithms,What is quantum entanglement application?,technical,expert
+quantum_computing_engineer,hardware,What are quantum hardware architectures?,technical,expert
+quantum_computing_engineer,hardware,How do you design quantum circuits?,technical,expert
+quantum_computing_engineer,hardware,What is quantum decoherence?,technical,expert
+quantum_computing_engineer,hardware,How do you calibrate quantum systems?,technical,expert
+quantum_computing_engineer,hardware,What is quantum noise mitigation?,technical,expert
+robotics_engineer,control_systems,What are robotic control algorithms?,technical,advanced
+robotics_engineer,control_systems,How do you implement PID controllers?,technical,advanced
+robotics_engineer,control_systems,What is inverse kinematics?,technical,advanced
+robotics_engineer,control_systems,How do you design motion planning?,technical,expert
+robotics_engineer,control_systems,What is sensor fusion in robotics?,technical,advanced
+robotics_engineer,ai_integration,How do you integrate AI in robotics?,technical,expert
+robotics_engineer,ai_integration,What is computer vision for robots?,technical,advanced
+robotics_engineer,ai_integration,How do you implement SLAM algorithms?,technical,expert
+robotics_engineer,ai_integration,What is reinforcement learning in robotics?,technical,expert
+robotics_engineer,ai_integration,How do you design autonomous behaviors?,technical,expert
+ar_vr_developer,graphics,What is 3D graphics programming?,technical,advanced
+ar_vr_developer,graphics,How do you optimize VR rendering?,technical,advanced
+ar_vr_developer,graphics,What are shader programming techniques?,technical,advanced
+ar_vr_developer,graphics,How do you implement spatial audio?,technical,advanced
+ar_vr_developer,graphics,What is haptic feedback design?,technical,advanced
+ar_vr_developer,interaction,How do you design VR user interfaces?,technical,advanced
+ar_vr_developer,interaction,What is gesture recognition?,technical,advanced
+ar_vr_developer,interaction,How do you handle motion sickness?,technical,advanced
+ar_vr_developer,interaction,What is eye tracking implementation?,technical,advanced
+ar_vr_developer,interaction,How do you design immersive experiences?,behavioral,advanced
+iot_engineer,connectivity,What are IoT communication protocols?,technical,intermediate
+iot_engineer,connectivity,How do you implement MQTT?,technical,intermediate
+iot_engineer,connectivity,What is LoRaWAN architecture?,technical,advanced
+iot_engineer,connectivity,How do you design mesh networks?,technical,advanced
+iot_engineer,connectivity,What is edge computing in IoT?,technical,advanced
+iot_engineer,sensors,How do you integrate sensor data?,technical,intermediate
+iot_engineer,sensors,What is sensor calibration?,technical,intermediate
+iot_engineer,sensors,How do you handle sensor failures?,technical,advanced
+iot_engineer,sensors,What is predictive maintenance?,technical,advanced
+iot_engineer,sensors,How do you implement real-time monitoring?,technical,advanced
+embedded_engineer,microcontrollers,What are microcontroller architectures?,technical,intermediate
+embedded_engineer,microcontrollers,How do you program ARM processors?,technical,advanced
+embedded_engineer,microcontrollers,What is real-time operating system?,technical,advanced
+embedded_engineer,microcontrollers,How do you optimize power consumption?,technical,advanced
+embedded_engineer,microcontrollers,What is interrupt handling?,technical,intermediate
+embedded_engineer,firmware,How do you develop firmware?,technical,intermediate
+embedded_engineer,firmware,What is bootloader development?,technical,advanced
+embedded_engineer,firmware,How do you implement device drivers?,technical,advanced
+embedded_engineer,firmware,What is hardware abstraction layer?,technical,advanced
+embedded_engineer,firmware,How do you debug embedded systems?,technical,advanced
