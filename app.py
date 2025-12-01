@@ -233,7 +233,9 @@ def display_results(results: Dict):
         "🎤 Interview Prep",
         "📈 Advanced Analytics",
         "🚀 Professional Tools",
-        "🔥 AI Features"
+        "🔥 AI Features",
+        "🎯 Resume Scoring",
+        "🚀 Career Path"
     ])
     
     with tab1:
