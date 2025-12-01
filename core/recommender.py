@@ -716,3 +716,272 @@ class Recommender:
             return ['Database design', 'API architecture', 'Scalability concepts', 'Caching strategies']
         else:
             return ['Basic architecture patterns', 'Database relationships', 'API design principles']
+    
+    def generate_career_roadmap(self, current_skills: List[str], target_role: str, 
+                               experience_level: str = 'beginner') -> Dict:
+        """Generate detailed career roadmap with timeline."""
+        
+        # Define skill progression paths for different roles
+        role_progressions = {
+            'web_developer': {
+                'beginner': [
+                    {'month': 1, 'skills': ['HTML', 'CSS'], 'projects': ['Static website', 'CSS animations']},
+                    {'month': 2, 'skills': ['JavaScript'], 'projects': ['Interactive webpage', 'Calculator app']},
+                    {'month': 3, 'skills': ['React'], 'projects': ['Todo app', 'Weather dashboard']},
+                    {'month': 4, 'skills': ['Node.js', 'Express'], 'projects': ['REST API', 'Backend server']},
+                    {'month': 5, 'skills': ['Database', 'MongoDB'], 'projects': ['Full-stack app', 'User authentication']},
+                    {'month': 6, 'skills': ['Deployment', 'AWS'], 'projects': ['Deployed portfolio', 'Production app']}
+                ],
+                'intermediate': [
+                    {'month': 1, 'skills': ['Advanced React', 'Redux'], 'projects': ['E-commerce frontend']},
+                    {'month': 2, 'skills': ['TypeScript'], 'projects': ['Typed React application']},
+                    {'month': 3, 'skills': ['Testing', 'Jest'], 'projects': ['Test-driven development']},
+                    {'month': 4, 'skills': ['GraphQL'], 'projects': ['GraphQL API integration']},
+                    {'month': 5, 'skills': ['Docker', 'CI/CD'], 'projects': ['Containerized deployment']},
+                    {'month': 6, 'skills': ['System Design'], 'projects': ['Scalable architecture']}
+                ]
+            },
+            'mobile_developer': {
+                'beginner': [
+                    {'month': 1, 'skills': ['Dart', 'Flutter Basics'], 'projects': ['Hello World app', 'Basic UI']},
+                    {'month': 2, 'skills': ['Flutter Widgets'], 'projects': ['Calculator app', 'Todo list']},
+                    {'month': 3, 'skills': ['State Management'], 'projects': ['Shopping cart', 'User preferences']},
+                    {'month': 4, 'skills': ['API Integration'], 'projects': ['Weather app', 'News reader']},
+                    {'month': 5, 'skills': ['Local Storage', 'SQLite'], 'projects': ['Notes app', 'Expense tracker']},
+                    {'month': 6, 'skills': ['Firebase', 'Authentication'], 'projects': ['Social app', 'Chat application']}
+                ]
+            },
+            'data_analyst': {
+                'beginner': [
+                    {'month': 1, 'skills': ['Excel Advanced', 'SQL Basics'], 'projects': ['Sales analysis', 'Data cleaning']},
+                    {'month': 2, 'skills': ['Python', 'Pandas'], 'projects': ['Data manipulation', 'CSV analysis']},
+                    {'month': 3, 'skills': ['Data Visualization', 'Matplotlib'], 'projects': ['Chart creation', 'Dashboard']},
+                    {'month': 4, 'skills': ['Statistics', 'Hypothesis Testing'], 'projects': ['A/B testing', 'Statistical analysis']},
+                    {'month': 5, 'skills': ['Tableau', 'Power BI'], 'projects': ['Interactive dashboard', 'Business reports']},
+                    {'month': 6, 'skills': ['Machine Learning Basics'], 'projects': ['Predictive model', 'Classification']}
+                ]
+            }
+        }
+        
+        # Get appropriate progression
+        target_progression = role_progressions.get(target_role, role_progressions['web_developer'])
+        level_progression = target_progression.get(experience_level, target_progression['beginner'])
+        
+        # Identify gaps based on current skills
+        current_skills_lower = [skill.lower() for skill in current_skills]
+        
+        roadmap_steps = []
+        for step in level_progression:
+            step_skills = step['skills']
+            missing_skills = [skill for skill in step_skills if skill.lower() not in current_skills_lower]
+            
+            if missing_skills:  # Only include if there are skills to learn
+                roadmap_steps.append({
+                    'month': step['month'],
+                    'skills_to_learn': missing_skills,
+                    'all_skills': step_skills,
+                    'projects': step['projects'],
+                    'estimated_hours': len(missing_skills) * 20,  # 20 hours per skill
+                    'priority': 'High' if step['month'] <= 3 else 'Medium'
+                })
+        
+        # Generate learning resources for each step
+        for step in roadmap_steps:
+            step['resources'] = self._get_learning_resources_for_skills(step['skills_to_learn'])
+        
+        return {
+            'roadmap_steps': roadmap_steps,
+            'total_timeline_months': len(roadmap_steps),
+            'estimated_total_hours': sum(step['estimated_hours'] for step in roadmap_steps),
+            'next_milestone': roadmap_steps[0] if roadmap_steps else None,
+            'career_advice': self._generate_career_advice(target_role, experience_level)
+        }
+    
+    def _get_learning_resources_for_skills(self, skills: List[str]) -> Dict:
+        """Get learning resources for specific skills."""
+        resources = {
+            'courses': [],
+            'documentation': [],
+            'practice_sites': [],
+            'youtube_channels': []
+        }
+        
+        skill_resources = {
+            'html': {
+                'courses': ['freeCodeCamp HTML/CSS', 'MDN HTML Tutorial'],
+                'practice_sites': ['Codecademy', 'W3Schools'],
+                'youtube_channels': ['Traversy Media', 'The Net Ninja']
+            },
+            'css': {
+                'courses': ['CSS Grid Garden', 'Flexbox Froggy'],
+                'practice_sites': ['CSS Battle', 'Frontend Mentor'],
+                'youtube_channels': ['Kevin Powell', 'Layout Land']
+            },
+            'javascript': {
+                'courses': ['JavaScript30', 'Eloquent JavaScript'],
+                'practice_sites': ['Codewars', 'HackerRank JavaScript'],
+                'youtube_channels': ['Wes Bos', 'Fun Fun Function']
+            },
+            'react': {
+                'courses': ['React Official Tutorial', 'Scrimba React Course'],
+                'documentation': ['React.dev', 'React Router Docs'],
+                'youtube_channels': ['Codevolution', 'Academind']
+            },
+            'python': {
+                'courses': ['Python.org Tutorial', 'Automate the Boring Stuff'],
+                'practice_sites': ['LeetCode Python', 'Codewars Python'],
+                'youtube_channels': ['Corey Schafer', 'Real Python']
+            }
+        }
+        
+        for skill in skills:
+            skill_lower = skill.lower()
+            if skill_lower in skill_resources:
+                skill_res = skill_resources[skill_lower]
+                resources['courses'].extend(skill_res.get('courses', []))
+                resources['documentation'].extend(skill_res.get('documentation', []))
+                resources['practice_sites'].extend(skill_res.get('practice_sites', []))
+                resources['youtube_channels'].extend(skill_res.get('youtube_channels', []))
+        
+        return resources
+    
+    def _generate_career_advice(self, target_role: str, experience_level: str) -> List[str]:
+        """Generate career advice based on target role and experience level."""
+        advice = []
+        
+        if experience_level == 'beginner':
+            advice.extend([
+                'Focus on building a strong portfolio with real projects',
+                'Contribute to open source projects to gain experience',
+                'Join developer communities and attend meetups',
+                'Practice coding regularly and build the habit'
+            ])
+        
+        if target_role == 'web_developer':
+            advice.extend([
+                'Learn both frontend and backend technologies for versatility',
+                'Stay updated with modern frameworks and tools',
+                'Practice responsive design and accessibility'
+            ])
+        elif target_role == 'mobile_developer':
+            advice.extend([
+                'Choose between native (iOS/Android) or cross-platform (Flutter/React Native)',
+                'Understand mobile UX principles and design patterns',
+                'Learn about app store deployment and optimization'
+            ])
+        elif target_role == 'data_analyst':
+            advice.extend([
+                'Develop strong SQL skills as foundation',
+                'Learn to tell stories with data visualization',
+                'Understand business context for data analysis'
+            ])
+        
+        return advice
+    
+    def estimate_hiring_probability(self, resume_data: Dict, jd_data: Dict, 
+                                  match_data: Dict) -> Dict:
+        """Estimate probability of getting hired based on multiple factors."""
+        
+        # Factor 1: Skills Match (40% weight)
+        skills_score = match_data.get('overall_match', 0)
+        skills_probability = (skills_score / 100) * 40
+        
+        # Factor 2: Experience Alignment (25% weight)
+        experience_data = match_data.get('experience_analysis', {})
+        exp_score = experience_data.get('alignment_score', 50)
+        experience_probability = (exp_score / 100) * 25
+        
+        # Factor 3: Resume Quality (20% weight)
+        quality_score = resume_data.get('quality_score', 0)
+        quality_probability = (quality_score / 100) * 20
+        
+        # Factor 4: ATS Compatibility (15% weight)
+        ats_data = resume_data.get('ats_analysis', {})
+        ats_score = ats_data.get('score', 70)
+        ats_probability = (ats_score / 100) * 15
+        
+        # Calculate total probability
+        total_probability = skills_probability + experience_probability + quality_probability + ats_probability
+        
+        # Adjust based on competition level (estimated)
+        competition_adjustment = self._estimate_competition_adjustment(jd_data)
+        adjusted_probability = total_probability * competition_adjustment
+        
+        # Generate specific recommendations
+        improvement_areas = []
+        if skills_score < 70:
+            improvement_areas.append('Skills alignment needs improvement')
+        if exp_score < 60:
+            improvement_areas.append('Experience relevance could be stronger')
+        if quality_score < 80:
+            improvement_areas.append('Resume quality should be enhanced')
+        if ats_score < 75:
+            improvement_areas.append('ATS compatibility needs optimization')
+        
+        return {
+            'hiring_probability': round(adjusted_probability, 1),
+            'confidence_level': self._get_probability_confidence_level(adjusted_probability),
+            'breakdown': {
+                'skills_match': round(skills_probability, 1),
+                'experience_alignment': round(experience_probability, 1),
+                'resume_quality': round(quality_probability, 1),
+                'ats_compatibility': round(ats_probability, 1)
+            },
+            'improvement_areas': improvement_areas,
+            'next_steps': self._generate_hiring_improvement_steps(improvement_areas),
+            'competition_factor': round(competition_adjustment, 2)
+        }
+    
+    def _estimate_competition_adjustment(self, jd_data: Dict) -> float:
+        """Estimate competition level and adjust probability accordingly."""
+        base_adjustment = 1.0
+        
+        # Check for high-competition indicators
+        jd_text = jd_data.get('text', '').lower()
+        
+        # Popular companies or roles
+        if any(company in jd_text for company in ['google', 'facebook', 'amazon', 'microsoft', 'apple']):
+            base_adjustment *= 0.7  # High competition
+        
+        # Remote work (often more competitive)
+        if 'remote' in jd_text:
+            base_adjustment *= 0.85
+        
+        # Entry-level positions (high competition)
+        if any(level in jd_text for level in ['entry', 'junior', 'graduate', 'intern']):
+            base_adjustment *= 0.8
+        
+        return base_adjustment
+    
+    def _get_probability_confidence_level(self, probability: float) -> str:
+        """Convert probability to confidence level description."""
+        if probability >= 80:
+            return 'Very Strong Candidate'
+        elif probability >= 65:
+            return 'Strong Candidate'
+        elif probability >= 50:
+            return 'Competitive Candidate'
+        elif probability >= 35:
+            return 'Moderate Chance'
+        else:
+            return 'Needs Significant Improvement'
+    
+    def _generate_hiring_improvement_steps(self, improvement_areas: List[str]) -> List[str]:
+        """Generate specific steps to improve hiring probability."""
+        steps = []
+        
+        if 'Skills alignment' in str(improvement_areas):
+            steps.append('Focus on learning the top 3 missing skills from job requirements')
+        
+        if 'Experience relevance' in str(improvement_areas):
+            steps.append('Reframe existing experience to better match job requirements')
+            steps.append('Consider building relevant projects to demonstrate skills')
+        
+        if 'Resume quality' in str(improvement_areas):
+            steps.append('Improve resume formatting and content structure')
+            steps.append('Add quantified achievements and stronger action verbs')
+        
+        if 'ATS compatibility' in str(improvement_areas):
+            steps.append('Optimize resume for ATS systems with better keyword usage')
+        
+        return steps
