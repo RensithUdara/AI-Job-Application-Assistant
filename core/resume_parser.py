@@ -299,3 +299,242 @@ class ResumeParser:
             'issues': issues,
             'word_count': word_count
         }
+    
+    def analyze_bullet_points(self, text: str) -> Dict:
+        """Analyze bullet points quality using advanced NLP techniques."""
+        bullets = []
+        lines = text.split('\n')
+        
+        for line in lines:
+            line = line.strip()
+            if line.startswith('•') or line.startswith('-') or line.startswith('*'):
+                bullet_text = line[1:].strip()
+                if len(bullet_text) > 10:  # Meaningful bullet
+                    score = self._score_bullet_point(bullet_text)
+                    bullets.append({
+                        'text': bullet_text,
+                        'score': score,
+                        'feedback': self._get_bullet_feedback(bullet_text, score),
+                        'suggestions': self._get_bullet_suggestions(bullet_text)
+                    })
+        
+        avg_score = sum([b['score'] for b in bullets]) / len(bullets) if bullets else 0
+        
+        return {
+            'bullets': bullets,
+            'total_bullets': len(bullets),
+            'average_score': round(avg_score, 1),
+            'quality_level': self._get_quality_level(avg_score),
+            'improvement_tips': self._get_overall_bullet_tips(bullets)
+        }
+    
+    def _score_bullet_point(self, bullet: str) -> int:
+        """Score individual bullet point quality (1-10)."""
+        score = 4  # Base score
+        bullet_lower = bullet.lower()
+        
+        # Check for strong action verbs (+2)
+        has_strong_verb = any(verb.lower() in bullet_lower for verb in self.strong_action_verbs)
+        if has_strong_verb:
+            score += 2
+        
+        # Check for weak action verbs (-1)
+        has_weak_verb = any(verb.lower() in bullet_lower for verb in self.weak_action_verbs)
+        if has_weak_verb:
+            score -= 1
+        
+        # Check for quantification (+2)
+        numbers = re.findall(r'\d+', bullet)
+        percentages = re.findall(r'\d+%', bullet)
+        if numbers or percentages:
+            score += 2
+        
+        # Check for impact words (+1)
+        impact_words = ['increased', 'improved', 'reduced', 'enhanced', 'optimized', 'delivered']
+        if any(word in bullet_lower for word in impact_words):
+            score += 1
+        
+        # Check for technical skills (+1)
+        technical_terms = ['api', 'database', 'framework', 'algorithm', 'system', 'application']
+        if any(term in bullet_lower for term in technical_terms):
+            score += 1
+        
+        # Check for result/outcome indicators (+1)
+        result_indicators = ['resulting in', 'leading to', 'which resulted', 'achieving', 'delivered']
+        if any(indicator in bullet_lower for indicator in result_indicators):
+            score += 1
+        
+        # Penalty for too short (-1)
+        if len(bullet.split()) < 6:
+            score -= 1
+        
+        # Penalty for too generic (-1)
+        generic_phrases = ['responsible for', 'worked on', 'helped with', 'assisted in']
+        if any(phrase in bullet_lower for phrase in generic_phrases):
+            score -= 1
+        
+        return max(1, min(10, score))
+    
+    def _get_bullet_feedback(self, bullet: str, score: int) -> str:
+        """Generate specific improvement feedback for bullet points."""
+        if score >= 8:
+            return "🌟 Excellent bullet! Strong action verb, quantified results, and clear impact."
+        elif score >= 6:
+            return "✅ Good bullet. Consider adding specific metrics or stronger action verbs."
+        elif score >= 4:
+            return "⚠️ Average bullet. Add quantifiable results and use stronger action verbs."
+        else:
+            return "❌ Weak bullet. Rewrite with action verb, specific details, and measurable impact."
+    
+    def _get_bullet_suggestions(self, bullet: str) -> List[str]:
+        """Generate specific improvement suggestions for bullet points."""
+        suggestions = []
+        bullet_lower = bullet.lower()
+        
+        # Check for missing quantification
+        if not re.search(r'\d', bullet):
+            suggestions.append("Add specific numbers, percentages, or timeframes")
+        
+        # Check for weak verbs
+        if any(verb.lower() in bullet_lower for verb in self.weak_action_verbs):
+            suggestions.append("Replace weak action verbs with stronger alternatives")
+        
+        # Check for missing impact
+        impact_words = ['increased', 'improved', 'reduced', 'enhanced', 'optimized']
+        if not any(word in bullet_lower for word in impact_words):
+            suggestions.append("Include the impact or result of your action")
+        
+        # Check for vague terms
+        vague_terms = ['various', 'multiple', 'several', 'many']
+        if any(term in bullet_lower for term in vague_terms):
+            suggestions.append("Replace vague terms with specific details")
+        
+        return suggestions
+    
+    def _get_quality_level(self, score: float) -> str:
+        """Convert numeric score to quality level."""
+        if score >= 8:
+            return "Excellent"
+        elif score >= 6:
+            return "Good" 
+        elif score >= 4:
+            return "Average"
+        else:
+            return "Needs Improvement"
+    
+    def _get_overall_bullet_tips(self, bullets: List[Dict]) -> List[str]:
+        """Generate overall improvement tips based on all bullets."""
+        tips = []
+        
+        if len(bullets) < 3:
+            tips.append("Add more bullet points to better showcase your experience")
+        
+        avg_score = sum([b['score'] for b in bullets]) / len(bullets) if bullets else 0
+        
+        if avg_score < 6:
+            tips.append("Focus on rewriting bullets with the STAR method (Situation, Task, Action, Result)")
+            tips.append("Start each bullet with a strong action verb")
+            tips.append("Include specific numbers and metrics wherever possible")
+        
+        return tips
+    
+    def analyze_action_verbs(self, text: str) -> Dict:
+        """Comprehensive action verb analysis."""
+        text_lower = text.lower()
+        
+        strong_found = []
+        weak_found = []
+        
+        # Find specific instances
+        for verb in self.strong_action_verbs:
+            if verb.lower() in text_lower:
+                strong_found.append(verb)
+        
+        for verb in self.weak_action_verbs:
+            if verb.lower() in text_lower:
+                weak_found.append(verb)
+        
+        # Generate suggestions for improvement
+        suggestions = []
+        verb_replacements = {
+            'helped': ['Assisted', 'Supported', 'Facilitated', 'Collaborated'],
+            'worked': ['Developed', 'Created', 'Built', 'Implemented'],
+            'did': ['Completed', 'Executed', 'Delivered', 'Achieved'],
+            'used': ['Utilized', 'Applied', 'Implemented', 'Leveraged'],
+            'responsible': ['Managed', 'Led', 'Oversaw', 'Coordinated']
+        }
+        
+        for weak_verb in weak_found:
+            if weak_verb.lower() in verb_replacements:
+                suggestions.append({
+                    'weak_verb': weak_verb,
+                    'alternatives': verb_replacements[weak_verb.lower()]
+                })
+        
+        strength_ratio = len(strong_found) / max(1, len(weak_found))
+        
+        return {
+            'strong_verbs_found': strong_found,
+            'weak_verbs_found': weak_found,
+            'strong_count': len(strong_found),
+            'weak_count': len(weak_found),
+            'verb_strength_ratio': round(strength_ratio, 2),
+            'verb_recommendations': suggestions,
+            'overall_assessment': self._assess_verb_usage(strength_ratio)
+        }
+    
+    def _assess_verb_usage(self, ratio: float) -> str:
+        """Assess overall verb usage quality."""
+        if ratio >= 2:
+            return "Excellent use of strong action verbs"
+        elif ratio >= 1:
+            return "Good balance of action verbs"
+        elif ratio >= 0.5:
+            return "Room for improvement in action verb usage"
+        else:
+            return "Needs significant improvement in action verb usage"
+    
+    def analyze_quantification(self, text: str) -> Dict:
+        """Analyze quantification and metrics usage in resume."""
+        # Find different types of metrics
+        numbers = re.findall(r'\b\d+\b', text)
+        percentages = re.findall(r'\d+%', text)
+        monetary = re.findall(r'\$[\d,]+', text)
+        timeframes = re.findall(r'\d+\s*(years?|months?|weeks?|days?)', text, re.IGNORECASE)
+        sizes = re.findall(r'\d+\s*(users?|customers?|people|members?|employees?)', text, re.IGNORECASE)
+        
+        # Analyze sentences for quantification opportunities
+        sentences = [s.strip() for s in text.split('.') if len(s.strip()) > 20]
+        unquantified_sentences = []
+        
+        for sentence in sentences:
+            if not re.search(r'\d', sentence) and len(sentence.split()) > 5:
+                # Check if it's an achievement that could be quantified
+                achievement_indicators = ['improved', 'increased', 'reduced', 'managed', 'led', 'created']
+                if any(indicator in sentence.lower() for indicator in achievement_indicators):
+                    unquantified_sentences.append(sentence)
+        
+        # Generate specific suggestions
+        suggestions = []
+        if len(numbers) < 5:
+            suggestions.append("Add more specific numbers to quantify your achievements")
+        if not percentages:
+            suggestions.append("Include percentage improvements where applicable (e.g., 'increased efficiency by 25%')")
+        if not timeframes:
+            suggestions.append("Mention timeframes for projects and achievements")
+        if len(unquantified_sentences) > 3:
+            suggestions.append("Several achievements lack quantification - add metrics to show impact")
+        
+        quantification_score = min(10, len(numbers) + len(percentages) * 2 + len(monetary) + len(timeframes))
+        
+        return {
+            'numbers_count': len(numbers),
+            'percentages_count': len(percentages),
+            'monetary_count': len(monetary),
+            'timeframes_count': len(timeframes),
+            'sizes_count': len(sizes),
+            'quantification_score': quantification_score,
+            'unquantified_opportunities': len(unquantified_sentences),
+            'suggestions': suggestions,
+            'sample_unquantified': unquantified_sentences[:3]  # Show first 3 examples
+        }
