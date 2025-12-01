@@ -131,10 +131,10 @@ def display_creative_templates():
     
     with col3:
         st.markdown("""
-        <div style='border: 2px solid #e91e63; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #e91e63; margin: 0;'>🎭 Media & Arts</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>Ideal for media, arts, and entertainment</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #e91e63; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #f48fb1; margin: 0;'>🎭 Media & Arts</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>Ideal for media, arts, and entertainment</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Creative project emphasis</li>
                 <li>Awards and recognition</li>
                 <li>Artistic achievement focus</li>
@@ -155,10 +155,10 @@ def display_technical_templates():
     
     with col1:
         st.markdown("""
-        <div style='border: 2px solid #00bcd4; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #00bcd4; margin: 0;'>⚡ Software Engineer</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>Optimized for software development roles</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #00bcd4; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #4dd0e1; margin: 0;'>⚡ Software Engineer</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>Optimized for software development roles</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Technical skills prominent</li>
                 <li>Project showcase section</li>
                 <li>GitHub integration ready</li>
@@ -172,10 +172,10 @@ def display_technical_templates():
     
     with col2:
         st.markdown("""
-        <div style='border: 2px solid #00bcd4; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #00bcd4; margin: 0;'>📊 Data Scientist</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>Perfect for data science and analytics roles</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #00bcd4; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #4dd0e1; margin: 0;'>📊 Data Scientist</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>Perfect for data science and analytics roles</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Research experience focus</li>
                 <li>Publications section</li>
                 <li>Statistical tools emphasis</li>
@@ -189,10 +189,10 @@ def display_technical_templates():
     
     with col3:
         st.markdown("""
-        <div style='border: 2px solid #00bcd4; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #00bcd4; margin: 0;'>🔒 Cybersecurity</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>Specialized for security and IT roles</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #00bcd4; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #4dd0e1; margin: 0;'>🔒 Cybersecurity</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>Specialized for security and IT roles</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Security certifications</li>
                 <li>Incident response experience</li>
                 <li>Compliance knowledge</li>
@@ -213,10 +213,10 @@ def display_executive_templates():
     
     with col1:
         st.markdown("""
-        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #795548; margin: 0;'>🏢 C-Level Executive</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>For CEO, CTO, CFO, and other C-suite roles</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #bcaaa4; margin: 0;'>🏢 C-Level Executive</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>For CEO, CTO, CFO, and other C-suite roles</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Leadership achievements</li>
                 <li>Strategic initiatives focus</li>
                 <li>Board experience</li>
@@ -230,10 +230,10 @@ def display_executive_templates():
     
     with col2:
         st.markdown("""
-        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #795548; margin: 0;'>📈 VP/Director</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>For Vice Presidents and Director positions</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #bcaaa4; margin: 0;'>📈 VP/Director</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>For Vice Presidents and Director positions</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Team leadership focus</li>
                 <li>Department growth</li>
                 <li>Strategic planning</li>
@@ -247,10 +247,10 @@ def display_executive_templates():
     
     with col3:
         st.markdown("""
-        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: white;'>
-            <h4 style='color: #795548; margin: 0;'>🎯 Senior Manager</h4>
-            <p style='margin: 0.5rem 0; color: #666;'>For senior management transitioning to executive roles</p>
-            <ul style='color: #666; font-size: 0.9rem;'>
+        <div style='border: 2px solid #795548; border-radius: 10px; padding: 1rem; margin: 0.5rem 0; background: rgba(45, 55, 72, 0.9); color: white;'>
+            <h4 style='color: #bcaaa4; margin: 0;'>🎯 Senior Manager</h4>
+            <p style='margin: 0.5rem 0; color: #e2e8f0;'>For senior management transitioning to executive roles</p>
+            <ul style='color: #e2e8f0; font-size: 0.9rem;'>
                 <li>Management experience</li>
                 <li>Process improvement</li>
                 <li>Budget management</li>
