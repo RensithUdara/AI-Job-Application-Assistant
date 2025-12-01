@@ -226,7 +226,7 @@ def test_integration_features():
         jd_data = processor.process_job_description(sample_jd)
         
         # Test matching
-        match_data = matcher.calculate_match(resume_data, jd_data)
+        match_data = matcher.match_resume_to_jd(resume_data, jd_data)
         
         print(f"  ✅ Integration test: Match score {match_data.get('overall_match', 0)}%")
         print("  🎉 Integration Features: ALL TESTS PASSED")
