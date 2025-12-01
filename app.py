@@ -2876,7 +2876,8 @@ def display_resume_builder_tab(resume_data: Dict, jd_data: Dict, match_data: Dic
             job_processor = JobDescriptionProcessor()
             
             # Extract key terms from job description
-            jd_skills = job_processor.extract_skills(jd_data['jd_text'])
+            jd_analysis = job_processor.process_jd(jd_data['jd_text'])
+            jd_skills = jd_analysis.get('skills', {})
             
             st.write("**Keywords found in job description:**")
             
