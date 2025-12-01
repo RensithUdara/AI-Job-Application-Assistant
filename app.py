@@ -115,14 +115,18 @@ st.markdown("""
 }
 
 .metric-card strong {
-    color: #1a202c;
+    color: #1a202c !important;
     font-weight: 600;
     font-size: 1.1rem;
 }
 
 .metric-card small {
-    color: #718096;
+    color: #4a5568 !important;
     font-weight: 400;
+}
+
+.metric-card * {
+    color: inherit !important;
 }
 
 /* Priority Cards with Glassmorphism */
@@ -130,33 +134,48 @@ st.markdown("""
     border-left-color: #e53e3e;
     background: linear-gradient(145deg, #fed7d7 0%, #feb2b2 100%);
     box-shadow: 0 8px 32px rgba(229, 62, 62, 0.2);
+    color: #742a2a !important;
 }
 
 .priority-high strong {
-    color: #c53030;
-    text-shadow: 1px 1px 2px rgba(197, 48, 48, 0.1);
+    color: #742a2a !important;
+    text-shadow: 1px 1px 2px rgba(116, 42, 42, 0.2);
+}
+
+.priority-high * {
+    color: #742a2a !important;
 }
 
 .priority-medium {
     border-left-color: #d69e2e;
     background: linear-gradient(145deg, #fefcbf 0%, #faf089 100%);
     box-shadow: 0 8px 32px rgba(214, 158, 46, 0.2);
+    color: #744210 !important;
 }
 
 .priority-medium strong {
-    color: #b7791f;
-    text-shadow: 1px 1px 2px rgba(183, 121, 31, 0.1);
+    color: #744210 !important;
+    text-shadow: 1px 1px 2px rgba(116, 66, 16, 0.2);
+}
+
+.priority-medium * {
+    color: #744210 !important;
 }
 
 .priority-low {
     border-left-color: #38a169;
     background: linear-gradient(145deg, #c6f6d5 0%, #9ae6b4 100%);
     box-shadow: 0 8px 32px rgba(56, 161, 105, 0.2);
+    color: #22543d !important;
 }
 
 .priority-low strong {
-    color: #276749;
-    text-shadow: 1px 1px 2px rgba(39, 103, 73, 0.1);
+    color: #22543d !important;
+    text-shadow: 1px 1px 2px rgba(34, 84, 61, 0.2);
+}
+
+.priority-low * {
+    color: #22543d !important;
 }
 
 /* Enhanced Tab Styling */
@@ -191,12 +210,21 @@ st.markdown("""
 
 /* Professional Input Sections */
 .upload-section {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     padding: 2rem;
     border-radius: 15px;
     margin: 1rem 0;
     box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid #e2e8f0;
+    color: #2d3748 !important;
+}
+
+.upload-section * {
+    color: #2d3748 !important;
+}
+
+.upload-section h3 {
+    color: #2d3748 !important;
 }
 
 /* Custom Buttons */
@@ -364,8 +392,47 @@ st.markdown("""
 
 /* Ensure text visibility in all themes */
 .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
-    color: inherit !important;
+    color: #2d3748 !important;
     font-family: 'Inter', sans-serif !important;
+}
+
+.stMarkdown p, .stMarkdown div, .stMarkdown span {
+    color: #2d3748 !important;
+}
+
+/* Fix white text on white background */
+.element-container .stMarkdown {
+    color: #2d3748 !important;
+}
+
+/* Streamlit specific fixes */
+.stSelectbox label, .stTextArea label, .stTextInput label {
+    color: #2d3748 !important;
+}
+
+.stRadio label, .stCheckbox label {
+    color: #2d3748 !important;
+}
+
+/* Fix metric display */
+[data-testid="metric-container"] {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+[data-testid="metric-container"] * {
+    color: #2d3748 !important;
+}
+
+/* Fix expander text */
+.streamlit-expanderContent {
+    color: #2d3748 !important;
+}
+
+.streamlit-expanderContent * {
+    color: #2d3748 !important;
 }
 </style>
 """, unsafe_allow_html=True)
