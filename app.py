@@ -261,6 +261,12 @@ def display_results(results: Dict):
     
     with tab8:
         display_advanced_ai_features_tab(resume_data, jd_data, match_data)
+    
+    with tab9:
+        display_resume_scoring_tab(resume_data, jd_data)
+    
+    with tab10:
+        display_career_path_tab(resume_data, jd_data)
 
 def display_summary_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
     """Display summary information."""
