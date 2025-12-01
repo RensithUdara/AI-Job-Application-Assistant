@@ -193,5 +193,155 @@
         "nice_to_have": [
             "tools"
         ]
+    },
+    "ai_engineer": {
+        "keywords": [
+            "artificial intelligence",
+            "machine learning",
+            "deep learning",
+            "neural networks",
+            "tensorflow",
+            "pytorch",
+            "computer vision",
+            "nlp",
+            "data science",
+            "predictive modeling",
+            "ai research",
+            "model deployment"
+        ],
+        "must_have": [
+            "ai_ml",
+            "programming_languages",
+            "frameworks"
+        ],
+        "nice_to_have": [
+            "cloud_platforms",
+            "databases",
+            "tools"
+        ]
+    },
+    "cybersecurity_analyst": {
+        "keywords": [
+            "cybersecurity",
+            "security analyst",
+            "penetration testing",
+            "vulnerability assessment",
+            "incident response",
+            "threat analysis",
+            "security monitoring",
+            "compliance",
+            "risk assessment",
+            "ethical hacking",
+            "malware analysis"
+        ],
+        "must_have": [
+            "cybersecurity",
+            "tools",
+            "certifications"
+        ],
+        "nice_to_have": [
+            "programming_languages",
+            "databases",
+            "cloud_platforms"
+        ]
+    },
+    "blockchain_developer": {
+        "keywords": [
+            "blockchain",
+            "smart contracts",
+            "solidity",
+            "ethereum",
+            "web3",
+            "defi",
+            "cryptocurrency",
+            "distributed ledger",
+            "consensus algorithms",
+            "cryptography",
+            "dapp development"
+        ],
+        "must_have": [
+            "blockchain",
+            "programming_languages",
+            "cybersecurity"
+        ],
+        "nice_to_have": [
+            "web_technologies",
+            "databases",
+            "cloud_platforms"
+        ]
+    },
+    "cloud_architect": {
+        "keywords": [
+            "cloud architecture",
+            "aws",
+            "azure",
+            "google cloud",
+            "infrastructure design",
+            "serverless",
+            "containerization",
+            "microservices",
+            "scalability",
+            "security",
+            "cost optimization"
+        ],
+        "must_have": [
+            "cloud_platforms",
+            "concepts",
+            "certifications"
+        ],
+        "nice_to_have": [
+            "programming_languages",
+            "databases",
+            "cybersecurity"
+        ]
+    },
+    "qa_engineer": {
+        "keywords": [
+            "quality assurance",
+            "testing",
+            "automation testing",
+            "selenium",
+            "test planning",
+            "bug tracking",
+            "performance testing",
+            "api testing",
+            "regression testing",
+            "test cases",
+            "jira"
+        ],
+        "must_have": [
+            "concepts",
+            "tools",
+            "programming_languages"
+        ],
+        "nice_to_have": [
+            "web_technologies",
+            "mobile_technologies",
+            "databases"
+        ]
+    },
+    "business_analyst": {
+        "keywords": [
+            "business analysis",
+            "requirements gathering",
+            "stakeholder management",
+            "process improvement",
+            "data analysis",
+            "reporting",
+            "documentation",
+            "user acceptance testing",
+            "business intelligence",
+            "workflow analysis"
+        ],
+        "must_have": [
+            "soft_skills",
+            "concepts",
+            "databases"
+        ],
+        "nice_to_have": [
+            "tools",
+            "frameworks",
+            "industry_knowledge"
+        ]
     }
 }
