@@ -342,7 +342,7 @@ class Recommender:
         
         if matched_trending:
             insights['skill_trends'] = matched_trending
-            insights['industry_insights'].append(f'Trending technologies mentioned: {', '.join(matched_trending)}')
+            insights['industry_insights'].append(f'Trending technologies mentioned: {", ".join(matched_trending)}')
         
         # Career progression suggestions
         role_progressions = {
