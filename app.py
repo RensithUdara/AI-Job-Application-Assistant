@@ -225,7 +225,7 @@ def display_results(results: Dict):
     recommendations = results['recommendations']
     
     # Create tabs
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs([
         "📊 Summary", 
         "🎯 Skills Analysis", 
         "📋 Resume Structure", 
