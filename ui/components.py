@@ -36,41 +36,58 @@ def setup_page_config():
     )
 
 def apply_custom_css():
-    """Apply custom CSS styling."""
+    """Apply custom CSS styling with enhanced design."""
     st.markdown("""
     <style>
-    .main-header {
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
-        border-radius: 10px;
-        color: white;
-        text-align: center;
-        margin-bottom: 2rem;
+    /* Import modern fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Global app styling */
+    .stApp {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Enhanced main content area */
+    .main .block-container {
+        padding-top: 2rem;
+        max-width: 1200px;
     }
 
+    /* Metric cards with modern design */
     .metric-card {
-        background-color: #ffffff;
-        padding: 1rem;
-        border-radius: 8px;
+        background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
+        padding: 1.5rem;
+        border-radius: 12px;
         border-left: 4px solid #667eea;
-        margin: 0.5rem 0;
-        color: #212529;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        border: 1px solid #e9ecef;
+        margin: 0.8rem 0;
+        color: #2d3748;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        border-color: #667eea;
     }
 
     .metric-card strong {
-        color: #495057;
+        color: #2d3748;
         font-weight: 600;
+        font-size: 1.1rem;
     }
 
     .metric-card small {
-        color: #6c757d;
+        color: #4a5568;
+        font-size: 0.9rem;
     }
 
+    /* Priority-based styling */
     .priority-high {
-        border-left-color: #dc3545;
-        background-color: #fff5f5;
+        border-left-color: #e53e3e;
+        background: linear-gradient(145deg, #fff5f5 0%, #fed7d7 100%);
     }
 
     .priority-high strong {
@@ -78,36 +95,200 @@ def apply_custom_css():
     }
 
     .priority-medium {
-        border-left-color: #ffc107;
-        background-color: #fffbeb;
+        border-left-color: #d69e2e;
+        background: linear-gradient(145deg, #fffbeb 0%, #faf089 100%);
     }
 
     .priority-medium strong {
-        color: #d69e2e;
+        color: #b7791f;
     }
 
     .priority-low {
-        border-left-color: #28a745;
-        background-color: #f0fff4;
+        border-left-color: #38a169;
+        background: linear-gradient(145deg, #f0fff4 0%, #c6f6d5 100%);
     }
 
     .priority-low strong {
-        color: #38a169;
+        color: #2f855a;
     }
 
+    /* Enhanced tab styling */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 24px;
+        gap: 8px;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        padding: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
     .stTabs [data-baseweb="tab"] {
         height: 50px;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 12px 24px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .stTabs [data-baseweb="tab"]:hover {
+        background: rgba(255,255,255,0.2);
+        transform: translateY(-2px);
+    }
+
+    .stTabs [data-baseweb="tab"][aria-selected="true"] {
+        background: white;
+        color: #2d3748;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Button enhancements */
+    .stButton > button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    /* File uploader styling */
+    .stFileUploader > div > div {
+        background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
+        border: 2px dashed #667eea;
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+    }
+    
+    .stFileUploader > div > div:hover {
+        border-color: #764ba2;
+        background: linear-gradient(145deg, #f8f9ff 0%, #e8efff 100%);
+    }
+
+    /* Sidebar enhancements */
+    .css-1d391kg {
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .sidebar .sidebar-content {
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    /* Text input and textarea styling */
+    .stTextInput > div > div > input {
+        border-radius: 8px;
+        border: 2px solid #e2e8f0;
+        transition: all 0.3s ease;
+    }
+    
+    .stTextInput > div > div > input:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .stTextArea > div > div > textarea {
+        border-radius: 8px;
+        border: 2px solid #e2e8f0;
+        transition: all 0.3s ease;
+    }
+    
+    .stTextArea > div > div > textarea:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    /* Selectbox styling */
+    .stSelectbox > div > div {
+        border-radius: 8px;
+        border: 2px solid #e2e8f0;
+    }
+
+    /* Progress bars */
+    .stProgress > div > div > div {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        border-radius: 4px;
+    }
+
+    /* Metrics styling */
+    .css-1xarl3l {
+        background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
+        border-radius: 12px;
+        padding: 1rem;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* Success/Warning/Error message styling */
+    .stSuccess {
+        background: linear-gradient(145deg, #f0fff4 0%, #c6f6d5 100%);
+        border-left: 4px solid #38a169;
+        border-radius: 8px;
+    }
+    
+    .stWarning {
+        background: linear-gradient(145deg, #fffbeb 0%, #faf089 100%);
+        border-left: 4px solid #d69e2e;
+        border-radius: 8px;
+    }
+    
+    .stError {
+        background: linear-gradient(145deg, #fff5f5 0%, #fed7d7 100%);
+        border-left: 4px solid #e53e3e;
+        border-radius: 8px;
+    }
+
+    /* Expander styling */
+    .streamlit-expanderHeader {
+        background: linear-gradient(145deg, #f8f9ff 0%, #e8efff 100%);
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        font-weight: 500;
     }
 
     /* Ensure text visibility in all themes */
     .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
         color: inherit !important;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Animation for loading states */
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+    
+    .loading {
+        animation: pulse 2s infinite;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
     }
     </style>
     """, unsafe_allow_html=True)
