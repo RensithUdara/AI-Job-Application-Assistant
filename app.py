@@ -1609,12 +1609,6 @@ def display_advanced_ai_features_tab(resume_data, jd_data, match_data):
                 st.write(f"🎯 {strategy}")
             
             st.write(f"**Recommended Timeline:** {competition_data['timeline_advice']}")
-    
-    with tab9:
-        display_resume_scoring_tab(resume_data, jd_data)
-    
-    with tab10:
-        display_career_path_tab(resume_data, jd_data)
 
 def display_resume_scoring_tab(resume_data: Dict, jd_data: Dict):
     """Display advanced resume scoring and ATS analysis."""
