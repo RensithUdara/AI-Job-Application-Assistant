@@ -1,35 +1,117 @@
-role,skill,question,type
-mobile_developer,flutter,What is the difference between StatefulWidget and StatelessWidget?,technical
-mobile_developer,flutter,How do you handle state management in Flutter apps?,technical
-mobile_developer,android,Explain the Android activity lifecycle.,technical
-mobile_developer,kotlin,What are the key differences between Java and Kotlin?,technical
-mobile_developer,firebase,How would you structure Firestore data for a chat app?,technical
-web_developer,react,What is the virtual DOM and how does it work?,technical
-web_developer,javascript,Explain closures in JavaScript with an example.,technical
-web_developer,node.js,What is the event loop in Node.js?,technical
-web_developer,html,What is the difference between HTML and HTML5?,technical
-web_developer,css,How do you implement responsive design?,technical
-data_analyst,sql,Write a query to find the second highest salary from an employee table.,technical
-data_analyst,python,How do you handle missing data in pandas?,technical
-data_analyst,statistics,What is the difference between correlation and causation?,technical
-data_analyst,excel,How would you create a pivot table for sales analysis?,technical
-data_scientist,machine_learning,Explain overfitting and how to prevent it.,technical
-data_scientist,python,What are the key differences between lists and tuples?,technical
-data_scientist,statistics,When would you use a t-test vs chi-square test?,technical
-software_engineer,algorithms,Explain the time complexity of quicksort.,technical
-software_engineer,oop,What are the four pillars of object-oriented programming?,technical
-software_engineer,data_structures,When would you use a hash table vs a binary tree?,technical
-devops_engineer,docker,What is the difference between a Docker image and container?,technical
-devops_engineer,kubernetes,Explain what a Pod is in Kubernetes.,technical
-devops_engineer,aws,What is the difference between EC2 and Lambda?,technical
-general,soft_skill,Describe a challenge you faced in a team project and how you overcame it.,behavioral
-general,soft_skill,Tell me about a time when you had to learn a new technology quickly.,behavioral
-general,soft_skill,How do you prioritize tasks when working on multiple projects?,behavioral
-general,soft_skill,Describe a situation where you had to explain a technical concept to a non-technical person.,behavioral
-general,soft_skill,Tell me about a time when you made a mistake and how you handled it.,behavioral
-general,soft_skill,How do you stay updated with the latest technology trends?,behavioral
-general,soft_skill,Describe your ideal work environment.,behavioral
-general,communication,How would you handle a disagreement with a team member about a technical approach?,behavioral
-general,leadership,Tell me about a time when you took initiative on a project.,behavioral
-general,problem_solving,Walk me through how you would debug a piece of code that's not working.,technical
-general,time_management,How do you handle tight deadlines?,behavioral
+role,skill,question,type,difficulty
+mobile_developer,flutter,What is the difference between StatefulWidget and StatelessWidget?,technical,intermediate
+mobile_developer,flutter,How do you handle state management in Flutter apps?,technical,advanced
+mobile_developer,flutter,Explain the Flutter widget lifecycle.,technical,intermediate
+mobile_developer,flutter,How would you implement custom animations in Flutter?,technical,advanced
+mobile_developer,android,Explain the Android activity lifecycle.,technical,intermediate
+mobile_developer,android,What are Android Services and when would you use them?,technical,advanced
+mobile_developer,android,How do you handle background tasks in Android?,technical,advanced
+mobile_developer,kotlin,What are the key differences between Java and Kotlin?,technical,beginner
+mobile_developer,kotlin,Explain coroutines in Kotlin and their benefits.,technical,advanced
+mobile_developer,kotlin,What are data classes in Kotlin?,technical,intermediate
+mobile_developer,firebase,How would you structure Firestore data for a chat app?,technical,advanced
+mobile_developer,firebase,Explain Firebase Authentication flow.,technical,intermediate
+mobile_developer,react_native,What is the difference between React and React Native?,technical,beginner
+mobile_developer,react_native,How do you bridge native modules in React Native?,technical,expert
+web_developer,react,What is the virtual DOM and how does it work?,technical,intermediate
+web_developer,react,Explain React hooks and their use cases.,technical,advanced
+web_developer,react,What is the component lifecycle in React?,technical,intermediate
+web_developer,react,How do you optimize React application performance?,technical,expert
+web_developer,javascript,Explain closures in JavaScript with an example.,technical,intermediate
+web_developer,javascript,What is event bubbling and capturing?,technical,intermediate
+web_developer,javascript,Explain async/await vs Promises.,technical,advanced
+web_developer,javascript,What are the differences between var let and const?,technical,beginner
+web_developer,node.js,What is the event loop in Node.js?,technical,advanced
+web_developer,node.js,How do you handle errors in Node.js applications?,technical,intermediate
+web_developer,node.js,Explain middleware in Express.js.,technical,intermediate
+web_developer,html,What is the difference between HTML and HTML5?,technical,beginner
+web_developer,html,Explain semantic HTML and its importance.,technical,intermediate
+web_developer,css,How do you implement responsive design?,technical,intermediate
+web_developer,css,What are CSS Grid and Flexbox? When to use each?,technical,advanced
+web_developer,css,Explain CSS specificity and the cascade.,technical,intermediate
+data_analyst,sql,Write a query to find the second highest salary from an employee table.,technical,intermediate
+data_analyst,sql,Explain different types of JOINs in SQL.,technical,intermediate
+data_analyst,sql,How do you optimize a slow SQL query?,technical,advanced
+data_analyst,python,How do you handle missing data in pandas?,technical,intermediate
+data_analyst,python,Explain list comprehensions vs generator expressions.,technical,advanced
+data_analyst,statistics,What is the difference between correlation and causation?,technical,intermediate
+data_analyst,statistics,When would you use a t-test vs chi-square test?,technical,advanced
+data_analyst,statistics,Explain Type I and Type II errors.,technical,advanced
+data_analyst,excel,How would you create a pivot table for sales analysis?,technical,beginner
+data_analyst,tableau,How do you create calculated fields in Tableau?,technical,intermediate
+data_scientist,machine_learning,Explain overfitting and how to prevent it.,technical,advanced
+data_scientist,machine_learning,What is the bias-variance tradeoff?,technical,expert
+data_scientist,machine_learning,Compare supervised vs unsupervised learning.,technical,intermediate
+data_scientist,deep_learning,Explain backpropagation in neural networks.,technical,expert
+data_scientist,deep_learning,What are CNNs and when are they used?,technical,advanced
+data_scientist,python,What are the key differences between lists and tuples?,technical,beginner
+data_scientist,python,Explain decorators in Python.,technical,advanced
+data_scientist,statistics,What is A/B testing and how do you design one?,technical,advanced
+software_engineer,algorithms,Explain the time complexity of quicksort.,technical,intermediate
+software_engineer,algorithms,What is dynamic programming? Give an example.,technical,advanced
+software_engineer,data_structures,When would you use a hash table vs a binary tree?,technical,intermediate
+software_engineer,data_structures,Explain the difference between stack and queue.,technical,beginner
+software_engineer,oop,What are the four pillars of object-oriented programming?,technical,intermediate
+software_engineer,oop,Explain polymorphism with real-world examples.,technical,advanced
+software_engineer,design_patterns,What is the Singleton pattern and when to use it?,technical,intermediate
+software_engineer,design_patterns,Explain MVC architecture.,technical,intermediate
+devops_engineer,docker,What is the difference between a Docker image and container?,technical,intermediate
+devops_engineer,docker,How do you optimize Docker images for production?,technical,advanced
+devops_engineer,kubernetes,Explain what a Pod is in Kubernetes.,technical,intermediate
+devops_engineer,kubernetes,How do you handle secrets in Kubernetes?,technical,advanced
+devops_engineer,aws,What is the difference between EC2 and Lambda?,technical,intermediate
+devops_engineer,aws,How do you set up CI/CD pipeline in AWS?,technical,advanced
+devops_engineer,terraform,What are Terraform providers and resources?,technical,intermediate
+devops_engineer,monitoring,How do you monitor application performance?,technical,advanced
+ai_engineer,machine_learning,Explain gradient descent and its variants.,technical,expert
+ai_engineer,deep_learning,What are transformers in NLP?,technical,expert
+ai_engineer,computer_vision,How does YOLO object detection work?,technical,expert
+ai_engineer,nlp,Explain attention mechanisms in neural networks.,technical,expert
+ai_engineer,tensorflow,How do you deploy TensorFlow models in production?,technical,advanced
+cybersecurity_analyst,penetration_testing,What is the difference between white-box and black-box testing?,technical,intermediate
+cybersecurity_analyst,network_security,Explain how firewalls work.,technical,intermediate
+cybersecurity_analyst,incident_response,What steps do you take when a security breach is detected?,technical,advanced
+cybersecurity_analyst,vulnerability_assessment,How do you prioritize security vulnerabilities?,technical,advanced
+blockchain_developer,smart_contracts,What are smart contracts and how do they work?,technical,intermediate
+blockchain_developer,solidity,Explain gas optimization in Solidity.,technical,advanced
+blockchain_developer,ethereum,What is the difference between ETH and ERC-20 tokens?,technical,intermediate
+blockchain_developer,consensus,Explain Proof of Work vs Proof of Stake.,technical,advanced
+cloud_architect,architecture,How do you design a scalable cloud architecture?,technical,expert
+cloud_architect,security,What are cloud security best practices?,technical,advanced
+cloud_architect,cost_optimization,How do you optimize cloud costs?,technical,advanced
+qa_engineer,automation,What is the test pyramid?,technical,intermediate
+qa_engineer,selenium,How do you handle dynamic elements in Selenium?,technical,advanced
+qa_engineer,api_testing,How do you test REST APIs?,technical,intermediate
+product_manager,strategy,How do you prioritize product features?,behavioral,intermediate
+product_manager,metrics,What KPIs would you track for a mobile app?,behavioral,advanced
+ui_ux_designer,design_thinking,Explain the design thinking process.,behavioral,intermediate
+ui_ux_designer,usability,How do you conduct user testing?,behavioral,advanced
+business_analyst,requirements,How do you gather and document requirements?,behavioral,intermediate
+business_analyst,stakeholder_management,How do you handle conflicting stakeholder requirements?,behavioral,advanced
+general,soft_skill,Describe a challenge you faced in a team project and how you overcame it.,behavioral,intermediate
+general,soft_skill,Tell me about a time when you had to learn a new technology quickly.,behavioral,intermediate
+general,soft_skill,How do you prioritize tasks when working on multiple projects?,behavioral,intermediate
+general,soft_skill,Describe a situation where you had to explain a technical concept to a non-technical person.,behavioral,intermediate
+general,soft_skill,Tell me about a time when you made a mistake and how you handled it.,behavioral,intermediate
+general,soft_skill,How do you stay updated with the latest technology trends?,behavioral,beginner
+general,soft_skill,Describe your ideal work environment.,behavioral,beginner
+general,soft_skill,How do you handle stress and tight deadlines?,behavioral,intermediate
+general,soft_skill,Tell me about a time you had to give constructive feedback.,behavioral,advanced
+general,soft_skill,How do you handle disagreements with team members?,behavioral,intermediate
+general,communication,How would you present technical findings to executives?,behavioral,advanced
+general,leadership,Describe a time when you took initiative on a project.,behavioral,intermediate
+general,leadership,How do you motivate team members during challenging times?,behavioral,advanced
+general,problem_solving,Walk me through how you would debug a piece of code that's not working.,technical,intermediate
+general,problem_solving,How do you approach solving a problem you've never encountered before?,behavioral,intermediate
+general,time_management,How do you handle competing priorities?,behavioral,intermediate
+general,adaptability,Tell me about a time when project requirements changed significantly.,behavioral,intermediate
+general,innovation,Describe an innovative solution you implemented.,behavioral,advanced
+general,mentoring,How do you help junior developers grow?,behavioral,advanced
+general,culture_fit,Why do you want to work for our company?,behavioral,beginner
+general,career_growth,Where do you see yourself in 5 years?,behavioral,beginner
+startup,risk_tolerance,How comfortable are you with ambiguity and changing priorities?,behavioral,intermediate
+startup,ownership,Describe a time when you took full ownership of a project.,behavioral,advanced
+enterprise,compliance,How do you ensure code quality in large teams?,technical,advanced
+enterprise,scalability,How would you design a system for millions of users?,technical,expert
+remote_work,communication,How do you stay connected with remote team members?,behavioral,intermediate
+remote_work,productivity,How do you maintain productivity while working from home?,behavioral,intermediate
