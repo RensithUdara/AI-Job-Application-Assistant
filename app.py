@@ -113,6 +113,16 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 def main():
+    # Initialize session state
+    if 'show_chat' not in st.session_state:
+        st.session_state.show_chat = False
+    if 'show_templates' not in st.session_state:
+        st.session_state.show_templates = False
+    if 'show_interview' not in st.session_state:
+        st.session_state.show_interview = False
+    if 'chat_history' not in st.session_state:
+        st.session_state.chat_history = []
+
     # Enhanced Sidebar
     with st.sidebar:
         st.markdown("### 🚀 Quick Actions")
