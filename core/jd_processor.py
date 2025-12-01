@@ -26,6 +26,15 @@ class JobDescriptionProcessor:
         self.all_skills = set()
         for category, skills in self.skills_taxonomy.items():
             self.all_skills.update([skill.lower() for skill in skills])
+        
+        # Seniority level indicators
+        self.seniority_keywords = {
+            'intern': ['intern', 'internship', 'student', 'entry-level', 'graduate'],
+            'junior': ['junior', 'associate', 'entry-level', '0-2 years', 'new grad'],
+            'mid': ['mid-level', '2-5 years', '3-7 years', 'experienced', 'professional'],
+            'senior': ['senior', '5+ years', '7+ years', 'lead', 'principal', 'expert'],
+            'lead': ['lead', 'manager', 'director', 'head', 'chief', '10+ years']
+        }
     
     def process_jd(self, jd_text: str) -> Dict:
         """Process job description and extract relevant information."""
