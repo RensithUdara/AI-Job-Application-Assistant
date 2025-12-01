@@ -1132,3 +1132,76 @@ class Recommender:
             'application_strategy': strategy,
             'timeline_advice': timeline
         }
+    
+    def generate_multiple_resume_versions(self, resume_data: Dict, target_roles: List[str]) -> Dict:
+        """Generate multiple customized resume versions for different roles."""
+        versions = {}
+        
+        # Get base resume skills
+        base_skills = resume_data.get('resume_skills', {}).get('all_skills', [])
+        
+        # Role-specific optimizations
+        role_optimizations = {
+            'web_developer': {
+                'priority_skills': ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js'],
+                'keywords': ['frontend', 'backend', 'responsive', 'web development'],
+                'summary_focus': 'web application development and user experience'
+            },
+            'mobile_developer': {
+                'priority_skills': ['React Native', 'iOS', 'Android', 'Flutter', 'Swift'],
+                'keywords': ['mobile', 'app development', 'cross-platform', 'native'],
+                'summary_focus': 'mobile application development and platform optimization'
+            },
+            'data_analyst': {
+                'priority_skills': ['Python', 'SQL', 'Tableau', 'Excel', 'Power BI'],
+                'keywords': ['analytics', 'data visualization', 'insights', 'reporting'],
+                'summary_focus': 'data analysis and business intelligence'
+            },
+            'software_engineer': {
+                'priority_skills': ['Python', 'Java', 'Git', 'APIs', 'Testing'],
+                'keywords': ['software development', 'engineering', 'architecture', 'scalable'],
+                'summary_focus': 'software engineering and system architecture'
+            }
+        }
+        
+        for role in target_roles:
+            optimization = role_optimizations.get(role, role_optimizations['software_engineer'])
+            
+            # Find matching skills with resume
+            matched_priority_skills = [skill for skill in optimization['priority_skills'] 
+                                     if any(skill.lower() in base_skill.lower() for base_skill in base_skills)]
+            
+            # Generate customized summary
+            role_name = role.replace('_', ' ').title()
+            summary = f"Experienced {role_name} specializing in {optimization['summary_focus']}. "
+            summary += f"Proficient in {', '.join(matched_priority_skills[:3])} with strong problem-solving skills."
+            
+            versions[role] = {
+                'summary': summary,
+                'prioritized_skills': {
+                    'high_priority': matched_priority_skills,
+                    'medium_priority': [skill for skill in base_skills if skill not in matched_priority_skills][:5],
+                    'keywords_to_add': optimization['keywords']
+                },
+                'customization_tips': [
+                    f'Emphasize {role_name} specific projects and achievements',
+                    f'Include {", ".join(optimization["keywords"])} keywords naturally',
+                    'Tailor work experience descriptions to match role requirements',
+                    'Add relevant certifications or courses for this role'
+                ],
+                'keyword_optimization': optimization['keywords'][:4]
+            }
+        
+        # Generate overall application strategy
+        application_strategy = {
+            'primary_focus': 'Customize each resume version for specific role requirements',
+            'keyword_strategy': 'Use role-specific terminology and industry buzzwords',
+            'experience_emphasis': 'Highlight most relevant projects and achievements first',
+            'skill_presentation': 'Order skills by relevance to each specific role'
+        }
+        
+        return {
+            'versions': versions,
+            'application_strategy': application_strategy,
+            'total_versions_generated': len(versions)
+        }
