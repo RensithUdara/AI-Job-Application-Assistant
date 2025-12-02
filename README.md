@@ -319,105 +319,176 @@ mindmap
 
 ### **📱 Multi-Page Application Structure**
 
-```
-🏠 Main Dashboard ←──────────→ 🤖 AI Career Chat ←──────────→ 📄 Resume Templates
-       │                            │                              │
-       ▼                            ▼                              ▼
-┌─────────────────────┐  ┌─────────────────────┐     ┌─────────────────────┐
-│   📊 Core Analysis   │  │  💬 Interactive AI  │     │ 📝 Professional     │
-│                     │  │                     │     │    Templates        │
-│ • Summary & Scores  │  │ • Career Guidance   │     │                     │
-│ • Skills Analysis   │  │ • Resume Tips       │     │ • 12+ Categories    │
-│ • Recommendations   │  │ • Interview Prep    │     │ • Live Preview      │
-│ • Interview Prep    │  │ • Salary Advice     │     │ • Download Ready    │
-│ • Advanced Analytics│  │ • Job Search Help   │     │ • Customizable      │
-└─────────────────────┘  └─────────────────────┘     └─────────────────────┘
-                                      │
-                                      ▼
-                           ┌─────────────────────┐
-                           │  🎤 Mock Interview   │
-                           │     Simulator       │
-                           │                     │
-                           │ • Multiple Types    │
-                           │ • Real-time Feedback│
-                           │ • Performance Track │
-                           │ • Question Bank     │
-                           │ • Progress Analytics│
-                           └─────────────────────┘
+```mermaid
+flowchart TD
+    A[🏠 Main Dashboard] <--> B[🤖 AI Career Chat]
+    B <--> C[📄 Resume Templates]
+    A <--> C
+    B --> D[🎤 Mock Interview Simulator]
+    
+    A --> A1[📊 Core Analysis<br/>• Summary & Scores<br/>• Skills Analysis<br/>• Recommendations<br/>• Interview Prep<br/>• Advanced Analytics]
+    
+    B --> B1[💬 Interactive AI<br/>• Career Guidance<br/>• Resume Tips<br/>• Interview Prep<br/>• Salary Advice<br/>• Job Search Help]
+    
+    C --> C1[📝 Professional Templates<br/>• 12+ Categories<br/>• Live Preview<br/>• Download Ready<br/>• Customizable]
+    
+    D --> D1[🎤 Mock Interview<br/>Simulator<br/>• Multiple Types<br/>• Real-time Feedback<br/>• Performance Track<br/>• Question Bank<br/>• Progress Analytics]
+    
+    classDef dashboard fill:#e3f2fd,color:#000
+    classDef aiChat fill:#f1f8e9,color:#000
+    classDef templates fill:#fff3e0,color:#000
+    classDef interview fill:#fce4ec,color:#000
+    
+    class A,A1 dashboard
+    class B,B1 aiChat
+    class C,C1 templates
+    class D,D1 interview
 ```
 
 ### **📊 Comprehensive Analysis Tabs**
 
 #### **Tab 1: 📊 Executive Summary**
-```
-┌─────────────────────────────────────────────────────┐
-│                🎯 MATCH OVERVIEW                     │
-├─────────────────────────────────────────────────────┤
-│  Overall Score: ████████░░ 82%                      │
-│  Market Ready:  ███████░░░ 74%                      │
-│  ATS Score:     █████████░ 91%                      │
-├─────────────────────────────────────────────────────┤
-│               🏆 KEY HIGHLIGHTS                      │
-│  ✅ Strong technical skills alignment               │
-│  ⚠️  Need leadership experience                      │
-│  🎯 Ready for mid-level positions                   │
-└─────────────────────────────────────────────────────┘
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor': '#2196f3'}}}%%
+pie title 🎯 MATCH OVERVIEW
+    "Overall Score" : 82
+    "Remaining" : 18
 ```
 
-#### **Tab 2: 🎯 Skills Intelligence**  
+```mermaid
+quadrantChart
+    title Performance Analysis
+    x-axis Low --> High
+    y-axis Market Readiness --> ATS Optimization
+    quadrant-1 High Performance
+    quadrant-2 ATS Optimized
+    quadrant-3 Needs Improvement
+    quadrant-4 Market Ready
+    
+    Overall Score: [0.82, 0.85]
+    ATS Score: [0.91, 0.75]
+    Market Ready: [0.74, 0.80]
 ```
-┌─────────────────────────────────────────────────────┐
-│              SKILL GAP ANALYSIS                     │
-├─────────────────────────────────────────────────────┤
-│  🟢 MATCHED (15)    │ 🟡 PARTIAL (8)  │ 🔴 MISSING (5) │
-│  ├─ Python ████████│ ├─ AWS ████░░░░  │ ├─ Kubernetes  │
-│  ├─ React ████████ │ ├─ Docker ██████ │ ├─ GraphQL     │
-│  ├─ SQL ████████   │ └─ Git ████████  │ └─ TypeScript  │
-│  └─ [12 more...]   │                  │                │
-├─────────────────────────────────────────────────────┤
-│               PRIORITY RECOMMENDATIONS              │
-│  🔥 High:    Learn Kubernetes (3-4 weeks)          │
-│  🟡 Medium:  Improve AWS skills (2-3 weeks)        │
-│  🟢 Low:     Add GraphQL experience (1-2 weeks)    │
-└─────────────────────────────────────────────────────┘
+
+**🏆 KEY HIGHLIGHTS**
+- ✅ Strong technical skills alignment
+- ⚠️ Need leadership experience  
+- 🎯 Ready for mid-level positions
+
+#### **Tab 2: 🎯 Skills Intelligence**  
+```mermaid
+sankey-beta
+    %% Skills Gap Analysis Flow
+    Total Skills,🟢 MATCHED,15
+    Total Skills,🟡 PARTIAL,8
+    Total Skills,🔴 MISSING,5
+    
+    🟢 MATCHED,Python,5
+    🟢 MATCHED,React,4
+    🟢 MATCHED,SQL,3
+    🟢 MATCHED,Others,3
+    
+    🟡 PARTIAL,AWS,3
+    🟡 PARTIAL,Docker,3
+    🟡 PARTIAL,Git,2
+    
+    🔴 MISSING,Kubernetes,2
+    🔴 MISSING,GraphQL,2
+    🔴 MISSING,TypeScript,1
+```
+
+```mermaid
+gantt
+    title PRIORITY RECOMMENDATIONS Timeline
+    dateFormat X
+    axisFormat %s
+    
+    section 🔥 High Priority
+    Learn Kubernetes    :crit, k8s, 0, 4w
+    
+    section 🟡 Medium Priority  
+    Improve AWS skills  :active, aws, 0, 3w
+    
+    section 🟢 Low Priority
+    Add GraphQL experience :graphql, 0, 2w
 ```
 
 #### **Tab 3: 📋 Resume Quality Assessment**
+```mermaid
+xychart-beta
+    title "Resume Section Quality Analysis"
+    x-axis ["Contact Info", "Summary", "Experience", "Education", "Skills"]
+    y-axis "Quality Score" 0 --> 100
+    bar [95, 72, 91, 88, 64]
 ```
-┌─────────────────────────────────────────────────────┐
-│               RESUME STRUCTURE                      │
-├─────────────────────────────────────────────────────┤
-│  Section           │ Status    │ Quality │ ATS Score │
-│  ─────────────────────────────────────────────────  │
-│  Contact Info      │ ✅ Good   │ 95%     │ 98%       │
-│  Summary           │ ⚠️  Fair  │ 72%     │ 85%       │
-│  Experience        │ ✅ Excel  │ 91%     │ 94%       │
-│  Education         │ ✅ Good   │ 88%     │ 92%       │
-│  Skills            │ ⚠️  Poor  │ 64%     │ 71%       │
-├─────────────────────────────────────────────────────┤
-│               IMPROVEMENT AREAS                     │
-│  📝 Add quantified achievements in summary          │
-│  🎯 Reorganize skills by relevance                  │
-│  📊 Include metrics in experience bullets           │
-└─────────────────────────────────────────────────────┘
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor': '#4caf50', 'primaryTextColor': '#000'}}}%%
+flowchart LR
+    A[📋 Resume Structure] --> B[📞 Contact Info<br/>✅ Good - 95%]
+    A --> C[📝 Summary<br/>⚠️ Fair - 72%]
+    A --> D[💼 Experience<br/>✅ Excel - 91%]
+    A --> E[🎓 Education<br/>✅ Good - 88%]
+    A --> F[🎯 Skills<br/>⚠️ Poor - 64%]
+    
+    G[🔧 Improvement Areas] --> H[📝 Add quantified<br/>achievements]
+    G --> I[🎯 Reorganize skills<br/>by relevance]
+    G --> J[📊 Include metrics<br/>in bullets]
+    
+    classDef good fill:#c8e6c9,color:#000
+    classDef fair fill:#fff3c4,color:#000
+    classDef poor fill:#ffcdd2,color:#000
+    classDef improve fill:#e1f5fe,color:#000
+    
+    class B,D,E good
+    class C fair
+    class F poor
+    class G,H,I,J improve
 ```
 
 #### **Tab 4: 💡 Strategic Recommendations**
+```mermaid
+gantt
+    title ACTION PLAN ROADMAP
+    dateFormat YYYY-MM-DD
+    section 🔴 CRITICAL (1 week)
+    Rewrite summary with metrics    :crit, summary, 2025-12-03, 1w
+    Add missing critical skills     :crit, skills, 2025-12-03, 1w  
+    Include project outcomes        :crit, outcomes, 2025-12-03, 1w
+    
+    section 🟡 IMPORTANT (2-4 weeks)
+    Kubernetes certification        :active, k8s, 2025-12-10, 4w
+    Build portfolio project         :portfolio, 2025-12-10, 3w
+    Practice interview responses    :interview, 2025-12-17, 2w
+    
+    section 🟢 HELPFUL (1-2 months)
+    Long-term skill development     :helpful, 2025-12-31, 8w
 ```
-┌─────────────────────────────────────────────────────┐
-│              ACTION PLAN (PRIORITY ORDER)           │
-├─────────────────────────────────────────────────────┤
-│  🔴 CRITICAL (Complete within 1 week)               │
-│  ├─ 📝 Rewrite summary with quantified results     │
-│  ├─ 🎯 Add missing critical skills to resume       │
-│  └─ 📊 Include project outcomes with metrics       │
-├─────────────────────────────────────────────────────┤
-│  🟡 IMPORTANT (Complete within 2-4 weeks)          │
-│  ├─ 📚 Complete Kubernetes certification           │
-│  ├─ 🛠️ Build portfolio project with new tech      │
-│  └─ 🎤 Practice behavioral interview responses     │
-├─────────────────────────────────────────────────────┤
-│  🟢 HELPFUL (Complete within 1-2 months)           │
+
+```mermaid
+flowchart TD
+    A[💡 Strategic Action Plan] --> B[🔴 CRITICAL<br/>1 Week Priority]
+    A --> C[🟡 IMPORTANT<br/>2-4 Weeks]
+    A --> D[🟢 HELPFUL<br/>1-2 Months]
+    
+    B --> B1[📝 Rewrite summary<br/>with quantified results]
+    B --> B2[🎯 Add missing<br/>critical skills]
+    B --> B3[📊 Include project<br/>outcomes with metrics]
+    
+    C --> C1[📚 Complete Kubernetes<br/>certification]
+    C --> C2[🛠️ Build portfolio<br/>project with new tech]
+    C --> C3[🎤 Practice behavioral<br/>interview responses]
+    
+    D --> D1[📖 Long-term skill<br/>development plan]
+    
+    classDef critical fill:#ffcdd2,color:#000
+    classDef important fill:#fff3c4,color:#000
+    classDef helpful fill:#c8e6c9,color:#000
+    
+    class B,B1,B2,B3 critical
+    class C,C1,C2,C3 important
+    class D,D1 helpful
+```
 │  ├─ 🌐 Optimize LinkedIn profile                   │
 │  ├─ 📖 Read industry blogs and trends              │
 │  └─ 🤝 Attend networking events                    │
