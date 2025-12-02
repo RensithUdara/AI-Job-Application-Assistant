@@ -100,123 +100,175 @@ ai-job-application-assistant/
 
 ### **🏗️ System Architecture Diagram**
 
+```mermaid
+C4Context
+    title System Architecture - AI Job Application Assistant
+    
+    Person(user, "Job Seeker", "Users seeking career advancement")
+    
+    System_Boundary(app, "AI Job Assistant") {
+        Container(ui, "🎨 UI Layer", "Streamlit", "Interactive web interface")
+        Container(logic, "🧠 Business Logic", "Python", "Core processing engine")
+        Container(data, "📊 Data Layer", "JSON/CSV", "Knowledge base & storage")
+    }
+    
+    Rel(user, ui, "Uses", "Web browser")
+    Rel(ui, logic, "Processes", "Function calls")
+    Rel(logic, data, "Reads/Writes", "Data access")
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    🎯 AI JOB APPLICATION ASSISTANT               │
-│                         Streamlit Web Application                │
-└─────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                        🎨 USER INTERFACE LAYER                   │
-├─────────────────────────────────────────────────────────────────┤
-│  📊 Main Dashboard     │  🤖 AI Chat        │  📄 Templates      │
-│  ├─ Summary & Analytics│  ├─ Career Guidance │  ├─ ATS-Friendly  │
-│  ├─ Skills Analysis    │  ├─ Resume Tips     │  ├─ Creative Pro   │
-│  ├─ Recommendations    │  └─ Interview Prep  │  ├─ Technical      │
-│  └─ Interview Simulator│                     │  └─ Executive      │
-├─────────────────────────────────────────────────────────────────┤
-│  🧩 Shared Components: Navigation, Modals, Charts, Forms        │
-└─────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      🧠 BUSINESS LOGIC LAYER                     │
-├─────────────────────────────────────────────────────────────────┤
-│  📄 Resume Parser     │  💼 JD Processor    │  🔍 Smart Matcher  │
-│  ├─ PDF/DOCX Support │  ├─ Role Detection  │  ├─ Semantic Match  │
-│  ├─ Section Detection│  ├─ Skill Extraction│  ├─ Score Calculation│
-│  ├─ Skill Extraction │  ├─ Requirement     │  └─ Gap Analysis    │
-│  └─ Content Analysis │  │   Analysis       │                     │
-│                       │  └─ Salary Intelligence               │
-├─────────────────────────────────────────────────────────────────┤
-│  🎯 Recommender       │  📊 Career Analyzer │  🛠️ Utilities      │
-│  ├─ Learning Paths   │  ├─ Market Intelligence│ ├─ Text Processing│
-│  ├─ Action Items     │  ├─ Competitiveness  │  ├─ Data Validation│
-│  ├─ Resource Links   │  ├─ Growth Projection │  └─ Helper Functions│
-│  └─ Priority Scoring │  └─ Trend Analysis    │                   │
-└─────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                       📊 DATA & KNOWLEDGE LAYER                  │
-├─────────────────────────────────────────────────────────────────┤
-│  🧬 Skills Taxonomy   │  💼 Job Templates   │  🎤 Question Bank   │
-│  ├─ 2000+ Skills     │  ├─ Role Definitions│  ├─ Technical Q's   │
-│  ├─ Categorization   │  ├─ Requirements    │  ├─ Behavioral Q's  │
-│  ├─ Skill Relations  │  ├─ Career Paths    │  └─ Case Studies    │
-│  └─ Market Demand    │  └─ Salary Ranges   │                     │
-├─────────────────────────────────────────────────────────────────┤
-│  📈 Market Data       │  🏢 Company Info    │  📚 Learning Resources│
-│  ├─ Salary Trends    │  ├─ Culture Insights│  ├─ Course Links     │
-│  ├─ Skill Demand     │  ├─ Tech Stack      │  ├─ Certification   │
-│  └─ Industry Growth  │  └─ Hiring Patterns │  └─ Practice Projects│
-└─────────────────────────────────────────────────────────────────┘
+
+```mermaid
+flowchart TB
+    subgraph "🎯 AI JOB APPLICATION ASSISTANT"
+        direction TB
+        
+        subgraph "🎨 USER INTERFACE LAYER"
+            A1[📊 Main Dashboard<br/>Summary & Analytics<br/>Skills Analysis<br/>Recommendations]
+            A2[🤖 AI Chat<br/>Career Guidance<br/>Resume Tips<br/>Interview Prep]
+            A3[📄 Templates<br/>ATS-Friendly<br/>Creative Pro<br/>Technical<br/>Executive]
+            A4[🧩 Shared Components<br/>Navigation, Modals, Charts, Forms]
+        end
+        
+        subgraph "🧠 BUSINESS LOGIC LAYER"
+            B1[📄 Resume Parser<br/>PDF/DOCX Support<br/>Section Detection<br/>Skill Extraction<br/>Content Analysis]
+            B2[💼 JD Processor<br/>Role Detection<br/>Skill Extraction<br/>Requirement Analysis<br/>Salary Intelligence]
+            B3[🔍 Smart Matcher<br/>Semantic Match<br/>Score Calculation<br/>Gap Analysis]
+            B4[🎯 Recommender<br/>Learning Paths<br/>Action Items<br/>Resource Links<br/>Priority Scoring]
+            B5[📊 Career Analyzer<br/>Market Intelligence<br/>Competitiveness<br/>Growth Projection<br/>Trend Analysis]
+            B6[🛠️ Utilities<br/>Text Processing<br/>Data Validation<br/>Helper Functions]
+        end
+        
+        subgraph "📊 DATA & KNOWLEDGE LAYER"
+            C1[🧬 Skills Taxonomy<br/>2000+ Skills<br/>Categorization<br/>Skill Relations<br/>Market Demand]
+            C2[💼 Job Templates<br/>Role Definitions<br/>Requirements<br/>Career Paths<br/>Salary Ranges]
+            C3[🎤 Question Bank<br/>Technical Q's<br/>Behavioral Q's<br/>Case Studies]
+            C4[📈 Market Data<br/>Salary Trends<br/>Skill Demand<br/>Industry Growth]
+            C5[🏢 Company Info<br/>Culture Insights<br/>Tech Stack<br/>Hiring Patterns]
+            C6[📚 Learning Resources<br/>Course Links<br/>Certification<br/>Practice Projects]
+        end
+    end
+    
+    A1 --> B1
+    A2 --> B4
+    A3 --> C2
+    
+    B1 --> C1
+    B2 --> C2
+    B3 --> C1
+    B4 --> C6
+    B5 --> C4
+    B6 --> C1
+    
+    classDef uiLayer fill:#e3f2fd,color:#000
+    classDef logicLayer fill:#f1f8e9,color:#000
+    classDef dataLayer fill:#fff3e0,color:#000
+    
+    class A1,A2,A3,A4 uiLayer
+    class B1,B2,B3,B4,B5,B6 logicLayer
+    class C1,C2,C3,C4,C5,C6 dataLayer
 ```
 
 ### **🔄 Data Flow Architecture**
 
+```mermaid
+sequenceDiagram
+    participant U as 👤 User
+    participant UI as 🎨 UI Layer
+    participant PE as 🧠 Processing Engine
+    participant DL as 📊 Data Layer
+    participant AI as 🤖 AI Engine
+    
+    U->>UI: Upload Resume & Job Description
+    UI->>PE: Send documents for processing
+    
+    Note over PE: Processing Pipeline
+    PE->>PE: Step 1: Document Parsing & Text Extraction
+    PE->>DL: Step 2: Load skills taxonomy & templates
+    PE->>AI: Step 3: NLP Processing & Entity Recognition
+    AI->>PE: Extracted entities & skills
+    PE->>PE: Step 4: Skill Extraction & Categorization
+    PE->>PE: Step 5: Semantic Matching & Similarity Scoring
+    PE->>AI: Step 6: Generate recommendations
+    AI->>PE: Personalized recommendations
+    PE->>PE: Step 7: Gap Analysis & Priority Scoring
+    
+    PE->>UI: Return analysis results
+    UI->>U: Display interactive dashboard
+    U->>UI: Navigate tabs & explore insights
+    UI->>U: Show visualizations & recommendations
 ```
-📄 Resume Input ──┐
-                  ├──→ 🧠 Processing Engine ──→ 📊 Analysis Results
-💼 Job Description ┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    PROCESSING PIPELINE                          │
-├─────────────────────────────────────────────────────────────────┤
-│  Step 1: Document Parsing & Text Extraction                    │
-│  Step 2: NLP Processing & Entity Recognition                    │
-│  Step 3: Skill Extraction & Categorization                     │
-│  Step 4: Semantic Matching & Similarity Scoring                │
-│  Step 5: Gap Analysis & Recommendation Generation              │
-│  Step 6: Visualization & Interactive Display                   │
-└─────────────────────────────────────────────────────────────────┘
+
+```mermaid
+flowchart LR
+    A[📄 Resume Input] --> C[🧠 Processing Engine]
+    B[💼 Job Description] --> C
+    C --> D[📊 Analysis Results]
+    
+    subgraph "Processing Pipeline"
+        direction TB
+        C --> E1[Step 1: Document Parsing<br/>& Text Extraction]
+        E1 --> E2[Step 2: NLP Processing<br/>& Entity Recognition]
+        E2 --> E3[Step 3: Skill Extraction<br/>& Categorization]
+        E3 --> E4[Step 4: Semantic Matching<br/>& Similarity Scoring]
+        E4 --> E5[Step 5: Gap Analysis &<br/>Recommendation Generation]
+        E5 --> E6[Step 6: Visualization &<br/>Interactive Display]
+    end
+    
+    E6 --> D
+    
+    classDef input fill:#e3f2fd
+    classDef process fill:#f1f8e9
+    classDef output fill:#fff3e0
+    
+    class A,B input
+    class C,E1,E2,E3,E4,E5,E6 process
+    class D output
 ```
 
 ## 🚀 Comprehensive Feature Suite
 
-### **🤖 AI-Powered Career Assistant**
-```
-┌─────────────────────────────────────────┐
-│           💬 AI Career Chat             │
-├─────────────────────────────────────────┤
-│  • Personalized career guidance         │
-│  • Real-time resume feedback           │
-│  • Interview preparation tips          │
-│  • Salary negotiation strategies       │
-│  • Career planning assistance          │
-│  • Industry-specific advice            │
-└─────────────────────────────────────────┘
-```
-
-### **📄 Professional Resume Templates**
-```
-┌──────────────────┬──────────────────┬──────────────────┬──────────────────┐
-│   🎯 ATS-Friendly │  🎨 Creative Pro  │  💻 Technical    │  👔 Executive    │
-├──────────────────┼──────────────────┼──────────────────┼──────────────────┤
-│ • Classic Prof.  │ • Designer Port. │ • Software Eng.  │ • C-Level Exec.  │
-│ • Modern Minimal │ • Digital Market │ • Data Scientist │ • VP/Director    │
-│ • Skills-Focused │ • Media & Arts   │ • Cybersecurity  │ • Senior Manager │
-└──────────────────┴──────────────────┴──────────────────┴──────────────────┘
-```
-
-### **🎤 Mock Interview Simulator**
-```
-┌─────────────────────────────────────────┐
-│         🎭 Interview Types              │
-├─────────────────────────────────────────┤
-│  Behavioral  │  Technical  │  System   │
-│  Leadership  │ Culture Fit │ Case Study│
-├─────────────────────────────────────────┤
-│         📊 Features                     │
-├─────────────────────────────────────────┤
-│  • Real-time feedback & scoring         │
-│  • Industry-specific questions          │
-│  • Difficulty level adjustment          │
-│  • Performance analytics               │
-│  • Progress tracking                    │
-└─────────────────────────────────────────┘
+```mermaid
+mindmap
+  root((🚀 AI Career Assistant<br/>Feature Suite))
+    🤖 AI-Powered Assistant
+      💬 AI Career Chat
+        Personalized guidance
+        Real-time feedback
+        Interview tips
+        Salary negotiation
+        Career planning
+        Industry advice
+    📄 Resume Templates
+      🎯 ATS-Friendly
+        Classic Professional
+        Modern Minimal
+        Skills-Focused
+      🎨 Creative Pro
+        Designer Portfolio
+        Digital Marketing
+        Media & Arts
+      💻 Technical
+        Software Engineer
+        Data Scientist
+        Cybersecurity
+      👔 Executive
+        C-Level Executive
+        VP/Director
+        Senior Manager
+    🎤 Interview Simulator
+      🎭 Interview Types
+        Behavioral
+        Technical
+        System Design
+        Leadership
+        Culture Fit
+        Case Study
+      📊 Features
+        Real-time feedback
+        Industry questions
+        Difficulty adjustment
+        Performance analytics
+        Progress tracking
 ```
 
 ### **1. 🔍 Advanced Resume Analysis**
@@ -267,105 +319,176 @@ ai-job-application-assistant/
 
 ### **📱 Multi-Page Application Structure**
 
-```
-🏠 Main Dashboard ←──────────→ 🤖 AI Career Chat ←──────────→ 📄 Resume Templates
-       │                            │                              │
-       ▼                            ▼                              ▼
-┌─────────────────────┐  ┌─────────────────────┐     ┌─────────────────────┐
-│   📊 Core Analysis   │  │  💬 Interactive AI  │     │ 📝 Professional     │
-│                     │  │                     │     │    Templates        │
-│ • Summary & Scores  │  │ • Career Guidance   │     │                     │
-│ • Skills Analysis   │  │ • Resume Tips       │     │ • 12+ Categories    │
-│ • Recommendations   │  │ • Interview Prep    │     │ • Live Preview      │
-│ • Interview Prep    │  │ • Salary Advice     │     │ • Download Ready    │
-│ • Advanced Analytics│  │ • Job Search Help   │     │ • Customizable      │
-└─────────────────────┘  └─────────────────────┘     └─────────────────────┘
-                                      │
-                                      ▼
-                           ┌─────────────────────┐
-                           │  🎤 Mock Interview   │
-                           │     Simulator       │
-                           │                     │
-                           │ • Multiple Types    │
-                           │ • Real-time Feedback│
-                           │ • Performance Track │
-                           │ • Question Bank     │
-                           │ • Progress Analytics│
-                           └─────────────────────┘
+```mermaid
+flowchart TD
+    A[🏠 Main Dashboard] <--> B[🤖 AI Career Chat]
+    B <--> C[📄 Resume Templates]
+    A <--> C
+    B --> D[🎤 Mock Interview Simulator]
+    
+    A --> A1[📊 Core Analysis<br/>• Summary & Scores<br/>• Skills Analysis<br/>• Recommendations<br/>• Interview Prep<br/>• Advanced Analytics]
+    
+    B --> B1[💬 Interactive AI<br/>• Career Guidance<br/>• Resume Tips<br/>• Interview Prep<br/>• Salary Advice<br/>• Job Search Help]
+    
+    C --> C1[📝 Professional Templates<br/>• 12+ Categories<br/>• Live Preview<br/>• Download Ready<br/>• Customizable]
+    
+    D --> D1[🎤 Mock Interview<br/>Simulator<br/>• Multiple Types<br/>• Real-time Feedback<br/>• Performance Track<br/>• Question Bank<br/>• Progress Analytics]
+    
+    classDef dashboard fill:#e3f2fd,color:#000
+    classDef aiChat fill:#f1f8e9,color:#000
+    classDef templates fill:#fff3e0,color:#000
+    classDef interview fill:#fce4ec,color:#000
+    
+    class A,A1 dashboard
+    class B,B1 aiChat
+    class C,C1 templates
+    class D,D1 interview
 ```
 
 ### **📊 Comprehensive Analysis Tabs**
 
 #### **Tab 1: 📊 Executive Summary**
-```
-┌─────────────────────────────────────────────────────┐
-│                🎯 MATCH OVERVIEW                     │
-├─────────────────────────────────────────────────────┤
-│  Overall Score: ████████░░ 82%                      │
-│  Market Ready:  ███████░░░ 74%                      │
-│  ATS Score:     █████████░ 91%                      │
-├─────────────────────────────────────────────────────┤
-│               🏆 KEY HIGHLIGHTS                      │
-│  ✅ Strong technical skills alignment               │
-│  ⚠️  Need leadership experience                      │
-│  🎯 Ready for mid-level positions                   │
-└─────────────────────────────────────────────────────┘
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor': '#2196f3'}}}%%
+pie title 🎯 MATCH OVERVIEW
+    "Overall Score" : 82
+    "Remaining" : 18
 ```
 
-#### **Tab 2: 🎯 Skills Intelligence**  
+```mermaid
+quadrantChart
+    title Performance Analysis
+    x-axis Low --> High
+    y-axis Market Readiness --> ATS Optimization
+    quadrant-1 High Performance
+    quadrant-2 ATS Optimized
+    quadrant-3 Needs Improvement
+    quadrant-4 Market Ready
+    
+    Overall Score: [0.82, 0.85]
+    ATS Score: [0.91, 0.75]
+    Market Ready: [0.74, 0.80]
 ```
-┌─────────────────────────────────────────────────────┐
-│              SKILL GAP ANALYSIS                     │
-├─────────────────────────────────────────────────────┤
-│  🟢 MATCHED (15)    │ 🟡 PARTIAL (8)  │ 🔴 MISSING (5) │
-│  ├─ Python ████████│ ├─ AWS ████░░░░  │ ├─ Kubernetes  │
-│  ├─ React ████████ │ ├─ Docker ██████ │ ├─ GraphQL     │
-│  ├─ SQL ████████   │ └─ Git ████████  │ └─ TypeScript  │
-│  └─ [12 more...]   │                  │                │
-├─────────────────────────────────────────────────────┤
-│               PRIORITY RECOMMENDATIONS              │
-│  🔥 High:    Learn Kubernetes (3-4 weeks)          │
-│  🟡 Medium:  Improve AWS skills (2-3 weeks)        │
-│  🟢 Low:     Add GraphQL experience (1-2 weeks)    │
-└─────────────────────────────────────────────────────┘
+
+**🏆 KEY HIGHLIGHTS**
+- ✅ Strong technical skills alignment
+- ⚠️ Need leadership experience  
+- 🎯 Ready for mid-level positions
+
+#### **Tab 2: 🎯 Skills Intelligence**  
+```mermaid
+sankey-beta
+    %% Skills Gap Analysis Flow
+    Total Skills,🟢 MATCHED,15
+    Total Skills,🟡 PARTIAL,8
+    Total Skills,🔴 MISSING,5
+    
+    🟢 MATCHED,Python,5
+    🟢 MATCHED,React,4
+    🟢 MATCHED,SQL,3
+    🟢 MATCHED,Others,3
+    
+    🟡 PARTIAL,AWS,3
+    🟡 PARTIAL,Docker,3
+    🟡 PARTIAL,Git,2
+    
+    🔴 MISSING,Kubernetes,2
+    🔴 MISSING,GraphQL,2
+    🔴 MISSING,TypeScript,1
+```
+
+```mermaid
+gantt
+    title PRIORITY RECOMMENDATIONS Timeline
+    dateFormat X
+    axisFormat %s
+    
+    section 🔥 High Priority
+    Learn Kubernetes    :crit, k8s, 0, 4w
+    
+    section 🟡 Medium Priority  
+    Improve AWS skills  :active, aws, 0, 3w
+    
+    section 🟢 Low Priority
+    Add GraphQL experience :graphql, 0, 2w
 ```
 
 #### **Tab 3: 📋 Resume Quality Assessment**
+```mermaid
+xychart-beta
+    title "Resume Section Quality Analysis"
+    x-axis ["Contact Info", "Summary", "Experience", "Education", "Skills"]
+    y-axis "Quality Score" 0 --> 100
+    bar [95, 72, 91, 88, 64]
 ```
-┌─────────────────────────────────────────────────────┐
-│               RESUME STRUCTURE                      │
-├─────────────────────────────────────────────────────┤
-│  Section           │ Status    │ Quality │ ATS Score │
-│  ─────────────────────────────────────────────────  │
-│  Contact Info      │ ✅ Good   │ 95%     │ 98%       │
-│  Summary           │ ⚠️  Fair  │ 72%     │ 85%       │
-│  Experience        │ ✅ Excel  │ 91%     │ 94%       │
-│  Education         │ ✅ Good   │ 88%     │ 92%       │
-│  Skills            │ ⚠️  Poor  │ 64%     │ 71%       │
-├─────────────────────────────────────────────────────┤
-│               IMPROVEMENT AREAS                     │
-│  📝 Add quantified achievements in summary          │
-│  🎯 Reorganize skills by relevance                  │
-│  📊 Include metrics in experience bullets           │
-└─────────────────────────────────────────────────────┘
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor': '#4caf50', 'primaryTextColor': '#000'}}}%%
+flowchart LR
+    A[📋 Resume Structure] --> B[📞 Contact Info<br/>✅ Good - 95%]
+    A --> C[📝 Summary<br/>⚠️ Fair - 72%]
+    A --> D[💼 Experience<br/>✅ Excel - 91%]
+    A --> E[🎓 Education<br/>✅ Good - 88%]
+    A --> F[🎯 Skills<br/>⚠️ Poor - 64%]
+    
+    G[🔧 Improvement Areas] --> H[📝 Add quantified<br/>achievements]
+    G --> I[🎯 Reorganize skills<br/>by relevance]
+    G --> J[📊 Include metrics<br/>in bullets]
+    
+    classDef good fill:#c8e6c9,color:#000
+    classDef fair fill:#fff3c4,color:#000
+    classDef poor fill:#ffcdd2,color:#000
+    classDef improve fill:#e1f5fe,color:#000
+    
+    class B,D,E good
+    class C fair
+    class F poor
+    class G,H,I,J improve
 ```
 
 #### **Tab 4: 💡 Strategic Recommendations**
+```mermaid
+gantt
+    title ACTION PLAN ROADMAP
+    dateFormat YYYY-MM-DD
+    section 🔴 CRITICAL (1 week)
+    Rewrite summary with metrics    :crit, summary, 2025-12-03, 1w
+    Add missing critical skills     :crit, skills, 2025-12-03, 1w  
+    Include project outcomes        :crit, outcomes, 2025-12-03, 1w
+    
+    section 🟡 IMPORTANT (2-4 weeks)
+    Kubernetes certification        :active, k8s, 2025-12-10, 4w
+    Build portfolio project         :portfolio, 2025-12-10, 3w
+    Practice interview responses    :interview, 2025-12-17, 2w
+    
+    section 🟢 HELPFUL (1-2 months)
+    Long-term skill development     :helpful, 2025-12-31, 8w
 ```
-┌─────────────────────────────────────────────────────┐
-│              ACTION PLAN (PRIORITY ORDER)           │
-├─────────────────────────────────────────────────────┤
-│  🔴 CRITICAL (Complete within 1 week)               │
-│  ├─ 📝 Rewrite summary with quantified results     │
-│  ├─ 🎯 Add missing critical skills to resume       │
-│  └─ 📊 Include project outcomes with metrics       │
-├─────────────────────────────────────────────────────┤
-│  🟡 IMPORTANT (Complete within 2-4 weeks)          │
-│  ├─ 📚 Complete Kubernetes certification           │
-│  ├─ 🛠️ Build portfolio project with new tech      │
-│  └─ 🎤 Practice behavioral interview responses     │
-├─────────────────────────────────────────────────────┤
-│  🟢 HELPFUL (Complete within 1-2 months)           │
+
+```mermaid
+flowchart TD
+    A[💡 Strategic Action Plan] --> B[🔴 CRITICAL<br/>1 Week Priority]
+    A --> C[🟡 IMPORTANT<br/>2-4 Weeks]
+    A --> D[🟢 HELPFUL<br/>1-2 Months]
+    
+    B --> B1[📝 Rewrite summary<br/>with quantified results]
+    B --> B2[🎯 Add missing<br/>critical skills]
+    B --> B3[📊 Include project<br/>outcomes with metrics]
+    
+    C --> C1[📚 Complete Kubernetes<br/>certification]
+    C --> C2[🛠️ Build portfolio<br/>project with new tech]
+    C --> C3[🎤 Practice behavioral<br/>interview responses]
+    
+    D --> D1[📖 Long-term skill<br/>development plan]
+    
+    classDef critical fill:#ffcdd2,color:#000
+    classDef important fill:#fff3c4,color:#000
+    classDef helpful fill:#c8e6c9,color:#000
+    
+    class B,B1,B2,B3 critical
+    class C,C1,C2,C3 important
+    class D,D1 helpful
+```
 │  ├─ 🌐 Optimize LinkedIn profile                   │
 │  ├─ 📖 Read industry blogs and trends              │
 │  └─ 🤝 Attend networking events                    │
@@ -763,17 +886,26 @@ RETURNING USERS:
 
 ### **💡 How to Contribute**
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    CONTRIBUTION WORKFLOW                    │
-├─────────────────────────────────────────────────────────────┤
-│  1. 🍴 Fork Repository                                      │
-│  2. 🌿 Create Feature Branch                                │
-│  3. 💻 Implement Changes                                    │
-│  4. ✅ Test & Validate                                      │
-│  5. 📝 Document Updates                                     │
-│  6. 🚀 Submit Pull Request                                  │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    A[🍴 Fork Repository] --> B[🌿 Create Feature Branch]
+    B --> C[💻 Implement Changes]
+    C --> D[✅ Test & Validate]
+    D --> E[📝 Document Updates]
+    E --> F[🚀 Submit Pull Request]
+    F --> G[👥 Code Review]
+    G --> H{Review Approved?}
+    H -->|Yes| I[✅ Merge to Main]
+    H -->|No| C
+    I --> J[🎉 Contribution Complete]
+    
+    classDef process fill:#2196f3,color:#fff
+    classDef decision fill:#ff9800,color:#fff
+    classDef success fill:#4caf50,color:#fff
+    
+    class A,B,C,D,E,F,G process
+    class H decision
+    class I,J success
 ```
 
 #### **Development Setup:**
