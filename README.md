@@ -86,9 +86,28 @@ ai-job-application-assistant/
 │   ├── 🎤 interview_questions.csv     # Question bank by domain
 │   ├── 💰 salary_data.json            # Market salary intelligence
 │   ├── 📈 market_trends.json          # Industry trends & insights
-│   └── 🏢 company_insights.json       # Company-specific data
+│   ├── 🏢 company_insights.json       # Company-specific data
+│   ├── 📊 metrics.db                  # Real-time analytics database ✨ NEW
+│   ├── 📝 app_config.json             # App configuration settings ✨ NEW
+│   ├── 🛤️ career_paths.json           # Career roadmaps & resources ✨ NEW
+│   ├── 💼 role_config.json            # Role definitions ✨ NEW
+│   ├── 📄 resume_config.json          # Resume processing config ✨ NEW
+│   ├── 📚 learning_resources.json     # Courses & certifications ✨ NEW
+│   ├── 🎨 ui_elements.json            # UI configurations ✨ NEW
+│   ├── 🎤 mock_interview_questions.json # Interview Q&A database ✨ NEW
+│   └── generate_demo_metrics.py       # Demo data generator ✨ NEW
 │
-├── 📄 assets/                         # Sample Files & Resources
+├── 🧠 core/                           # Business Logic Layer
+│   ├── __init__.py                    # Package initialization
+│   ├── 📄 resume_parser.py            # Multi-format resume processing
+│   ├── 💼 jd_processor.py             # Job description analysis
+│   ├── 🔍 matcher.py                  # Intelligent matching algorithms
+│   ├── 🎯 recommender.py              # Personalized recommendations
+│   ├── 📊 career_analyzer.py          # Career intelligence & analytics
+│   ├── 📊 metrics_tracker.py          # Real-time metrics tracking ✨ NEW
+│   ├── ⚙️ config_loader.py            # Configuration management ✨ NEW
+│   └── 🛠️ utils.py                    # Shared utilities & helpers
+│├── 📄 assets/                         # Sample Files & Resources
 │   ├── 📄 sample_resume.txt           # Example resume
 │   └── 💼 sample_jd.txt               # Example job description
 │
