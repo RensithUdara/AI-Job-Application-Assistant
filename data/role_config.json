@@ -1,0 +1,225 @@
+{
+  "role_required_skills": {
+    "software_engineer": [
+      "programming", "algorithms", "data structures", "version control",
+      "testing", "debugging", "system design", "databases"
+    ],
+    "senior_software_engineer": [
+      "advanced programming", "system architecture", "technical leadership",
+      "code review", "mentoring", "project management", "performance optimization"
+    ],
+    "web_developer": [
+      "html", "css", "javascript", "responsive design", "frontend frameworks",
+      "backend development", "api integration", "web security"
+    ],
+    "data_scientist": [
+      "python", "machine learning", "statistics", "data visualization",
+      "sql", "big data", "deep learning", "research methodology"
+    ],
+    "devops_engineer": [
+      "linux", "docker", "kubernetes", "ci/cd", "infrastructure as code",
+      "cloud platforms", "monitoring", "automation"
+    ],
+    "mobile_developer": [
+      "mobile ui design", "state management", "native platforms", "api integration",
+      "databases", "performance optimization", "user experience"
+    ],
+    "data_analyst": [
+      "sql", "python", "statistics", "data visualization", "excel",
+      "tableau", "data modeling", "business analysis"
+    ]
+  },
+  "role_keywords": {
+    "mobile_developer": [
+      "flutter", "android", "ios", "kotlin", "swift", "react native",
+      "mobile", "app store", "play store"
+    ],
+    "web_developer": [
+      "javascript", "react", "html", "css", "node.js", "angular", "vue",
+      "web", "frontend", "backend", "express", "django"
+    ],
+    "data_analyst": [
+      "sql", "python", "excel", "tableau", "statistics", "data",
+      "analytics", "visualization", "pandas", "numpy"
+    ],
+    "software_engineer": [
+      "programming", "algorithms", "data structures", "system design",
+      "api", "database", "testing"
+    ],
+    "data_scientist": [
+      "machine learning", "deep learning", "python", "r", "tensorflow",
+      "pytorch", "scikit-learn", "statistics", "data mining"
+    ],
+    "devops_engineer": [
+      "docker", "kubernetes", "aws", "azure", "gcp", "ci/cd", "jenkins",
+      "terraform", "ansible", "linux"
+    ]
+  },
+  "role_optimizations": {
+    "web_developer": {
+      "priority_skills": ["HTML", "CSS", "JavaScript", "React", "Node.js"],
+      "keywords": ["frontend", "backend", "responsive", "web development"],
+      "summary_focus": "web application development and user experience"
+    },
+    "mobile_developer": {
+      "priority_skills": ["React Native", "iOS", "Android", "Flutter", "Swift"],
+      "keywords": ["mobile", "app development", "cross-platform", "native"],
+      "summary_focus": "mobile application development and platform optimization"
+    },
+    "data_analyst": {
+      "priority_skills": ["SQL", "Excel", "Python", "Tableau", "Statistics"],
+      "keywords": ["analytics", "data", "visualization", "insights"],
+      "summary_focus": "data analysis and business intelligence"
+    },
+    "software_engineer": {
+      "priority_skills": ["Programming", "System Design", "Algorithms", "Databases"],
+      "keywords": ["software", "architecture", "scalability", "performance"],
+      "summary_focus": "software architecture and system design"
+    },
+    "data_scientist": {
+      "priority_skills": ["Machine Learning", "Python", "Statistics", "Deep Learning"],
+      "keywords": ["machine learning", "ai", "data science", "predictive"],
+      "summary_focus": "machine learning and data science solutions"
+    }
+  },
+  "industry_indicators": {
+    "fintech": [
+      "fintech", "financial", "banking", "payment", "trading",
+      "cryptocurrency", "blockchain", "compliance"
+    ],
+    "healthcare": [
+      "healthcare", "medical", "hospital", "patient", "clinical",
+      "pharma", "biotech", "hipaa"
+    ],
+    "e_commerce": [
+      "e-commerce", "ecommerce", "retail", "marketplace", "shopping",
+      "customer", "supply chain"
+    ],
+    "gaming": [
+      "gaming", "game", "entertainment", "mobile games", "console",
+      "unity", "unreal", "multiplayer"
+    ],
+    "education": [
+      "education", "learning", "student", "academic", "school",
+      "university", "edtech"
+    ],
+    "enterprise": [
+      "enterprise", "b2b", "saas", "corporate", "business",
+      "crm", "erp", "scalability"
+    ]
+  },
+  "difficulty_thresholds": {
+    "difficulty_levels": [
+      {
+        "level": "Expert",
+        "min_score": 40,
+        "description": "Highly specialized and challenging role"
+      },
+      {
+        "level": "Hard",
+        "min_score": 30,
+        "description": "This role requires significant expertise and experience"
+      },
+      {
+        "level": "Medium",
+        "min_score": 20,
+        "description": "This role requires solid experience and technical competency"
+      },
+      {
+        "level": "Easy-Moderate",
+        "min_score": 10,
+        "description": "This role is accessible to candidates with some experience"
+      },
+      {
+        "level": "Easy",
+        "min_score": 0,
+        "description": "This role is suitable for entry-level or junior candidates"
+      }
+    ]
+  },
+  "resume_compatibility_thresholds": {
+    "excellent": 4,
+    "good": 2,
+    "excellent_keywords": 15,
+    "good_keywords": 8,
+    "excellent_density": 3.0,
+    "good_density": 1.5
+  },
+  "interview_preparation": {
+    "technical_topics_by_role": {
+      "web_developer": [
+        "JavaScript fundamentals",
+        "React/Vue concepts",
+        "REST API design",
+        "Database queries"
+      ],
+      "mobile_developer": [
+        "Mobile UI patterns",
+        "State management",
+        "API integration",
+        "Platform-specific features"
+      ],
+      "data_analyst": [
+        "SQL queries",
+        "Data manipulation with Python",
+        "Statistical concepts",
+        "Data visualization"
+      ]
+    },
+    "system_design_topics": {
+      "junior": [
+        "Basic architecture patterns",
+        "Database relationships",
+        "API design principles"
+      ],
+      "senior": [
+        "Database design",
+        "API architecture",
+        "Scalability concepts",
+        "Caching strategies"
+      ]
+    },
+    "timeline": {
+      "1_week_before": ["Complete company research", "Prepare STAR examples"],
+      "3_days_before": ["Review technical concepts", "Practice coding problems"],
+      "1_day_before": ["Mock interview practice", "Prepare questions to ask"],
+      "day_of": ["Review key points", "Prepare materials", "Arrive early"]
+    }
+  },
+  "competition_level_config": {
+    "high_competition": {
+      "score": 70,
+      "label": "High",
+      "description": "Highly competitive, requires strong positioning",
+      "timeline": "Apply within 1-2 weeks",
+      "strategy": [
+        "Customize resume extensively for exact keyword matching",
+        "Write compelling cover letter highlighting unique value",
+        "Apply as early as possible",
+        "Network with current employees if possible",
+        "Prepare for multiple interview rounds"
+      ]
+    },
+    "medium_competition": {
+      "score": 50,
+      "label": "Medium",
+      "description": "Moderate competition, good opportunities",
+      "timeline": "Apply within 2-3 weeks",
+      "strategy": [
+        "Customize resume to match key requirements",
+        "Apply with professional presentation",
+        "Highlight relevant experience clearly"
+      ]
+    },
+    "low_competition": {
+      "score": 0,
+      "label": "Low",
+      "description": "Lower competition, good opportunities for qualified candidates",
+      "timeline": "Apply within 3-4 weeks",
+      "strategy": [
+        "Customize resume to match key requirements",
+        "Apply with professional presentation"
+      ]
+    }
+  }
+}
