@@ -15,6 +15,10 @@ def initialize_session_state():
         st.session_state.analysis_done = False
     if 'results' not in st.session_state:
         st.session_state.results = {}
+    if 'show_feedback' not in st.session_state:
+        st.session_state.show_feedback = False
+    if 'feedback_rating' not in st.session_state:
+        st.session_state.feedback_rating = 0
 
 def display_sidebar():
     """Display the enhanced sidebar with quick actions and settings."""
@@ -94,6 +98,21 @@ def display_sidebar():
         st.markdown("### 💡 Daily Tip")
         from ui.components import display_daily_tip
         display_daily_tip()
+        
+        st.markdown("---")
+        
+        # Feedback section
+        st.markdown("### 📢 Feedback & Support")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            if st.button("💬 Share Feedback", use_container_width=True, key="sidebar_feedback_btn"):
+                st.session_state.show_feedback = True
+        
+        with col2:
+            if st.button("📊 View Stats", use_container_width=True, key="sidebar_stats_btn"):
+                st.session_state.show_feedback_stats = True
     
     return {
         'analysis_depth': analysis_depth,
