@@ -29,7 +29,9 @@ class ConfigLoader:
             'career_paths.json',
             'role_config.json',
             'resume_config.json',
-            'mock_interview_questions.json'
+            'mock_interview_questions.json',
+            'learning_resources.json',
+            'ui_elements.json'
         ]
         
         for config_file in config_files:
