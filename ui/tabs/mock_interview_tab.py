@@ -264,9 +264,9 @@ def display_active_interview():
         current_q = session['questions'][session['current_question']]
         
         st.markdown(f"""
-        <div style='background: #f0f8e8; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #4CAF50; margin: 1rem 0;'>
-            <h4 style='color: #2e7d32; margin: 0;'>Interview Question:</h4>
-            <p style='font-size: 1.1rem; margin: 0.5rem 0 0 0; color: #1b5e20;'>{current_q}</p>
+        <div style='background: #1a472a; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #4CAF50; margin: 1rem 0;'>
+            <h4 style='color: #4CAF50; margin: 0; font-size: 1.1rem;'>🎤 Interview Question:</h4>
+            <p style='font-size: 1.15rem; margin: 0.8rem 0 0 0; color: #ffffff; font-weight: 500;'>{current_q}</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -360,46 +360,73 @@ def display_interview_results(session):
     """Display comprehensive interview results and analysis."""
     st.markdown("### 📊 Interview Performance Summary")
     
-    # Overall metrics
+    # Overall metrics with better contrast
     col1, col2, col3, col4 = st.columns(4)
     
+    avg_score = sum([r['feedback']['score'] for r in session['responses']]) / len(session['responses'])
+    total_words = sum([r['word_count'] for r in session['responses']])
+    duration = datetime.now() - session['start_time']
+    questions_answered = len(session['responses'])
+    
     with col1:
-        avg_score = sum([r['feedback']['score'] for r in session['responses']]) / len(session['responses'])
-        st.metric("Overall Score", f"{avg_score:.1f}/10")
+        st.markdown(f"""
+        <div style='background: #1a2a1a; padding: 1.2rem; border-radius: 8px; text-align: center; border: 1px solid #4CAF50;'>
+            <p style='color: #4CAF50; font-size: 0.9rem; margin: 0; font-weight: bold;'>Overall Score</p>
+            <p style='color: #ffffff; font-size: 1.8rem; font-weight: bold; margin: 0.5rem 0;'>{avg_score:.1f}/10</p>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col2:
-        total_words = sum([r['word_count'] for r in session['responses']])
-        st.metric("Total Words", f"{total_words:,}")
+        st.markdown(f"""
+        <div style='background: #1a2a1a; padding: 1.2rem; border-radius: 8px; text-align: center; border: 1px solid #2196F3;'>
+            <p style='color: #2196F3; font-size: 0.9rem; margin: 0; font-weight: bold;'>Total Words</p>
+            <p style='color: #ffffff; font-size: 1.8rem; font-weight: bold; margin: 0.5rem 0;'>{total_words:,}</p>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col3:
-        duration = datetime.now() - session['start_time']
-        st.metric("Duration", f"{duration.total_seconds()/60:.0f} min")
+        st.markdown(f"""
+        <div style='background: #1a2a1a; padding: 1.2rem; border-radius: 8px; text-align: center; border: 1px solid #FF9800;'>
+            <p style='color: #FF9800; font-size: 0.9rem; margin: 0; font-weight: bold;'>Duration</p>
+            <p style='color: #ffffff; font-size: 1.8rem; font-weight: bold; margin: 0.5rem 0;'>{duration.total_seconds()/60:.0f} min</p>
+        </div>
+        """, unsafe_allow_html=True)
     
     with col4:
-        questions_answered = len(session['responses'])
-        st.metric("Questions Answered", f"{questions_answered}/{len(session['questions'])}")
+        st.markdown(f"""
+        <div style='background: #1a2a1a; padding: 1.2rem; border-radius: 8px; text-align: center; border: 1px solid #9C27B0;'>
+            <p style='color: #9C27B0; font-size: 0.9rem; margin: 0; font-weight: bold;'>Questions Answered</p>
+            <p style='color: #ffffff; font-size: 1.8rem; font-weight: bold; margin: 0.5rem 0;'>{questions_answered}/{len(session['questions'])}</p>
+        </div>
+        """, unsafe_allow_html=True)
     
     # Detailed feedback for each question
     st.markdown("### 📋 Question-by-Question Feedback")
     
     for i, response_data in enumerate(session['responses'], 1):
         with st.expander(f"Question {i}: Score {response_data['feedback']['score']}/10"):
-            st.write(f"**Question:** {response_data['question']}")
-            st.write(f"**Your Response:** {response_data['response']}")
+            st.markdown(f"<p style='color: #ffffff; font-weight: bold;'>📌 Question:</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style='color: #e0e0e0; background: #1a1a1a; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;'>{response_data['question']}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style='color: #ffffff; font-weight: bold;'>💬 Your Response:</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style='color: #e0e0e0; background: #1a1a1a; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;'>{response_data['response']}</p>", unsafe_allow_html=True)
             
             col1, col2 = st.columns(2)
             
             with col1:
                 if response_data['feedback']['strengths']:
-                    st.success("**Strengths:**")
+                    st.markdown("<div style='background: #1e3a2f; padding: 1rem; border-radius: 5px; border-left: 3px solid #4CAF50;'>", unsafe_allow_html=True)
+                    st.markdown("<p style='color: #4CAF50; font-weight: bold; margin: 0;'>✅ Strengths:</p>", unsafe_allow_html=True)
                     for strength in response_data['feedback']['strengths']:
-                        st.write(f"✅ {strength}")
+                        st.markdown(f"<p style='color: #e0e0e0; margin: 0.3rem 0;'>• {strength}</p>", unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
             
             with col2:
                 if response_data['feedback']['suggestions']:
-                    st.info("**Suggestions:**")
+                    st.markdown("<div style='background: #2a3a1a; padding: 1rem; border-radius: 5px; border-left: 3px solid #FFC107;'>", unsafe_allow_html=True)
+                    st.markdown("<p style='color: #FFC107; font-weight: bold; margin: 0;'>💡 Suggestions:</p>", unsafe_allow_html=True)
                     for suggestion in response_data['feedback']['suggestions']:
-                        st.write(f"💡 {suggestion}")
+                        st.markdown(f"<p style='color: #e0e0e0; margin: 0.3rem 0;'>• {suggestion}</p>", unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
     
     # Action items
     st.markdown("### 🎯 Recommended Next Steps")
@@ -407,20 +434,11 @@ def display_interview_results(session):
     avg_score = sum([r['feedback']['score'] for r in session['responses']]) / len(session['responses'])
     
     if avg_score >= 8:
-        st.success("Excellent performance! You're well-prepared for interviews.")
-        st.write("- Continue practicing with harder questions")
-        st.write("- Focus on specific technical areas for your target role")
-        st.write("- Practice negotiation and closing techniques")
+        st.markdown("<div style='background: #1e3a2f; padding: 1.2rem; border-radius: 8px; border-left: 3px solid #4CAF50;'>\n<p style='color: #4CAF50; font-weight: bold; margin: 0;'>✅ Excellent performance! You're well-prepared for interviews.</p>\n<p style='color: #e0e0e0; margin: 0.5rem 0 0 0;'>• Continue practicing with harder questions</p>\n<p style='color: #e0e0e0; margin: 0.2rem 0;'>• Focus on specific technical areas for your target role</p>\n<p style='color: #e0e0e0; margin: 0.2rem 0;'>• Practice negotiation and closing techniques</p>\n</div>", unsafe_allow_html=True)
     elif avg_score >= 6:
-        st.info("Good performance with room for improvement.")
-        st.write("- Practice more STAR method responses")
-        st.write("- Quantify your achievements with specific metrics")
-        st.write("- Research common questions for your industry")
+        st.markdown("<div style='background: #2a3a1a; padding: 1.2rem; border-radius: 8px; border-left: 3px solid #FFC107;'>\n<p style='color: #FFC107; font-weight: bold; margin: 0;'>ℹ️ Good performance with room for improvement.</p>\n<p style='color: #e0e0e0; margin: 0.5rem 0 0 0;'>• Practice more STAR method responses</p>\n<p style='color: #e0e0e0; margin: 0.2rem 0;'>• Quantify your achievements with specific metrics</p>\n<p style='color: #e0e0e0; margin: 0.2rem 0;'>• Research common questions for your industry</p>\n</div>", unsafe_allow_html=True)
     else:
-        st.warning("More practice needed to improve confidence.")
-        st.write("- Focus on storytelling and structure")
-        st.write("- Prepare 5-10 solid examples from your experience")
-        st.write("- Practice basic questions until they become natural")
+        st.markdown("<div style='background: #3a1a1a; padding: 1.2rem; border-radius: 8px; border-left: 3px solid #F44336;'>\n<p style='color: #F44336; font-weight: bold; margin: 0;'>⚠️ More practice needed to improve confidence.</p>\n<p style='color: #e0e0e0; margin: 0.5rem 0 0 0;'>• Focus on storytelling and structure</p>\n<p style='color: #e0e0e0; margin: 0.2rem 0;'>• Prepare 5-10 solid examples from your experience</p>\n<p style='color: #e0e0e0; margin: 0.2rem 0;'>• Practice basic questions until they become natural</p>\n</div>", unsafe_allow_html=True)
     
     # Reset button
     if st.button("🔄 Start New Interview", use_container_width=True):
