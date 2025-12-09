@@ -39,6 +39,11 @@ def main():
     # Display main header
     display_main_header()
     
+    # Handle feedback tab display
+    if st.session_state.get('show_feedback', False):
+        display_feedback_tab()
+        return
+    
     # Get current page
     current_page = st.session_state.get('current_page', 'main')
     
