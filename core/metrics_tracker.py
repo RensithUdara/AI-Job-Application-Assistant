@@ -156,8 +156,8 @@ class MetricsTracker:
             ''', (user_id, today))
             
             today_jobs = cursor.fetchone()
-            jobs_analyzed = today_jobs[0] if today_jobs[0] else 0
-            avg_match_score = today_jobs[1] if today_jobs[1] else 0
+            jobs_analyzed = today_jobs[0] if today_jobs and today_jobs[0] else 0
+            avg_match_score = today_jobs[1] if today_jobs and today_jobs[1] else 0
             
             # Yesterday's job analyses for comparison
             cursor.execute('''
@@ -166,7 +166,8 @@ class MetricsTracker:
                 WHERE user_id = ? AND DATE(analyzed_at) = ?
             ''', (user_id, yesterday))
             
-            yesterday_count = cursor.fetchone()[0] if cursor.fetchone() else 0
+            yesterday_result = cursor.fetchone()
+            yesterday_count = yesterday_result[0] if yesterday_result and yesterday_result[0] else 0
             
             # Calculate change percentage
             jobs_change = 0
@@ -184,8 +185,8 @@ class MetricsTracker:
             ''', (user_id, today))
             
             attempts = cursor.fetchone()
-            total_attempts = attempts[0] if attempts[0] else 0
-            success_count = attempts[1] if attempts[1] else 0
+            total_attempts = attempts[0] if attempts and attempts[0] else 0
+            success_count = attempts[1] if attempts and attempts[1] else 0
             success_rate = (success_count / total_attempts * 100) if total_attempts > 0 else 0
             
             # Yesterday's success rate for comparison
@@ -198,7 +199,7 @@ class MetricsTracker:
             
             yesterday_attempts = cursor.fetchone()
             yesterday_success = (yesterday_attempts[1] / yesterday_attempts[0] * 100 
-                               if yesterday_attempts[0] > 0 else 0)
+                               if yesterday_attempts and yesterday_attempts[0] and yesterday_attempts[0] > 0 else 0)
             
             success_change = success_rate - yesterday_success
             
@@ -209,7 +210,8 @@ class MetricsTracker:
                 WHERE user_id = ? AND DATE(analyzed_at) = ?
             ''', (user_id, yesterday))
             
-            yesterday_avg_score = cursor.fetchone()[0] if cursor.fetchone() else 0
+            yesterday_score_result = cursor.fetchone()
+            yesterday_avg_score = yesterday_score_result[0] if yesterday_score_result and yesterday_score_result[0] else 0
             score_change = avg_match_score - (yesterday_avg_score if yesterday_avg_score else 0)
             
             conn.close()
@@ -246,8 +248,8 @@ class MetricsTracker:
             ''', (user_id, week_ago, today))
             
             week_jobs = cursor.fetchone()
-            jobs_analyzed = week_jobs[0] if week_jobs[0] else 0
-            avg_match_score = week_jobs[1] if week_jobs[1] else 0
+            jobs_analyzed = week_jobs[0] if week_jobs and week_jobs[0] else 0
+            avg_match_score = week_jobs[1] if week_jobs and week_jobs[1] else 0
             
             # Last week's stats
             last_week_start = (datetime.now() - timedelta(days=14)).date().isoformat()
@@ -257,7 +259,8 @@ class MetricsTracker:
                 WHERE user_id = ? AND DATE(analyzed_at) BETWEEN ? AND ?
             ''', (user_id, last_week_start, week_ago))
             
-            last_week_count = cursor.fetchone()[0] if cursor.fetchone() else 0
+            last_week_result = cursor.fetchone()
+            last_week_count = last_week_result[0] if last_week_result and last_week_result[0] else 0
             jobs_change = ((jobs_analyzed - last_week_count) / last_week_count * 100 
                           if last_week_count > 0 else (100 if jobs_analyzed > 0 else 0))
             
@@ -270,8 +273,8 @@ class MetricsTracker:
             ''', (user_id, week_ago, today))
             
             resume_data = cursor.fetchone()
-            total_resumes = resume_data[0] if resume_data[0] else 0
-            successful_parses = resume_data[1] if resume_data[1] else 0
+            total_resumes = resume_data[0] if resume_data and resume_data[0] else 0
+            successful_parses = resume_data[1] if resume_data and resume_data[1] else 0
             parsing_rate = (successful_parses / total_resumes * 100) if total_resumes > 0 else 0
             
             conn.close()
