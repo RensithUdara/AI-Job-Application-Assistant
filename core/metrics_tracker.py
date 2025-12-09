@@ -305,8 +305,8 @@ class MetricsTracker:
             ''', (user_id,))
             
             total_jobs = cursor.fetchone()
-            jobs_analyzed = total_jobs[0] if total_jobs[0] else 0
-            avg_match_score = total_jobs[1] if total_jobs[1] else 0
+            jobs_analyzed = total_jobs[0] if total_jobs and total_jobs[0] else 0
+            avg_match_score = total_jobs[1] if total_jobs and total_jobs[1] else 0
             
             # All time applications
             cursor.execute('''
@@ -317,8 +317,8 @@ class MetricsTracker:
             ''', (user_id,))
             
             attempts = cursor.fetchone()
-            total_attempts = attempts[0] if attempts[0] else 0
-            success_count = attempts[1] if attempts[1] else 0
+            total_attempts = attempts[0] if attempts and attempts[0] else 0
+            success_count = attempts[1] if attempts and attempts[1] else 0
             success_rate = (success_count / total_attempts * 100) if total_attempts > 0 else 0
             
             # All time resume analyses
@@ -329,8 +329,8 @@ class MetricsTracker:
             ''', (user_id,))
             
             resume_data = cursor.fetchone()
-            total_resumes = resume_data[0] if resume_data[0] else 0
-            avg_ats_score = resume_data[1] if resume_data[1] else 0
+            total_resumes = resume_data[0] if resume_data and resume_data[0] else 0
+            avg_ats_score = resume_data[1] if resume_data and resume_data[1] else 0
             
             conn.close()
             
