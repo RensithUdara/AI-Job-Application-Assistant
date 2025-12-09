@@ -1,182 +1,182 @@
 {
-  "Behavioral": {
-    "Easy": [
-      "Tell me about yourself and your background.",
-      "Why are you interested in this role?",
-      "What are your greatest strengths?",
-      "Describe a typical day at your current job.",
-      "What motivates you in your work?"
-    ],
-    "Medium": [
-      "Tell me about a time when you had to work with a difficult team member.",
-      "Describe a situation where you had to meet a tight deadline.",
-      "Give an example of when you had to learn something new quickly.",
-      "Tell me about a time you failed and how you handled it.",
-      "Describe a situation where you had to convince someone to see your point of view."
-    ],
-    "Hard": [
-      "Tell me about a time when you had to make a difficult decision with incomplete information.",
-      "Describe a situation where you had to challenge your manager or senior leadership.",
-      "Give an example of when you had to deal with a major setback or crisis.",
-      "Tell me about a time when you had to lead a team through a significant change.",
-      "Describe a situation where you identified and solved a complex problem."
-    ],
-    "Expert": [
-      "Tell me about a time when you had to balance competing priorities from multiple stakeholders.",
-      "Describe how you would handle a situation where your team is underperforming consistently.",
-      "Give an example of when you had to make an unpopular decision that was right for the business.",
-      "Tell me about a time when you had to rebuild trust after a significant failure.",
-      "Describe how you've driven innovation or transformation in your organization."
-    ]
-  },
-  "Technical": {
-    "Easy": [
-      "What programming languages are you most comfortable with and why?",
-      "Explain the difference between a stack and a queue.",
-      "What is the difference between SQL and NoSQL databases?",
-      "How do you ensure your code is maintainable?",
-      "What is version control and why is it important?"
-    ],
-    "Medium": [
-      "How would you optimize a slow database query?",
-      "Explain the concept of object-oriented programming.",
-      "What are the benefits and drawbacks of microservices architecture?",
-      "How do you handle errors and exceptions in your code?",
-      "Describe the software development lifecycle you follow."
-    ],
-    "Hard": [
-      "Design a system to handle 1 million concurrent users.",
-      "How would you implement a cache that automatically evicts least recently used items?",
-      "Explain the CAP theorem and its implications for distributed systems.",
-      "How do you ensure data consistency in a distributed system?",
-      "Design an algorithm to detect cycles in a directed graph."
-    ],
-    "Expert": [
-      "How would you architect a global content delivery network?",
-      "Design a real-time collaborative editing system like Google Docs.",
-      "How would you implement distributed consensus in a network of nodes?",
-      "Design a system for real-time fraud detection at scale.",
-      "How would you build a recommendation system for millions of users?"
-    ]
-  },
-  "System Design": {
-    "Easy": [
-      "What is system design and why is it important?",
-      "Explain the difference between vertical and horizontal scaling.",
-      "What is a database index and how does it improve performance?",
-      "Describe the difference between relational and NoSQL databases.",
-      "What is API design and why does it matter?"
-    ],
-    "Medium": [
-      "Design a URL shortener like bit.ly.",
-      "How would you design a chat application like WhatsApp?",
-      "Design a social media feed like Twitter.",
-      "How would you design a file storage system like Dropbox?",
-      "Design a ride-sharing service like Uber."
-    ],
-    "Hard": [
-      "Design a global video streaming service like Netflix.",
-      "How would you design a search engine like Google?",
-      "Design a distributed cache system like Redis Cluster.",
-      "How would you design a payment processing system?",
-      "Design a real-time multiplayer game backend."
-    ],
-    "Expert": [
-      "Design a global distributed database that guarantees ACID properties.",
-      "How would you design a system that can handle 1 billion daily active users?",
-      "Design an event-driven architecture for a real-time data processing platform.",
-      "How would you design a blockchain-based payment system?",
-      "Design a self-healing infrastructure management system."
-    ]
-  },
-  "Culture Fit": {
-    "Easy": [
-      "What type of work environment do you thrive in?",
-      "How do you handle work-life balance?",
-      "What are you looking for in your next role?",
-      "How do you stay updated with industry trends?",
-      "What questions do you have about our company culture?"
-    ],
-    "Medium": [
-      "Describe your ideal team dynamic.",
-      "How do you prefer to receive feedback?",
-      "What company values are most important to you?",
-      "How would you contribute to a diverse and inclusive workplace?",
-      "Tell me about your greatest professional achievement and what you learned from it."
-    ],
-    "Hard": [
-      "How would you handle disagreement with company values?",
-      "Describe your approach to mentoring junior team members.",
-      "How do you maintain professional relationships during conflicts?",
-      "What would make you consider leaving a company?",
-      "How do you balance personal growth with company needs?"
-    ],
-    "Expert": [
-      "How do you foster a culture of innovation and psychological safety?",
-      "Describe your leadership philosophy and how you build trust.",
-      "How would you drive cultural change in a traditional organization?",
-      "What's your approach to developing talent and succession planning?",
-      "How do you balance moving fast with maintaining quality and ethics?"
-    ]
-  },
-  "Case Study": {
-    "Easy": [
-      "A product's user engagement has dropped 20% in the last quarter. What would you investigate first?",
-      "You notice your team's code quality is declining. How would you address this?",
-      "A key competitor just launched a similar product. What's your initial response?",
-      "Your project is behind schedule. How do you get it back on track?",
-      "A customer complains about slow performance. How do you diagnose the issue?"
-    ],
-    "Medium": [
-      "Our user engagement has dropped 20% in the last quarter. How would you investigate and address this?",
-      "A key competitor just launched a similar product. What's our response strategy?",
-      "We need to reduce costs by 15% without affecting quality. What would you recommend?",
-      "How would you launch a new product in a saturated market?",
-      "Our team productivity has been declining. How would you diagnose and fix this?"
-    ],
-    "Hard": [
-      "A critical security breach has compromised customer data. How do you respond?",
-      "We're losing market share to a competitor. Develop a comprehensive turnaround strategy.",
-      "Your product has a major technical debt problem. How do you balance innovation with debt payoff?",
-      "How would you scale the infrastructure to support 10x growth in 6 months?",
-      "Your product roadmap conflicts with market trends. How do you decide what to build?"
-    ],
-    "Expert": [
-      "Design a transformation strategy to pivot the company's entire business model.",
-      "How would you enter and dominate a new market segment?",
-      "Create a plan to merge two companies with different cultures and technologies.",
-      "How would you rebuild trust with users after a failed product launch?",
-      "Design a sustainability strategy that improves both environmental impact and profitability."
-    ]
-  },
-  "Leadership": {
-    "Easy": [
-      "Describe your leadership style and give an example of it in action.",
-      "How do you motivate team members who are struggling with performance?",
-      "Tell me about a time when you had to deliver bad news to your team.",
-      "How do you handle conflicts between team members?",
-      "Describe how you've built and maintained high-performing teams."
-    ],
-    "Medium": [
-      "How do you provide constructive feedback to a direct report?",
-      "Describe your approach to delegating tasks to your team.",
-      "How do you develop leaders within your organization?",
-      "Tell me about a time you had to make a tough decision affecting your team.",
-      "How do you handle a team member who resists change?"
-    ],
-    "Hard": [
-      "How would you handle a situation where your best performer is toxic to the team?",
-      "Describe your strategy for managing a geographically distributed team.",
-      "How do you lead through organizational change and uncertainty?",
-      "Tell me about a time you had to rebuild a dysfunctional team.",
-      "How do you balance being approachable and maintaining authority?"
-    ],
-    "Expert": [
-      "How do you build and sustain a culture of accountability and excellence?",
-      "Describe your vision for scaling leadership across a growing organization.",
-      "How would you lead an organization through a major crisis?",
-      "What's your approach to succession planning and retaining top talent?",
-      "How do you drive strategic alignment across multiple teams and departments?"
-    ]
-  }
+    "Behavioral": {
+        "Easy": [
+            "Tell me about yourself and your background.",
+            "Why are you interested in this role?",
+            "What are your greatest strengths?",
+            "Describe a typical day at your current job.",
+            "What motivates you in your work?"
+        ],
+        "Medium": [
+            "Tell me about a time when you had to work with a difficult team member.",
+            "Describe a situation where you had to meet a tight deadline.",
+            "Give an example of when you had to learn something new quickly.",
+            "Tell me about a time you failed and how you handled it.",
+            "Describe a situation where you had to convince someone to see your point of view."
+        ],
+        "Hard": [
+            "Tell me about a time when you had to make a difficult decision with incomplete information.",
+            "Describe a situation where you had to challenge your manager or senior leadership.",
+            "Give an example of when you had to deal with a major setback or crisis.",
+            "Tell me about a time when you had to lead a team through a significant change.",
+            "Describe a situation where you identified and solved a complex problem."
+        ],
+        "Expert": [
+            "Tell me about a time when you had to balance competing priorities from multiple stakeholders.",
+            "Describe how you would handle a situation where your team is underperforming consistently.",
+            "Give an example of when you had to make an unpopular decision that was right for the business.",
+            "Tell me about a time when you had to rebuild trust after a significant failure.",
+            "Describe how you've driven innovation or transformation in your organization."
+        ]
+    },
+    "Technical": {
+        "Easy": [
+            "What programming languages are you most comfortable with and why?",
+            "Explain the difference between a stack and a queue.",
+            "What is the difference between SQL and NoSQL databases?",
+            "How do you ensure your code is maintainable?",
+            "What is version control and why is it important?"
+        ],
+        "Medium": [
+            "How would you optimize a slow database query?",
+            "Explain the concept of object-oriented programming.",
+            "What are the benefits and drawbacks of microservices architecture?",
+            "How do you handle errors and exceptions in your code?",
+            "Describe the software development lifecycle you follow."
+        ],
+        "Hard": [
+            "Design a system to handle 1 million concurrent users.",
+            "How would you implement a cache that automatically evicts least recently used items?",
+            "Explain the CAP theorem and its implications for distributed systems.",
+            "How do you ensure data consistency in a distributed system?",
+            "Design an algorithm to detect cycles in a directed graph."
+        ],
+        "Expert": [
+            "How would you architect a global content delivery network?",
+            "Design a real-time collaborative editing system like Google Docs.",
+            "How would you implement distributed consensus in a network of nodes?",
+            "Design a system for real-time fraud detection at scale.",
+            "How would you build a recommendation system for millions of users?"
+        ]
+    },
+    "System Design": {
+        "Easy": [
+            "What is system design and why is it important?",
+            "Explain the difference between vertical and horizontal scaling.",
+            "What is a database index and how does it improve performance?",
+            "Describe the difference between relational and NoSQL databases.",
+            "What is API design and why does it matter?"
+        ],
+        "Medium": [
+            "Design a URL shortener like bit.ly.",
+            "How would you design a chat application like WhatsApp?",
+            "Design a social media feed like Twitter.",
+            "How would you design a file storage system like Dropbox?",
+            "Design a ride-sharing service like Uber."
+        ],
+        "Hard": [
+            "Design a global video streaming service like Netflix.",
+            "How would you design a search engine like Google?",
+            "Design a distributed cache system like Redis Cluster.",
+            "How would you design a payment processing system?",
+            "Design a real-time multiplayer game backend."
+        ],
+        "Expert": [
+            "Design a global distributed database that guarantees ACID properties.",
+            "How would you design a system that can handle 1 billion daily active users?",
+            "Design an event-driven architecture for a real-time data processing platform.",
+            "How would you design a blockchain-based payment system?",
+            "Design a self-healing infrastructure management system."
+        ]
+    },
+    "Culture Fit": {
+        "Easy": [
+            "What type of work environment do you thrive in?",
+            "How do you handle work-life balance?",
+            "What are you looking for in your next role?",
+            "How do you stay updated with industry trends?",
+            "What questions do you have about our company culture?"
+        ],
+        "Medium": [
+            "Describe your ideal team dynamic.",
+            "How do you prefer to receive feedback?",
+            "What company values are most important to you?",
+            "How would you contribute to a diverse and inclusive workplace?",
+            "Tell me about your greatest professional achievement and what you learned from it."
+        ],
+        "Hard": [
+            "How would you handle disagreement with company values?",
+            "Describe your approach to mentoring junior team members.",
+            "How do you maintain professional relationships during conflicts?",
+            "What would make you consider leaving a company?",
+            "How do you balance personal growth with company needs?"
+        ],
+        "Expert": [
+            "How do you foster a culture of innovation and psychological safety?",
+            "Describe your leadership philosophy and how you build trust.",
+            "How would you drive cultural change in a traditional organization?",
+            "What's your approach to developing talent and succession planning?",
+            "How do you balance moving fast with maintaining quality and ethics?"
+        ]
+    },
+    "Case Study": {
+        "Easy": [
+            "A product's user engagement has dropped 20% in the last quarter. What would you investigate first?",
+            "You notice your team's code quality is declining. How would you address this?",
+            "A key competitor just launched a similar product. What's your initial response?",
+            "Your project is behind schedule. How do you get it back on track?",
+            "A customer complains about slow performance. How do you diagnose the issue?"
+        ],
+        "Medium": [
+            "Our user engagement has dropped 20% in the last quarter. How would you investigate and address this?",
+            "A key competitor just launched a similar product. What's our response strategy?",
+            "We need to reduce costs by 15% without affecting quality. What would you recommend?",
+            "How would you launch a new product in a saturated market?",
+            "Our team productivity has been declining. How would you diagnose and fix this?"
+        ],
+        "Hard": [
+            "A critical security breach has compromised customer data. How do you respond?",
+            "We're losing market share to a competitor. Develop a comprehensive turnaround strategy.",
+            "Your product has a major technical debt problem. How do you balance innovation with debt payoff?",
+            "How would you scale the infrastructure to support 10x growth in 6 months?",
+            "Your product roadmap conflicts with market trends. How do you decide what to build?"
+        ],
+        "Expert": [
+            "Design a transformation strategy to pivot the company's entire business model.",
+            "How would you enter and dominate a new market segment?",
+            "Create a plan to merge two companies with different cultures and technologies.",
+            "How would you rebuild trust with users after a failed product launch?",
+            "Design a sustainability strategy that improves both environmental impact and profitability."
+        ]
+    },
+    "Leadership": {
+        "Easy": [
+            "Describe your leadership style and give an example of it in action.",
+            "How do you motivate team members who are struggling with performance?",
+            "Tell me about a time when you had to deliver bad news to your team.",
+            "How do you handle conflicts between team members?",
+            "Describe how you've built and maintained high-performing teams."
+        ],
+        "Medium": [
+            "How do you provide constructive feedback to a direct report?",
+            "Describe your approach to delegating tasks to your team.",
+            "How do you develop leaders within your organization?",
+            "Tell me about a time you had to make a tough decision affecting your team.",
+            "How do you handle a team member who resists change?"
+        ],
+        "Hard": [
+            "How would you handle a situation where your best performer is toxic to the team?",
+            "Describe your strategy for managing a geographically distributed team.",
+            "How do you lead through organizational change and uncertainty?",
+            "Tell me about a time you had to rebuild a dysfunctional team.",
+            "How do you balance being approachable and maintaining authority?"
+        ],
+        "Expert": [
+            "How do you build and sustain a culture of accountability and excellence?",
+            "Describe your vision for scaling leadership across a growing organization.",
+            "How would you lead an organization through a major crisis?",
+            "What's your approach to succession planning and retaining top talent?",
+            "How do you drive strategic alignment across multiple teams and departments?"
+        ]
+    }
 }
