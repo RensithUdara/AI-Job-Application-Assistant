@@ -6,6 +6,8 @@ Interactive mock interview simulator and preparation tool.
 import streamlit as st
 import random
 from datetime import datetime
+import json
+import os
 
 def display_mock_interview_tab():
     """Display the Mock Interview interface as a full tab."""
@@ -125,107 +127,19 @@ def start_interview_session(interview_type, experience_level, industry, role_foc
     
     st.success("🎬 Interview session started! Good luck!")
 
+def load_mock_questions():
+    """Load mock interview questions from JSON file."""
+    try:
+        json_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'mock_interview_questions.json')
+        with open(json_path, 'r') as f:
+            return json.load(f)
+    except Exception as e:
+        st.error(f"Error loading questions: {e}")
+        return {}
+
 def generate_interview_questions(interview_type, experience_level, industry, difficulty, count):
-    """Generate interview questions based on parameters."""
-    questions_db = {
-        'Behavioral': {
-            'Easy': [
-                "Tell me about yourself and your background.",
-                "Why are you interested in this role?",
-                "What are your greatest strengths?",
-                "Describe a typical day at your current job.",
-                "What motivates you in your work?"
-            ],
-            'Medium': [
-                "Tell me about a time when you had to work with a difficult team member.",
-                "Describe a situation where you had to meet a tight deadline.",
-                "Give an example of when you had to learn something new quickly.",
-                "Tell me about a time you failed and how you handled it.",
-                "Describe a situation where you had to convince someone to see your point of view."
-            ],
-            'Hard': [
-                "Tell me about a time when you had to make a difficult decision with incomplete information.",
-                "Describe a situation where you had to challenge your manager or senior leadership.",
-                "Give an example of when you had to deal with a major setback or crisis.",
-                "Tell me about a time when you had to lead a team through a significant change.",
-                "Describe a situation where you identified and solved a complex problem."
-            ],
-            'Expert': [
-                "Tell me about a time when you had to balance competing priorities from multiple stakeholders.",
-                "Describe how you would handle a situation where your team is underperforming consistently.",
-                "Give an example of when you had to make an unpopular decision that was right for the business.",
-                "Tell me about a time when you had to rebuild trust after a significant failure.",
-                "Describe how you've driven innovation or transformation in your organization."
-            ]
-        },
-        'Technical': {
-            'Easy': [
-                "What programming languages are you most comfortable with and why?",
-                "Explain the difference between a stack and a queue.",
-                "What is the difference between SQL and NoSQL databases?",
-                "How do you ensure your code is maintainable?",
-                "What is version control and why is it important?"
-            ],
-            'Medium': [
-                "How would you optimize a slow database query?",
-                "Explain the concept of object-oriented programming.",
-                "What are the benefits and drawbacks of microservices architecture?",
-                "How do you handle errors and exceptions in your code?",
-                "Describe the software development lifecycle you follow."
-            ],
-            'Hard': [
-                "Design a system to handle 1 million concurrent users.",
-                "How would you implement a cache that automatically evicts least recently used items?",
-                "Explain the CAP theorem and its implications for distributed systems.",
-                "How do you ensure data consistency in a distributed system?",
-                "Design an algorithm to detect cycles in a directed graph."
-            ],
-            'Expert': [
-                "How would you architect a global content delivery network?",
-                "Design a real-time collaborative editing system like Google Docs.",
-                "How would you implement distributed consensus in a network of nodes?",
-                "Design a system for real-time fraud detection at scale.",
-                "How would you build a recommendation system for millions of users?"
-            ]
-        },
-        'System Design': {
-            'Medium': [
-                "Design a URL shortener like bit.ly.",
-                "How would you design a chat application like WhatsApp?",
-                "Design a social media feed like Twitter.",
-                "How would you design a file storage system like Dropbox?",
-                "Design a ride-sharing service like Uber."
-            ],
-            'Hard': [
-                "Design a global video streaming service like Netflix.",
-                "How would you design a search engine like Google?",
-                "Design a distributed cache system like Redis Cluster.",
-                "How would you design a payment processing system?",
-                "Design a real-time multiplayer game backend."
-            ]
-        },
-        'Culture Fit': [
-            "What type of work environment do you thrive in?",
-            "How do you handle work-life balance?",
-            "What are you looking for in your next role?",
-            "How do you stay updated with industry trends?",
-            "What questions do you have about our company culture?"
-        ],
-        'Case Study': [
-            "Our user engagement has dropped 20% in the last quarter. How would you investigate and address this?",
-            "A key competitor just launched a similar product. What's our response strategy?",
-            "We need to reduce costs by 15% without affecting quality. What would you recommend?",
-            "How would you launch a new product in a saturated market?",
-            "Our team productivity has been declining. How would you diagnose and fix this?"
-        ],
-        'Leadership': [
-            "Describe your leadership style and give an example of it in action.",
-            "How do you motivate team members who are struggling with performance?",
-            "Tell me about a time when you had to deliver bad news to your team.",
-            "How do you handle conflicts between team members?",
-            "Describe how you've built and maintained high-performing teams."
-        ]
-    }
+    """Generate interview questions based on parameters from JSON database."""
+    questions_db = load_mock_questions()
     
     # Get questions based on type and difficulty
     if interview_type in questions_db and difficulty in questions_db[interview_type]:
@@ -236,10 +150,8 @@ def generate_interview_questions(interview_type, experience_level, industry, dif
         for diff_level in questions_db[interview_type].values():
             if isinstance(diff_level, list):
                 available_questions.extend(diff_level)
-            else:
-                available_questions.extend(diff_level)
     else:
-        available_questions = questions_db['Behavioral']['Medium']  # Default fallback
+        available_questions = questions_db.get('Behavioral', {}).get('Medium', [])  # Default fallback
     
     # Select random questions
     selected_questions = random.sample(available_questions, min(count, len(available_questions)))
