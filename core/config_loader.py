@@ -95,6 +95,14 @@ class ConfigLoader:
         """Get interview questions configuration."""
         return self.get_config('mock_interview_questions.json', key, default)
     
+    def get_learning_resources(self, key: str = None, default: Any = None) -> Any:
+        """Get learning resources configuration."""
+        return self.get_config('learning_resources.json', key, default)
+    
+    def get_ui_elements(self, key: str = None, default: Any = None) -> Any:
+        """Get UI elements configuration."""
+        return self.get_config('ui_elements.json', key, default)
+    
     def reload_config(self, config_name: str = None):
         """Reload configuration from file."""
         if config_name:
@@ -168,3 +176,50 @@ def get_interview_questions_by_type(question_type: str, difficulty: str = 'Mediu
     """Get interview questions by type and difficulty."""
     questions = config.get_config('mock_interview_questions.json', f'{question_type}.{difficulty}', [])
     return questions if isinstance(questions, list) else []
+
+
+def get_impact_words() -> List[str]:
+    """Get impact words for resume analysis."""
+    return config.get_config('learning_resources.json', 'resume_analysis.impact_words', [])
+
+
+def get_technical_terms() -> List[str]:
+    """Get technical terms for resume analysis."""
+    return config.get_config('learning_resources.json', 'resume_analysis.technical_terms', [])
+
+
+def get_generic_phrases() -> List[str]:
+    """Get generic phrases to avoid in resume."""
+    return config.get_config('learning_resources.json', 'resume_analysis.generic_phrases', [])
+
+
+def get_vague_terms() -> List[str]:
+    """Get vague terms to avoid in resume."""
+    return config.get_config('learning_resources.json', 'resume_analysis.vague_terms', [])
+
+
+def get_course_mapping() -> Dict[str, Dict]:
+    """Get course mapping for skills."""
+    return config.get_config('learning_resources.json', 'course_mapping', {})
+
+
+def get_project_mapping() -> Dict[str, List[str]]:
+    """Get project mapping for roles."""
+    return config.get_config('learning_resources.json', 'project_mapping', {})
+
+
+def get_certification_mapping() -> Dict[str, str]:
+    """Get certification mapping for skills."""
+    return config.get_config('learning_resources.json', 'certification_mapping', {})
+
+
+def get_allowed_file_types() -> List[str]:
+    """Get allowed file upload types."""
+    return config.get_config('ui_elements.json', 'file_upload.allowed_types', [])
+
+
+def get_ui_icons(category: str, key: str = None) -> Any:
+    """Get UI icons by category."""
+    if key:
+        return config.get_config('ui_elements.json', f'icons_and_symbols.{category}.{key}')
+    return config.get_config('ui_elements.json', f'icons_and_symbols.{category}', {})
