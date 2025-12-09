@@ -3,6 +3,10 @@ Demo Data Generator - Populate metrics database with sample data for testing.
 Run this to initialize the database with realistic metrics.
 """
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from core.metrics_tracker import get_metrics_tracker
 from datetime import datetime, timedelta
 import random
