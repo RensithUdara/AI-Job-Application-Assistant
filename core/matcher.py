@@ -57,6 +57,17 @@ class Matcher:
                 resume_data, jd_data
             )
             
+            # Record this analysis in metrics database
+            if self.tracker:
+                try:
+                    self.tracker.record_job_analysis(
+                        user_id="default",
+                        job_id=jd_data.get('job_id', 'unknown'),
+                        match_score=overall_score
+                    )
+                except:
+                    pass  # Don't break analysis if metrics recording fails
+            
             return {
                 'match_score_overall': overall_score,
                 'skill_match': skill_match_result,
