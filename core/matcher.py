@@ -7,6 +7,12 @@ class Matcher:
     def __init__(self):
         """Initialize the matcher for resume-job description comparison."""
         self.vectorizer = TfidfVectorizer(stop_words='english', lowercase=True, max_features=1000)
+        # Import metrics tracker for recording analysis
+        try:
+            from core.metrics_tracker import get_metrics_tracker
+            self.tracker = get_metrics_tracker()
+        except:
+            self.tracker = None
     
     def match_resume_to_jd(self, resume_data: Dict, jd_data: Dict) -> Dict:
         """Compare resume with job description and provide match analysis."""
@@ -50,6 +56,17 @@ class Matcher:
             experience_alignment = self._analyze_experience_alignment(
                 resume_data, jd_data
             )
+            
+            # Record this analysis in metrics database
+            if self.tracker:
+                try:
+                    self.tracker.record_job_analysis(
+                        user_id="default",
+                        job_id=jd_data.get('job_id', 'unknown'),
+                        match_score=overall_score
+                    )
+                except:
+                    pass  # Don't break analysis if metrics recording fails
             
             return {
                 'match_score_overall': overall_score,

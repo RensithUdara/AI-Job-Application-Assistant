@@ -25,6 +25,13 @@ class ResumeParser:
         except FileNotFoundError:
             self.market_trends = {}
         
+        # Initialize metrics tracker
+        try:
+            from core.metrics_tracker import get_metrics_tracker
+            self.tracker = get_metrics_tracker()
+        except:
+            self.tracker = None
+        
         # Flatten skills for easier searching
         self.all_skills = set()
         for category, skills in self.skills_taxonomy.items():
@@ -84,6 +91,20 @@ class ResumeParser:
             duplicate_analysis = self.detect_duplicate_content(text)
             timeline_analysis = self.validate_resume_timeline(text)
             project_analysis = self.analyze_project_impact(text)
+            
+            # Record this resume analysis in metrics database
+            ats_score = ats_analysis.get('score', 0)
+            parsing_success = ats_score >= 70  # Consider 70+ as successful parsing
+            if self.tracker:
+                try:
+                    self.tracker.record_resume_analysis(
+                        user_id="default",
+                        resume_id=f"resume_{contact_info.get('name', 'unknown')}_{hash(text[:100])}",
+                        ats_score=ats_score,
+                        parsing_success=parsing_success
+                    )
+                except:
+                    pass  # Don't break parsing if metrics recording fails
             
             return {
                 'raw_text': text,

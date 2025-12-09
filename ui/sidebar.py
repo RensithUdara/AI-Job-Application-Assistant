@@ -60,11 +60,33 @@ def display_sidebar():
         
         st.markdown("---")
         
-        # Quick Stats
+        # Quick Stats - Real-time metrics from database
         st.markdown("### 📊 Today's Insights")
-        st.metric("Jobs Analyzed Today", "1,247", "↗ +12%")
-        st.metric("Average Match Score", "78%", "↗ +3%")
-        st.metric("Success Rate", "94%", "→ 0%")
+        from core.metrics_tracker import get_metrics_tracker
+        
+        tracker = get_metrics_tracker()
+        metrics = tracker.get_today_metrics(user_id="default")
+        
+        # Format metrics with change indicators
+        jobs_change_str, _ = tracker.get_formatted_change(metrics['jobs_change'])
+        score_change_str, _ = tracker.get_formatted_change(metrics['score_change'])
+        success_change_str, _ = tracker.get_formatted_change(metrics['success_change'])
+        
+        st.metric(
+            "Jobs Analyzed Today",
+            f"{metrics['jobs_analyzed']:,}",
+            jobs_change_str
+        )
+        st.metric(
+            "Average Match Score",
+            f"{metrics['avg_match_score']:.0f}%",
+            score_change_str
+        )
+        st.metric(
+            "Success Rate",
+            f"{metrics['success_rate']:.0f}%",
+            success_change_str
+        )
         
         st.markdown("---")
         
