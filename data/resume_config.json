@@ -1,0 +1,178 @@
+{
+    "action_verbs": {
+        "strong": [
+            "Achieved",
+            "Analyzed",
+            "Architected",
+            "Automated",
+            "Built",
+            "Collaborated",
+            "Configured",
+            "Created",
+            "Delivered",
+            "Designed",
+            "Developed",
+            "Engineered",
+            "Enhanced",
+            "Established",
+            "Executed",
+            "Implemented",
+            "Improved",
+            "Increased",
+            "Initiated",
+            "Launched",
+            "Led",
+            "Managed",
+            "Optimized",
+            "Orchestrated",
+            "Planned",
+            "Reduced",
+            "Resolved",
+            "Scaled",
+            "Streamlined",
+            "Transformed"
+        ],
+        "weak": [
+            "Did",
+            "Worked",
+            "Helped",
+            "Assisted",
+            "Participated",
+            "Involved",
+            "Responsible",
+            "Used",
+            "Tried",
+            "Handled",
+            "Dealt",
+            "Made"
+        ]
+    },
+    "resume_sections": {
+        "contact_information": {
+            "keywords": [
+                "phone",
+                "email",
+                "address",
+                "linkedin",
+                "github",
+                "website"
+            ],
+            "importance": "high"
+        },
+        "summary": {
+            "keywords": [
+                "objective",
+                "summary",
+                "professional summary",
+                "about"
+            ],
+            "importance": "high"
+        },
+        "experience": {
+            "keywords": [
+                "experience",
+                "work experience",
+                "employment",
+                "professional experience"
+            ],
+            "importance": "high"
+        },
+        "education": {
+            "keywords": [
+                "education",
+                "degree",
+                "bachelor",
+                "master",
+                "university",
+                "college"
+            ],
+            "importance": "medium"
+        },
+        "skills": {
+            "keywords": [
+                "skills",
+                "technical skills",
+                "competencies",
+                "expertise"
+            ],
+            "importance": "high"
+        },
+        "certifications": {
+            "keywords": [
+                "certification",
+                "certifications",
+                "license",
+                "credentials"
+            ],
+            "importance": "medium"
+        },
+        "projects": {
+            "keywords": [
+                "projects",
+                "portfolio",
+                "case studies"
+            ],
+            "importance": "medium"
+        }
+    },
+    "ats_optimization": {
+        "file_format_preferences": [
+            ".docx",
+            ".pdf"
+        ],
+        "font_preferences": [
+            "Arial",
+            "Calibri",
+            "Helvetica",
+            "Times New Roman"
+        ],
+        "minimum_keywords_per_section": 8,
+        "maximum_keywords_per_section": 20,
+        "optimal_keyword_density": 3.0,
+        "format_score_thresholds": {
+            "excellent": 80,
+            "good": 60,
+            "fair": 40,
+            "poor": 20
+        }
+    },
+    "resume_scoring_criteria": {
+        "section_headers": {
+            "threshold": 4,
+            "excellent": "excellent",
+            "good": "good",
+            "poor": "poor"
+        },
+        "contact_info": {
+            "email_required": true,
+            "phone_required": true,
+            "threshold": 50
+        },
+        "bullet_points": {
+            "excellent": 15,
+            "good": 8
+        },
+        "keyword_density": {
+            "excellent": 3.0,
+            "good": 1.5
+        }
+    },
+    "skill_categories": [
+        "programming_languages",
+        "web_technologies",
+        "mobile_technologies",
+        "databases",
+        "cloud_platforms",
+        "tools",
+        "frameworks",
+        "soft_skills"
+    ],
+    "color_codes": {
+        "excellent": "#4CAF50",
+        "good": "#2196F3",
+        "fair": "#FF9800",
+        "poor": "#F44336",
+        "strong": "#4CAF50",
+        "weak": "#FF9800"
+    }
+}

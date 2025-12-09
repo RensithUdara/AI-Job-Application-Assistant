@@ -1,0 +1,71 @@
+{
+    "app_config": {
+        "page_title": "AI Job Application Assistant",
+        "page_icon": "🎯",
+        "layout": "wide",
+        "initial_sidebar_state": "expanded",
+        "theme": {
+            "primaryColor": "#2E86C1",
+            "backgroundColor": "#FFFFFF",
+            "secondaryBackgroundColor": "#F0F2F6",
+            "textColor": "#262730"
+        }
+    },
+    "performance_config": {
+        "max_file_size_mb": 10,
+        "cache_ttl_seconds": 3600,
+        "processing_timeout_seconds": 30,
+        "chunk_size_kb": 1
+    },
+    "ui_config": {
+        "max_skills_display": 10,
+        "skills_separator": " • ",
+        "status_icons": {
+            "present": "✅",
+            "absent": "❌"
+        },
+        "priority_icons": {
+            "high": "🔴",
+            "medium": "🟡",
+            "low": "🟢"
+        },
+        "match_score_colors": {
+            "excellent": "🟢",
+            "good": "🟡",
+            "fair": "🟠",
+            "poor": "🔴"
+        },
+        "score_ranges": {
+            "excellent": 80,
+            "good": 60,
+            "fair": 40
+        }
+    },
+    "gauge_chart_config": {
+        "reference_value": 70,
+        "max_value": 100,
+        "color_ranges": [
+            {
+                "min": 0,
+                "max": 40,
+                "color": "lightgray",
+                "label": "Poor"
+            },
+            {
+                "min": 40,
+                "max": 70,
+                "color": "yellow",
+                "label": "Fair"
+            },
+            {
+                "min": 70,
+                "max": 100,
+                "color": "lightgreen",
+                "label": "Excellent"
+            }
+        ],
+        "threshold_value": 90,
+        "threshold_color": "red",
+        "chart_height": 300
+    }
+}

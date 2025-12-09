@@ -1,0 +1,423 @@
+{
+    "career_roadmaps": {
+        "web_developer": {
+            "beginner": [
+                {
+                    "month": 1,
+                    "skills": [
+                        "HTML",
+                        "CSS"
+                    ],
+                    "projects": [
+                        "Static website",
+                        "CSS animations"
+                    ]
+                },
+                {
+                    "month": 2,
+                    "skills": [
+                        "JavaScript"
+                    ],
+                    "projects": [
+                        "Interactive webpage",
+                        "Calculator app"
+                    ]
+                },
+                {
+                    "month": 3,
+                    "skills": [
+                        "React"
+                    ],
+                    "projects": [
+                        "Todo app",
+                        "Weather dashboard"
+                    ]
+                },
+                {
+                    "month": 4,
+                    "skills": [
+                        "Node.js",
+                        "Express"
+                    ],
+                    "projects": [
+                        "REST API",
+                        "Backend server"
+                    ]
+                },
+                {
+                    "month": 5,
+                    "skills": [
+                        "Database",
+                        "MongoDB"
+                    ],
+                    "projects": [
+                        "Full-stack app",
+                        "User authentication"
+                    ]
+                },
+                {
+                    "month": 6,
+                    "skills": [
+                        "Advanced React",
+                        "Testing"
+                    ],
+                    "projects": [
+                        "E-commerce site",
+                        "Testing suite"
+                    ]
+                }
+            ],
+            "intermediate": [
+                {
+                    "month": 1,
+                    "skills": [
+                        "Advanced JavaScript",
+                        "TypeScript"
+                    ],
+                    "projects": [
+                        "Type-safe application"
+                    ]
+                },
+                {
+                    "month": 2,
+                    "skills": [
+                        "Advanced React Patterns",
+                        "State Management"
+                    ],
+                    "projects": [
+                        "Redux application",
+                        "Context API project"
+                    ]
+                },
+                {
+                    "month": 3,
+                    "skills": [
+                        "Database Design",
+                        "SQL"
+                    ],
+                    "projects": [
+                        "Complex database schema"
+                    ]
+                },
+                {
+                    "month": 4,
+                    "skills": [
+                        "APIs",
+                        "GraphQL"
+                    ],
+                    "projects": [
+                        "GraphQL server"
+                    ]
+                },
+                {
+                    "month": 5,
+                    "skills": [
+                        "DevOps",
+                        "Deployment"
+                    ],
+                    "projects": [
+                        "CI/CD pipeline"
+                    ]
+                },
+                {
+                    "month": 6,
+                    "skills": [
+                        "System Design"
+                    ],
+                    "projects": [
+                        "Scalable architecture"
+                    ]
+                }
+            ]
+        },
+        "mobile_developer": {
+            "beginner": [
+                {
+                    "month": 1,
+                    "skills": [
+                        "Dart",
+                        "Flutter Basics"
+                    ],
+                    "projects": [
+                        "Hello World app",
+                        "Basic UI"
+                    ]
+                },
+                {
+                    "month": 2,
+                    "skills": [
+                        "Flutter Widgets"
+                    ],
+                    "projects": [
+                        "Calculator app",
+                        "Todo list"
+                    ]
+                },
+                {
+                    "month": 3,
+                    "skills": [
+                        "State Management"
+                    ],
+                    "projects": [
+                        "Shopping cart",
+                        "User preferences"
+                    ]
+                },
+                {
+                    "month": 4,
+                    "skills": [
+                        "API Integration"
+                    ],
+                    "projects": [
+                        "Weather app",
+                        "News reader"
+                    ]
+                },
+                {
+                    "month": 5,
+                    "skills": [
+                        "Local Storage",
+                        "SQLite"
+                    ],
+                    "projects": [
+                        "Notes app",
+                        "Expense tracker"
+                    ]
+                },
+                {
+                    "month": 6,
+                    "skills": [
+                        "Firebase",
+                        "Authentication"
+                    ],
+                    "projects": [
+                        "Social app",
+                        "Chat application"
+                    ]
+                }
+            ]
+        },
+        "data_analyst": {
+            "beginner": [
+                {
+                    "month": 1,
+                    "skills": [
+                        "Excel Advanced",
+                        "SQL Basics"
+                    ],
+                    "projects": [
+                        "Sales analysis",
+                        "Data cleaning"
+                    ]
+                },
+                {
+                    "month": 2,
+                    "skills": [
+                        "Python",
+                        "Pandas"
+                    ],
+                    "projects": [
+                        "Data manipulation",
+                        "CSV analysis"
+                    ]
+                },
+                {
+                    "month": 3,
+                    "skills": [
+                        "Data Visualization",
+                        "Matplotlib"
+                    ],
+                    "projects": [
+                        "Chart creation",
+                        "Dashboard"
+                    ]
+                },
+                {
+                    "month": 4,
+                    "skills": [
+                        "Statistics",
+                        "Hypothesis Testing"
+                    ],
+                    "projects": [
+                        "A/B testing",
+                        "Statistical analysis"
+                    ]
+                },
+                {
+                    "month": 5,
+                    "skills": [
+                        "SQL Advanced",
+                        "Database"
+                    ],
+                    "projects": [
+                        "Complex queries",
+                        "Data warehouse"
+                    ]
+                },
+                {
+                    "month": 6,
+                    "skills": [
+                        "Tableau",
+                        "Power BI"
+                    ],
+                    "projects": [
+                        "Interactive dashboard",
+                        "Business intelligence"
+                    ]
+                }
+            ]
+        }
+    },
+    "learning_resources": {
+        "online_courses": [
+            "Coursera - Role-specific specializations",
+            "Udemy - Practical skill courses",
+            "Pluralsight - Technology training",
+            "edX - University-level courses"
+        ],
+        "practice_platforms": [
+            "LeetCode - Algorithm practice",
+            "HackerRank - Programming challenges",
+            "Codecademy - Interactive learning",
+            "FreeCodeCamp - Full-stack development"
+        ],
+        "certifications": [
+            "AWS Certified Solutions Architect",
+            "Google Cloud Professional",
+            "Microsoft Azure Fundamentals",
+            "CompTIA Security+"
+        ],
+        "projects": [
+            "Build a portfolio website",
+            "Create a full-stack application",
+            "Contribute to open source projects",
+            "Complete coding bootcamp projects"
+        ],
+        "skill_resources": {
+            "html": {
+                "courses": [
+                    "freeCodeCamp HTML/CSS",
+                    "MDN HTML Tutorial"
+                ],
+                "practice_sites": [
+                    "Codecademy",
+                    "W3Schools"
+                ],
+                "youtube_channels": [
+                    "Traversy Media",
+                    "The Net Ninja"
+                ]
+            },
+            "css": {
+                "courses": [
+                    "CSS Grid Garden",
+                    "Flexbox Froggy"
+                ],
+                "practice_sites": [
+                    "CSS Battle",
+                    "Frontend Mentor"
+                ],
+                "youtube_channels": [
+                    "Kevin Powell",
+                    "Layout Land"
+                ]
+            },
+            "javascript": {
+                "courses": [
+                    "JavaScript30",
+                    "Eloquent JavaScript"
+                ],
+                "practice_sites": [
+                    "Codewars",
+                    "HackerRank JavaScript"
+                ],
+                "youtube_channels": [
+                    "Wes Bos",
+                    "Fun Fun Function"
+                ]
+            },
+            "react": {
+                "courses": [
+                    "React Official Tutorial",
+                    "Scrimba React Course"
+                ],
+                "documentation": [
+                    "React.dev",
+                    "React Router Docs"
+                ],
+                "youtube_channels": [
+                    "Codevolution",
+                    "Academind"
+                ]
+            },
+            "python": {
+                "courses": [
+                    "Python.org Tutorial",
+                    "Automate the Boring Stuff"
+                ],
+                "practice_sites": [
+                    "LeetCode Python",
+                    "Codewars Python"
+                ],
+                "youtube_channels": [
+                    "Corey Schafer",
+                    "Real Python"
+                ]
+            }
+        }
+    },
+    "learning_timelines": {
+        "by_gap_count": [
+            {
+                "gap_count": 2,
+                "timeline": "2-4 months with dedicated study (10-15 hours/week)"
+            },
+            {
+                "gap_count": 4,
+                "timeline": "4-6 months with dedicated study (15-20 hours/week)"
+            },
+            {
+                "gap_count": 5,
+                "timeline": "6-12 months with dedicated study (20+ hours/week)"
+            }
+        ]
+    },
+    "progress_tracking": {
+        "milestones": [
+            {
+                "week": 2,
+                "goal": "Complete foundational learning for 1-2 skills"
+            },
+            {
+                "week": 6,
+                "goal": "Build first practice project"
+            },
+            {
+                "week": 10,
+                "goal": "Complete intermediate level for priority skills"
+            },
+            {
+                "week": 16,
+                "goal": "Portfolio project completed"
+            },
+            {
+                "week": 20,
+                "goal": "Ready for job applications"
+            }
+        ],
+        "success_metrics": [
+            "Complete weekly learning goals",
+            "Build practical projects demonstrating skills",
+            "Pass practice assessments/quizzes",
+            "Receive positive feedback on code reviews",
+            "Successfully complete certification exams"
+        ],
+        "tracking_tools": [
+            "Learning journal or blog",
+            "GitHub repository for projects",
+            "Skill assessment tools",
+            "Peer review and feedback",
+            "Regular self-assessment quizzes"
+        ]
+    }
+}
