@@ -20,6 +20,7 @@ from ui.results_display import display_results
 from ui.tabs.ai_chat_tab import display_ai_chat_tab
 from ui.tabs.resume_templates_tab import display_resume_templates_tab
 from ui.tabs.mock_interview_tab import display_mock_interview_tab
+from ui.tabs.feedback_tab import display_feedback_tab
 
 def main():
     """Main application function."""
