@@ -1,0 +1,84 @@
+{
+    "ui_elements": {
+        "career_path": {
+            "demo_critical_gaps": [
+                "Advanced JavaScript",
+                "System Design",
+                "Leadership"
+            ],
+            "demo_enhancements": [
+                "Cloud Platforms",
+                "DevOps Tools",
+                "Project Management"
+            ],
+            "demo_metrics": {
+                "skills_coverage": "60%",
+                "readiness": "Medium",
+                "preparation_time": "6-12 months"
+            }
+        },
+        "company_culture": {
+            "rating_categories": [
+                "Overall Rating",
+                "Work-Life Balance",
+                "Career Growth",
+                "Compensation"
+            ]
+        },
+        "skills_tab": {
+            "chart_colors": {
+                "matched": "green",
+                "missing": "red"
+            },
+            "color_scale": [
+                "red",
+                "yellow",
+                "green"
+            ]
+        },
+        "structure_tab": {
+            "chart_names": [
+                "Present",
+                "Missing"
+            ]
+        },
+        "interview_tab": {
+            "question_types": [
+                "behavioral",
+                "technical",
+                "culture_fit",
+                "system_design"
+            ]
+        }
+    },
+    "file_upload": {
+        "allowed_types": [
+            "pdf",
+            "docx",
+            "txt"
+        ],
+        "max_file_size_mb": 10,
+        "accepted_formats": ".pdf, .docx, .txt"
+    },
+    "icons_and_symbols": {
+        "status": {
+            "present": "✅",
+            "missing": "❌",
+            "excellent": "🌟",
+            "good": "✅",
+            "average": "⚠️",
+            "poor": "❌"
+        },
+        "warnings": {
+            "critical": "🚨",
+            "warning": "⚠️",
+            "info": "ℹ️",
+            "success": "✅"
+        },
+        "cards": {
+            "gap": "❌",
+            "enhancement": "🔸",
+            "metric": "📊"
+        }
+    }
+}

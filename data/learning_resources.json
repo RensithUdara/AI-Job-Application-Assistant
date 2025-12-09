@@ -1,0 +1,195 @@
+{
+    "resume_analysis": {
+        "impact_words": [
+            "increased",
+            "improved",
+            "reduced",
+            "enhanced",
+            "optimized",
+            "delivered"
+        ],
+        "technical_terms": [
+            "api",
+            "database",
+            "framework",
+            "algorithm",
+            "system",
+            "application"
+        ],
+        "result_indicators": [
+            "resulting in",
+            "leading to",
+            "which resulted",
+            "achieving",
+            "delivered"
+        ],
+        "generic_phrases": [
+            "responsible for",
+            "worked on",
+            "helped with",
+            "assisted in"
+        ],
+        "vague_terms": [
+            "various",
+            "multiple",
+            "several",
+            "many"
+        ],
+        "bullet_scoring": {
+            "strong_verb_bonus": 2,
+            "weak_verb_penalty": 1,
+            "quantification_bonus": 2,
+            "impact_words_bonus": 1,
+            "technical_terms_bonus": 1,
+            "result_indicators_bonus": 1,
+            "short_bullet_penalty": 1,
+            "generic_phrase_penalty": 1,
+            "min_words_for_bullet": 6,
+            "score_range": [
+                1,
+                10
+            ]
+        },
+        "quality_levels": {
+            "excellent": 8,
+            "good": 6,
+            "average": 4,
+            "min": 0
+        },
+        "feedback_messages": {
+            "excellent": "🌟 Excellent bullet! Strong action verb, quantified results, and clear impact.",
+            "good": "✅ Good bullet. Consider adding specific metrics or stronger action verbs.",
+            "average": "⚠️ Average bullet. Add quantifiable results and use stronger action verbs.",
+            "poor": "❌ Weak bullet. Rewrite with action verb, specific details, and measurable impact."
+        }
+    },
+    "skill_extraction": {
+        "standard_headers": [
+            "experience",
+            "education",
+            "skills",
+            "summary"
+        ]
+    },
+    "course_mapping": {
+        "python": {
+            "course": "Python for Beginners",
+            "platform": "Codecademy",
+            "time": "4-6 weeks"
+        },
+        "javascript": {
+            "course": "JavaScript Fundamentals",
+            "platform": "freeCodeCamp",
+            "time": "3-4 weeks"
+        },
+        "react": {
+            "course": "React - The Complete Guide",
+            "platform": "Udemy",
+            "time": "6-8 weeks"
+        },
+        "node.js": {
+            "course": "Node.js Development",
+            "platform": "Coursera",
+            "time": "4-5 weeks"
+        },
+        "aws": {
+            "course": "AWS Cloud Practitioner",
+            "platform": "AWS Training",
+            "time": "2-3 weeks"
+        },
+        "docker": {
+            "course": "Docker Mastery",
+            "platform": "Udemy",
+            "time": "3-4 weeks"
+        },
+        "sql": {
+            "course": "SQL for Data Science",
+            "platform": "Coursera",
+            "time": "3-4 weeks"
+        },
+        "kubernetes": {
+            "course": "Kubernetes for Developers",
+            "platform": "Linux Academy",
+            "time": "4-6 weeks"
+        },
+        "typescript": {
+            "course": "TypeScript Fundamentals",
+            "platform": "egghead.io",
+            "time": "2-3 weeks"
+        },
+        "machine_learning": {
+            "course": "Machine Learning Specialization",
+            "platform": "Coursera",
+            "time": "8-12 weeks"
+        }
+    },
+    "project_mapping": {
+        "web_developer": [
+            "Build a personal portfolio website",
+            "Create a full-stack e-commerce app",
+            "Develop a REST API with authentication",
+            "Build a real-time chat application",
+            "Create a productivity dashboard"
+        ],
+        "mobile_developer": [
+            "Build a mobile app with local storage",
+            "Create an app with API integration",
+            "Develop a cross-platform Flutter app",
+            "Build a social networking app",
+            "Create a fitness tracking application"
+        ],
+        "data_analyst": [
+            "Analyze a public dataset",
+            "Create interactive dashboards",
+            "Build a machine learning model",
+            "Perform exploratory data analysis",
+            "Create data visualization reports"
+        ],
+        "data_scientist": [
+            "Build a predictive model",
+            "Create a recommendation system",
+            "Perform natural language processing",
+            "Build a computer vision application",
+            "Create a time-series forecasting model"
+        ],
+        "devops_engineer": [
+            "Set up CI/CD pipeline",
+            "Containerize an application",
+            "Create infrastructure as code",
+            "Implement monitoring and alerting",
+            "Set up kubernetes deployment"
+        ]
+    },
+    "certification_mapping": {
+        "aws": "AWS Cloud Practitioner",
+        "google cloud": "Google Cloud Associate",
+        "azure": "Microsoft Azure Fundamentals",
+        "docker": "Docker Certified Associate",
+        "kubernetes": "Certified Kubernetes Administrator",
+        "jenkins": "CloudBees Certified Jenkins Engineer",
+        "terraform": "HashiCorp Certified Terraform Associate",
+        "cka": "Certified Kubernetes Administrator"
+    },
+    "match_score_thresholds": {
+        "excellent": 75,
+        "good": 50,
+        "needs_development": 0
+    },
+    "growth_potential_levels": [
+        {
+            "score_min": 75,
+            "score_max": 100,
+            "level": "Excellent"
+        },
+        {
+            "score_min": 50,
+            "score_max": 74,
+            "level": "Good"
+        },
+        {
+            "score_min": 0,
+            "score_max": 49,
+            "level": "Needs Development"
+        }
+    ]
+}
