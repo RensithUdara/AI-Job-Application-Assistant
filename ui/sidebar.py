@@ -17,6 +17,8 @@ def initialize_session_state():
         st.session_state.results = {}
     if 'show_feedback' not in st.session_state:
         st.session_state.show_feedback = False
+    if 'show_feedback_stats' not in st.session_state:
+        st.session_state.show_feedback_stats = False
     if 'feedback_rating' not in st.session_state:
         st.session_state.feedback_rating = 0
 

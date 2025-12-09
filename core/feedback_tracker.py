@@ -25,7 +25,7 @@ class FeedbackTracker:
         if self._initialized:
             return
         
-        self.db_path = Path(__file__).parent.parent / "data" / "metrics.db"
+        self.db_path = Path(__file__).parent.parent / "data" / "assistant.db"
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._initialize_db()
         self._initialized = True

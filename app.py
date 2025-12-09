@@ -44,6 +44,19 @@ def main():
         display_feedback_tab()
         return
     
+    # Handle feedback stats view
+    if st.session_state.get('show_feedback_stats', False):
+        st.markdown("# 📊 Feedback Statistics")
+        col1, col2 = st.columns([1, 10])
+        with col1:
+            if st.button("← Back", use_container_width=True):
+                st.session_state.show_feedback_stats = False
+                st.rerun()
+        st.markdown("---")
+        from ui.modals import display_feedback_stats
+        display_feedback_stats()
+        return
+    
     # Get current page
     current_page = st.session_state.get('current_page', 'main')
     

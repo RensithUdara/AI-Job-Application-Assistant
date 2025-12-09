@@ -89,7 +89,7 @@ ai-job-application-assistant/
 │   ├── 💰 salary_data.json            # Market salary intelligence
 │   ├── 📈 market_trends.json          # Industry trends & insights
 │   ├── 🏢 company_insights.json       # Company-specific data
-│   ├── 📊 metrics.db                  # Real-time analytics database ✨ NEW
+│   ├── 📊 assistant.db                # Real-time analytics & feedback database ✨ NEW
 │   ├── 📝 app_config.json             # App configuration settings ✨ NEW
 │   ├── 🛤️ career_paths.json           # Career roadmaps & resources ✨ NEW
 │   ├── 💼 role_config.json            # Role definitions ✨ NEW
@@ -1276,7 +1276,7 @@ core/
 └─ config_loader.py             # Centralized configuration management
 
 data/
-├─ metrics.db                   # SQLite database for metrics
+├─ assistant.db                 # SQLite database for metrics & feedback
 ├─ app_config.json             # Application configuration
 ├─ career_paths.json           # Career development roadmaps
 ├─ role_config.json            # Role-specific configurations
