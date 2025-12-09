@@ -469,7 +469,7 @@ def display_practice_questions():
     
     for i, question in enumerate(questions, 1):
         with st.expander(f"Question {i}"):
-            st.write(f"**{question}**")
+            st.markdown(f"<p style='color: #ffffff; font-weight: bold; font-size: 1.05rem;'>{question}</p>", unsafe_allow_html=True)
             
             # Practice response area
             practice_response = st.text_area(
@@ -484,19 +484,19 @@ def display_practice_questions():
                 word_count = len(practice_response.split())
                 
                 if word_count < 30:
-                    st.warning(f"Consider expanding your response (current: {word_count} words)")
+                    st.markdown("<div style='background: #3a1a1a; padding: 1rem; border-radius: 5px; border-left: 3px solid #F44336;'><p style='color: #F44336; margin: 0;'>⚠️ Consider expanding your response (current: " + str(word_count) + " words)</p></div>", unsafe_allow_html=True)
                 elif word_count > 200:
-                    st.info(f"Try to be more concise (current: {word_count} words)")
+                    st.markdown("<div style='background: #2a3a1a; padding: 1rem; border-radius: 5px; border-left: 3px solid #FFC107;'><p style='color: #FFC107; margin: 0;'>💡 Try to be more concise (current: " + str(word_count) + " words)</p></div>", unsafe_allow_html=True)
                 else:
-                    st.success(f"Good response length ({word_count} words)")
+                    st.markdown("<div style='background: #1e3a2f; padding: 1rem; border-radius: 5px; border-left: 3px solid #4CAF50;'><p style='color: #4CAF50; margin: 0;'>✅ Good response length (" + str(word_count) + " words)</p></div>", unsafe_allow_html=True)
                 
                 # Give tips based on question type
                 if category == "Behavioral":
-                    st.info("💡 **Tip:** Use the STAR method - Situation, Task, Action, Result")
+                    st.markdown("<div style='background: #1a2a2a; padding: 1rem; border-radius: 5px; border-left: 3px solid #2196F3;'><p style='color: #2196F3; font-weight: bold; margin: 0;'>💡 Tip: Use the STAR method - Situation, Task, Action, Result</p></div>", unsafe_allow_html=True)
                 elif category == "Technical":
-                    st.info("💡 **Tip:** Explain your thought process and consider edge cases")
+                    st.markdown("<div style='background: #1a2a2a; padding: 1rem; border-radius: 5px; border-left: 3px solid #2196F3;'><p style='color: #2196F3; font-weight: bold; margin: 0;'>💡 Tip: Explain your thought process and consider edge cases</p></div>", unsafe_allow_html=True)
                 elif category == "System Design":
-                    st.info("💡 **Tip:** Start with requirements, then discuss architecture and tradeoffs")
+                    st.markdown("<div style='background: #1a2a2a; padding: 1rem; border-radius: 5px; border-left: 3px solid #2196F3;'><p style='color: #2196F3; font-weight: bold; margin: 0;'>💡 Tip: Start with requirements, then discuss architecture and tradeoffs</p></div>", unsafe_allow_html=True)
 
 def display_performance_analytics():
     """Display performance analytics and improvement tracking."""
