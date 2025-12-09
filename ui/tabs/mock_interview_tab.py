@@ -507,7 +507,7 @@ def display_performance_analytics():
         st.session_state.interview_history = []
     
     if not st.session_state.interview_history:
-        st.info("Complete some mock interviews to see your performance analytics here!")
+        st.markdown("<div style='background: #1a2a1a; padding: 1.2rem; border-radius: 8px; border-left: 3px solid #2196F3;'><p style='color: #2196F3; margin: 0;'>ℹ️ Complete some mock interviews to see your performance analytics here!</p></div>", unsafe_allow_html=True)
         
         # Sample analytics view
         st.markdown("#### 📊 Sample Analytics (Demo)")
@@ -531,7 +531,8 @@ def display_performance_analytics():
                 title="Performance Improvement Over Time",
                 xaxis_title="Interview Session",
                 yaxis_title="Average Score (out of 10)",
-                height=300
+                height=300,
+                template="plotly_dark"
             )
             
             st.plotly_chart(fig, use_container_width=True)
@@ -539,17 +540,16 @@ def display_performance_analytics():
         with col2:
             # Sample strengths/weaknesses
             st.markdown("#### 💪 Strengths")
-            st.success("✅ Good technical explanations")
-            st.success("✅ Strong quantified examples")
-            st.success("✅ Confident communication")
+            st.markdown("<div style='background: #1e3a2f; padding: 0.8rem; border-radius: 5px; border-left: 3px solid #4CAF50; margin: 0.5rem 0;'><p style='color: #4CAF50; margin: 0;'>✅ Good technical explanations</p></div>", unsafe_allow_html=True)
+            st.markdown("<div style='background: #1e3a2f; padding: 0.8rem; border-radius: 5px; border-left: 3px solid #4CAF50; margin: 0.5rem 0;'><p style='color: #4CAF50; margin: 0;'>✅ Strong quantified examples</p></div>", unsafe_allow_html=True)
+            st.markdown("<div style='background: #1e3a2f; padding: 0.8rem; border-radius: 5px; border-left: 3px solid #4CAF50; margin: 0.5rem 0;'><p style='color: #4CAF50; margin: 0;'>✅ Confident communication</p></div>", unsafe_allow_html=True)
             
             st.markdown("#### 🎯 Areas for Improvement")
-            st.info("💡 Practice more system design")
-            st.info("💡 Improve behavioral storytelling")
-            st.info("💡 Work on conciseness")
+            st.markdown("<div style='background: #2a3a1a; padding: 0.8rem; border-radius: 5px; border-left: 3px solid #FFC107; margin: 0.5rem 0;'><p style='color: #FFC107; margin: 0;'>💡 Practice more system design</p></div>", unsafe_allow_html=True)
+            st.markdown("<div style='background: #2a3a1a; padding: 0.8rem; border-radius: 5px; border-left: 3px solid #FFC107; margin: 0.5rem 0;'><p style='color: #FFC107; margin: 0;'>💡 Improve behavioral storytelling</p></div>", unsafe_allow_html=True)
+            st.markdown("<div style='background: #2a3a1a; padding: 0.8rem; border-radius: 5px; border-left: 3px solid #FFC107; margin: 0.5rem 0;'><p style='color: #FFC107; margin: 0;'>💡 Work on conciseness</p></div>", unsafe_allow_html=True)
     
     else:
-        # Show actual analytics when available
         st.success("Analytics will be populated as you complete interviews!")
     
     # Tips for improvement
@@ -560,13 +560,37 @@ def display_performance_analytics():
     
     with col1:
         st.markdown("""
-        **Before the Interview:**
-        - Research the company thoroughly
-        - Review your resume and be ready to discuss anything on it
-        - Prepare 5-10 questions to ask them
-        - Practice your elevator pitch
-        - Plan your outfit and route
-        """)
+        <div style='background: #1a2a1a; padding: 1rem; border-radius: 8px; border-left: 3px solid #2196F3;'>
+        <p style='color: #2196F3; font-weight: bold; margin: 0 0 0.5rem 0;'>📋 Before the Interview:</p>
+        <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Research the company thoroughly</p>
+        <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Review your resume and be ready to discuss anything on it</p>
+        <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Prepare 5-10 questions to ask them</p>
+        <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Practice your elevator pitch</p>
+        <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Plan your outfit and route</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div style='background: #1a2a1a; padding: 1rem; border-radius: 8px; border-left: 3px solid #4CAF50;'>
+        <p style='color: #4CAF50; font-weight: bold; margin: 0 0 0.5rem 0;'>🎯 During the Interview:</p>
+        <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Listen carefully to each question</p>
+        <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Take a moment to think before responding</p>
+        <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Use specific examples with quantified results</p>
+        <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Ask clarifying questions when needed</p>
+        <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Show enthusiasm and cultural fit</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div style='background: #1a2a1a; padding: 1rem; border-radius: 8px; border-left: 3px solid #FF9800; margin-top: 1rem;'>
+    <p style='color: #FF9800; font-weight: bold; margin: 0 0 0.5rem 0;'>📝 After the Interview:</p>
+    <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Send a thank you email within 24 hours</p>
+    <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Reflect on what went well and what to improve</p>
+    <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Follow up appropriately on timing</p>
+    <p style='color: #e0e0e0; margin: 0.3rem 0;'>• Continue practicing for future opportunities</p>
+    </div>
+    """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
