@@ -1,9 +1,10 @@
 """
 Modal Dialogs Module
-Contains modal dialog functionality for chat, interviews, and templates.
+Contains modal dialog functionality for chat, interviews, templates, and feedback.
 """
 
 import streamlit as st
+from core.feedback_tracker import get_feedback_tracker
 
 def display_chat_modal():
     """Display AI Career Assistant Chat modal."""
@@ -170,3 +171,270 @@ def display_templates_modal():
             st.rerun()
         
         st.markdown("---")
+
+
+def display_feedback_modal():
+    """Display feedback modal with star rating and text input."""
+    st.markdown("### 💬 We'd Love Your Feedback!")
+    st.markdown("Help us improve the AI Job Application Assistant by sharing your experience.")
+    
+    # Initialize session state for rating
+    if 'feedback_rating' not in st.session_state:
+        st.session_state.feedback_rating = 0
+    
+    # Rating section with interactive stars
+    st.markdown("#### Rate Your Experience")
+    
+    # Create 5 columns for stars
+    cols = st.columns(5)
+    
+    for i in range(5):
+        with cols[i]:
+            if st.button(
+                "⭐",
+                key=f"feedback_star_{i+1}",
+                help=["Poor", "Fair", "Good", "Very Good", "Excellent"][i],
+                use_container_width=True
+            ):
+                st.session_state.feedback_rating = i + 1
+    
+    # Display selected rating
+    if st.session_state.feedback_rating > 0:
+        rating_labels = {
+            1: "😞 Poor",
+            2: "😕 Fair",
+            3: "😐 Good",
+            4: "😊 Very Good",
+            5: "😍 Excellent"
+        }
+        st.markdown(
+            f"**Your Rating: {st.session_state.feedback_rating} Stars** - "
+            f"{rating_labels[st.session_state.feedback_rating]}"
+        )
+    else:
+        st.info("👆 Click the stars to rate your experience (1-5)")
+    
+    st.markdown("---")
+    
+    # Feedback type selection
+    st.markdown("#### What type of feedback?")
+    feedback_type = st.selectbox(
+        "Select feedback category:",
+        [
+            "General Feedback",
+            "Bug Report",
+            "Feature Request",
+            "Improvement Suggestion",
+            "Other"
+        ],
+        label_visibility="collapsed",
+        key="feedback_type_select"
+    )
+    
+    # Map display names to database values
+    type_mapping = {
+        "General Feedback": "general",
+        "Bug Report": "bug",
+        "Feature Request": "feature_request",
+        "Improvement Suggestion": "improvement",
+        "Other": "other"
+    }
+    feedback_type_value = type_mapping[feedback_type]
+    
+    st.markdown("---")
+    
+    # Feature mention (optional)
+    st.markdown("#### Which feature(s) are you referring to? (Optional)")
+    features = [
+        "Resume Parser",
+        "Job Matcher",
+        "AI Chat",
+        "Interview Prep",
+        "Resume Templates",
+        "Salary Intelligence",
+        "Career Path Analyzer",
+        "UI/UX",
+        "Performance",
+        "Database/Metrics",
+        "Other"
+    ]
+    feature_mentioned = st.multiselect(
+        "Select features (optional):",
+        features,
+        label_visibility="collapsed",
+        key="feedback_features"
+    )
+    
+    st.markdown("---")
+    
+    # Feedback text
+    st.markdown("#### Your Feedback")
+    feedback_text = st.text_area(
+        "Please share your thoughts (minimum 10 characters):",
+        height=120,
+        placeholder="Tell us what you think... What did you like? What could be improved?",
+        label_visibility="collapsed",
+        max_chars=2000,
+        key="feedback_text_area"
+    )
+    
+    st.markdown("---")
+    
+    # Submit button
+    col1, col2, col3 = st.columns([1, 1, 2])
+    
+    with col1:
+        submit_btn = st.button(
+            "📤 Submit Feedback",
+            use_container_width=True,
+            type="primary",
+            key="submit_feedback_btn"
+        )
+    
+    with col2:
+        clear_btn = st.button(
+            "🔄 Clear",
+            use_container_width=True,
+            key="clear_feedback_btn"
+        )
+    
+    # Handle submission
+    if submit_btn:
+        # Validation
+        if st.session_state.feedback_rating == 0:
+            st.error("❌ Please select a star rating (1-5)")
+            return False
+        
+        if not feedback_text or len(feedback_text.strip()) < 10:
+            st.error("❌ Please enter at least 10 characters of feedback")
+            return False
+        
+        # Record feedback
+        tracker = get_feedback_tracker()
+        feature_str = ", ".join(feature_mentioned) if feature_mentioned else None
+        
+        success = tracker.record_feedback(
+            user_id="default",
+            rating=st.session_state.feedback_rating,
+            feedback_text=feedback_text,
+            feedback_type=feedback_type_value,
+            feature_mentioned=feature_str
+        )
+        
+        if success:
+            st.success("✅ Thank you for your feedback! We appreciate your input.")
+            st.balloons()
+            # Reset form
+            st.session_state.feedback_rating = 0
+            return True
+        else:
+            st.error("❌ Failed to submit feedback. Please try again.")
+            return False
+    
+    # Clear form
+    if clear_btn:
+        st.session_state.feedback_rating = 0
+        st.rerun()
+    
+    return False
+
+
+def display_feedback_stats():
+    """Display feedback statistics in a readable format."""
+    tracker = get_feedback_tracker()
+    summary = tracker.get_feedback_summary()
+    
+    if summary['total_feedbacks'] == 0:
+        st.info("📊 No feedback collected yet. Be the first to share your thoughts!")
+        return
+    
+    st.markdown("### 📊 Feedback Statistics")
+    
+    # Main stats
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.metric("Total Feedback", summary['total_feedbacks'])
+    
+    with col2:
+        st.metric(
+            "Average Rating",
+            f"{summary['avg_rating']:.1f} ⭐",
+            help="Average star rating across all feedback"
+        )
+    
+    with col3:
+        st.metric("Best Rating", f"{summary['max_rating']} ⭐")
+    
+    with col4:
+        st.metric("Lowest Rating", f"{summary['min_rating']} ⭐")
+    
+    st.markdown("---")
+    
+    # Rating distribution
+    st.markdown("#### Rating Distribution")
+    distribution = tracker.get_rating_distribution()
+    
+    # Create bar chart data
+    ratings = list(range(1, 6))
+    counts = [distribution[r] for r in ratings]
+    
+    max_count = max(counts) if counts else 1
+    for rating, count in zip(ratings, counts):
+        percentage = (count / max_count * 100) if max_count > 0 else 0
+        bar = "█" * int(percentage / 5)
+        st.write(f"{rating} ⭐ {bar} {count} feedback(s)")
+    
+    st.markdown("---")
+    
+    # Feedback type distribution
+    if summary['feedback_type_distribution']:
+        st.markdown("#### Feedback Type Distribution")
+        type_dist = summary['feedback_type_distribution']
+        
+        type_labels = {
+            'general': '💬 General',
+            'bug': '🐛 Bug Report',
+            'feature_request': '🚀 Feature Request',
+            'improvement': '✨ Improvement',
+            'other': '📝 Other'
+        }
+        
+        for ftype, count in sorted(type_dist.items(), key=lambda x: x[1], reverse=True):
+            label = type_labels.get(ftype, ftype)
+            st.write(f"{label}: {count}")
+    
+    st.markdown("---")
+    
+    # Top mentioned features
+    if summary['top_features']:
+        st.markdown("#### Most Mentioned Features")
+        for feature in summary['top_features'][:5]:
+            star_rating = "⭐" * int(feature['avg_rating'])
+            st.write(
+                f"**{feature['feature']}** - "
+                f"{star_rating} ({feature['avg_rating']}/5 avg, {feature['count']} mentions)"
+            )
+
+
+def display_recent_feedback(limit: int = 5):
+    """Display recent feedback entries."""
+    tracker = get_feedback_tracker()
+    recent = tracker.get_recent_feedback(limit=limit)
+    
+    if not recent:
+        st.info("📭 No feedback yet. Your feedback will appear here!")
+        return
+    
+    st.markdown("### 📝 Recent Feedback")
+    
+    for feedback in recent:
+        with st.expander(
+            f"{'⭐' * feedback['rating']} {feedback['type'].replace('_', ' ').title()} - {feedback['created_at'][:10]}"
+        ):
+            st.write(f"**Rating:** {feedback['rating']} ⭐")
+            st.write(f"**Type:** {feedback['type'].replace('_', ' ').title()}")
+            if feedback['feature']:
+                st.write(f"**Features:** {feedback['feature']}")
+            st.markdown("---")
+            st.write(feedback['text'])
