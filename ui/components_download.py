@@ -3,6 +3,7 @@ Download Report Component - Provides download functionality for analysis reports
 """
 
 import streamlit as st
+import json
 from typing import Dict
 from core.report_generator import get_report_generator
 
@@ -83,7 +84,8 @@ def display_download_section(resume_data: Dict, jd_data: Dict, match_data: Dict)
         elif report_format == "📊 CSV":
             st.code(generator.generate_csv_report(resume_data, jd_data, match_data), language="csv")
         elif report_format == "🔧 JSON":
-            st.json(eval(generator.generate_json_report(resume_data, jd_data, match_data)))
+            report_json = json.loads(generator.generate_json_report(resume_data, jd_data, match_data))
+            st.json(report_json)
         else:
             st.info("PDF preview not available. Download the file to view.")
         
