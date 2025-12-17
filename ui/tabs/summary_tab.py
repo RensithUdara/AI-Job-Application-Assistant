@@ -130,6 +130,102 @@ def display_summary_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
         else:
             st.info("No specific improvements needed")
     
+    st.markdown("---")
+    
+    # Detailed Analytics
+    st.subheader("📊 Detailed Analytics")
+    
+    analytics_col1, analytics_col2 = st.columns(2)
+    
+    with analytics_col1:
+        st.write("#### Skill Gap Analysis")
+        ats_score = resume_data.get('ats_analysis', {}).get('score', 0)
+        quality_score = resume_data.get('quality_score', 0)
+        
+        # Create mini metrics
+        col_a1, col_a2 = st.columns(2)
+        with col_a1:
+            st.metric("Resume Quality", f"{quality_score:.0f}/100", help="Overall resume format & content quality")
+        with col_a2:
+            st.metric("ATS Compatibility", f"{ats_score:.0f}/100", help="Optimization for Applicant Tracking Systems")
+    
+    with analytics_col2:
+        st.write("#### Experience Analysis")
+        exp_requirement = jd_data.get('experience_range', 'Not specified')
+        seniority = jd_data.get('seniority', 'Not specified')
+        
+        col_a3, col_a4 = st.columns(2)
+        with col_a3:
+            st.metric("Required Experience", exp_requirement)
+        with col_a4:
+            st.metric("Seniority Level", seniority)
+    
+    st.markdown("---")
+    
+    # Quick Action Items
+    st.subheader("⚡ Quick Action Items")
+    
+    priority_analysis = match_data.get('priority_analysis', {})
+    priority_skills = priority_analysis.get('critical_missing', [])
+    
+    if priority_skills:
+        st.write("**🎯 Focus on these critical skills:**")
+        for i, skill in enumerate(priority_skills[:5], 1):  # Top 5 critical skills
+            st.write(f"{i}. **{skill}** - Priority: HIGH")
+    else:
+        st.success("✅ No critical skill gaps identified!")
+    
+    st.markdown("---")
+    
+    # Match Score Breakdown (Visual)
+    st.subheader("📉 Match Score Breakdown")
+    
+    skill_match = match_data.get('skill_match', {}).get('match_percentage', 0)
+    experience_match = match_data.get('experience_match', 0)
+    education_match = match_data.get('education_match', 0)
+    salary_match = match_data.get('salary_match', 0)
+    
+    breakdown_col1, breakdown_col2 = st.columns(2)
+    
+    with breakdown_col1:
+        breakdown_data = {
+            'Skill Match': skill_match,
+            'Experience Match': experience_match,
+            'Education Match': education_match,
+            'Salary Alignment': salary_match,
+        }
+        
+        for category, value in breakdown_data.items():
+            progress_value = min(100, max(0, value))
+            st.write(f"**{category}**: {progress_value:.0f}%")
+            st.progress(progress_value / 100)
+    
+    with breakdown_col2:
+        st.write("**Match Score Interpretation:**")
+        st.write("""
+        - **80-100%**: Excellent fit - Strong candidate
+        - **60-79%**: Good fit - Competitive candidate  
+        - **40-59%**: Moderate fit - Has potential with gaps
+        - **Below 40%**: Low fit - Significant improvements needed
+        """)
+    
+    st.markdown("---")
+    
+    # Recommendation Summary
+    st.subheader("💡 Application Strategy Recommendation")
+    
+    if match_score >= 75:
+        recommendation = "🟢 **Apply Now!** You're a strong match for this role. Customize your cover letter to highlight the matched skills."
+        icon = "✅"
+    elif match_score >= 50:
+        recommendation = "🟡 **Apply with Strategy.** Address the skill gaps in your cover letter and resume. Show willingness to learn missing skills."
+        icon = "⏳"
+    else:
+        recommendation = "🔴 **Consider Alternatives.** Focus on building the critical skills first, then apply in 3-6 months."
+        icon = "⚠️"
+    
+    st.info(f"{icon} {recommendation}")
+    
     with col7:
         exp_score = match_data.get('experience_alignment', {}).get('experience_score', 0)
         st.metric("Experience Fit", f"{exp_score}/100")
