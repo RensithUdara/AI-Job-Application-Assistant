@@ -225,11 +225,3 @@ def display_summary_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
         icon = "⚠️"
     
     st.info(f"{icon} {recommendation}")
-    
-    with col7:
-        exp_score = match_data.get('experience_alignment', {}).get('experience_score', 0)
-        st.metric("Experience Fit", f"{exp_score}/100")
-    
-    with col8:
-        word_count = resume_data.get('word_count', 0)
-        st.metric("Resume Word Count", word_count)
