@@ -109,7 +109,7 @@ def display_sidebar():
         col1, col2 = st.columns(2)
         
         with col1:
-            if st.button("💬 Share Feedback", use_container_width=True, key="sidebar_feedback_btn"):
+            if st.button("💬 Feedback", use_container_width=True, key="sidebar_feedback_btn"):
                 st.session_state.show_feedback = True
         
         with col2:
