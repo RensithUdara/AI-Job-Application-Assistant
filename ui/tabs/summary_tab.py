@@ -24,7 +24,15 @@ def display_summary_tab(resume_data: Dict, jd_data: Dict, match_data: Dict):
         st.plotly_chart(fig, width='stretch')
     
     with col2:
-        st.metric("Detected Role", jd_data.get('jd_role', 'Unknown').replace('_', ' ').title())
+        # Get detected role from resume's role compatibility analysis
+        role_compatibility = resume_data.get('role_compatibility', {})
+        detected_role = role_compatibility.get('best_match_role', 'Unknown')
+        if detected_role:
+            detected_role = detected_role.replace('_', ' ').title()
+        else:
+            detected_role = 'Unknown'
+        
+        st.metric("Detected Role", detected_role)
         st.metric("Experience Level", jd_data.get('seniority', 'Not specified'))
     
     with col3:
