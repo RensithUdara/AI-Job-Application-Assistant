@@ -92,6 +92,12 @@ class ResumeParser:
             timeline_analysis = self.validate_resume_timeline(text)
             project_analysis = self.analyze_project_impact(text)
             
+            # Extract current job title from resume
+            current_job_title = self._extract_current_job_title(cleaned_text)
+            
+            # Add best_match_role to role_compatibility for backward compatibility
+            role_compatibility['best_match_role'] = current_job_title if current_job_title else role_compatibility.get('best_fit_role', 'Unknown')
+            
             # Record this resume analysis in metrics database
             ats_score = ats_analysis.get('score', 0)
             parsing_success = ats_score >= 70  # Consider 70+ as successful parsing
@@ -867,6 +873,75 @@ class ResumeParser:
             'best_fit_score': role_scores[best_role]['score'],
             'role_recommendations': self._get_role_recommendations(role_scores)
         }
+    
+    def _extract_current_job_title(self, text: str) -> str:
+        """Extract the most recent/current job title from the resume."""
+        try:
+            # Common job title patterns
+            lines = text.split('\n')
+            
+            # Look for job titles in experience section
+            in_experience = False
+            job_titles = []
+            
+            for i, line in enumerate(lines):
+                line_lower = line.lower()
+                
+                # Check if we're in experience section
+                if any(keyword in line_lower for keyword in ['experience', 'work history', 'employment', 'professional experience']):
+                    in_experience = True
+                    continue
+                
+                # Stop if we hit another major section
+                if in_experience and any(keyword in line_lower for keyword in ['education', 'skills', 'certification', 'project', 'summary']):
+                    in_experience = False
+                
+                # Extract job titles when in experience section
+                if in_experience and line.strip():
+                    # Common patterns for job titles
+                    # Pattern 1: Title | Company | Date
+                    if '|' in line:
+                        parts = line.split('|')
+                        title = parts[0].strip()
+                        if title and len(title) < 100:  # Reasonable length for job title
+                            job_titles.append(title)
+                    
+                    # Pattern 2: Title at Company
+                    elif ' at ' in line.lower():
+                        parts = line.lower().split(' at ')
+                        title = line.split(' at ')[0].strip()
+                        if title and len(title) < 100:
+                            job_titles.append(title)
+                    
+                    # Pattern 3: Company Name with Title on next line (common format)
+                    elif len(line.strip()) > 0 and len(line.strip()) < 80 and any(
+                        role_word in line.lower() for role_word in [
+                            'developer', 'engineer', 'analyst', 'manager', 'architect', 
+                            'designer', 'specialist', 'consultant', 'scientist', 'officer',
+                            'director', 'lead', 'senior', 'junior', 'associate', 'coordinator',
+                            'administrator', 'technician', 'programmer', 'tester', 'qa'
+                        ]
+                    ):
+                        job_titles.append(line.strip())
+            
+            # Return the first (most recent) job title found
+            if job_titles:
+                # Clean and normalize the title
+                title = job_titles[0]
+                # Remove extra whitespace and special characters
+                title = re.sub(r'\s+', ' ', title)
+                title = re.sub(r'[^a-zA-Z\s]', '', title)  # Remove special chars except spaces
+                title = title.strip()
+                
+                if title:
+                    return title.title()
+            
+            # Fallback: use skills-based role detection
+            return None
+            
+        except Exception as e:
+            print(f"Error extracting job title: {e}")
+            return None
     
     def _get_role_strength_level(self, score: float) -> str:
         """Convert role compatibility score to strength level."""
