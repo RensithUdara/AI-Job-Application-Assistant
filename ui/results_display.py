@@ -14,6 +14,7 @@ from ui.tabs import (
     market_analytics_tab, networking_hub_tab, company_culture_tab,
     resume_builder_tab
 )
+from ui.components_download import display_download_section
 
 def display_results(results: Dict):
     """Display analysis results in organized tabs."""
@@ -88,3 +89,7 @@ def display_results(results: Dict):
     
     with tabs[14]:
         resume_builder_tab.display_resume_builder_tab(resume_data, jd_data, match_data)
+    
+    # Add download section at the bottom
+    st.markdown("---")
+    display_download_section(resume_data, jd_data, match_data)
