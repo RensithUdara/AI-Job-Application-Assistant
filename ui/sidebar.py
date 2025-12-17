@@ -115,6 +115,14 @@ def display_sidebar():
         with col2:
             if st.button("📊 View Stats", use_container_width=True, key="sidebar_stats_btn"):
                 st.session_state.show_feedback_stats = True
+        
+        st.markdown("---")
+        
+        # Download section (show if analysis done)
+        if st.session_state.get('analysis_done', False):
+            st.markdown("### 📥 Download Report")
+            if st.button("📥 Download Analysis", use_container_width=True, key="sidebar_download_btn"):
+                st.session_state.show_download_section = True
     
     return {
         'analysis_depth': analysis_depth,
