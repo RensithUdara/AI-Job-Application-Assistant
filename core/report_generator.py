@@ -204,7 +204,7 @@ class ReportGenerator:
             report.append("RECOMMENDATION: 🟡 MODERATE MATCH - Apply with gaps addressed")
         else:
             report.append("RECOMMENDATION: 🔴 LOW MATCH - Build skills first")
-        report.append()
+        report.append("")
         
         # Skills Analysis
         report.append("\nSKILLS ANALYSIS")
@@ -226,7 +226,7 @@ class ReportGenerator:
             if len(matched_skills) > 15:
                 report.append(f"  ... and {len(matched_skills) - 15} more\n")
             else:
-                report.append()
+                report.append("")
         
         # Critical Missing
         if critical_missing:
@@ -236,7 +236,7 @@ class ReportGenerator:
             if len(critical_missing) > 10:
                 report.append(f"  ... and {len(critical_missing) - 10} more\n")
             else:
-                report.append()
+                report.append("")
         
         # Other Missing
         if missing_skills and missing_skills != critical_missing:
@@ -247,7 +247,7 @@ class ReportGenerator:
             if len(other_missing) > 10:
                 report.append(f"  ... and {len(other_missing) - 10} more\n")
             else:
-                report.append()
+                report.append("")
         
         # Market Analysis
         report.append("\n\nMARKET ANALYSIS")
@@ -264,7 +264,7 @@ class ReportGenerator:
             report.append("STRENGTHS:")
             for i, strength in enumerate(strengths, 1):
                 report.append(f"  {i}. {strength}")
-            report.append()
+            report.append("")
         
         # Improvements
         improvements = market_analysis.get('improvement_areas', [])
@@ -272,7 +272,7 @@ class ReportGenerator:
             report.append("\nAREAS FOR IMPROVEMENT:")
             for i, improvement in enumerate(improvements, 1):
                 report.append(f"  {i}. {improvement}")
-            report.append()
+            report.append("")
         
         # Footer
         report.append("\n" + "=" * 80)
