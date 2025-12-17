@@ -17,89 +17,81 @@ class ReportGenerator:
     
     def generate_pdf_report(self, resume_data: Dict, jd_data: Dict, match_data: Dict) -> bytes:
         """
-        Generate PDF report (requires reportlab).
-        Falls back to text if PDF not available.
+        Generate PDF report using simple text-based PDF creation.
         """
         try:
-            from reportlab.lib.pagesizes import letter
-            from reportlab.lib import colors
-            from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-            from reportlab.lib.units import inch
-            from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+            from fpdf import FPDF
             
             # Create PDF
-            pdf_buffer = io.BytesIO()
-            doc = SimpleDocTemplate(pdf_buffer, pagesize=letter)
-            elements = []
-            styles = getSampleStyleSheet()
-            
-            # Title
-            title_style = ParagraphStyle(
-                'CustomTitle',
-                parent=styles['Heading1'],
-                fontSize=24,
-                textColor=colors.HexColor('#1f77b4'),
-                spaceAfter=30,
-                alignment=1  # Center
-            )
-            elements.append(Paragraph("📊 Application Match Analysis Report", title_style))
-            elements.append(Spacer(1, 0.3*inch))
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font("Arial", "B", 16)
+            pdf.cell(0, 10, "Application Match Analysis Report", 0, 1, "C")
+            pdf.set_font("Arial", "", 11)
+            pdf.ln(5)
             
             # Overall Match Score
             match_score = match_data.get('match_score_overall', 0)
-            elements.append(Paragraph(f"<b>Overall Match Score: {match_score:.1f}%</b>", styles['Heading2']))
-            elements.append(Spacer(1, 0.2*inch))
+            pdf.set_font("Arial", "B", 12)
+            pdf.cell(0, 8, f"Overall Match Score: {match_score:.1f}%", 0, 1)
+            pdf.ln(3)
             
             # Key Metrics
-            metrics_data = [
-                ['Metric', 'Value'],
-                ['Detected Role', resume_data.get('role_compatibility', {}).get('best_match_role', 'Unknown')],
-                ['Target Role', jd_data.get('jd_role', 'Unknown')],
-                ['Resume Quality', f"{resume_data.get('quality_score', 0):.0f}/100"],
-                ['Skills Match', f"{match_data.get('skill_match', {}).get('match_percentage', 0):.1f}%"],
-                ['ATS Score', f"{resume_data.get('ats_analysis', {}).get('score', 0):.0f}/100"],
-                ['Experience Level', jd_data.get('seniority', 'Not specified')],
+            pdf.set_font("Arial", "B", 11)
+            pdf.cell(0, 8, "Key Metrics:", 0, 1)
+            pdf.set_font("Arial", "", 10)
+            
+            metrics = [
+                ("Detected Role", resume_data.get('role_compatibility', {}).get('best_match_role', 'Unknown')),
+                ("Target Role", jd_data.get('jd_role', 'Unknown')),
+                ("Resume Quality", f"{resume_data.get('quality_score', 0):.0f}/100"),
+                ("Skills Match", f"{match_data.get('skill_match', {}).get('match_percentage', 0):.1f}%"),
+                ("ATS Score", f"{resume_data.get('ats_analysis', {}).get('score', 0):.0f}/100"),
+                ("Experience Level", jd_data.get('seniority', 'Not specified')),
             ]
             
-            metrics_table = Table(metrics_data)
-            metrics_table.setStyle(TableStyle([
-                ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-                ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-                ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-                ('FONTSIZE', (0, 0), (-1, 0), 12),
-                ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-                ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-                ('GRID', (0, 0), (-1, -1), 1, colors.black),
-            ]))
+            for metric, value in metrics:
+                pdf.cell(60, 7, f"{metric}:", 0, 0)
+                pdf.cell(0, 7, str(value), 0, 1)
             
-            elements.append(metrics_table)
-            elements.append(Spacer(1, 0.3*inch))
+            pdf.ln(5)
             
             # Skills Analysis
-            elements.append(Paragraph("<b>Skills Analysis</b>", styles['Heading2']))
+            pdf.set_font("Arial", "B", 11)
+            pdf.cell(0, 8, "Skills Analysis:", 0, 1)
+            pdf.set_font("Arial", "", 10)
+            
             matched_skills = match_data.get('matched_skills', [])
+            pdf.cell(0, 7, f"Matched Skills ({len(matched_skills)}):", 0, 1)
+            for skill in matched_skills[:10]:
+                pdf.cell(10, 6, "")
+                pdf.cell(0, 6, f"• {skill}", 0, 1)
+            
+            pdf.ln(2)
             missing_skills = match_data.get('missing_skills', [])
+            pdf.cell(0, 7, f"Missing Skills ({len(missing_skills)}):", 0, 1)
+            for skill in missing_skills[:10]:
+                pdf.cell(10, 6, "")
+                pdf.cell(0, 6, f"• {skill}", 0, 1)
             
-            elements.append(Paragraph(f"<b>Matched Skills ({len(matched_skills)}):</b>", styles['Normal']))
-            if matched_skills:
-                for skill in matched_skills[:10]:
-                    elements.append(Paragraph(f"• {skill}", styles['Normal']))
-            
-            elements.append(Spacer(1, 0.1*inch))
-            elements.append(Paragraph(f"<b>Missing Skills ({len(missing_skills)}):</b>", styles['Normal']))
-            if missing_skills:
-                for skill in missing_skills[:10]:
-                    elements.append(Paragraph(f"• {skill}", styles['Normal']))
-            
-            # Build PDF
-            doc.build(elements)
-            pdf_buffer.seek(0)
-            return pdf_buffer.getvalue()
+            # Convert to bytes
+            pdf_output = pdf.output()
+            return pdf_output if isinstance(pdf_output, bytes) else pdf_output.encode('latin-1')
             
         except ImportError:
-            # Fallback to text report
-            return self.generate_text_report(resume_data, jd_data, match_data).encode('utf-8')
+            # Fallback: Create simple text-based PDF
+            text_content = self.generate_text_report(resume_data, jd_data, match_data)
+            try:
+                from fpdf import FPDF
+                pdf = FPDF()
+                pdf.add_page()
+                pdf.set_font("Arial", "", 10)
+                for line in text_content.split('\n')[:50]:  # Limit lines
+                    pdf.cell(0, 5, line[:80], 0, 1)  # Limit line width
+                return pdf.output()
+            except:
+                # Final fallback: Text as PDF bytes
+                return text_content.encode('utf-8')
     
     def generate_csv_report(self, resume_data: Dict, jd_data: Dict, match_data: Dict) -> str:
         """Generate CSV report."""
