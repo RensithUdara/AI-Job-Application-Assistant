@@ -3,7 +3,6 @@ AI Job Application Assistant - Main Application
 Simplified and modular version with organized UI components.
 """
 
-import utils.session
 import streamlit as st
 import sys
 import os
